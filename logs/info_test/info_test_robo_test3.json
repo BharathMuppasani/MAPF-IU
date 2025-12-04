@@ -1,0 +1,5401 @@
+{
+  "environment": {
+    "id": "SimulatedWarehouseEnv",
+    "gridSize": [
+      11,
+      11
+    ],
+    "obstacles": [
+      {
+        "id": "Obs-0-0",
+        "cell": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "Obs-0-1",
+        "cell": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "Obs-0-2",
+        "cell": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": "Obs-0-3",
+        "cell": [
+          0,
+          3
+        ]
+      },
+      {
+        "id": "Obs-0-4",
+        "cell": [
+          0,
+          4
+        ]
+      },
+      {
+        "id": "Obs-0-5",
+        "cell": [
+          0,
+          5
+        ]
+      },
+      {
+        "id": "Obs-0-6",
+        "cell": [
+          0,
+          6
+        ]
+      },
+      {
+        "id": "Obs-0-7",
+        "cell": [
+          0,
+          7
+        ]
+      },
+      {
+        "id": "Obs-0-8",
+        "cell": [
+          0,
+          8
+        ]
+      },
+      {
+        "id": "Obs-0-9",
+        "cell": [
+          0,
+          9
+        ]
+      },
+      {
+        "id": "Obs-0-10",
+        "cell": [
+          0,
+          10
+        ]
+      },
+      {
+        "id": "Obs-1-0",
+        "cell": [
+          1,
+          0
+        ]
+      },
+      {
+        "id": "Obs-1-1",
+        "cell": [
+          1,
+          1
+        ]
+      },
+      {
+        "id": "Obs-1-2",
+        "cell": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": "Obs-1-3",
+        "cell": [
+          1,
+          3
+        ]
+      },
+      {
+        "id": "Obs-1-4",
+        "cell": [
+          1,
+          4
+        ]
+      },
+      {
+        "id": "Obs-1-5",
+        "cell": [
+          1,
+          5
+        ]
+      },
+      {
+        "id": "Obs-1-6",
+        "cell": [
+          1,
+          6
+        ]
+      },
+      {
+        "id": "Obs-1-7",
+        "cell": [
+          1,
+          7
+        ]
+      },
+      {
+        "id": "Obs-1-8",
+        "cell": [
+          1,
+          8
+        ]
+      },
+      {
+        "id": "Obs-1-9",
+        "cell": [
+          1,
+          9
+        ]
+      },
+      {
+        "id": "Obs-1-10",
+        "cell": [
+          1,
+          10
+        ]
+      },
+      {
+        "id": "Obs-2-0",
+        "cell": [
+          2,
+          0
+        ]
+      },
+      {
+        "id": "Obs-2-1",
+        "cell": [
+          2,
+          1
+        ]
+      },
+      {
+        "id": "Obs-2-2",
+        "cell": [
+          2,
+          2
+        ]
+      },
+      {
+        "id": "Obs-2-3",
+        "cell": [
+          2,
+          3
+        ]
+      },
+      {
+        "id": "Obs-2-4",
+        "cell": [
+          2,
+          4
+        ]
+      },
+      {
+        "id": "Obs-2-5",
+        "cell": [
+          2,
+          5
+        ]
+      },
+      {
+        "id": "Obs-2-6",
+        "cell": [
+          2,
+          6
+        ]
+      },
+      {
+        "id": "Obs-2-7",
+        "cell": [
+          2,
+          7
+        ]
+      },
+      {
+        "id": "Obs-2-8",
+        "cell": [
+          2,
+          8
+        ]
+      },
+      {
+        "id": "Obs-2-9",
+        "cell": [
+          2,
+          9
+        ]
+      },
+      {
+        "id": "Obs-2-10",
+        "cell": [
+          2,
+          10
+        ]
+      },
+      {
+        "id": "Obs-3-0",
+        "cell": [
+          3,
+          0
+        ]
+      },
+      {
+        "id": "Obs-3-1",
+        "cell": [
+          3,
+          1
+        ]
+      },
+      {
+        "id": "Obs-3-2",
+        "cell": [
+          3,
+          2
+        ]
+      },
+      {
+        "id": "Obs-3-5",
+        "cell": [
+          3,
+          5
+        ]
+      },
+      {
+        "id": "Obs-3-8",
+        "cell": [
+          3,
+          8
+        ]
+      },
+      {
+        "id": "Obs-3-9",
+        "cell": [
+          3,
+          9
+        ]
+      },
+      {
+        "id": "Obs-3-10",
+        "cell": [
+          3,
+          10
+        ]
+      },
+      {
+        "id": "Obs-4-0",
+        "cell": [
+          4,
+          0
+        ]
+      },
+      {
+        "id": "Obs-4-1",
+        "cell": [
+          4,
+          1
+        ]
+      },
+      {
+        "id": "Obs-4-2",
+        "cell": [
+          4,
+          2
+        ]
+      },
+      {
+        "id": "Obs-4-5",
+        "cell": [
+          4,
+          5
+        ]
+      },
+      {
+        "id": "Obs-4-6",
+        "cell": [
+          4,
+          6
+        ]
+      },
+      {
+        "id": "Obs-4-8",
+        "cell": [
+          4,
+          8
+        ]
+      },
+      {
+        "id": "Obs-4-9",
+        "cell": [
+          4,
+          9
+        ]
+      },
+      {
+        "id": "Obs-4-10",
+        "cell": [
+          4,
+          10
+        ]
+      },
+      {
+        "id": "Obs-5-0",
+        "cell": [
+          5,
+          0
+        ]
+      },
+      {
+        "id": "Obs-5-1",
+        "cell": [
+          5,
+          1
+        ]
+      },
+      {
+        "id": "Obs-5-2",
+        "cell": [
+          5,
+          2
+        ]
+      },
+      {
+        "id": "Obs-5-3",
+        "cell": [
+          5,
+          3
+        ]
+      },
+      {
+        "id": "Obs-5-8",
+        "cell": [
+          5,
+          8
+        ]
+      },
+      {
+        "id": "Obs-5-9",
+        "cell": [
+          5,
+          9
+        ]
+      },
+      {
+        "id": "Obs-5-10",
+        "cell": [
+          5,
+          10
+        ]
+      },
+      {
+        "id": "Obs-6-0",
+        "cell": [
+          6,
+          0
+        ]
+      },
+      {
+        "id": "Obs-6-1",
+        "cell": [
+          6,
+          1
+        ]
+      },
+      {
+        "id": "Obs-6-2",
+        "cell": [
+          6,
+          2
+        ]
+      },
+      {
+        "id": "Obs-6-4",
+        "cell": [
+          6,
+          4
+        ]
+      },
+      {
+        "id": "Obs-6-8",
+        "cell": [
+          6,
+          8
+        ]
+      },
+      {
+        "id": "Obs-6-9",
+        "cell": [
+          6,
+          9
+        ]
+      },
+      {
+        "id": "Obs-6-10",
+        "cell": [
+          6,
+          10
+        ]
+      },
+      {
+        "id": "Obs-7-0",
+        "cell": [
+          7,
+          0
+        ]
+      },
+      {
+        "id": "Obs-7-1",
+        "cell": [
+          7,
+          1
+        ]
+      },
+      {
+        "id": "Obs-7-2",
+        "cell": [
+          7,
+          2
+        ]
+      },
+      {
+        "id": "Obs-7-8",
+        "cell": [
+          7,
+          8
+        ]
+      },
+      {
+        "id": "Obs-7-9",
+        "cell": [
+          7,
+          9
+        ]
+      },
+      {
+        "id": "Obs-7-10",
+        "cell": [
+          7,
+          10
+        ]
+      },
+      {
+        "id": "Obs-8-0",
+        "cell": [
+          8,
+          0
+        ]
+      },
+      {
+        "id": "Obs-8-1",
+        "cell": [
+          8,
+          1
+        ]
+      },
+      {
+        "id": "Obs-8-2",
+        "cell": [
+          8,
+          2
+        ]
+      },
+      {
+        "id": "Obs-8-3",
+        "cell": [
+          8,
+          3
+        ]
+      },
+      {
+        "id": "Obs-8-4",
+        "cell": [
+          8,
+          4
+        ]
+      },
+      {
+        "id": "Obs-8-5",
+        "cell": [
+          8,
+          5
+        ]
+      },
+      {
+        "id": "Obs-8-6",
+        "cell": [
+          8,
+          6
+        ]
+      },
+      {
+        "id": "Obs-8-7",
+        "cell": [
+          8,
+          7
+        ]
+      },
+      {
+        "id": "Obs-8-8",
+        "cell": [
+          8,
+          8
+        ]
+      },
+      {
+        "id": "Obs-8-9",
+        "cell": [
+          8,
+          9
+        ]
+      },
+      {
+        "id": "Obs-8-10",
+        "cell": [
+          8,
+          10
+        ]
+      },
+      {
+        "id": "Obs-9-0",
+        "cell": [
+          9,
+          0
+        ]
+      },
+      {
+        "id": "Obs-9-1",
+        "cell": [
+          9,
+          1
+        ]
+      },
+      {
+        "id": "Obs-9-2",
+        "cell": [
+          9,
+          2
+        ]
+      },
+      {
+        "id": "Obs-9-3",
+        "cell": [
+          9,
+          3
+        ]
+      },
+      {
+        "id": "Obs-9-4",
+        "cell": [
+          9,
+          4
+        ]
+      },
+      {
+        "id": "Obs-9-5",
+        "cell": [
+          9,
+          5
+        ]
+      },
+      {
+        "id": "Obs-9-6",
+        "cell": [
+          9,
+          6
+        ]
+      },
+      {
+        "id": "Obs-9-7",
+        "cell": [
+          9,
+          7
+        ]
+      },
+      {
+        "id": "Obs-9-8",
+        "cell": [
+          9,
+          8
+        ]
+      },
+      {
+        "id": "Obs-9-9",
+        "cell": [
+          9,
+          9
+        ]
+      },
+      {
+        "id": "Obs-9-10",
+        "cell": [
+          9,
+          10
+        ]
+      },
+      {
+        "id": "Obs-10-0",
+        "cell": [
+          10,
+          0
+        ]
+      },
+      {
+        "id": "Obs-10-1",
+        "cell": [
+          10,
+          1
+        ]
+      },
+      {
+        "id": "Obs-10-2",
+        "cell": [
+          10,
+          2
+        ]
+      },
+      {
+        "id": "Obs-10-3",
+        "cell": [
+          10,
+          3
+        ]
+      },
+      {
+        "id": "Obs-10-4",
+        "cell": [
+          10,
+          4
+        ]
+      },
+      {
+        "id": "Obs-10-5",
+        "cell": [
+          10,
+          5
+        ]
+      },
+      {
+        "id": "Obs-10-6",
+        "cell": [
+          10,
+          6
+        ]
+      },
+      {
+        "id": "Obs-10-7",
+        "cell": [
+          10,
+          7
+        ]
+      },
+      {
+        "id": "Obs-10-8",
+        "cell": [
+          10,
+          8
+        ]
+      },
+      {
+        "id": "Obs-10-9",
+        "cell": [
+          10,
+          9
+        ]
+      },
+      {
+        "id": "Obs-10-10",
+        "cell": [
+          10,
+          10
+        ]
+      }
+    ]
+  },
+  "agents": [
+    {
+      "id": "Robot-1",
+      "initialState": {
+        "time": 0,
+        "cell": [
+          3,
+          3
+        ]
+      },
+      "goalState": {
+        "cell": [
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "id": "Robot-2",
+      "initialState": {
+        "time": 0,
+        "cell": [
+          7,
+          7
+        ]
+      },
+      "goalState": {
+        "cell": [
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "id": "Robot-3",
+      "initialState": {
+        "time": 0,
+        "cell": [
+          3,
+          7
+        ]
+      },
+      "goalState": {
+        "cell": [
+          6,
+          3
+        ]
+      }
+    },
+    {
+      "id": "Robot-4",
+      "initialState": {
+        "time": 0,
+        "cell": [
+          7,
+          3
+        ]
+      },
+      "goalState": {
+        "cell": [
+          3,
+          6
+        ]
+      }
+    }
+  ],
+  "agentPaths": [
+    {
+      "agent": "Robot-1",
+      "subplanId": "Robot-1-Plan-Original",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            7,
+            5
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "agent": "Robot-2",
+      "subplanId": "Robot-2-Plan-Original",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            3,
+            4
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "agent": "Robot-3",
+      "subplanId": "Robot-3-Plan-Original",
+      "planCost": 9,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            7,
+            5
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            7,
+            4
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            7,
+            3
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            6,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "agent": "Robot-4",
+      "subplanId": "Robot-4-Plan-Original",
+      "planCost": 9,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            7,
+            4
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            7,
+            5
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            7
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            7
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            3,
+            6
+          ]
+        }
+      ]
+    }
+  ],
+  "execution_trace": {
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "passes": [
+          {
+            "pass_number": 1,
+            "events": [
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-1",
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-2"
+            ]
+          },
+          {
+            "pass_number": 2,
+            "events": [
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-3",
+              "Static replan success for Agent 4, created plan Robot-4-Plan-Resolved-4",
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-5"
+            ]
+          },
+          {
+            "pass_number": 3,
+            "events": [
+              "Static replan success for Agent 4, created plan Robot-4-Plan-Resolved-6",
+              "Static replan success for Agent 4, created plan Robot-4-Plan-Resolved-7"
+            ]
+          },
+          {
+            "pass_number": 4,
+            "events": [
+              "General Yield success for Agent 1"
+            ]
+          },
+          {
+            "pass_number": 5,
+            "events": [
+              "Static replan success for Agent 3, created plan Robot-3-Plan-Resolved-9",
+              "Static replan success for Agent 4, created plan Robot-4-Plan-Resolved-10",
+              "Static replan success for Agent 4, created plan Robot-4-Plan-Resolved-11"
+            ]
+          },
+          {
+            "pass_number": 6,
+            "events": []
+          },
+          {
+            "pass_number": 7,
+            "events": []
+          },
+          {
+            "pass_number": 8,
+            "events": []
+          },
+          {
+            "pass_number": 9,
+            "events": []
+          },
+          {
+            "pass_number": 10,
+            "events": []
+          },
+          {
+            "pass_number": 11,
+            "events": []
+          },
+          {
+            "pass_number": 12,
+            "events": []
+          },
+          {
+            "pass_number": 13,
+            "events": []
+          },
+          {
+            "pass_number": 14,
+            "events": []
+          },
+          {
+            "pass_number": 15,
+            "events": []
+          },
+          {
+            "pass_number": 16,
+            "events": []
+          },
+          {
+            "pass_number": 17,
+            "events": []
+          },
+          {
+            "pass_number": 18,
+            "events": []
+          },
+          {
+            "pass_number": 19,
+            "events": []
+          },
+          {
+            "pass_number": 20,
+            "events": []
+          },
+          {
+            "pass_number": 21,
+            "events": []
+          },
+          {
+            "pass_number": 22,
+            "events": []
+          },
+          {
+            "pass_number": 23,
+            "events": []
+          },
+          {
+            "pass_number": 24,
+            "events": []
+          },
+          {
+            "pass_number": 25,
+            "events": []
+          },
+          {
+            "pass_number": 26,
+            "events": []
+          },
+          {
+            "pass_number": 27,
+            "events": []
+          },
+          {
+            "pass_number": 28,
+            "events": []
+          },
+          {
+            "pass_number": 29,
+            "events": []
+          },
+          {
+            "pass_number": 30,
+            "events": []
+          },
+          {
+            "pass_number": 31,
+            "events": []
+          },
+          {
+            "pass_number": 32,
+            "events": []
+          },
+          {
+            "pass_number": 33,
+            "events": []
+          },
+          {
+            "pass_number": 34,
+            "events": []
+          },
+          {
+            "pass_number": 35,
+            "events": []
+          },
+          {
+            "pass_number": 36,
+            "events": []
+          },
+          {
+            "pass_number": 37,
+            "events": []
+          },
+          {
+            "pass_number": 38,
+            "events": []
+          },
+          {
+            "pass_number": 39,
+            "events": []
+          },
+          {
+            "pass_number": 40,
+            "events": []
+          },
+          {
+            "pass_number": 41,
+            "events": []
+          },
+          {
+            "pass_number": 42,
+            "events": []
+          },
+          {
+            "pass_number": 43,
+            "events": []
+          },
+          {
+            "pass_number": 44,
+            "events": []
+          },
+          {
+            "pass_number": 45,
+            "events": []
+          },
+          {
+            "pass_number": 46,
+            "events": []
+          },
+          {
+            "pass_number": 47,
+            "events": []
+          },
+          {
+            "pass_number": 48,
+            "events": []
+          },
+          {
+            "pass_number": 49,
+            "events": []
+          },
+          {
+            "pass_number": 50,
+            "events": []
+          }
+        ]
+      },
+      {
+        "attempt_number": 2,
+        "passes": [
+          {
+            "pass_number": 1,
+            "events": [
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-12",
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-13"
+            ]
+          },
+          {
+            "pass_number": 2,
+            "events": [
+              "General Yield success for Agent 1"
+            ]
+          },
+          {
+            "pass_number": 3,
+            "events": [
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-15",
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-16"
+            ]
+          },
+          {
+            "pass_number": 4,
+            "events": [
+              "General Yield success for Agent 2"
+            ]
+          },
+          {
+            "pass_number": 5,
+            "events": [
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-18",
+              "Static replan success for Agent 3, created plan Robot-3-Plan-Resolved-19",
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-20"
+            ]
+          },
+          {
+            "pass_number": 6,
+            "events": [
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-21",
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-22"
+            ]
+          },
+          {
+            "pass_number": 7,
+            "events": [
+              "General Yield success for Agent 2"
+            ]
+          },
+          {
+            "pass_number": 8,
+            "events": [
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-24",
+              "Static replan success for Agent 3, created plan Robot-3-Plan-Resolved-25",
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-26"
+            ]
+          },
+          {
+            "pass_number": 9,
+            "events": [
+              "General Yield success for Agent 2"
+            ]
+          },
+          {
+            "pass_number": 10,
+            "events": [
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-28",
+              "Static replan success for Agent 3, created plan Robot-3-Plan-Resolved-29",
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-30"
+            ]
+          },
+          {
+            "pass_number": 11,
+            "events": [
+              "Smart Coordinated Yield: Agent 3 yields for 2"
+            ]
+          },
+          {
+            "pass_number": 12,
+            "events": [
+              "Static replan success for Agent 3, created plan Robot-3-Plan-Resolved-31",
+              "Static replan success for Agent 3, created plan Robot-3-Plan-Resolved-32"
+            ]
+          },
+          {
+            "pass_number": 13,
+            "events": []
+          },
+          {
+            "pass_number": 14,
+            "events": []
+          },
+          {
+            "pass_number": 15,
+            "events": []
+          },
+          {
+            "pass_number": 16,
+            "events": []
+          },
+          {
+            "pass_number": 17,
+            "events": []
+          },
+          {
+            "pass_number": 18,
+            "events": []
+          },
+          {
+            "pass_number": 19,
+            "events": []
+          },
+          {
+            "pass_number": 20,
+            "events": []
+          },
+          {
+            "pass_number": 21,
+            "events": []
+          },
+          {
+            "pass_number": 22,
+            "events": []
+          },
+          {
+            "pass_number": 23,
+            "events": []
+          },
+          {
+            "pass_number": 24,
+            "events": []
+          },
+          {
+            "pass_number": 25,
+            "events": []
+          },
+          {
+            "pass_number": 26,
+            "events": []
+          },
+          {
+            "pass_number": 27,
+            "events": []
+          },
+          {
+            "pass_number": 28,
+            "events": []
+          },
+          {
+            "pass_number": 29,
+            "events": []
+          },
+          {
+            "pass_number": 30,
+            "events": []
+          },
+          {
+            "pass_number": 31,
+            "events": []
+          },
+          {
+            "pass_number": 32,
+            "events": []
+          },
+          {
+            "pass_number": 33,
+            "events": []
+          },
+          {
+            "pass_number": 34,
+            "events": []
+          },
+          {
+            "pass_number": 35,
+            "events": []
+          },
+          {
+            "pass_number": 36,
+            "events": []
+          },
+          {
+            "pass_number": 37,
+            "events": []
+          },
+          {
+            "pass_number": 38,
+            "events": []
+          },
+          {
+            "pass_number": 39,
+            "events": []
+          },
+          {
+            "pass_number": 40,
+            "events": []
+          },
+          {
+            "pass_number": 41,
+            "events": []
+          },
+          {
+            "pass_number": 42,
+            "events": []
+          },
+          {
+            "pass_number": 43,
+            "events": []
+          },
+          {
+            "pass_number": 44,
+            "events": []
+          },
+          {
+            "pass_number": 45,
+            "events": []
+          },
+          {
+            "pass_number": 46,
+            "events": []
+          },
+          {
+            "pass_number": 47,
+            "events": []
+          },
+          {
+            "pass_number": 48,
+            "events": []
+          },
+          {
+            "pass_number": 49,
+            "events": []
+          },
+          {
+            "pass_number": 50,
+            "events": []
+          }
+        ]
+      },
+      {
+        "attempt_number": 3,
+        "passes": [
+          {
+            "pass_number": 1,
+            "events": [
+              "General Yield success for Agent 1"
+            ]
+          },
+          {
+            "pass_number": 2,
+            "events": [
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-34",
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-35"
+            ]
+          },
+          {
+            "pass_number": 3,
+            "events": [
+              "General Yield success for Agent 1"
+            ]
+          },
+          {
+            "pass_number": 4,
+            "events": [
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-37",
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-38"
+            ]
+          },
+          {
+            "pass_number": 5,
+            "events": []
+          },
+          {
+            "pass_number": 6,
+            "events": []
+          },
+          {
+            "pass_number": 7,
+            "events": []
+          },
+          {
+            "pass_number": 8,
+            "events": []
+          },
+          {
+            "pass_number": 9,
+            "events": []
+          },
+          {
+            "pass_number": 10,
+            "events": []
+          },
+          {
+            "pass_number": 11,
+            "events": []
+          },
+          {
+            "pass_number": 12,
+            "events": []
+          },
+          {
+            "pass_number": 13,
+            "events": []
+          },
+          {
+            "pass_number": 14,
+            "events": []
+          },
+          {
+            "pass_number": 15,
+            "events": []
+          },
+          {
+            "pass_number": 16,
+            "events": []
+          },
+          {
+            "pass_number": 17,
+            "events": []
+          },
+          {
+            "pass_number": 18,
+            "events": []
+          },
+          {
+            "pass_number": 19,
+            "events": []
+          },
+          {
+            "pass_number": 20,
+            "events": []
+          },
+          {
+            "pass_number": 21,
+            "events": []
+          },
+          {
+            "pass_number": 22,
+            "events": []
+          },
+          {
+            "pass_number": 23,
+            "events": []
+          },
+          {
+            "pass_number": 24,
+            "events": []
+          },
+          {
+            "pass_number": 25,
+            "events": []
+          },
+          {
+            "pass_number": 26,
+            "events": []
+          },
+          {
+            "pass_number": 27,
+            "events": []
+          },
+          {
+            "pass_number": 28,
+            "events": []
+          },
+          {
+            "pass_number": 29,
+            "events": []
+          },
+          {
+            "pass_number": 30,
+            "events": []
+          },
+          {
+            "pass_number": 31,
+            "events": []
+          },
+          {
+            "pass_number": 32,
+            "events": []
+          },
+          {
+            "pass_number": 33,
+            "events": []
+          },
+          {
+            "pass_number": 34,
+            "events": []
+          },
+          {
+            "pass_number": 35,
+            "events": []
+          },
+          {
+            "pass_number": 36,
+            "events": []
+          },
+          {
+            "pass_number": 37,
+            "events": []
+          },
+          {
+            "pass_number": 38,
+            "events": []
+          },
+          {
+            "pass_number": 39,
+            "events": []
+          },
+          {
+            "pass_number": 40,
+            "events": []
+          },
+          {
+            "pass_number": 41,
+            "events": []
+          },
+          {
+            "pass_number": 42,
+            "events": []
+          },
+          {
+            "pass_number": 43,
+            "events": []
+          },
+          {
+            "pass_number": 44,
+            "events": []
+          },
+          {
+            "pass_number": 45,
+            "events": []
+          },
+          {
+            "pass_number": 46,
+            "events": []
+          },
+          {
+            "pass_number": 47,
+            "events": []
+          },
+          {
+            "pass_number": 48,
+            "events": []
+          },
+          {
+            "pass_number": 49,
+            "events": []
+          },
+          {
+            "pass_number": 50,
+            "events": []
+          }
+        ]
+      },
+      {
+        "attempt_number": 4,
+        "passes": [
+          {
+            "pass_number": 1,
+            "events": [
+              "General Yield success for Agent 2"
+            ]
+          },
+          {
+            "pass_number": 2,
+            "events": [
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-40",
+              "Static replan success for Agent 2, created plan Robot-2-Plan-Resolved-41"
+            ]
+          },
+          {
+            "pass_number": 3,
+            "events": [
+              "General Yield success for Agent 1"
+            ]
+          },
+          {
+            "pass_number": 4,
+            "events": [
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-43",
+              "Static replan success for Agent 1, created plan Robot-1-Plan-Resolved-44"
+            ]
+          },
+          {
+            "pass_number": 5,
+            "events": []
+          },
+          {
+            "pass_number": 6,
+            "events": []
+          },
+          {
+            "pass_number": 7,
+            "events": []
+          },
+          {
+            "pass_number": 8,
+            "events": []
+          },
+          {
+            "pass_number": 9,
+            "events": []
+          },
+          {
+            "pass_number": 10,
+            "events": []
+          },
+          {
+            "pass_number": 11,
+            "events": []
+          },
+          {
+            "pass_number": 12,
+            "events": []
+          },
+          {
+            "pass_number": 13,
+            "events": []
+          },
+          {
+            "pass_number": 14,
+            "events": []
+          },
+          {
+            "pass_number": 15,
+            "events": []
+          },
+          {
+            "pass_number": 16,
+            "events": []
+          },
+          {
+            "pass_number": 17,
+            "events": []
+          },
+          {
+            "pass_number": 18,
+            "events": []
+          },
+          {
+            "pass_number": 19,
+            "events": []
+          },
+          {
+            "pass_number": 20,
+            "events": []
+          },
+          {
+            "pass_number": 21,
+            "events": []
+          },
+          {
+            "pass_number": 22,
+            "events": []
+          },
+          {
+            "pass_number": 23,
+            "events": []
+          },
+          {
+            "pass_number": 24,
+            "events": []
+          },
+          {
+            "pass_number": 25,
+            "events": []
+          },
+          {
+            "pass_number": 26,
+            "events": []
+          },
+          {
+            "pass_number": 27,
+            "events": []
+          },
+          {
+            "pass_number": 28,
+            "events": []
+          },
+          {
+            "pass_number": 29,
+            "events": []
+          },
+          {
+            "pass_number": 30,
+            "events": []
+          },
+          {
+            "pass_number": 31,
+            "events": []
+          },
+          {
+            "pass_number": 32,
+            "events": []
+          }
+        ]
+      }
+    ]
+  },
+  "collisionEvents": [
+    {
+      "id": "Collision-2-(5,7)",
+      "time": 2,
+      "type": "vertex",
+      "location": [
+        5,
+        7
+      ],
+      "agents": [
+        "Robot-2",
+        "Robot-3"
+      ]
+    },
+    {
+      "id": "Collision-4-(5,5)",
+      "time": 4,
+      "type": "vertex",
+      "location": [
+        5,
+        5
+      ],
+      "agents": [
+        "Robot-1",
+        "Robot-2",
+        "Robot-4"
+      ]
+    },
+    {
+      "id": "Collision-5-(6,5)",
+      "time": 5,
+      "type": "vertex",
+      "location": [
+        6,
+        5
+      ],
+      "agents": [
+        "Robot-1",
+        "Robot-3"
+      ]
+    },
+    {
+      "id": "Collision-6-(7,5)",
+      "time": 6,
+      "type": "vertex",
+      "location": [
+        7,
+        5
+      ],
+      "agents": [
+        "Robot-1",
+        "Robot-3"
+      ]
+    },
+    {
+      "id": "Collision-3-(6,5)",
+      "time": 3,
+      "type": "vertex",
+      "location": [
+        6,
+        5
+      ],
+      "agents": [
+        "Robot-2",
+        "Robot-4"
+      ]
+    },
+    {
+      "id": "Collision-4-(6,6)",
+      "time": 4,
+      "type": "vertex",
+      "location": [
+        6,
+        6
+      ],
+      "agents": [
+        "Robot-3",
+        "Robot-4"
+      ]
+    },
+    {
+      "id": "Collision-6-(4,4)",
+      "time": 6,
+      "type": "vertex",
+      "location": [
+        4,
+        4
+      ],
+      "agents": [
+        "Robot-1",
+        "Robot-2"
+      ]
+    },
+    {
+      "id": "Collision-6-(6,6)",
+      "time": 6,
+      "type": "vertex",
+      "location": [
+        6,
+        6
+      ],
+      "agents": [
+        "Robot-1",
+        "Robot-2"
+      ]
+    },
+    {
+      "id": "Collision-2-(7,5)",
+      "time": 2,
+      "type": "vertex",
+      "location": [
+        7,
+        5
+      ],
+      "agents": [
+        "Robot-2",
+        "Robot-4"
+      ]
+    },
+    {
+      "id": "Collision-6-(5,7)",
+      "time": 6,
+      "type": "vertex",
+      "location": [
+        5,
+        7
+      ],
+      "agents": [
+        "Robot-3",
+        "Robot-4"
+      ]
+    },
+    {
+      "id": "Collision-4-((5,6),(5,7))",
+      "time": 4,
+      "type": "edge",
+      "location": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ]
+      ],
+      "agents": [
+        "Robot-2",
+        "Robot-3"
+      ]
+    }
+  ],
+  "conflictAlerts": [
+    {
+      "id": "Alert-2",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-3",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-5",
+      "alertsConflict": "Collision-3-(6,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-6",
+      "alertsConflict": "Collision-3-(6,5)",
+      "targetAgent": "Robot-4",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-8",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-9",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-10",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-4",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-12",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-13",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-14",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-16",
+      "alertsConflict": "Collision-4-(6,6)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "Alert-17",
+      "alertsConflict": "Collision-4-(6,6)",
+      "targetAgent": "Robot-4",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-64",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-65",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-67",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-68",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-69",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-71",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-72",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-74",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-75",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-76",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-78",
+      "alertsConflict": "Collision-4-(6,6)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "Alert-79",
+      "alertsConflict": "Collision-4-(6,6)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "Alert-81",
+      "alertsConflict": "Collision-2-(7,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-82",
+      "alertsConflict": "Collision-2-(7,5)",
+      "targetAgent": "Robot-4",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          7,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-84",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-85",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-86",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-2",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-88",
+      "alertsConflict": "Collision-4-(6,6)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-89",
+      "alertsConflict": "Collision-4-(6,6)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "Alert-91",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-92",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-93",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-2",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-95",
+      "alertsConflict": "Collision-4-(6,6)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 5,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #3 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-96",
+      "alertsConflict": "Collision-4-(6,6)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 5,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #3 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "Alert-98",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 5,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #3 for this collision.",
+      "staticForbiddenCells": [
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-99",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 5,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #3 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-100",
+      "alertsConflict": "Collision-2-(5,7)",
+      "targetAgent": "Agents-[2, 3]",
+      "alertType": "smartCoordinatedYield",
+      "rationale": "Agent 3 clears path for Agent 2."
+    },
+    {
+      "id": "Alert-103",
+      "alertsConflict": "Collision-6-(5,7)",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-104",
+      "alertsConflict": "Collision-6-(5,7)",
+      "targetAgent": "Robot-4",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-144",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-145",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-146",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-148",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-149",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-151",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-152",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-153",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-155",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-156",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-204",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-205",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-206",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-208",
+      "alertsConflict": "Collision-4-((5,6),(5,7))",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-209",
+      "alertsConflict": "Collision-4-((5,6),(5,7))",
+      "targetAgent": "Robot-3",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-211",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "Alert-212",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 4,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #2 for this collision.",
+      "staticForbiddenCells": [
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "Alert-213",
+      "alertsConflict": "Collision-4-(5,5)",
+      "targetAgent": "Robot-1",
+      "alertType": "generalYield",
+      "rationale": "Active agent yielding to resolve deadlock."
+    },
+    {
+      "id": "Alert-215",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-1",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "Alert-216",
+      "alertsConflict": "Collision-6-(4,4)",
+      "targetAgent": "Robot-2",
+      "rewindWindow": 3,
+      "alertType": "staticReplan",
+      "rationale": "Agent selected via 'best' strategy during attempt #1 for this collision.",
+      "staticForbiddenCells": [
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ]
+      ]
+    }
+  ],
+  "replanningStrategies": [
+    {
+      "id": "Strategy-2",
+      "triggeredBy": "Alert-2",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-3",
+      "triggeredBy": "Alert-3",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-5",
+      "triggeredBy": "Alert-5",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-6",
+      "triggeredBy": "Alert-6",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-8",
+      "triggeredBy": "Alert-8",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-9",
+      "triggeredBy": "Alert-9",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-10",
+      "triggeredBy": "Alert-10",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-12",
+      "triggeredBy": "Alert-12",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-13",
+      "triggeredBy": "Alert-13",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-14",
+      "triggeredBy": "Alert-14",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-16",
+      "triggeredBy": "Alert-16",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-17",
+      "triggeredBy": "Alert-17",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-64",
+      "triggeredBy": "Alert-64",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-65",
+      "triggeredBy": "Alert-65",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-67",
+      "triggeredBy": "Alert-67",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-68",
+      "triggeredBy": "Alert-68",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-69",
+      "triggeredBy": "Alert-69",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-71",
+      "triggeredBy": "Alert-71",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-72",
+      "triggeredBy": "Alert-72",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-74",
+      "triggeredBy": "Alert-74",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-75",
+      "triggeredBy": "Alert-75",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-76",
+      "triggeredBy": "Alert-76",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-78",
+      "triggeredBy": "Alert-78",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-79",
+      "triggeredBy": "Alert-79",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-81",
+      "triggeredBy": "Alert-81",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-82",
+      "triggeredBy": "Alert-82",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-84",
+      "triggeredBy": "Alert-84",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-85",
+      "triggeredBy": "Alert-85",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-86",
+      "triggeredBy": "Alert-86",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-88",
+      "triggeredBy": "Alert-88",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-89",
+      "triggeredBy": "Alert-89",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-91",
+      "triggeredBy": "Alert-91",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-92",
+      "triggeredBy": "Alert-92",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-93",
+      "triggeredBy": "Alert-93",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-95",
+      "triggeredBy": "Alert-95",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-96",
+      "triggeredBy": "Alert-96",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-98",
+      "triggeredBy": "Alert-98",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-99",
+      "triggeredBy": "Alert-99",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-100",
+      "triggeredBy": "Alert-100",
+      "type": "SmartCoordinatedYield"
+    },
+    {
+      "id": "Strategy-103",
+      "triggeredBy": "Alert-103",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-104",
+      "triggeredBy": "Alert-104",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-144",
+      "triggeredBy": "Alert-144",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-145",
+      "triggeredBy": "Alert-145",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-146",
+      "triggeredBy": "Alert-146",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-148",
+      "triggeredBy": "Alert-148",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-149",
+      "triggeredBy": "Alert-149",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-151",
+      "triggeredBy": "Alert-151",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-152",
+      "triggeredBy": "Alert-152",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-153",
+      "triggeredBy": "Alert-153",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-155",
+      "triggeredBy": "Alert-155",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-156",
+      "triggeredBy": "Alert-156",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-204",
+      "triggeredBy": "Alert-204",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-205",
+      "triggeredBy": "Alert-205",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-206",
+      "triggeredBy": "Alert-206",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-208",
+      "triggeredBy": "Alert-208",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-209",
+      "triggeredBy": "Alert-209",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-211",
+      "triggeredBy": "Alert-211",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-212",
+      "triggeredBy": "Alert-212",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-213",
+      "triggeredBy": "Alert-213",
+      "type": "GeneralYield"
+    },
+    {
+      "id": "Strategy-215",
+      "triggeredBy": "Alert-215",
+      "type": "Static Obstacle Avoidance"
+    },
+    {
+      "id": "Strategy-216",
+      "triggeredBy": "Alert-216",
+      "type": "Static Obstacle Avoidance"
+    }
+  ],
+  "agentSubplans": [
+    {
+      "id": "Robot-2-Plan-Resolved-2",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-2-(5,7)",
+      "generatedBy": "Strategy-3",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-5",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-3-(6,5)",
+      "generatedBy": "Strategy-6",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-4-Plan-Resolved-7",
+      "belongsToAgent": "Robot-4",
+      "derivedFromConflict": "Collision-4-(5,5)",
+      "generatedBy": "Strategy-10",
+      "planCost": 9,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            7,
+            4
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            7,
+            5
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            7
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            7
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            3,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-8",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-4-(5,5)",
+      "generatedBy": "Strategy-14",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            7,
+            5
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-4-Plan-Resolved-11",
+      "belongsToAgent": "Robot-4",
+      "derivedFromConflict": "Collision-4-(6,6)",
+      "generatedBy": "Strategy-17",
+      "planCost": 9,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            7,
+            4
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            7,
+            5
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            7
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            7
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            3,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-13",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-6-(4,4)",
+      "generatedBy": "Strategy-65",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-14",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-4-(5,5)",
+      "generatedBy": "Strategy-69",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-16",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-6-(4,4)",
+      "generatedBy": "Strategy-72",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-17",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-4-(5,5)",
+      "generatedBy": "Strategy-76",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-20",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-4-(6,6)",
+      "generatedBy": "Strategy-79",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            7,
+            5
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-22",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-2-(7,5)",
+      "generatedBy": "Strategy-82",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-23",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-2-(5,7)",
+      "generatedBy": "Strategy-86",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-26",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-4-(6,6)",
+      "generatedBy": "Strategy-89",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-27",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-2-(5,7)",
+      "generatedBy": "Strategy-93",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-30",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-4-(6,6)",
+      "generatedBy": "Strategy-96",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-3-Plan-Resolved-32",
+      "belongsToAgent": "Robot-3",
+      "derivedFromConflict": "Collision-6-(5,7)",
+      "generatedBy": "Strategy-104",
+      "planCost": 10,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            7,
+            5
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            7,
+            4
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            7,
+            3
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            6,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-33",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-4-(5,5)",
+      "generatedBy": "Strategy-146",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-35",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-6-(4,4)",
+      "generatedBy": "Strategy-149",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-36",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-4-(5,5)",
+      "generatedBy": "Strategy-153",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-38",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-6-(4,4)",
+      "generatedBy": "Strategy-156",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-39",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-4-(5,5)",
+      "generatedBy": "Strategy-206",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            5,
+            7
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            6
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-2-Plan-Resolved-41",
+      "belongsToAgent": "Robot-2",
+      "derivedFromConflict": "Collision-4-((5,6),(5,7))",
+      "generatedBy": "Strategy-209",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            7,
+            7
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            6,
+            7
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-42",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-4-(5,5)",
+      "generatedBy": "Strategy-213",
+      "planCost": 14,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 9,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 10,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 11,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 12,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 13,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 14,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Robot-1-Plan-Resolved-44",
+      "belongsToAgent": "Robot-1",
+      "derivedFromConflict": "Collision-6-(4,4)",
+      "generatedBy": "Strategy-216",
+      "planCost": 8,
+      "steps": [
+        {
+          "time": 0,
+          "cell": [
+            3,
+            3
+          ]
+        },
+        {
+          "time": 1,
+          "cell": [
+            4,
+            3
+          ]
+        },
+        {
+          "time": 2,
+          "cell": [
+            4,
+            4
+          ]
+        },
+        {
+          "time": 3,
+          "cell": [
+            5,
+            4
+          ]
+        },
+        {
+          "time": 4,
+          "cell": [
+            5,
+            5
+          ]
+        },
+        {
+          "time": 5,
+          "cell": [
+            6,
+            5
+          ]
+        },
+        {
+          "time": 6,
+          "cell": [
+            6,
+            6
+          ]
+        },
+        {
+          "time": 7,
+          "cell": [
+            7,
+            6
+          ]
+        },
+        {
+          "time": 8,
+          "cell": [
+            7,
+            7
+          ]
+        }
+      ]
+    }
+  ],
+  "jointPlan": {
+    "id": "FinalJointPlan",
+    "subplans": [
+      "Robot-1-Plan-Resolved-13",
+      "Robot-2-Plan-Resolved-41",
+      "Robot-3-Plan-Resolved-32",
+      "Robot-4-Plan-Original"
+    ],
+    "globalMakespan": 31
+  },
+  "informationSharingMetrics": {
+    "initialSubmissionIU": 38,
+    "revisedSubmissionIU": 300,
+    "conflictAlertIU": 75,
+    "alertDetailsIU": {
+      "static": 75,
+      "dynamic": 0,
+      "pivot": 0,
+      "defer": 0
+    },
+    "totalInformationLoadIU": 413
+  }
+}

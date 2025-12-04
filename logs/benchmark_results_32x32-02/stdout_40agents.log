@@ -1,0 +1,1533 @@
+Using device: mps
+→ Running single instance from: test_data/maps/random-32-32-20/benchmark_converted/scene_even1_40agents.txt
+✓ Log directory created (if needed): /Users/lab/Desktop/github/MAPF-NeurIPS-25/logs/benchmark_results_32x32-02
+Loaded instance from 'test_data/maps/random-32-32-20/benchmark_converted/scene_even1_40agents.txt': 40 agents, grid size (32, 32).
+Instance has 40 agents.
+
+=== Collision Resolution Started ===
+Grid: (32, 32), Agents: 40
+Strategy: STATIC + DYNAMIC + JOINT A*
+Precomputing heuristic distances...
+Finished agents: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40}
+
+--- Pass 1/10000 (Elapsed: 0.05s) ---
+  Padded Agent 1: 4 → 50
+  Padded Agent 2: 7 → 50
+  Padded Agent 3: 18 → 50
+  Padded Agent 4: 37 → 50
+  Padded Agent 5: 38 → 50
+  Padded Agent 6: 15 → 50
+  Padded Agent 7: 9 → 50
+  Padded Agent 8: 14 → 50
+  Padded Agent 9: 33 → 50
+  Padded Agent 10: 33 → 50
+  Padded Agent 11: 41 → 50
+  Padded Agent 12: 36 → 50
+  Padded Agent 13: 13 → 50
+  Padded Agent 14: 8 → 50
+  Padded Agent 15: 10 → 50
+  Padded Agent 16: 5 → 50
+  Padded Agent 17: 6 → 50
+  Padded Agent 18: 47 → 50
+  Padded Agent 19: 8 → 50
+  Padded Agent 20: 35 → 50
+  Padded Agent 21: 42 → 50
+  Padded Agent 22: 32 → 50
+  Padded Agent 23: 3 → 50
+  Padded Agent 24: 25 → 50
+  Padded Agent 25: 3 → 50
+  Padded Agent 26: 24 → 50
+  Padded Agent 27: 26 → 50
+  Padded Agent 28: 19 → 50
+  Padded Agent 29: 45 → 50
+  Padded Agent 30: 25 → 50
+  Padded Agent 31: 35 → 50
+  Padded Agent 32: 23 → 50
+  Padded Agent 33: 38 → 50
+  Padded Agent 35: 29 → 50
+  Padded Agent 36: 2 → 50
+  Padded Agent 37: 8 → 50
+  Padded Agent 38: 25 → 50
+  Padded Agent 39: 14 → 50
+  Padded Agent 40: 49 → 50
+Detected 30 collisions
+
+  Collision: T=1, Type=vertex, Cell=(18, 7), Agents=[10, 26], Attempt=1
+  → ONE-STEP-WAIT (attempt 1): vertex collision, both agents moving
+    ✗ Agent 26: Created 3 new collisions
+    ✗ Agent 10: Created 14 new collisions
+    ✗ ONE-STEP-WAIT failed for both agents
+  → Trying STATIC for Agent 10 (attempt 1/1)
+  → Trying STATIC for Agent 26 (attempt 1/1)
+  → Trying DYNAMIC for Agent 10 (blocker: 26) (attempt 1/1)
+  → Trying DYNAMIC for Agent 26 (blocker: 10) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=3, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((16, 7), (20, 7))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=4, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((15, 7), (20, 8))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=5, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((14, 7), (21, 8))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=6, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((13, 7), (22, 8))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=7, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((12, 7), (23, 8))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=8, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((11, 7), (24, 8))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=9, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((10, 7), (25, 8))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=10, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((9, 7), (25, 9))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=11, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((8, 7), (26, 9))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=12, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((7, 7), (27, 9))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=13, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((7, 8), (27, 10))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=14, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((7, 9), (27, 11))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=15, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((7, 10), (27, 12))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=16, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((7, 11), (27, 13))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=17, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((6, 11), (27, 14))
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=18, agents=[10, 26]
+    Start positions: ((18, 8), (18, 6))
+    Subgoal positions: ((6, 12), (27, 15))
+    Joint A* failed after expanding window to rewind=17, horizon=17
+  ✗ Joint A* failed, will skip this collision for rest of pass
+  → All strategies exhausted, attempting DEFER (attempt 1/1)
+    Deferring Agent 10 (dist-to-goal: 0, T=1, Cell=(18, 7))
+    ✓ Agent 10 parked at (18, 8) for 53 steps
+  ✓ DEFER successful: Agent 10 parked at start
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 2/10000 (Elapsed: 74.38s) ---
+Detected 29 collisions
+
+  Collision: T=1, Type=vertex, Cell=(18, 8), Agents=[10, 29], Attempt=1
+  → Trying STATIC for Agent 29 (attempt 1/1)
+  → DYNAMIC: Agent 29 replans around deferred Agent 10
+  → Trying DYNAMIC for Agent 29 (blocker: 10) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  YIELD-ON-START attempt 1: Agent 10 (at start (18, 8))
+    Yielding Agent 10 from start (18, 8) at T=1
+      Testing parking candidate (19, 8) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (19, 8) is spatiotemporally safe!
+    → Found parking cell: (19, 8)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+    ✓ Built YIELD-ON-START plan: 0 prefix + 2 yield = 2 total
+  ✓ YIELD-ON-START successful: Agent 10 yielded from start
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 3/10000 (Elapsed: 94.75s) ---
+  Padded Agent 10: 2 → 50
+Detected 29 collisions
+
+  Collision: T=1, Type=edge, Cell=((18, 8), (19, 8)), Agents=[10, 29], Attempt=1
+  → Trying STATIC for Agent 29 (attempt 1/1)
+  → DYNAMIC: Agent 29 replans around deferred Agent 10
+  → Trying DYNAMIC for Agent 29 (blocker: 10) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=3, agents=[10, 29]
+    Start positions: ((18, 8), (19, 8))
+    Subgoal positions: ((18, 8), (17, 7))
+    Joint A* success in 3 steps (expanded 6 nodes) window [0,3]
+      Agent 10 joint plan: [3, 2, 4]
+      Agent 29 joint plan: [0, 2, 0]
+    Splicing agent 10: plan_len=50, t_start=0, t_goal_sub=3, segment_len=3
+    Splicing agent 29: plan_len=50, t_start=0, t_goal_sub=3, segment_len=3
+    ✓ Joint plan accepted!
+      Final plan for Agent 10: [3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+      Final plan for Agent 29: [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 0, 3, 3, 0, 3, 3, 1, 3, 3, 3, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 29 to 28
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 4/10000 (Elapsed: 115.01s) ---
+Detected 28 collisions
+
+  Collision: T=3, Type=vertex, Cell=(14, 14), Agents=[5, 24], Attempt=1
+  → ONE-STEP-WAIT (attempt 1): vertex collision, both agents moving
+    ✗ Agent 24: Created 4 new collisions
+    ✗ Agent 5: Created 12 new collisions
+    ✗ ONE-STEP-WAIT failed for both agents
+  → Trying STATIC for Agent 5 (attempt 1/1)
+  → Trying STATIC for Agent 24 (attempt 1/1)
+  → Trying DYNAMIC for Agent 5 (blocker: 24) (attempt 1/1)
+  → Trying DYNAMIC for Agent 24 (blocker: 5) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=3, t_start=1, t_goal_sub=5, agents=[5, 24]
+    Start positions: ((12, 14), (16, 14))
+    Subgoal positions: ((16, 14), (12, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=6, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((17, 14), (11, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=7, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((18, 14), (11, 15))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=8, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((19, 14), (10, 15))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=9, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((20, 14), (9, 15))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=10, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((21, 14), (8, 15))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=11, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((22, 14), (7, 15))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=12, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((23, 14), (6, 15))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=13, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((24, 14), (6, 16))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=14, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((25, 14), (5, 16))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=15, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((26, 14), (5, 17))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=16, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((27, 14), (5, 18))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=17, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((27, 15), (4, 18))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=18, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((27, 16), (4, 19))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=19, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((27, 17), (3, 19))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=20, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((27, 18), (3, 20))
+    Joint A* failed after expanding window to rewind=17, horizon=17
+  ✗ Joint A* failed, will skip this collision for rest of pass
+  → All strategies exhausted, attempting DEFER (attempt 1/1)
+    Deferring Agent 5 (dist-to-goal: 0, T=3, Cell=(14, 14))
+    ✓ Agent 5 parked at (11, 14) for 53 steps
+  ✓ DEFER successful: Agent 5 parked at start
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 5/10000 (Elapsed: 188.83s) ---
+Detected 27 collisions
+
+  Collision: T=3, Type=edge, Cell=((15, 14), (14, 14)), Agents=[24, 39], Attempt=1
+  → Trying STATIC for Agent 24 (attempt 1/1)
+  → Trying STATIC for Agent 39 (attempt 1/1)
+  → Trying DYNAMIC for Agent 24 (blocker: 39) (attempt 1/1)
+  → Trying DYNAMIC for Agent 39 (blocker: 24) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=3, t_start=1, t_goal_sub=5, agents=[24, 39]
+    Start positions: ((16, 14), (14, 15))
+    Subgoal positions: ((12, 14), (17, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=6, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((11, 14), (18, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=7, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((11, 15), (19, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=8, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((10, 15), (20, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=9, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((9, 15), (21, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=10, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((8, 15), (22, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=11, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((7, 15), (23, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=12, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((6, 15), (24, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=13, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((6, 16), (25, 14))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=14, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((5, 16), (25, 13))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=15, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((5, 17), (25, 13))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=16, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((5, 18), (25, 13))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=17, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((4, 18), (25, 13))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=18, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((4, 19), (25, 13))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=19, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((3, 19), (25, 13))
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=20, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((3, 20), (25, 13))
+    Joint A* failed after expanding window to rewind=17, horizon=17
+  ✗ Joint A* failed, will skip this collision for rest of pass
+  → All strategies exhausted, attempting DEFER (attempt 1/1)
+    Deferring Agent 24 (dist-to-goal: 0, T=3, Cell=((15, 14), (14, 14)))
+    ✓ Agent 24 parked at (17, 14) for 56 steps
+  ✓ DEFER successful: Agent 24 parked at start
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 6/10000 (Elapsed: 262.12s) ---
+Detected 25 collisions
+
+  Collision: T=3, Type=vertex, Cell=(28, 22), Agents=[34, 37], Attempt=1
+  → ONE-STEP-WAIT (attempt 1): vertex collision, both agents moving
+    ✗ Agent 37: Created 1 new collisions
+    ✗ Agent 34: Created 3 new collisions
+    ✗ ONE-STEP-WAIT failed for both agents
+  → Trying STATIC for Agent 34 (attempt 1/1)
+  → Trying STATIC for Agent 37 (attempt 1/1)
+  ✓ STATIC successful for Agent 37
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 7/10000 (Elapsed: 273.46s) ---
+  Padded Agent 37: 8 → 50
+Detected 24 collisions
+
+  Collision: T=5, Type=edge, Cell=((17, 28), (18, 28)), Agents=[9, 11], Attempt=1
+  → Trying STATIC for Agent 9 (attempt 1/1)
+  → Trying STATIC for Agent 11 (attempt 1/1)
+  → Trying DYNAMIC for Agent 9 (blocker: 11) (attempt 1/1)
+  → Trying DYNAMIC for Agent 11 (blocker: 9) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=5, t_start=3, t_goal_sub=7, agents=[9, 11]
+    Start positions: ((16, 28), (19, 28))
+    Subgoal positions: ((18, 26), (15, 28))
+    Joint A* success in 4 steps (expanded 5 nodes) window [3,7]
+      Agent 9 joint plan: [1, 2, 1, 2]
+      Agent 11 joint plan: [0, 0, 0, 0]
+    Splicing agent 9: plan_len=50, t_start=3, t_goal_sub=7, segment_len=4
+    Splicing agent 11: plan_len=50, t_start=3, t_goal_sub=7, segment_len=4
+    ✓ Joint plan accepted!
+      Final plan for Agent 9: [1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+      Final plan for Agent 11: [2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 24 to 23
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 8/10000 (Elapsed: 313.80s) ---
+Detected 23 collisions
+
+  Collision: T=5, Type=vertex, Cell=(17, 14), Agents=[24, 39], Attempt=1
+  → Trying STATIC for Agent 39 (attempt 1/1)
+  → DYNAMIC: Agent 39 replans around deferred Agent 24
+  → Trying DYNAMIC for Agent 39 (blocker: 24) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  YIELD-ON-START attempt 1: Agent 24 (at start (17, 14))
+    Yielding Agent 24 from start (17, 14) at T=5
+      Testing parking candidate (16, 14) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (16, 14) is spatiotemporally safe!
+    → Found parking cell: (16, 14)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+    ✓ Built YIELD-ON-START plan: 4 prefix + 2 yield = 6 total
+  ✓ YIELD-ON-START successful: Agent 24 yielded from start
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 9/10000 (Elapsed: 334.12s) ---
+  Padded Agent 24: 6 → 50
+Detected 23 collisions
+
+  Collision: T=5, Type=edge, Cell=((17, 14), (16, 14)), Agents=[24, 39], Attempt=1
+  → Trying STATIC for Agent 39 (attempt 1/1)
+  → DYNAMIC: Agent 39 replans around deferred Agent 24
+  → Trying DYNAMIC for Agent 39 (blocker: 24) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=5, t_start=3, t_goal_sub=7, agents=[24, 39]
+    Start positions: ((17, 14), (15, 14))
+    Subgoal positions: ((17, 14), (19, 14))
+    Joint A* window: coll_time=5, t_start=2, t_goal_sub=8, agents=[24, 39]
+    Start positions: ((17, 14), (14, 14))
+    Subgoal positions: ((17, 14), (20, 14))
+    Joint A* window: coll_time=5, t_start=1, t_goal_sub=9, agents=[24, 39]
+    Start positions: ((17, 14), (14, 15))
+    Subgoal positions: ((17, 14), (21, 14))
+    Joint A* window: coll_time=5, t_start=0, t_goal_sub=10, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((17, 14), (22, 14))
+    Joint A* window: coll_time=5, t_start=0, t_goal_sub=11, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((17, 14), (23, 14))
+    Joint A* window: coll_time=5, t_start=0, t_goal_sub=12, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((17, 14), (24, 14))
+    Joint A* window: coll_time=5, t_start=0, t_goal_sub=13, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((17, 14), (25, 14))
+    Joint A* window: coll_time=5, t_start=0, t_goal_sub=14, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((17, 14), (25, 13))
+    Joint A* window: coll_time=5, t_start=0, t_goal_sub=15, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((17, 14), (25, 13))
+    Joint A* window: coll_time=5, t_start=0, t_goal_sub=16, agents=[24, 39]
+    Start positions: ((17, 14), (13, 15))
+    Subgoal positions: ((17, 14), (25, 13))
+    Joint A* success in 16 steps (expanded 3203 nodes) window [0,16]
+      Agent 24 joint plan: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 2, 3]...
+      Agent 39 joint plan: [1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1]...
+    Splicing agent 24: plan_len=50, t_start=0, t_goal_sub=16, segment_len=16
+    Splicing agent 39: plan_len=50, t_start=0, t_goal_sub=16, segment_len=16
+    ✓ Joint plan accepted!
+      Final plan for Agent 24: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 2, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+      Final plan for Agent 39: [1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 23 to 18
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 10/10000 (Elapsed: 375.90s) ---
+Detected 18 collisions
+
+  Collision: T=9, Type=vertex, Cell=(11, 14), Agents=[5, 33], Attempt=1
+  → Trying STATIC for Agent 33 (attempt 1/1)
+  → DYNAMIC: Agent 33 replans around deferred Agent 5
+  → Trying DYNAMIC for Agent 33 (blocker: 5) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  YIELD-ON-START attempt 1: Agent 5 (at start (11, 14))
+    Yielding Agent 5 from start (11, 14) at T=9
+      Testing parking candidate (12, 14) (dist=1):
+        Test trajectory length: 6 timesteps
+      Parking conflict (vertex): t=10, agent 5 vs 33 at (12, 14)
+        ✗ Candidate (12, 14) rejected due to spatiotemporal conflicts
+      Testing parking candidate (11, 13) (dist=1):
+        Test trajectory length: 6 timesteps
+      Parking conflict (vertex): t=11, agent 5 vs 28 at (11, 13)
+        ✗ Candidate (11, 13) rejected due to spatiotemporal conflicts
+      Testing parking candidate (11, 15) (dist=1):
+        Test trajectory length: 6 timesteps
+      Parking conflict (vertex): t=13, agent 5 vs 28 at (11, 15)
+        ✗ Candidate (11, 15) rejected due to spatiotemporal conflicts
+      Testing parking candidate (13, 14) (dist=2):
+        Test trajectory length: 8 timesteps
+      Parking conflict (vertex): t=10, agent 5 vs 33 at (12, 14)
+        ✗ Candidate (13, 14) rejected due to spatiotemporal conflicts
+      Testing parking candidate (10, 13) (dist=2):
+        Test trajectory length: 8 timesteps
+      Parking conflict (edge): t=10->11, agent 5 <-> 28
+        ✗ Candidate (10, 13) rejected due to spatiotemporal conflicts
+      Testing parking candidate (10, 15) (dist=2):
+        Test trajectory length: 8 timesteps
+      ✓ Candidate (10, 15) is spatiotemporally safe!
+    → Found parking cell: (10, 15)
+      Yield segment: 2 steps to parking, wait 0, 2 steps back
+    ✓ Built YIELD-ON-START plan: 8 prefix + 4 yield = 12 total
+  ✓ YIELD-ON-START successful: Agent 5 yielded from start
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 11/10000 (Elapsed: 396.78s) ---
+  Padded Agent 5: 12 → 50
+Detected 17 collisions
+
+  Collision: T=12, Type=vertex, Cell=(21, 12), Agents=[4, 6], Attempt=1
+  → ONE-STEP-WAIT (attempt 1): vertex collision, both agents moving
+    ✗ Agent 6: Created 1 new collisions
+    ✗ Agent 4: Created 2 new collisions
+    ✗ ONE-STEP-WAIT failed for both agents
+  → Trying STATIC for Agent 4 (attempt 1/1)
+  → Trying STATIC for Agent 6 (attempt 1/1)
+  ✓ STATIC successful for Agent 6
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 12/10000 (Elapsed: 409.72s) ---
+  Padded Agent 6: 19 → 50
+Detected 17 collisions
+
+  Collision: T=12, Type=vertex, Cell=(11, 14), Agents=[5, 28], Attempt=1
+  → ONE-STEP-WAIT (attempt 1): vertex collision, both agents moving
+    ✗ Agent 28: Created 1 new collisions
+    ✗ Agent 5: Created 1 new collisions
+    ✗ ONE-STEP-WAIT failed for both agents
+  → Trying STATIC for Agent 28 (attempt 1/1)
+  ✓ STATIC successful for Agent 28
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 13/10000 (Elapsed: 416.52s) ---
+  Padded Agent 28: 19 → 50
+Detected 16 collisions
+
+  Collision: T=12, Type=vertex, Cell=(24, 15), Agents=[6, 14], Attempt=1
+  → Trying STATIC for Agent 6 (attempt 1/1)
+  ✓ STATIC successful for Agent 6
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 14/10000 (Elapsed: 418.44s) ---
+  Padded Agent 6: 15 → 50
+Detected 16 collisions
+
+  Collision: T=12, Type=vertex, Cell=(21, 12), Agents=[4, 6], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  → Trying DYNAMIC for Agent 4 (blocker: 6) (attempt 1/1)
+  → Trying DYNAMIC for Agent 6 (blocker: 4) (attempt 1/1)
+  ✓ DYNAMIC successful for Agent 6
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 15/10000 (Elapsed: 436.32s) ---
+  Padded Agent 6: 19 → 50
+Detected 17 collisions
+
+  Collision: T=9, Type=edge, Cell=((20, 15), (19, 15)), Agents=[6, 39], Attempt=1
+  → Trying STATIC for Agent 6 (attempt 1/1)
+  ✓ STATIC successful for Agent 6
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 16/10000 (Elapsed: 437.81s) ---
+  Padded Agent 6: 15 → 50
+Detected 15 collisions
+
+  Collision: T=15, Type=vertex, Cell=(11, 14), Agents=[3, 5], Attempt=1
+  → Trying STATIC for Agent 3 (attempt 1/1)
+  ✓ STATIC successful for Agent 3
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 17/10000 (Elapsed: 441.44s) ---
+  Padded Agent 3: 22 → 50
+Detected 14 collisions
+
+  Collision: T=17, Type=vertex, Cell=(19, 14), Agents=[2, 33], Attempt=1
+  → Trying STATIC for Agent 2 (attempt 1/1)
+  → Trying STATIC for Agent 33 (attempt 1/1)
+  → Trying DYNAMIC for Agent 2 (blocker: 33) (attempt 1/1)
+  → Trying DYNAMIC for Agent 33 (blocker: 2) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 2 at goal (19, 14)
+      Testing parking candidate (18, 14) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (18, 14) is spatiotemporally safe!
+    → Found parking cell: (18, 14)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 16 prefix + 2 yield = 18 total actions
+    ✓ Agent 2 yielded to parking cell (18, 14)
+    [DEBUG YIELD] Yield plan generated for Agent 2:
+      - Original plan length: 50
+      - New yield plan length: 18
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=15: (19, 14) → (19, 14)
+        T=16: (19, 14) → (19, 14)
+        T=17: (19, 14) → (18, 14) ← COLLISION TIME
+        T=18: (19, 14) → (19, 14)
+  ✓ YIELD-ON-GOAL successful for Agent 2
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 18/10000 (Elapsed: 462.06s) ---
+  Padded Agent 2: 18 → 50
+Detected 14 collisions
+
+  Collision: T=17, Type=edge, Cell=((19, 14), (18, 14)), Agents=[2, 33], Attempt=1
+  → Trying STATIC for Agent 33 (attempt 1/1)
+  → Trying DYNAMIC for Agent 33 (blocker: 2) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=17, t_start=15, t_goal_sub=19, agents=[2, 33]
+    Start positions: ((19, 14), (17, 14))
+    Subgoal positions: ((19, 14), (21, 14))
+    Joint A* success in 4 steps (expanded 8 nodes) window [15,19]
+      Agent 2 joint plan: [4, 3, 2, 4]
+      Agent 33 joint plan: [1, 1, 1, 1]
+    Splicing agent 2: plan_len=50, t_start=15, t_goal_sub=19, segment_len=4
+    Splicing agent 33: plan_len=50, t_start=15, t_goal_sub=19, segment_len=4
+    ✓ Joint plan accepted!
+      Final plan for Agent 2: [1, 1, 1, 1, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+      Final plan for Agent 33: [1, 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 0, 3, 3, 3, 1, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 14 to 13
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 19/10000 (Elapsed: 482.32s) ---
+Detected 13 collisions
+
+  Collision: T=19, Type=vertex, Cell=(27, 18), Agents=[21, 23], Attempt=1
+  → Trying STATIC for Agent 21 (attempt 1/1)
+  → Trying STATIC for Agent 23 (attempt 1/1)
+  → Trying DYNAMIC for Agent 21 (blocker: 23) (attempt 1/1)
+  → Trying DYNAMIC for Agent 23 (blocker: 21) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 23 at goal (27, 18)
+      Testing parking candidate (26, 18) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (26, 18) is spatiotemporally safe!
+    → Found parking cell: (26, 18)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Conflict (vertex) at t=21: Agent 23 vs 26 at (27, 18)
+    → Yield segment creates conflicts
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=19, t_start=17, t_goal_sub=21, agents=[21, 23]
+    Start positions: ((26, 19), (27, 18))
+    Subgoal positions: ((27, 16), (27, 18))
+    Joint A* window: coll_time=19, t_start=16, t_goal_sub=22, agents=[21, 23]
+    Start positions: ((25, 19), (27, 18))
+    Subgoal positions: ((27, 15), (27, 18))
+    Joint A* success in 6 steps (expanded 143 nodes) window [16,22]
+      Agent 21 joint plan: [1, 2, 2, 2, 1, 2]
+      Agent 23 joint plan: [4, 4, 4, 4, 0, 1]
+    Splicing agent 21: plan_len=50, t_start=16, t_goal_sub=22, segment_len=6
+    Splicing agent 23: plan_len=50, t_start=16, t_goal_sub=22, segment_len=6
+    ✓ Joint plan accepted!
+      Final plan for Agent 21: [1, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 2, 2, 2, 0, 2, 0, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4]
+      Final plan for Agent 23: [1, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 13 to 10
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 20/10000 (Elapsed: 504.65s) ---
+Detected 10 collisions
+
+  Collision: T=20, Type=vertex, Cell=(20, 19), Agents=[4, 9], Attempt=1
+  → ONE-STEP-WAIT (attempt 1): vertex collision, both agents moving
+    ✗ Agent 4: Created 1 new collisions
+    ✗ Agent 9: Created 1 new collisions
+    ✗ ONE-STEP-WAIT failed for both agents
+  → Trying STATIC for Agent 4 (attempt 1/1)
+  → Trying STATIC for Agent 9 (attempt 1/1)
+  → Trying DYNAMIC for Agent 4 (blocker: 9) (attempt 1/1)
+  → Trying DYNAMIC for Agent 9 (blocker: 4) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=20, t_start=18, t_goal_sub=22, agents=[4, 9]
+    Start positions: ((20, 17), (21, 20))
+    Subgoal positions: ((21, 20), (20, 17))
+    Joint A* window: coll_time=20, t_start=17, t_goal_sub=23, agents=[4, 9]
+    Start positions: ((20, 16), (22, 20))
+    Subgoal positions: ((22, 20), (20, 16))
+    Joint A* window: coll_time=20, t_start=16, t_goal_sub=24, agents=[4, 9]
+    Start positions: ((20, 15), (22, 21))
+    Subgoal positions: ((22, 21), (20, 15))
+    Joint A* window: coll_time=20, t_start=15, t_goal_sub=25, agents=[4, 9]
+    Start positions: ((20, 14), (22, 22))
+    Subgoal positions: ((22, 22), (20, 14))
+    Joint A* window: coll_time=20, t_start=14, t_goal_sub=26, agents=[4, 9]
+    Start positions: ((20, 13), (22, 23))
+    Subgoal positions: ((22, 23), (20, 13))
+    Joint A* window: coll_time=20, t_start=13, t_goal_sub=27, agents=[4, 9]
+    Start positions: ((21, 13), (22, 24))
+    Subgoal positions: ((22, 24), (21, 13))
+    Joint A* window: coll_time=20, t_start=12, t_goal_sub=28, agents=[4, 9]
+    Start positions: ((21, 12), (21, 24))
+    Subgoal positions: ((21, 24), (21, 12))
+    Joint A* window: coll_time=20, t_start=11, t_goal_sub=29, agents=[4, 9]
+    Start positions: ((21, 11), (20, 24))
+    Subgoal positions: ((20, 24), (21, 11))
+    Joint A* window: coll_time=20, t_start=10, t_goal_sub=30, agents=[4, 9]
+    Start positions: ((20, 11), (19, 24))
+    Subgoal positions: ((19, 24), (20, 11))
+    Joint A* window: coll_time=20, t_start=9, t_goal_sub=31, agents=[4, 9]
+    Start positions: ((20, 10), (19, 25))
+    Subgoal positions: ((19, 25), (20, 10))
+    Joint A* window: coll_time=20, t_start=8, t_goal_sub=32, agents=[4, 9]
+    Start positions: ((20, 9), (18, 25))
+    Subgoal positions: ((18, 25), (20, 9))
+    Joint A* window: coll_time=20, t_start=7, t_goal_sub=33, agents=[4, 9]
+    Start positions: ((20, 8), (18, 26))
+    Subgoal positions: ((18, 26), (20, 8))
+    Joint A* window: coll_time=20, t_start=6, t_goal_sub=34, agents=[4, 9]
+    Start positions: ((20, 7), (18, 27))
+    Subgoal positions: ((18, 27), (20, 8))
+    Joint A* success in 28 steps (expanded 13201 nodes) window [6,34]
+      Agent 4 joint plan: [3, 3, 3, 3, 1, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3]...
+      Agent 9 joint plan: [2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 0, 2, 4, 0]...
+    Splicing agent 4: plan_len=50, t_start=6, t_goal_sub=34, segment_len=28
+    Splicing agent 9: plan_len=50, t_start=6, t_goal_sub=34, segment_len=28
+    ✓ Joint plan accepted!
+      Final plan for Agent 4: [0, 3, 0, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 1, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+      Final plan for Agent 9: [1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 0, 2, 4, 0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 10 to 9
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 21/10000 (Elapsed: 573.08s) ---
+Detected 9 collisions
+
+  Collision: T=24, Type=edge, Cell=((26, 11), (25, 11)), Agents=[22, 31], Attempt=1
+  → Trying STATIC for Agent 22 (attempt 1/1)
+  → Trying STATIC for Agent 31 (attempt 1/1)
+  ✓ STATIC successful for Agent 31
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 22/10000 (Elapsed: 593.14s) ---
+  Padded Agent 31: 35 → 50
+Detected 8 collisions
+
+  Collision: T=30, Type=vertex, Cell=(22, 10), Agents=[6, 18], Attempt=1
+  → Trying STATIC for Agent 6 (attempt 1/1)
+  → Trying STATIC for Agent 18 (attempt 1/1)
+  → Trying DYNAMIC for Agent 6 (blocker: 18) (attempt 1/1)
+  → Trying DYNAMIC for Agent 18 (blocker: 6) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 6 at goal (22, 10)
+      Testing parking candidate (21, 10) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (21, 10) is spatiotemporally safe!
+    → Found parking cell: (21, 10)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 29 prefix + 2 yield = 31 total actions
+    ✓ Agent 6 yielded to parking cell (21, 10)
+    [DEBUG YIELD] Yield plan generated for Agent 6:
+      - Original plan length: 50
+      - New yield plan length: 31
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=28: (22, 10) → (22, 10)
+        T=29: (22, 10) → (22, 10)
+        T=30: (22, 10) → (21, 10) ← COLLISION TIME
+        T=31: (22, 10) → (22, 10)
+  ✓ YIELD-ON-GOAL successful for Agent 6
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 23/10000 (Elapsed: 613.70s) ---
+  Padded Agent 6: 31 → 50
+Detected 7 collisions
+
+  Collision: T=33, Type=vertex, Cell=(2, 20), Agents=[29, 35], Attempt=1
+  → Trying STATIC for Agent 29 (attempt 1/1)
+  → Trying STATIC for Agent 35 (attempt 1/1)
+  → Trying DYNAMIC for Agent 29 (blocker: 35) (attempt 1/1)
+  → Trying DYNAMIC for Agent 35 (blocker: 29) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 35 at goal (2, 20)
+      Testing parking candidate (1, 20) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (1, 20) is spatiotemporally safe!
+    → Found parking cell: (1, 20)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 32 prefix + 2 yield = 34 total actions
+    ✓ Agent 35 yielded to parking cell (1, 20)
+    [DEBUG YIELD] Yield plan generated for Agent 35:
+      - Original plan length: 50
+      - New yield plan length: 34
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=31: (2, 20) → (2, 20)
+        T=32: (2, 20) → (2, 20)
+        T=33: (2, 20) → (1, 20) ← COLLISION TIME
+        T=34: (2, 20) → (2, 20)
+  ✓ YIELD-ON-GOAL successful for Agent 35
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 24/10000 (Elapsed: 633.24s) ---
+  Padded Agent 35: 34 → 50
+Detected 6 collisions
+
+  Collision: T=35, Type=vertex, Cell=(5, 13), Agents=[19, 34], Attempt=1
+  → Trying STATIC for Agent 19 (attempt 1/1)
+  → Trying STATIC for Agent 34 (attempt 1/1)
+  → Trying DYNAMIC for Agent 19 (blocker: 34) (attempt 1/1)
+  → Trying DYNAMIC for Agent 34 (blocker: 19) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 19 at goal (5, 13)
+      Testing parking candidate (4, 13) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (4, 13) is spatiotemporally safe!
+    → Found parking cell: (4, 13)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 34 prefix + 2 yield = 36 total actions
+    ✓ Agent 19 yielded to parking cell (4, 13)
+    [DEBUG YIELD] Yield plan generated for Agent 19:
+      - Original plan length: 50
+      - New yield plan length: 36
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=33: (5, 13) → (5, 13)
+        T=34: (5, 13) → (5, 13)
+        T=35: (5, 13) → (4, 13) ← COLLISION TIME
+        T=36: (5, 13) → (5, 13)
+  ✓ YIELD-ON-GOAL successful for Agent 19
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 25/10000 (Elapsed: 653.83s) ---
+  Padded Agent 19: 36 → 50
+Detected 5 collisions
+
+  Collision: T=37, Type=vertex, Cell=(26, 25), Agents=[12, 33], Attempt=1
+  → Trying STATIC for Agent 12 (attempt 1/1)
+  → Trying STATIC for Agent 33 (attempt 1/1)
+  ✓ STATIC successful for Agent 33
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 26/10000 (Elapsed: 664.75s) ---
+  Padded Agent 33: 40 → 50
+Detected 4 collisions
+
+  Collision: T=37, Type=vertex, Cell=(1, 23), Agents=[27, 29], Attempt=1
+  → Trying STATIC for Agent 27 (attempt 1/1)
+  → Trying STATIC for Agent 29 (attempt 1/1)
+  ✓ STATIC successful for Agent 29
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 27/10000 (Elapsed: 670.29s) ---
+  Padded Agent 29: 45 → 50
+Detected 3 collisions
+
+  Collision: T=36, Type=vertex, Cell=(3, 22), Agents=[1, 29], Attempt=1
+  → Trying STATIC for Agent 1 (attempt 1/1)
+  → Trying STATIC for Agent 29 (attempt 1/1)
+  ✓ STATIC successful for Agent 29
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 28/10000 (Elapsed: 675.50s) ---
+  Padded Agent 29: 45 → 50
+Detected 4 collisions
+
+  Collision: T=37, Type=vertex, Cell=(1, 23), Agents=[27, 29], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  → Trying DYNAMIC for Agent 27 (blocker: 29) (attempt 1/1)
+  → Trying DYNAMIC for Agent 29 (blocker: 27) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 27 at goal (1, 23)
+      Testing parking candidate (1, 22) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (1, 22) is spatiotemporally safe!
+    → Found parking cell: (1, 22)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 36 prefix + 2 yield = 38 total actions
+    ✓ Agent 27 yielded to parking cell (1, 22)
+    [DEBUG YIELD] Yield plan generated for Agent 27:
+      - Original plan length: 50
+      - New yield plan length: 38
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=35: (1, 23) → (1, 23)
+        T=36: (1, 23) → (1, 23)
+        T=37: (1, 23) → (1, 22) ← COLLISION TIME
+        T=38: (1, 23) → (1, 23)
+  ✓ YIELD-ON-GOAL successful for Agent 27
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 29/10000 (Elapsed: 682.06s) ---
+  Padded Agent 27: 38 → 50
+Detected 4 collisions
+
+  Collision: T=37, Type=edge, Cell=((1, 23), (1, 22)), Agents=[27, 29], Attempt=1
+  → Trying STATIC for Agent 29 (attempt 1/1)
+  ✓ STATIC successful for Agent 29
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 30/10000 (Elapsed: 687.25s) ---
+  Padded Agent 29: 45 → 50
+Detected 3 collisions
+
+  Collision: T=36, Type=vertex, Cell=(3, 22), Agents=[1, 29], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  → Trying DYNAMIC for Agent 1 (blocker: 29) (attempt 1/1)
+  → Trying DYNAMIC for Agent 29 (blocker: 1) (attempt 1/1)
+  ✓ DYNAMIC successful for Agent 29
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 31/10000 (Elapsed: 693.93s) ---
+  Padded Agent 29: 45 → 50
+Detected 4 collisions
+
+  Collision: T=37, Type=edge, Cell=((1, 23), (1, 22)), Agents=[27, 29], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  → Trying DYNAMIC for Agent 29 (blocker: 27) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  ⊘ YIELD-ON-START: Not applicable (no deferred agent at start)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=37, t_start=35, t_goal_sub=39, agents=[27, 29]
+    Start positions: ((1, 23), (2, 22))
+    Subgoal positions: ((1, 23), (0, 24))
+    Joint A* window: coll_time=37, t_start=34, t_goal_sub=40, agents=[27, 29]
+    Start positions: ((1, 23), (2, 21))
+    Subgoal positions: ((1, 23), (0, 25))
+    Joint A* success in 6 steps (expanded 43 nodes) window [34,40]
+      Agent 27 joint plan: [2, 0, 1, 3, 4, 4]
+      Agent 29 joint plan: [3, 0, 3, 3, 0, 3]
+    Splicing agent 27: plan_len=50, t_start=34, t_goal_sub=40, segment_len=6
+    Splicing agent 29: plan_len=50, t_start=34, t_goal_sub=40, segment_len=6
+    ✓ Joint plan accepted!
+      Final plan for Agent 27: [0, 0, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 2, 0, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+      Final plan for Agent 29: [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 3, 1, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 4 to 3
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 32/10000 (Elapsed: 699.99s) ---
+Detected 3 collisions
+
+  Collision: T=40, Type=vertex, Cell=(2, 20), Agents=[35, 40], Attempt=1
+  → Trying STATIC for Agent 40 (attempt 1/1)
+  ✓ STATIC successful for Agent 40
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 33/10000 (Elapsed: 706.41s) ---
+  Padded Agent 1: 50 → 51
+  Padded Agent 2: 50 → 51
+  Padded Agent 3: 50 → 51
+  Padded Agent 4: 50 → 51
+  Padded Agent 5: 50 → 51
+  Padded Agent 6: 50 → 51
+  Padded Agent 7: 50 → 51
+  Padded Agent 8: 50 → 51
+  Padded Agent 9: 50 → 51
+  Padded Agent 10: 50 → 51
+  Padded Agent 11: 50 → 51
+  Padded Agent 12: 50 → 51
+  Padded Agent 13: 50 → 51
+  Padded Agent 14: 50 → 51
+  Padded Agent 15: 50 → 51
+  Padded Agent 16: 50 → 51
+  Padded Agent 17: 50 → 51
+  Padded Agent 18: 50 → 51
+  Padded Agent 19: 50 → 51
+  Padded Agent 20: 50 → 51
+  Padded Agent 21: 50 → 51
+  Padded Agent 22: 50 → 51
+  Padded Agent 23: 50 → 51
+  Padded Agent 24: 50 → 51
+  Padded Agent 25: 50 → 51
+  Padded Agent 26: 50 → 51
+  Padded Agent 27: 50 → 51
+  Padded Agent 28: 50 → 51
+  Padded Agent 29: 50 → 51
+  Padded Agent 30: 50 → 51
+  Padded Agent 31: 50 → 51
+  Padded Agent 32: 50 → 51
+  Padded Agent 33: 50 → 51
+  Padded Agent 34: 50 → 51
+  Padded Agent 35: 50 → 51
+  Padded Agent 36: 50 → 51
+  Padded Agent 37: 50 → 51
+  Padded Agent 38: 50 → 51
+  Padded Agent 39: 50 → 51
+Detected 2 collisions
+
+  Collision: T=43, Type=vertex, Cell=(3, 22), Agents=[1, 40], Attempt=1
+  → Trying STATIC for Agent 1 (attempt 1/1)
+  → Trying STATIC for Agent 40 (attempt 1/1)
+  ✓ STATIC successful for Agent 40
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 34/10000 (Elapsed: 713.04s) ---
+Detected 3 collisions
+
+  Collision: T=42, Type=vertex, Cell=(2, 20), Agents=[35, 40], Attempt=1
+  → Trying STATIC for Agent 40 (attempt 1/1)
+  ✓ STATIC successful for Agent 40
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 35/10000 (Elapsed: 723.25s) ---
+  Padded Agent 40: 49 → 50
+Detected 3 collisions
+
+  Collision: T=40, Type=vertex, Cell=(2, 20), Agents=[35, 40], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  → Trying DYNAMIC for Agent 40 (blocker: 35) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 35 at goal (2, 20)
+      Testing parking candidate (1, 20) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (1, 20) is spatiotemporally safe!
+    → Found parking cell: (1, 20)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 39 prefix + 2 yield = 41 total actions
+    ✓ Agent 35 yielded to parking cell (1, 20)
+    [DEBUG YIELD] Yield plan generated for Agent 35:
+      - Original plan length: 51
+      - New yield plan length: 41
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=38: (2, 20) → (2, 20)
+        T=39: (2, 20) → (2, 20)
+        T=40: (2, 20) → (1, 20) ← COLLISION TIME
+        T=41: (2, 20) → (2, 20)
+  ✓ YIELD-ON-GOAL successful for Agent 35
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 36/10000 (Elapsed: 733.60s) ---
+  Padded Agent 35: 41 → 50
+Detected 2 collisions
+
+  Collision: T=44, Type=vertex, Cell=(1, 23), Agents=[27, 40], Attempt=1
+  → Trying STATIC for Agent 40 (attempt 1/1)
+  ✓ STATIC successful for Agent 40
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 37/10000 (Elapsed: 736.48s) ---
+  Padded Agent 35: 50 → 51
+Detected 2 collisions
+
+  Collision: T=43, Type=vertex, Cell=(3, 22), Agents=[1, 40], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  → Trying DYNAMIC for Agent 1 (blocker: 40) (attempt 1/1)
+  → Trying DYNAMIC for Agent 40 (blocker: 1) (attempt 1/1)
+  ✓ DYNAMIC successful for Agent 40
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 38/10000 (Elapsed: 742.23s) ---
+  Padded Agent 40: 49 → 50
+Detected 2 collisions
+
+  Collision: T=44, Type=vertex, Cell=(1, 23), Agents=[27, 40], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  → Trying DYNAMIC for Agent 40 (blocker: 27) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 27 at goal (1, 23)
+      Testing parking candidate (1, 22) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (1, 22) is spatiotemporally safe!
+    → Found parking cell: (1, 22)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 43 prefix + 2 yield = 45 total actions
+    ✓ Agent 27 yielded to parking cell (1, 22)
+    [DEBUG YIELD] Yield plan generated for Agent 27:
+      - Original plan length: 51
+      - New yield plan length: 45
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=42: (1, 23) → (1, 23)
+        T=43: (1, 23) → (1, 23)
+        T=44: (1, 23) → (1, 22) ← COLLISION TIME
+        T=45: (1, 23) → (1, 23)
+  ✓ YIELD-ON-GOAL successful for Agent 27
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 39/10000 (Elapsed: 746.21s) ---
+  Padded Agent 27: 45 → 50
+Detected 2 collisions
+
+  Collision: T=44, Type=edge, Cell=((1, 23), (1, 22)), Agents=[27, 40], Attempt=1
+  → Trying STATIC for Agent 40 (attempt 1/1)
+  ✓ STATIC successful for Agent 40
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 40/10000 (Elapsed: 748.83s) ---
+  Padded Agent 27: 50 → 51
+Detected 2 collisions
+
+  Collision: T=43, Type=vertex, Cell=(3, 22), Agents=[1, 40], Attempt=3
+  ✗ STATIC exhausted (1 attempts), skipping
+  ✗ DYNAMIC exhausted (1 attempts), skipping
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 1 at goal (3, 22)
+      Testing parking candidate (2, 22) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (2, 22) is spatiotemporally safe!
+    → Found parking cell: (2, 22)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 42 prefix + 2 yield = 44 total actions
+    ✓ Agent 1 yielded to parking cell (2, 22)
+    [DEBUG YIELD] Yield plan generated for Agent 1:
+      - Original plan length: 51
+      - New yield plan length: 44
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=41: (3, 22) → (3, 22)
+        T=42: (3, 22) → (3, 22)
+        T=43: (3, 22) → (2, 22) ← COLLISION TIME
+        T=44: (3, 22) → (3, 22)
+  ✓ YIELD-ON-GOAL successful for Agent 1
+
+→ collisions remain among non-deferred agents; continuing to next pass
+
+--- Pass 41/10000 (Elapsed: 749.19s) ---
+  Padded Agent 1: 44 → 51
+Detected 1 collisions
+
+  Collision: T=44, Type=vertex, Cell=(0, 29), Agents=[29, 36], Attempt=1
+  → Trying STATIC for Agent 29 (attempt 1/1)
+  ✓ STATIC successful for Agent 29
+
+============================================================
+PHASE 1 → PHASE 2 TRANSITION
+============================================================
+✓ No collisions among 37 non-deferred agents
+→ Planning paths for 3 deferred agents...
+  T_end (non-deferred makespan): 51
+  Static obstacles at T_end: 37 cells occupied
+
+  → Planning deferred Agent 5:
+    Start: (11, 14), Goal: (31, 30)
+    WAIT 51 steps, then A* to goal
+    ✓ Deferred Agent 5 planned: WAIT(51) + 38 moves
+
+  → Planning deferred Agent 10:
+    Start: (18, 8), Goal: (6, 25)
+    WAIT 51 steps, then A* to goal
+    ✓ Deferred Agent 10 planned: WAIT(51) + 33 moves
+
+  → Planning deferred Agent 24:
+    Start: (17, 14), Goal: (3, 25)
+    WAIT 51 steps, then A* to goal
+    ✓ Deferred Agent 24 planned: WAIT(51) + 25 moves
+
+============================================================
+PHASE 2: FINAL CLEANUP PASS
+============================================================
+Running final collision resolution (DEFER disabled)...
+  Found 12 collisions after Phase 2 planning
+  Attempting to resolve with STATIC, DYNAMIC, YIELD-on-goal, YIELD-on-start, Joint A*...
+
+--- Pass 42/10000 (Elapsed: 749.82s) ---
+  Padded Agent 1: 51 → 89
+  Padded Agent 2: 51 → 89
+  Padded Agent 3: 51 → 89
+  Padded Agent 4: 51 → 89
+  Padded Agent 6: 51 → 89
+  Padded Agent 7: 51 → 89
+  Padded Agent 8: 51 → 89
+  Padded Agent 9: 51 → 89
+  Padded Agent 10: 84 → 89
+  Padded Agent 11: 51 → 89
+  Padded Agent 12: 51 → 89
+  Padded Agent 13: 51 → 89
+  Padded Agent 14: 51 → 89
+  Padded Agent 15: 51 → 89
+  Padded Agent 16: 51 → 89
+  Padded Agent 17: 51 → 89
+  Padded Agent 18: 51 → 89
+  Padded Agent 19: 51 → 89
+  Padded Agent 20: 51 → 89
+  Padded Agent 21: 51 → 89
+  Padded Agent 22: 51 → 89
+  Padded Agent 23: 51 → 89
+  Padded Agent 24: 76 → 89
+  Padded Agent 25: 51 → 89
+  Padded Agent 26: 51 → 89
+  Padded Agent 27: 51 → 89
+  Padded Agent 28: 51 → 89
+  Padded Agent 29: 45 → 89
+  Padded Agent 30: 51 → 89
+  Padded Agent 31: 51 → 89
+  Padded Agent 32: 51 → 89
+  Padded Agent 33: 51 → 89
+  Padded Agent 34: 51 → 89
+  Padded Agent 35: 51 → 89
+  Padded Agent 36: 51 → 89
+  Padded Agent 37: 51 → 89
+  Padded Agent 38: 51 → 89
+  Padded Agent 39: 51 → 89
+  Padded Agent 40: 51 → 89
+Detected 12 collisions
+
+  Collision: T=1, Type=vertex, Cell=(18, 8), Agents=[10, 29], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  ✗ DYNAMIC exhausted (1 attempts), skipping
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=1, t_start=0, t_goal_sub=3, agents=[10, 29]
+    Start positions: ((18, 8), (19, 8))
+    Subgoal positions: ((18, 8), (17, 7))
+    Joint A* success in 3 steps (expanded 6 nodes) window [0,3]
+      Agent 10 joint plan: [3, 2, 4]
+      Agent 29 joint plan: [0, 2, 0]
+    Splicing agent 10: plan_len=89, t_start=0, t_goal_sub=3, segment_len=3
+    Splicing agent 29: plan_len=89, t_start=0, t_goal_sub=3, segment_len=3
+    ✓ Joint plan accepted!
+      Final plan for Agent 10: [3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4]
+      Final plan for Agent 29: [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 12 to 11
+
+--- Pass 43/10000 (Elapsed: 750.09s) ---
+Detected 11 collisions
+
+  Collision: T=9, Type=vertex, Cell=(11, 14), Agents=[5, 33], Attempt=2
+  ✗ STATIC exhausted (1 attempts), skipping
+  ✗ DYNAMIC exhausted (1 attempts), skipping
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=9, t_start=7, t_goal_sub=11, agents=[5, 33]
+    Start positions: ((11, 14), (10, 13))
+    Subgoal positions: ((11, 14), (13, 14))
+    Joint A* success in 4 steps (expanded 9 nodes) window [7,11]
+      Agent 5 joint plan: [4, 3, 2, 4]
+      Agent 33 joint plan: [1, 3, 1, 1]
+    Splicing agent 5: plan_len=89, t_start=7, t_goal_sub=11, segment_len=4
+    Splicing agent 33: plan_len=89, t_start=7, t_goal_sub=11, segment_len=4
+    ✓ Joint plan accepted!
+      Final plan for Agent 5: [4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 1, 3]
+      Final plan for Agent 33: [1, 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 0, 3, 3, 3, 1, 3, 3, 1, 3, 3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 11 to 10
+
+--- Pass 44/10000 (Elapsed: 750.36s) ---
+Detected 10 collisions
+
+  Collision: T=15, Type=vertex, Cell=(17, 14), Agents=[24, 33], Attempt=1
+  → Trying STATIC for Agent 24 (attempt 1/1)
+  → Trying STATIC for Agent 33 (attempt 1/1)
+  → Trying DYNAMIC for Agent 24 (blocker: 33) (attempt 1/1)
+  → Trying DYNAMIC for Agent 33 (blocker: 24) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=15, t_start=13, t_goal_sub=17, agents=[24, 33]
+    Start positions: ((17, 14), (15, 14))
+    Subgoal positions: ((17, 14), (19, 14))
+    Joint A* window: coll_time=15, t_start=12, t_goal_sub=18, agents=[24, 33]
+    Start positions: ((17, 14), (14, 14))
+    Subgoal positions: ((17, 14), (20, 14))
+    Joint A* success in 6 steps (expanded 36 nodes) window [12,18]
+      Agent 24 joint plan: [0, 2, 3, 1, 4, 4]
+      Agent 33 joint plan: [1, 1, 1, 1, 1, 1]
+    Splicing agent 24: plan_len=89, t_start=12, t_goal_sub=18, segment_len=6
+    Splicing agent 33: plan_len=89, t_start=12, t_goal_sub=18, segment_len=6
+    ✓ Joint plan accepted!
+      Final plan for Agent 24: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 2, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 3, 0, 3, 0, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+      Final plan for Agent 33: [1, 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 0, 3, 3, 3, 1, 3, 3, 1, 3, 3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 10 to 9
+
+--- Pass 45/10000 (Elapsed: 792.69s) ---
+Detected 9 collisions
+
+  Collision: T=54, Type=vertex, Cell=(14, 14), Agents=[3, 5], Attempt=1
+  → Trying STATIC for Agent 3 (attempt 1/1)
+  → Trying STATIC for Agent 5 (attempt 1/1)
+  → Trying DYNAMIC for Agent 3 (blocker: 5) (attempt 1/1)
+  → Trying DYNAMIC for Agent 5 (blocker: 3) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 3 at goal (14, 14)
+      Testing parking candidate (13, 14) (dist=1):
+        Test trajectory length: 6 timesteps
+      Parking conflict (vertex): t=55, agent 3 vs 24 at (13, 14)
+        ✗ Candidate (13, 14) rejected due to spatiotemporal conflicts
+      Testing parking candidate (15, 14) (dist=1):
+        Test trajectory length: 6 timesteps
+      Parking conflict (vertex): t=55, agent 3 vs 5 at (15, 14)
+        ✗ Candidate (15, 14) rejected due to spatiotemporal conflicts
+      Testing parking candidate (14, 15) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (14, 15) is spatiotemporally safe!
+    → Found parking cell: (14, 15)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 53 prefix + 2 yield = 55 total actions
+    ✓ Agent 3 yielded to parking cell (14, 15)
+    [DEBUG YIELD] Yield plan generated for Agent 3:
+      - Original plan length: 89
+      - New yield plan length: 55
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=52: (14, 14) → (14, 14)
+        T=53: (14, 14) → (14, 14)
+        T=54: (14, 14) → (14, 15) ← COLLISION TIME
+        T=55: (14, 14) → (14, 14)
+  ✓ YIELD-ON-GOAL successful for Agent 3
+
+--- Pass 46/10000 (Elapsed: 813.51s) ---
+  Padded Agent 3: 55 → 89
+Detected 7 collisions
+
+  Collision: T=54, Type=vertex, Cell=(14, 14), Agents=[5, 24], Attempt=1
+  → ONE-STEP-WAIT (attempt 1): vertex collision, both agents moving
+    ✗ Agent 24: Created 4 new collisions
+    ✗ Agent 5: Created 5 new collisions
+    ✗ ONE-STEP-WAIT failed for both agents
+  → Trying STATIC for Agent 5 (attempt 1/1)
+  → Trying STATIC for Agent 24 (attempt 1/1)
+  → Trying DYNAMIC for Agent 5 (blocker: 24) (attempt 1/1)
+  → Trying DYNAMIC for Agent 24 (blocker: 5) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=54, t_start=52, t_goal_sub=56, agents=[5, 24]
+    Start positions: ((12, 14), (16, 14))
+    Subgoal positions: ((16, 14), (12, 14))
+    Joint A* window: coll_time=54, t_start=51, t_goal_sub=57, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((17, 14), (11, 14))
+    Joint A* window: coll_time=54, t_start=50, t_goal_sub=58, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((18, 14), (11, 15))
+    Joint A* window: coll_time=54, t_start=49, t_goal_sub=59, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((19, 14), (10, 15))
+    Joint A* window: coll_time=54, t_start=48, t_goal_sub=60, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((20, 14), (9, 15))
+    Joint A* window: coll_time=54, t_start=47, t_goal_sub=61, agents=[5, 24]
+    Start positions: ((11, 14), (17, 14))
+    Subgoal positions: ((21, 14), (8, 15))
+    Joint A* success in 14 steps (expanded 399 nodes) window [47,61]
+      Agent 5 joint plan: [1, 1, 3, 1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 2]
+      Agent 24 joint plan: [0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 3, 0, 0, 0]
+    Splicing agent 5: plan_len=89, t_start=47, t_goal_sub=61, segment_len=14
+    Splicing agent 24: plan_len=89, t_start=47, t_goal_sub=61, segment_len=14
+    ✓ Joint plan accepted!
+      Final plan for Agent 5: [4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 3, 1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 1, 3]
+      Final plan for Agent 24: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 2, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 3, 0, 3, 0, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 7 to 5
+
+--- Pass 47/10000 (Elapsed: 864.13s) ---
+Detected 5 collisions
+
+  Collision: T=67, Type=vertex, Cell=(5, 18), Agents=[17, 24], Attempt=1
+  → Trying STATIC for Agent 17 (attempt 1/1)
+  → Trying STATIC for Agent 24 (attempt 1/1)
+  → Trying DYNAMIC for Agent 17 (blocker: 24) (attempt 1/1)
+  → Trying DYNAMIC for Agent 24 (blocker: 17) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 17 at goal (5, 18)
+      Testing parking candidate (4, 18) (dist=1):
+        Test trajectory length: 6 timesteps
+      Parking conflict (vertex): t=68, agent 17 vs 24 at (4, 18)
+        ✗ Candidate (4, 18) rejected due to spatiotemporal conflicts
+      Testing parking candidate (6, 18) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (6, 18) is spatiotemporally safe!
+    → Found parking cell: (6, 18)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 66 prefix + 2 yield = 68 total actions
+    ✓ Agent 17 yielded to parking cell (6, 18)
+    [DEBUG YIELD] Yield plan generated for Agent 17:
+      - Original plan length: 89
+      - New yield plan length: 68
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=65: (5, 18) → (5, 18)
+        T=66: (5, 18) → (5, 18)
+        T=67: (5, 18) → (6, 18) ← COLLISION TIME
+        T=68: (5, 18) → (5, 18)
+  ✓ YIELD-ON-GOAL successful for Agent 17
+
+--- Pass 48/10000 (Elapsed: 885.01s) ---
+  Padded Agent 17: 68 → 89
+Detected 4 collisions
+
+  Collision: T=71, Type=vertex, Cell=(27, 18), Agents=[5, 23], Attempt=1
+  → Trying STATIC for Agent 5 (attempt 1/1)
+  → Trying STATIC for Agent 23 (attempt 1/1)
+  → Trying DYNAMIC for Agent 5 (blocker: 23) (attempt 1/1)
+  → Trying DYNAMIC for Agent 23 (blocker: 5) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 23 at goal (27, 18)
+      Testing parking candidate (26, 18) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (26, 18) is spatiotemporally safe!
+    → Found parking cell: (26, 18)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 70 prefix + 2 yield = 72 total actions
+    ✓ Agent 23 yielded to parking cell (26, 18)
+    [DEBUG YIELD] Yield plan generated for Agent 23:
+      - Original plan length: 89
+      - New yield plan length: 72
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=69: (27, 18) → (27, 18)
+        T=70: (27, 18) → (27, 18)
+        T=71: (27, 18) → (26, 18) ← COLLISION TIME
+        T=72: (27, 18) → (27, 18)
+  ✓ YIELD-ON-GOAL successful for Agent 23
+
+--- Pass 49/10000 (Elapsed: 905.76s) ---
+  Padded Agent 23: 72 → 89
+Detected 3 collisions
+
+  Collision: T=73, Type=vertex, Cell=(3, 22), Agents=[1, 24], Attempt=1
+  → Trying STATIC for Agent 24 (attempt 1/1)
+  ✓ STATIC successful for Agent 24
+
+--- Pass 50/10000 (Elapsed: 908.56s) ---
+  Padded Agent 24: 78 → 89
+Detected 2 collisions
+
+  Collision: T=74, Type=vertex, Cell=(28, 20), Agents=[5, 26], Attempt=1
+  → Trying STATIC for Agent 5 (attempt 1/1)
+  → Trying STATIC for Agent 26 (attempt 1/1)
+  → Trying DYNAMIC for Agent 5 (blocker: 26) (attempt 1/1)
+  → Trying DYNAMIC for Agent 26 (blocker: 5) (attempt 1/1)
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 26 at goal (28, 20)
+      Testing parking candidate (27, 20) (dist=1):
+        Test trajectory length: 6 timesteps
+      ✓ Candidate (27, 20) is spatiotemporally safe!
+    → Found parking cell: (27, 20)
+      Yield segment: 1 steps to parking, wait 0, 1 steps back
+      Spliced plan: 73 prefix + 2 yield = 75 total actions
+    ✓ Agent 26 yielded to parking cell (27, 20)
+    [DEBUG YIELD] Yield plan generated for Agent 26:
+      - Original plan length: 89
+      - New yield plan length: 75
+      - Yield trajectory segment (T-2 to T+5 around collision):
+        T=72: (28, 20) → (28, 20)
+        T=73: (28, 20) → (28, 20)
+        T=74: (28, 20) → (27, 20) ← COLLISION TIME
+        T=75: (28, 20) → (28, 20)
+  ✓ YIELD-ON-GOAL successful for Agent 26
+
+--- Pass 51/10000 (Elapsed: 929.32s) ---
+  Padded Agent 26: 75 → 89
+Detected 2 collisions
+
+  Collision: T=74, Type=edge, Cell=((27, 20), (28, 20)), Agents=[5, 26], Attempt=1
+  → Trying STATIC for Agent 5 (attempt 1/1)
+  → Trying DYNAMIC for Agent 5 (blocker: 26) (attempt 1/1)
+  ⊘ YIELD-ON-GOAL: Not applicable (no agent at goal)
+  → Trying Joint A* (attempt 1/1)
+    Joint A* window: coll_time=74, t_start=72, t_goal_sub=76, agents=[5, 26]
+    Start positions: ((27, 19), (28, 20))
+    Subgoal positions: ((30, 20), (28, 20))
+    Joint A* success in 4 steps (expanded 9 nodes) window [72,76]
+      Agent 5 joint plan: [3, 1, 1, 1]
+      Agent 26 joint plan: [4, 3, 2, 4]
+    Splicing agent 5: plan_len=89, t_start=72, t_goal_sub=76, segment_len=4
+    Splicing agent 26: plan_len=89, t_start=72, t_goal_sub=76, segment_len=4
+    ✓ Joint plan accepted!
+      Final plan for Agent 5: [4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 3, 1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 1, 3]
+      Final plan for Agent 26: [3, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 2 to 1
+
+--- Pass 52/10000 (Elapsed: 949.65s) ---
+Detected 1 collisions
+
+  Collision: T=76, Type=vertex, Cell=(5, 18), Agents=[10, 17], Attempt=1
+  → Trying STATIC for Agent 10 (attempt 1/1)
+  ✓ STATIC successful for Agent 10
+
+--- Pass 53/10000 (Elapsed: 956.97s) ---
+  Padded Agent 10: 84 → 89
+✓ No collisions found! Resolution complete (verified with debug scan).
+
+=== Global Cleanup ===
+Trimming trailing WAITs across all agents...
+  Global makespan: 89 (max plan was 89)
+  All plans now synchronized to length 89
+  Re-simulating all trajectories to match trimmed plans...
+  [DEBUG] After re-simulation:
+    Plan lengths: [89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89]
+    Traj lengths: [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90]
+    ✓ All trajectories synchronized to length 90
+Global cleanup complete: trimmed 0 agents, padded 0 agents, re-simulated all trajectories
+
+=== Final Collision Check (after cleanup) ===
+[DEBUG] Trajectory lengths after cleanup: [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90]
+[DEBUG] Max trajectory length: 90
+
+=== Resolution Complete ===
+Time: 957.33s
+Passes: 53
+Final collisions: 0
+Timed out: False
+[DEBUG] analyze_collisions says: 0 collisions
+[DEBUG] debug_scan_collisions says: 0 collisions
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 974
+  - Revised Path Submission IU: 3086
+  - Conflict Alert IU:          1661
+    - Static Alerts:      20 IU
+    - Dynamic Alerts:     27 IU
+    - Joint A* Planning:  1614 IU
+-----------------------------------
+  Total Information Load (IU):  5721
+-----------------------------------
+
+=== MAPF Metrics ===
+Makespan (longest trajectory):  90
+Sum of Costs (SOC):             3560
+Average Path Length:            89.00
+Total Agents:                   40
+Agents at Goal:                 40
+Final Collision Count:          0
+✔ Detailed execution log saved to 'logs/benchmark_results_32x32-02/scene_even1_40agents.json'
+Analysis Complete. Success: 100.00%, Time: 957.46s
+Agent 1 Final Plan: [0, 0, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 2 Final Plan: [1, 1, 1, 1, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 3 Final Plan: [1, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 3, 2, 2, 1, 1, 1, 1, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 4 Final Plan: [0, 3, 0, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 1, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 5 Final Plan: [4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 3, 1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 1, 3]
+Agent 6 Final Plan: [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 7 Final Plan: [3, 0, 0, 0, 2, 0, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 8 Final Plan: [1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 9 Final Plan: [1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 0, 2, 4, 0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 10 Final Plan: [3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4]
+Agent 11 Final Plan: [2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 12 Final Plan: [1, 3, 1, 1, 1, 1, 3, 1, 3, 1, 1, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3, 3, 1, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 13 Final Plan: [0, 3, 3, 0, 0, 0, 0, 0, 3, 3, 0, 3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 14 Final Plan: [2, 0, 0, 0, 0, 2, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 15 Final Plan: [0, 0, 2, 0, 0, 3, 0, 0, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 16 Final Plan: [1, 1, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 17 Final Plan: [2, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 18 Final Plan: [1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 1, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 19 Final Plan: [2, 2, 2, 1, 2, 2, 2, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 20 Final Plan: [0, 3, 3, 1, 1, 1, 1, 3, 1, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 1, 3, 3, 3, 3, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 21 Final Plan: [1, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 2, 2, 2, 0, 2, 0, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 22 Final Plan: [2, 1, 2, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 1, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 23 Final Plan: [1, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 24 Final Plan: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 2, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 3, 0, 3, 0, 1, 3, 3, 3, 3, 0, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 25 Final Plan: [1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 26 Final Plan: [3, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 27 Final Plan: [0, 0, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 2, 0, 1, 3, 4, 4, 4, 4, 4, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 28 Final Plan: [0, 3, 3, 1, 1, 1, 1, 1, 3, 3, 3, 3, 1, 3, 3, 3, 1, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 29 Final Plan: [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 30 Final Plan: [1, 1, 1, 1, 3, 1, 1, 3, 3, 1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 2, 1, 1, 3, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 31 Final Plan: [3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 3, 1, 1, 1, 2, 2, 2, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 32 Final Plan: [0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 33 Final Plan: [1, 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 0, 3, 3, 3, 1, 3, 3, 1, 3, 3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 34 Final Plan: [0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 35 Final Plan: [2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 36 Final Plan: [0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 37 Final Plan: [1, 1, 2, 1, 1, 2, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 38 Final Plan: [1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 3, 3, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 39 Final Plan: [1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 40 Final Plan: [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 3, 0, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 0, 3, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]

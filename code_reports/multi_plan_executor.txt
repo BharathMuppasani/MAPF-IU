@@ -1,0 +1,428 @@
+#!/usr/bin/env python3
+# multi_plan_executor.py
+
+import rclpy
+from rclpy.node import Node
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy
+from geometry_msgs.msg import Twist, Pose
+from nav_msgs.msg import Odometry
+from std_msgs.msg import Int32MultiArray
+from irobot_create_msgs.srv import ResetPose
+
+import math
+import time
+import argparse
+import json
+from datetime import datetime
+
+TURN_PHASE = 1
+MOVE_PHASE = 2
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--namespace', '-n', type=str, default='')
+    parser.add_argument('--plan', '-p', type=str, required=True)
+    parser.add_argument('--robot_id', type=str, required=True)
+    parser.add_argument('--robot_list', type=str, required=True)
+    # New: optional logging frequency (Hz) and distances/speeds if you want to tweak
+    parser.add_argument('--log_hz', type=float, default=25.0, help='Telemetry logging frequency (Hz)')
+    parser.add_argument('--forward_distance', type=float, default=0.45)
+    parser.add_argument('--max_linear_speed', type=float, default=0.3)
+    parser.add_argument('--min_linear_speed', type=float, default=0.05)
+    parser.add_argument('--max_angular_speed', type=float, default=0.5)
+    parser.add_argument('--min_angular_speed', type=float, default=0.05)
+    parser.add_argument('--control_loop_dt', type=float, default=0.005)
+    return parser.parse_args()
+
+
+class PlanExecutor(Node):
+    def __init__(self, namespace: str, robot_id: str, robot_list: list,
+                 log_hz: float,
+                 fwd_dist: float,
+                 max_lin: float, min_lin: float,
+                 max_ang: float, min_ang: float,
+                 control_dt: float):
+        ns_clean = namespace.strip('/')
+        super().__init__(f'{ns_clean}_plan_executor' if ns_clean else 'plan_executor')
+
+        # --- Identity & sync peers ---
+        self.robot_id = robot_id            # e.g., "r1"
+        self.robot_list = robot_list        # e.g., ["r1","r3","r2"]
+
+        # Sync state: rid -> {'step': int, 'phase': int}
+        self.sync_state = {}
+
+        # --- Execution / telemetry state ---
+        self.current_x = None
+        self.current_y = None
+        self.current_yaw = None
+        self.initial_yaw = None
+
+        self.current_step = 0          # 0 means "not started"
+        self.current_phase = 0         # 0=idle, 1=turn, 2=move
+        self.current_action = None     # last action code
+
+        self.is_executing = False      # gate for telemetry timer
+        self.last_cmd_vx = 0.0
+        self.last_cmd_az = 0.0
+
+        # --- Motion/Tuning params ---
+        self.forward_distance = float(fwd_dist)
+        self.max_lin_speed = float(max_lin)
+        self.min_lin_speed = float(min_lin)
+        self.max_ang_speed = float(max_ang)
+        self.min_ang_speed = float(min_ang)
+        self.control_dt = float(control_dt)
+
+        # Telemetry logging rate
+        self.log_hz = max(1.0, float(log_hz))
+        self.telemetry = []       # high-frequency samples for plotting
+        self.sync_events = []     # record of barrier publishes/arrivals
+
+        # --- Publishers/Subscribers/Services ---
+        ns = '/' + ns_clean if ns_clean else ''
+        self.cmd_vel_pub = self.create_publisher(Twist, f'{ns}/cmd_vel', 10)
+        self.reset_pose_client = self.create_client(ResetPose, f'{ns}/reset_pose')
+
+        qos = QoSProfile(depth=10)
+        qos.reliability = QoSReliabilityPolicy.BEST_EFFORT
+        self.odom_sub = self.create_subscription(Odometry, f'{ns}/odom', self.odom_callback, qos)
+
+        # Sync topic now includes PHASE (step barrier granularity)
+        # Msg format: Int32MultiArray [robot_num, step, phase]
+        self.sync_pub = self.create_publisher(Int32MultiArray, '/sync_barrier', 10)
+        self.sync_sub = self.create_subscription(Int32MultiArray, '/sync_barrier', self.sync_callback, 10)
+
+        # Telemetry timer
+        self.telemetry_timer = self.create_timer(1.0 / self.log_hz, self._log_telemetry)
+
+        # --- Log header (extends your original schema) ---
+        self.execution_log = {
+            "robot_id": self.robot_id,
+            "namespace": f"/{ns_clean}" if ns_clean else "",
+            "plan": [],
+            "actions": [],                # per-step summaries (now with per-phase timing)
+            "telemetry": [],              # high-frequency x,y,yaw over time
+            "sync_events": [],            # who/when reached which barrier
+            "start_time": None,
+            "end_time": None,
+            "total_duration": None,
+            "metadata": {
+                "forward_distance": self.forward_distance,
+                "max_linear_speed": self.max_lin_speed,
+                "min_linear_speed": self.min_lin_speed,
+                "max_angular_speed": self.max_ang_speed,
+                "min_angular_speed": self.min_ang_speed,
+                "control_loop_dt": self.control_dt,
+                "log_hz": self.log_hz,
+                "phase_synchronization": True,
+                "sync_message_format": "[robot_num, step, phase]"
+            }
+        }
+
+        # Wait for reset_pose
+        self.get_logger().info("Waiting for /reset_pose service…")
+        while not self.reset_pose_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().warn("/reset_pose not available, retrying…")
+        self.get_logger().info("/reset_pose service is now available.")
+
+    # -------------------- Callbacks --------------------
+
+    def odom_callback(self, msg):
+        self.current_x = msg.pose.pose.position.x
+        self.current_y = msg.pose.pose.position.y
+        q = msg.pose.pose.orientation
+        self.current_yaw = math.atan2(
+            2.0 * (q.w * q.z + q.x * q.y),
+            1.0 - 2.0 * (q.y * q.y + q.z * q.z)
+        )
+
+    def sync_callback(self, msg: Int32MultiArray):
+        # Backward compatibility: if only 2 fields, assume "MOVE_PHASE"
+        robot_num = int(msg.data[0]) if len(msg.data) >= 1 else -1
+        rid = f"r{robot_num}" if robot_num >= 0 else "unknown"
+        step = int(msg.data[1]) if len(msg.data) >= 2 else 0
+        phase = int(msg.data[2]) if len(msg.data) >= 3 else MOVE_PHASE
+
+        prev = self.sync_state.get(rid, {"step": -1, "phase": 0})
+        # Keep lexicographic "latest"
+        if (step > prev["step"]) or (step == prev["step"] and phase >= prev["phase"]):
+            self.sync_state[rid] = {"step": step, "phase": phase}
+            self.sync_events.append({
+                "t": time.time(),
+                "event": "recv",
+                "from": rid,
+                "step": step,
+                "phase": phase
+            })
+
+    # -------------------- Utilities --------------------
+
+    def _set_cmd(self, vx: float = 0.0, az: float = 0.0):
+        self.last_cmd_vx = vx
+        self.last_cmd_az = az
+        t = Twist()
+        t.linear.x = vx
+        t.angular.z = az
+        self.cmd_vel_pub.publish(t)
+
+    def _stop(self):
+        self._set_cmd(0.0, 0.0)
+
+    def _log_telemetry(self):
+        if not self.is_executing:
+            return
+        if self.current_x is None or self.current_y is None or self.current_yaw is None:
+            return
+        now = time.time()
+        self.telemetry.append({
+            "t": now - self.start_timestamp,  # relative seconds
+            "x": self.current_x,
+            "y": self.current_y,
+            "yaw": self.current_yaw,
+            "step": self.current_step,
+            "phase": self.current_phase,
+            "action": self.current_action,
+            "cmd_vx": self.last_cmd_vx,
+            "cmd_az": self.last_cmd_az
+        })
+
+    def normalize_angle(self, angle: float) -> float:
+        while angle > math.pi:
+            angle -= 2.0 * math.pi
+        while angle < -math.pi:
+            angle += 2.0 * math.pi
+        return angle
+
+    def wait_for_zeroed_odom(self, tol: float = 1e-2):
+        self.get_logger().info("Waiting for zeroed odom…")
+        while True:
+            rclpy.spin_once(self, timeout_sec=0.001)
+            if (self.current_x is not None and
+                abs(self.current_x) < tol and
+                abs(self.current_y) < tol and
+                abs(self.current_yaw) < tol):
+                break
+            time.sleep(self.control_dt)
+        self.initial_yaw = self.current_yaw
+        self.get_logger().info(f"Zeroed odom: x={self.current_x:.3f}, y={self.current_y:.3f}, yaw={self.initial_yaw:.3f}")
+
+    # -------------------- Phase-aware motion --------------------
+
+    def rotate_closed_loop(self, target_heading: float):
+        # Let odom settle a moment
+        for _ in range(5):
+            rclpy.spin_once(self, timeout_sec=0.001)
+            time.sleep(0.01)
+
+        while True:
+            rclpy.spin_once(self, timeout_sec=0.001)
+            error = self.normalize_angle(target_heading - self.current_yaw)
+            if abs(error) < 0.01:
+                break
+            speed = max(self.min_ang_speed, min(self.max_ang_speed, abs(error)))
+            if abs(error) <= speed * self.control_dt:
+                break
+            self._set_cmd(0.0, math.copysign(speed, error))
+            time.sleep(self.control_dt)
+
+        self._stop()
+        time.sleep(0.05)
+
+    def move_forward_closed_loop(self, distance: float):
+        # Let odom settle a moment
+        for _ in range(5):
+            rclpy.spin_once(self, timeout_sec=0.001)
+            time.sleep(0.01)
+
+        start_x, start_y = self.current_x, self.current_y
+        while True:
+            rclpy.spin_once(self, timeout_sec=0.001)
+            dx, dy = self.current_x - start_x, self.current_y - start_y
+            travelled = math.hypot(dx, dy)
+            if travelled >= distance:
+                break
+            speed = max(self.min_lin_speed, min(self.max_lin_speed, distance - travelled))
+            self._set_cmd(speed, 0.0)
+            time.sleep(self.control_dt)
+
+        self._stop()
+        time.sleep(0.05)
+
+    # -------------------- Synchronization helpers --------------------
+
+    def publish_sync(self, step: int, phase: int):
+        msg = Int32MultiArray()
+        msg.data = [int(self.robot_id.strip('r')), int(step), int(phase)]
+        self.sync_pub.publish(msg)
+        self.sync_events.append({
+            "t": time.time(),
+            "event": "send",
+            "from": self.robot_id,
+            "step": step,
+            "phase": phase
+        })
+
+    def _peer_reached(self, rid: str, step: int, phase: int) -> bool:
+        st = self.sync_state.get(rid)
+        if not st:
+            return False
+        # Lexicographic (step, phase)
+        return (st["step"] > step) or (st["step"] == step and st["phase"] >= phase)
+
+    def wait_for_all_sync(self, step: int, phase: int):
+        self.get_logger().info(f"[Barrier] Waiting for all robots at step={step}, phase={phase}…")
+        while True:
+            rclpy.spin_once(self, timeout_sec=0.01)
+            ready = True
+            for rid in self.robot_list:
+                if rid == self.robot_id:
+                    continue
+                if not self._peer_reached(rid, step, phase):
+                    ready = False
+                    break
+            if ready:
+                return
+            time.sleep(0.01)
+
+    # -------------------- Top-level execution --------------------
+
+    def execute_plan(self, plan):
+        self.execution_log["plan"] = plan
+        start_time_human = datetime.now().isoformat()
+        self.start_timestamp = time.time()
+        self.execution_log["start_time"] = start_time_human
+        self.execution_log["start_timestamp"] = self.start_timestamp
+
+        # Reset pose
+        req = ResetPose.Request()
+        req.pose = Pose()
+        req.pose.orientation.w = 1.0
+        fut = self.reset_pose_client.call_async(req)
+        rclpy.spin_until_future_complete(self, fut)
+        if fut.result() is None:
+            self.get_logger().error("/reset_pose failed!")
+        else:
+            self.get_logger().info("/reset_pose succeeded; flushing old odom…")
+
+        # Flush & zero odom
+        for _ in range(5):
+            rclpy.spin_once(self, timeout_sec=self.control_dt)
+            time.sleep(self.control_dt)
+        self.wait_for_zeroed_odom()
+
+        # Start telemetry
+        self.is_executing = True
+
+        # Initial barrier (step=0, phase=0) to align clocks
+        self.publish_sync(0, 0)
+        self.wait_for_all_sync(0, 0)
+
+        # Precompute mapping
+        heading_map = {0: 0.0, 1: math.pi, 2: math.pi/2, 3: -math.pi/2}
+
+        for step, act in enumerate(plan, start=1):
+            self.current_step = step
+            self.current_action = act
+
+            # Snapshot start state
+            sx, sy, syaw = self.current_x, self.current_y, self.current_yaw
+            step_t0 = time.time()
+
+            # Ideal target info
+            if act in heading_map and act != 4:
+                target_heading = self.normalize_angle(self.initial_yaw + heading_map[act])
+                ix = sx + self.forward_distance * math.cos(target_heading)
+                iy = sy + self.forward_distance * math.sin(target_heading)
+            else:
+                target_heading, ix, iy = None, None, None
+
+            # -------------------- Phase 1: TURN / ADJUST --------------------
+            self.current_phase = TURN_PHASE
+            turn_t0 = time.time()
+
+            if act in heading_map and act != 4:
+                # Only rotate if we are not already at heading (~0.01 rad)
+                err = self.normalize_angle(target_heading - self.current_yaw)
+                if abs(err) > 0.01:
+                    self.rotate_closed_loop(target_heading)
+            # If act==4 (WAIT), do nothing during TURN phase (but we still participate in the barrier)
+
+            turn_t1 = time.time()
+            self.publish_sync(step, TURN_PHASE)
+            self.wait_for_all_sync(step, TURN_PHASE)
+
+            # -------------------- Phase 2: MOVE FORWARD --------------------
+            self.current_phase = MOVE_PHASE
+            move_t0 = time.time()
+
+            if act in heading_map and act != 4:
+                self.move_forward_closed_loop(self.forward_distance)
+            else:
+                # WAIT action: hold position for one control tick to keep timing consistent
+                self._stop()
+                time.sleep(self.control_dt)
+
+            move_t1 = time.time()
+            self.publish_sync(step, MOVE_PHASE)
+            self.wait_for_all_sync(step, MOVE_PHASE)
+
+            # Snapshot end state
+            ex, ey, eyaw = self.current_x, self.current_y, self.current_yaw
+            step_dt = time.time() - step_t0
+
+            # Store per-step summary with per-phase durations
+            self.execution_log["actions"].append({
+                "step": step,
+                "action": act,
+                "start_x": sx, "start_y": sy, "start_yaw": syaw,
+                "end_x": ex, "end_y": ey, "end_yaw": eyaw,
+                "target_heading": target_heading,
+                "ideal_end_x": ix, "ideal_end_y": iy,
+                "phase_turn_duration": (turn_t1 - turn_t0),
+                "phase_move_duration": (move_t1 - move_t0),
+                "duration": step_dt
+            })
+
+        # Done
+        self.is_executing = False
+        end_timestamp = time.time()
+        end_time_human = datetime.now().isoformat()
+        self.execution_log["end_time"] = end_time_human
+        self.execution_log["end_timestamp"] = end_timestamp
+        self.execution_log["total_duration"] = end_timestamp - self.start_timestamp
+
+        # Attach telemetry & sync events (copy references)
+        self.execution_log["telemetry"] = self.telemetry
+        self.execution_log["sync_events"] = self.sync_events
+
+        # Persist
+        log_file = f"{self.robot_id}_plan_execution_log_{int(self.start_timestamp)}.json"
+        with open(log_file, 'w') as f:
+            json.dump(self.execution_log, f, indent=2)
+        self.get_logger().info(f"Execution log saved to {log_file}")
+        self.get_logger().info("Plan execution finished.")
+
+
+def main():
+    args = parse_args()
+    plan = [int(x) for x in args.plan.split(',') if x.strip().isdigit()]
+    robot_list = [x.strip() for x in args.robot_list.split(',')]
+    rclpy.init()
+    executor = PlanExecutor(
+        args.namespace, args.robot_id, robot_list,
+        log_hz=args.log_hz,
+        fwd_dist=args.forward_distance,
+        max_lin=args.max_linear_speed, min_lin=args.min_linear_speed,
+        max_ang=args.max_angular_speed, min_ang=args.min_angular_speed,
+        control_dt=args.control_loop_dt
+    )
+    try:
+        time.sleep(1.0)
+        executor.execute_plan(plan)
+    finally:
+        executor.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()

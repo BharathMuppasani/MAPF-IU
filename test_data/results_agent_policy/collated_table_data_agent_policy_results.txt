@@ -1,0 +1,88 @@
+--- COLLATED SIMULATION DATA FOR AGENT POLICY COMPARISON LATEX TABLES ---
+Data Presentation Note:
+  - Success Rate (SR) is averaged over all trials.
+  - Time (T(s)) is averaged over ALL trials (reflecting timeouts).
+  - Makespan (MS) and Collisions (CO) are averaged *only* over successful trials.
+  - A '-' for MS/CO indicates no successful trials in group with valid data for that metric.
+  - A '-' for T(s) indicates no trials in group provided valid time data.
+
+
+--- Results for Agent Policy Comparison: 11x11 Maze (Agents 5-20) ---
+Table Caption Hint: For an 11x11 grid (5-20 agents), comparing agent selection policies. Time in seconds.
+LaTeX Table Column Structure Hint:
+  Metrics (super-columns): ['SR', 'MS', 'CO', 'T(s)']
+  Agent Groups per Metric (sub-columns): ['5-10', '11-15', '16-20']
+
+\multicolumn{13}{c}{\textit{Policy: Random Agent Selection}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 98.33\% & 98.00\% & 82.00\% & 20.5 & 24.6 & 32.7 & 20 & 108 & 517 & 2.0 & 5.8 & 22.6 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 98.33\% & 96.00\% & 50.00\% & 17.8 & 23.6 & 24.3 & 16 & 122 & 259 & 4.3 & 15.7 & 35.6 \\
+
+\multicolumn{13}{c}{\textit{Policy: Farthest Agent Selection}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 100.00\% & 94.00\% & 90.00\% & 19.8 & 24.6 & 30.3 & 14 & 91 & 387 & 1.2 & 6.9 & 17.8 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 98.33\% & 84.00\% & 62.00\% & 18.9 & 23.3 & 26.5 & 14 & 96 & 224 & 4.6 & 18.3 & 35.1 \\
+
+\multicolumn{13}{c}{\textit{Policy: Fewest Future Collisions (FFC)}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 100.00\% & 100.00\% & 98.00\% & 17.8 & 23.6 & 27.4 & 9 & 53 & 191 & 1.1 & 4.2 & 11.8 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 100.00\% & 96.00\% & 82.00\% & 16.1 & 20.7 & 24.0 & 10 & 59 & 173 & 3.3 & 12.0 & 25.8 \\
+
+------------------------------------------------------------
+
+
+--- Results for Agent Policy Comparison: 21x21 Maze-like (Agents 32, 64, 96) ---
+Table Caption Hint: For a 21x21 grid-like env (32, 64, 96 agents), comparing agent selection policies. Time in seconds.
+LaTeX Table Column Structure Hint:
+  Metrics (super-columns): ['SR', 'MS', 'CO', 'T(s)']
+  Agent Groups per Metric (sub-columns): ['32', '64', '96']
+
+\multicolumn{13}{c}{\textit{Policy: Random Agent Selection}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 100.00\% & 0.00\% & 0.00\% & 99.2 & - & - & 1670 & - & - & 245.3 & 1805.0 & 1824.7 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 100.00\% & 0.00\% & 0.00\% & 48.8 & - & - & 931 & - & - & 367.9 & 1810.0 & 1812.0 \\
+
+\multicolumn{13}{c}{\textit{Policy: Farthest Agent Selection}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 100.00\% & 0.00\% & 0.00\% & 93.5 & - & - & 1216 & - & - & 185.9 & 1813.2 & 1812.2 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 100.00\% & 10.00\% & 0.00\% & 47.5 & 64.0 & - & 697 & 14654 & - & 316.3 & 1786.9 & 1819.9 \\
+
+\multicolumn{13}{c}{\textit{Policy: Fewest Future Collisions (FFC)}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 100.00\% & 90.00\% & 0.00\% & 86.6 & 131.4 & - & 528 & 18909 & - & 160.6 & 1433.6 & 2008.6 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 100.00\% & 80.00\% & 0.00\% & 41.4 & 72.0 & - & 457 & 11379 & - & 195.5 & 1412.2 & 2004.5 \\
+
+------------------------------------------------------------
+
+
+--- Results for Agent Policy Comparison: 25x25 Warehouse (Agents 32, 64, 96) ---
+Table Caption Hint: For a 25x25 warehouse env (32, 64, 96 agents), comparing agent selection policies. Time in seconds.
+LaTeX Table Column Structure Hint:
+  Metrics (super-columns): ['SR', 'MS', 'CO', 'T(s)']
+  Agent Groups per Metric (sub-columns): ['32', '64', '96']
+
+\multicolumn{13}{c}{\textit{Policy: Random Agent Selection}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 100.00\% & 20.00\% & 0.00\% & 119.0 & 139.0 & - & 722 & 23853 & - & 742.3 & 3474.3 & 3607.9 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 100.00\% & 100.00\% & 0.00\% & 42.4 & 54.6 & - & 302 & 5788 & - & 359.7 & 2271.5 & 3608.3 \\
+
+\multicolumn{13}{c}{\textit{Policy: Farthest Agent Selection}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 100.00\% & 60.00\% & 0.00\% & 83.4 & 126.0 & - & 455 & 9836 & - & 509.3 & 2854.6 & 3650.3 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 100.00\% & 100.00\% & 0.00\% & 45.0 & 59.4 & - & 268 & 4644 & - & 385.2 & 2092.2 & 3606.7 \\
+
+\multicolumn{13}{c}{\textit{Policy: Fewest Future Collisions (FFC)}} \\ \midrule
+Method: Our-BFS
+  LaTeX row data: Our-BFS & 100.00\% & 100.00\% & 20.00\% & 95.8 & 117.4 & 96.0 & 230 & 6097 & 26553 & 279.1 & 1652.4 & 3539.9 \\
+Method: Our-A*
+  LaTeX row data: Our-A* & 100.00\% & 100.00\% & 60.00\% & 42.2 & 41.6 & 52.7 & 204 & 2603 & 15146 & 256.4 & 993.0 & 3045.5 \\
+
+------------------------------------------------------------

@@ -1,0 +1,19 @@
+Using device: mps
+→ Running single instance from: test_data/maps/random-32-32-20/benchmark_converted/scene_even1_100agents.txt
+✓ Log directory created (if needed): /Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/logs/benchmark_results_32x32-20/astar-cpp
+Loaded instance from 'test_data/maps/random-32-32-20/benchmark_converted/scene_even1_100agents.txt': 100 agents, grid size (32, 32).
+Instance has 100 agents.
+Traceback (most recent call last):
+  File "/Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/run_exp.py", line 474, in <module>
+    main()
+  File "/Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/run_exp.py", line 469, in main
+    run_single_instance(args, model, device)
+  File "/Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/run_exp.py", line 388, in run_single_instance
+    run_and_analyze_mapf(
+  File "/Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/run_exp.py", line 244, in run_and_analyze_mapf
+    final_plans, final_trajs, unique_collisions, timed_out, log_data = fix_collisions(
+  File "/Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/fix.py", line 3553, in fix_collisions
+    joint_success, joint_plan_segments, _, t_start, t_goal_sub, expansions = try_joint_astar_planning(
+  File "/Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/fix.py", line 2295, in try_joint_astar_planning
+    success, plans, trajs, ts, tg, expansions = search_window_cpp(t_start, t_goal_sub)
+ValueError: not enough values to unpack (expected 6, got 5)

@@ -1,0 +1,67 @@
+\begin{table*}[!t]
+  \centering
+  \caption{\footnotesize
+  Comparison of performance metrics for MAPF problems across different map types and agent counts.
+  Results show Success Rate (SR), Makespan (MS), Computation Time (T), and Information Units (IU).
+  Higher values are better for SR ($\uparrow$), while lower values are better for MS, Time, and IU ($\downarrow$).
+  }
+  \label{tab:mapf_performance}
+
+  \begin{subtable}{\textwidth}
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{4pt}
+    \caption{32×32 random (10\% obstacles) with A* CPP}
+    \label{tab:perf_32x32-10}
+    \begin{tabular}{@{}>{{\raggedright\arraybackslash}}p{5.0em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}@{}}
+      \toprule
+      Metrics & 10 & 20 & 30 & 40 & 50 & 60 & 70 & 80 & 90 \\
+      \midrule
+      SR (\%) ($\uparrow$) & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% \\
+      MS ($\downarrow$) & 49 & 49 & 49 & 49 & 53 & 53 & 57 & 56 & 56 \\
+      Time (s) ($\downarrow$) & 0.02 & 0.13 & 0.49 & 1.31 & 3.90 & 7.59 & 16.77 & 26.58 & 40.40 \\
+      IU ($\downarrow$) & 364 & 781 & 1350 & 1975 & 3336 & 4525 & 6558 & 7898 & 9382 \\
+      Conflicts ($\downarrow$) & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 2 & 1 \\
+      \bottomrule
+    \end{tabular}
+  \end{subtable}
+
+  \begin{subtable}{\textwidth}
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{4pt}
+    \caption{32×32 random (20\% obstacles) with A* CPP}
+    \label{tab:perf_32x32-20}
+    \begin{tabular}{@{}>{{\raggedright\arraybackslash}}p{5.0em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}@{}}
+      \toprule
+      Metrics & 10 & 20 & 30 & 40 & 50 & 60 & 70 & 80 & 90 & 100 \\
+      \midrule
+      SR (\%) ($\uparrow$) & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% \\
+      MS ($\downarrow$) & 43 & 48 & 48 & 64 & 73 & 79 & 79 & 79 & 79 & 96 \\
+      Time (s) ($\downarrow$) & 0.02 & 0.13 & 0.90 & 3.14 & 8.20 & 18.85 & 29.59 & 48.37 & 89.46 & 222.72 \\
+      IU ($\downarrow$) & 394 & 795 & 1758 & 3497 & 5553 & 8062 & 9468 & 11929 & 16861 & 56878 \\
+      Conflicts ($\downarrow$) & 0 & 0 & 2 & 3 & 7 & 12 & 12 & 12 & 22 & 28 \\
+      \bottomrule
+    \end{tabular}
+  \end{subtable}
+
+  \begin{subtable}{\textwidth}
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{4pt}
+    \caption{Warehouse}
+    \label{tab:perf_warehouse}
+    \begin{tabular}{@{}>{{\raggedright\arraybackslash}}p{5.0em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}>{{\centering\arraybackslash}}p{3.8em}@{}}
+      \toprule
+      Metrics & 10 & 20 & 30 & 40 & 50 & 60 & 70 & 80 & 90 & 100 \\
+      \midrule
+      SR (\%) ($\uparrow$) & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% \\
+      MS ($\downarrow$) & 226 & 226 & 226 & 226 & 387 & 388 & 437 & 455 & 427 & 429 \\
+      Time (s) ($\downarrow$) & 0.23 & 79.89 & 234.61 & 402.69 & 714.03 & 882.67 & 3458.18 & 4213.59 & 5298.85 & 6929.32 \\
+      IU ($\downarrow$) & 1383 & 3333 & 5882 & 7629 & 10834 & 13928 & 27239 & 35943 & 44250 & 51787 \\
+      Conflicts ($\downarrow$) & 0 & 2 & 5 & 8 & 14 & 17 & 43 & 60 & 90 & 105 \\
+      \bottomrule
+    \end{tabular}
+  \end{subtable}
+
+\end{table*}

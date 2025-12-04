@@ -1,0 +1,2166 @@
+import time
+import copy
+import random
+import heapq
+import itertools
+from collections import defaultdict, deque
+
+from utils.env_utils import analyze_collisions, simulate_plan, debug_scan_collisions
+from utils.search_utils import plan_with_search, astar
+
+
+class InfoSharingTracker:
+    """Track and quantify information sharing events."""
+    def __init__(self):
+        self.initial_submission_iu = 0
+        self.alert_iu = 0
+        self.revised_submission_iu = 0
+        self.alert_details_iu = {
+            'static': 0,
+            'dynamic': 0,
+            'pibt': 0
+        }
+
+    def record_initial_submission(self, initial_trajectories):
+        self.initial_submission_iu = sum(len(t) for t in initial_trajectories if t)
+
+    def record_static_alert(self, forbidden_cells):
+        iu = len(forbidden_cells)
+        self.alert_iu += iu
+        self.alert_details_iu['static'] += iu
+
+    def record_dynamic_alert(self, dynamic_path):
+        iu = len(dynamic_path)
+        self.alert_iu += iu
+        self.alert_details_iu['dynamic'] += iu
+
+    def record_pibt_alert(self, pibt_plan_length):
+        iu = pibt_plan_length
+        self.alert_iu += iu
+        self.alert_details_iu['pibt'] += iu
+
+    def record_revised_submission(self, new_trajectory):
+        self.revised_submission_iu += len(new_trajectory)
+
+    @property
+    def total_iu(self):
+        return self.initial_submission_iu + self.alert_iu + self.revised_submission_iu
+
+    def report(self):
+        print("\n--- Information Sharing Metrics ---")
+        print(f"  - Initial Path Submission IU: {self.initial_submission_iu}")
+        print(f"  - Revised Path Submission IU: {self.revised_submission_iu}")
+        print(f"  - Conflict Alert IU:          {self.alert_iu}")
+        print(f"    - Static Alerts:      {self.alert_details_iu['static']} IU")
+        print(f"    - Dynamic Alerts:     {self.alert_details_iu['dynamic']} IU")
+        print(f"    - Joint A* Planning:  {self.alert_details_iu['pibt']} IU")
+        print("-----------------------------------")
+        print(f"  Total Information Load (IU):  {self.total_iu}")
+        print("-----------------------------------")
+
+    def to_dict(self):
+        return {
+            'initialSubmissionIU': self.initial_submission_iu,
+            'revisedSubmissionIU': self.revised_submission_iu,
+            'conflictAlertIU': self.alert_iu,
+            'alertDetailsIU': self.alert_details_iu,
+            'totalInformationLoadIU': self.total_iu
+        }
+
+
+def cell_key(cell):
+    """Convert cell to hashable key."""
+    if isinstance(cell, (list, tuple)):
+        if len(cell) == 2 and not isinstance(cell[0], (list, tuple)):
+            return tuple(map(int, cell))
+        else:
+            return tuple(tuple(map(int, c)) for c in cell)
+    return cell
+
+
+def trim_trailing_waits(plan, trajectory, goal):
+    """
+    Remove trailing WAIT actions from a plan if agent reaches goal.
+
+    If the trajectory ends at the goal, find the earliest point where we reach
+    the goal and trim the plan to that length (no trailing WAITs).
+
+    Args:
+        plan: List of actions
+        trajectory: Simulated trajectory from the plan
+        goal: Goal position tuple
+
+    Returns:
+        Trimmed plan (or original if no trimming needed)
+    """
+    if not trajectory or not plan:
+        return plan
+
+    goal = tuple(map(int, goal))
+
+    # Find first time we reach the goal
+    for t, pos in enumerate(trajectory):
+        if tuple(map(int, pos)) == goal:
+            # Trim plan to reach this point
+            # Plan has len(trajectory)-1 actions (trajectory has positions, plan has moves)
+            trimmed_plan = plan[:t]
+            return trimmed_plan
+
+    # Never reached goal, return original plan
+    return plan
+
+
+def compute_heuristic_distances(pristine_static_grid, goals):
+    """
+    Precompute BFS distances from each goal to all reachable cells.
+
+    Args:
+        pristine_static_grid: 2D array (0 = free, -1 = obstacle)
+        goals: List of goal positions [(r, c), ...]
+
+    Returns:
+        dist_map: Dict mapping (goal_idx, cell) -> distance
+    """
+    rows, cols = pristine_static_grid.shape
+    dist_map = {}
+
+    for goal_idx, goal in enumerate(goals):
+        goal = tuple(map(int, goal))
+        # BFS from goal
+        queue = deque([goal])
+        visited = {goal: 0}
+
+        while queue:
+            pos = queue.popleft()
+            dist = visited[pos]
+
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                nr, nc = pos[0] + dr, pos[1] + dc
+                new_pos = (nr, nc)
+
+                if 0 <= nr < rows and 0 <= nc < cols:
+                    if pristine_static_grid[nr, nc] == 0 and new_pos not in visited:
+                        visited[new_pos] = dist + 1
+                        queue.append(new_pos)
+
+        for cell, d in visited.items():
+            dist_map[(goal_idx, cell)] = d
+
+    return dist_map
+
+
+def pibt_step(agents_in_region, agent_positions, agent_goals, pristine_static_grid,
+              heuristic_dist_map, finished_agents, collision_wait_time, verbose=False):
+    """
+    Run one PIBT step for agents in the collision region.
+
+    Args:
+        agents_in_region: List of agent IDs
+        agent_positions: Dict {agent_id: (r, c)}
+        agent_goals: List of goal positions (indexed by agent_id - 1)
+        pristine_static_grid: 2D array (0 = free, -1 = obstacle)
+        heuristic_dist_map: Precomputed distances from goals
+        finished_agents: Set of agent IDs already at goal
+        collision_wait_time: Dict {agent_id: num_steps_waiting}
+        verbose: Print debug info
+
+    Returns:
+        next_positions: Dict {agent_id: (r, c)}
+    """
+    rows, cols = pristine_static_grid.shape
+    ACTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1), (0, 0)]  # UP, DOWN, LEFT, RIGHT, STAY
+
+    # Assign priorities (higher = more important)
+    priorities = {}
+    for agent_id in agents_in_region:
+        idx = agent_id - 1
+        goal = tuple(map(int, agent_goals[idx]))
+        pos = agent_positions[agent_id]
+
+        # Base priority: negative distance to goal (closer = higher priority)
+        base_priority = -heuristic_dist_map.get((idx, pos), 9999)
+
+        # Bonus for waiting time (stuck agents get priority boost)
+        wait_bonus = collision_wait_time.get(agent_id, 0) * 2
+
+        # Penalty if already at goal (lower priority)
+        goal_penalty = -10 if agent_id in finished_agents else 0
+
+        priorities[agent_id] = base_priority + wait_bonus + goal_penalty
+
+    # Sort agents by priority (descending)
+    sorted_agents = sorted(agents_in_region, key=lambda a: priorities[a], reverse=True)
+
+    # Reserved cells for next step
+    reserved_next = {}
+    next_positions = {}
+    planned = set()
+
+    def dfs_pibt(agent_id, in_stack):
+        """Recursive PIBT with priority inheritance."""
+        if agent_id in planned:
+            return True
+
+        in_stack.add(agent_id)
+        idx = agent_id - 1
+        pos = agent_positions[agent_id]
+        goal = tuple(map(int, agent_goals[idx]))
+
+        # Get candidate neighbors sorted by heuristic
+        candidates = []
+        for dr, dc in ACTIONS:
+            new_pos = (pos[0] + dr, pos[1] + dc)
+            if 0 <= new_pos[0] < rows and 0 <= new_pos[1] < cols:
+                if pristine_static_grid[new_pos[0], new_pos[1]] == 0:
+                    h = heuristic_dist_map.get((idx, new_pos), 9999)
+                    candidates.append((h, new_pos))
+
+        # Sort by heuristic (prefer closer to goal)
+        candidates.sort(key=lambda x: x[0])
+
+        for h, v_next in candidates:
+            # If already reserved, skip
+            if v_next in reserved_next:
+                continue
+
+            # If v_next is free in current timestep
+            occupant = None
+            for other_id in agents_in_region:
+                if other_id != agent_id and agent_positions[other_id] == v_next:
+                    occupant = other_id
+                    break
+
+            if occupant is None:
+                # Free to take
+                reserved_next[v_next] = agent_id
+                next_positions[agent_id] = v_next
+                planned.add(agent_id)
+                in_stack.remove(agent_id)
+                return True
+
+            # If occupied by lower-priority agent, try priority inheritance
+            if occupant not in in_stack and priorities[occupant] < priorities[agent_id]:
+                # Try to move occupant first
+                if dfs_pibt(occupant, in_stack):
+                    # Occupant moved, we can take its place
+                    reserved_next[v_next] = agent_id
+                    next_positions[agent_id] = v_next
+                    planned.add(agent_id)
+                    in_stack.remove(agent_id)
+                    return True
+
+        # All options failed, backtrack
+        in_stack.remove(agent_id)
+        return False
+
+    # Process agents in priority order
+    for agent_id in sorted_agents:
+        if agent_id not in planned:
+            if not dfs_pibt(agent_id, set()):
+                # Fallback: stay in place
+                next_positions[agent_id] = agent_positions[agent_id]
+
+    if verbose:
+        print(f"    PIBT step: {len(planned)}/{len(agents_in_region)} agents moved")
+
+    return next_positions
+
+
+def try_pibt_planning(collision, current_trajectories, agent_goals, agent_starts,
+                     pristine_static_grid, heuristic_dist_map, finished_agents,
+                     agent_envs, current_plans, info_tracker,
+                     model, device, search_type, algo, verbose=False):
+    """
+    Use PIBT to resolve collision by planning coordinated moves for involved agents.
+
+    Args:
+        collision: Collision dict with 'agents', 'time', 'type', 'cell'
+        current_trajectories: Current trajectories for all agents
+        agent_goals: List of goal positions
+        agent_starts: List of start positions
+        pristine_static_grid: Clean grid (0 = free, -1 = obstacle)
+        heuristic_dist_map: Precomputed distances to goals
+        finished_agents: Set of agent IDs at goal
+        agent_envs: Per-agent environments
+        current_plans: Current plans for all agents
+        info_tracker: Info sharing tracker
+        verbose: Print debug info
+
+    Returns:
+        (success, updated_plans_dict, updated_trajs_dict)
+    """
+    agents_in_collision = list(collision['agents'])
+    coll_time = collision['time']
+
+    if verbose:
+        print(f"    PIBT planning for {len(agents_in_collision)} agents at T={coll_time}")
+
+    # Initialize agent positions at collision time
+    agent_positions = {}
+    collision_wait_time = defaultdict(int)
+
+    for agent_id in agents_in_collision:
+        idx = agent_id - 1
+        traj = current_trajectories[idx]
+
+        if traj and coll_time < len(traj):
+            agent_positions[agent_id] = tuple(map(int, traj[coll_time]))
+        elif traj:
+            agent_positions[agent_id] = tuple(map(int, traj[-1]))
+        else:
+            agent_positions[agent_id] = tuple(map(int, agent_starts[idx]))
+
+    # Run PIBT for K steps to get coordinated trajectory snippets
+    num_pibt_steps = 15  # Plan ahead 15 steps
+    pibt_trajectories = {aid: [agent_positions[aid]] for aid in agents_in_collision}
+
+    for step in range(num_pibt_steps):
+        next_positions = pibt_step(
+            agents_in_collision, agent_positions, agent_goals,
+            pristine_static_grid, heuristic_dist_map, finished_agents,
+            collision_wait_time, verbose=verbose
+        )
+
+        # Update positions and trajectories
+        for agent_id in agents_in_collision:
+            new_pos = next_positions[agent_id]
+            pibt_trajectories[agent_id].append(new_pos)
+
+            # Track waiting time
+            if new_pos == agent_positions[agent_id]:
+                collision_wait_time[agent_id] += 1
+            else:
+                collision_wait_time[agent_id] = 0
+
+            agent_positions[agent_id] = new_pos
+
+    # Convert PIBT trajectories to action sequences
+    updated_plans = {}
+    updated_trajs = {}
+
+    for agent_id in agents_in_collision:
+        idx = agent_id - 1
+        pibt_traj = pibt_trajectories[agent_id]
+        goal = agent_goals[idx]
+
+        # Convert trajectory to actions
+        pibt_actions = []
+        for i in range(len(pibt_traj) - 1):
+            curr = pibt_traj[i]
+            next_pos = pibt_traj[i + 1]
+            delta = (next_pos[0] - curr[0], next_pos[1] - curr[1])
+
+            # Map delta to action index
+            action_map = {(-1, 0): 0, (1, 0): 1, (0, -1): 2, (0, 1): 3, (0, 0): 4}
+            action = action_map.get(delta, 4)  # Default to STAY
+            pibt_actions.append(action)
+
+        # Build full plan: prefix + pibt_segment + suffix
+        splice_start = max(0, coll_time - 2)  # Start slightly before collision
+        prefix_actions = current_plans[idx][:splice_start] if current_plans[idx] else []
+
+        # Suffix: plan from last PIBT position to goal using user's search strategy
+        last_pibt_pos = pibt_traj[-1]
+        if last_pibt_pos != goal:
+            env_suffix = copy.deepcopy(agent_envs[idx])
+            env_suffix.env.grid = pristine_static_grid.copy()
+            env_suffix.env.agent_pos = last_pibt_pos
+            env_suffix.env.goal_pos = goal
+
+            suffix_plan = plan_with_search(
+                env_suffix, model, device, search_type, algo,
+                timeout=2.0, heuristic_weight=1.0, max_expansions=500
+            )
+            if suffix_plan is None:
+                suffix_plan = []
+        else:
+            suffix_plan = []
+
+        # Combine
+        new_full_plan = prefix_actions + pibt_actions + suffix_plan
+
+        # Simulate to verify
+        sim_env = copy.deepcopy(agent_envs[idx])
+        sim_env.env.agent_pos = agent_starts[idx]
+        new_traj = simulate_plan(sim_env, new_full_plan)
+
+        if new_traj:
+            updated_plans[agent_id] = new_full_plan
+            updated_trajs[agent_id] = new_traj
+
+    if len(updated_plans) == len(agents_in_collision):
+        if info_tracker:
+            info_tracker.record_pibt_alert(num_pibt_steps * len(agents_in_collision))
+        return True, updated_plans, updated_trajs
+
+    return False, {}, {}
+
+
+def try_joint_astar_planning(
+    collision,
+    current_trajectories,
+    agent_goals,
+    agent_starts,
+    pristine_static_grid,
+    heuristic_dist_map,
+    max_agents=4,
+    time_budget=2.0,
+    max_expansions=20000,
+    verbose=False,
+    base_rewind=7,
+    base_horizon=15,
+    max_expansion_steps=8,
+    blocked_cells=None,
+    blocked_by_time=None,
+    use_time_based_blocking=True
+):
+    """
+    Resolve a collision by jointly planning for the involved agents using a small-horizon A*.
+
+    The search runs in the joint configuration space with a simple reservation table for all
+    other agents' trajectories, so the proposed fix should not introduce new conflicts.
+
+    Args:
+        base_rewind: How many steps to look back from collision time (default 7)
+        base_horizon: How many steps to look forward from collision time (default 15)
+        max_expansion_steps: How many times to expand window if search fails (default 8)
+    """
+    agents_in_collision = sorted(list(collision['agents']))
+    num_joint_agents = len(agents_in_collision)
+    coll_time = collision['time']
+
+    if num_joint_agents == 0 or num_joint_agents > max_agents:
+        return False, {}, {}, None, None
+
+    rows, cols = pristine_static_grid.shape
+    ACTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1), (0, 0)]  # UP, DOWN, LEFT, RIGHT, STAY
+
+    # Initialize blocked_cells set if not provided
+    if blocked_cells is None:
+        blocked_cells = set()
+
+    def agent_pos_at(agent_id, t):
+        idx = agent_id - 1
+        traj = current_trajectories[idx]
+        if traj:
+            if t < len(traj):
+                return tuple(map(int, traj[t]))
+            return tuple(map(int, traj[-1]))
+        return tuple(map(int, agent_starts[idx]))
+
+    # Reservation lookups for agents outside the collision set
+    all_agent_ids = set(range(1, len(agent_goals) + 1))
+    other_agents = sorted(all_agent_ids - set(agents_in_collision))
+
+    def reserved_positions_at(t):
+        reserved = set()
+        for aid in other_agents:
+            reserved.add(agent_pos_at(aid, t))
+        return reserved
+
+    def reserved_moves_at(t):
+        moves = []
+        for aid in other_agents:
+            prev_pos = agent_pos_at(aid, t)
+            next_pos = agent_pos_at(aid, t + 1)
+            moves.append((prev_pos, next_pos))
+        return moves
+
+    def check_joint_segment_conflicts(
+        agents_in_collision,
+        joint_trajs,
+        t_start,
+        t_goal_sub,
+        agent_pos_at,
+        other_agents,
+        verbose=False
+    ):
+        """Validate joint segment against vertex/edge conflicts (joint vs joint, joint vs others).
+
+        REFINEMENT #4: Returns (success, conflict_info) where conflict_info tracks which outside agents
+        are causing conflicts with the joint plan for escalation.
+        """
+        horizon = t_goal_sub - t_start
+        conflict_info = {'joint_other_conflicts': defaultdict(int)}  # oid -> conflict count
+
+        # BUGFIX: Verify trajectory bounds before accessing
+        for aid in agents_in_collision:
+            traj_len = len(joint_trajs.get(aid, []))
+            expected_len = horizon + 1
+            if traj_len != expected_len:
+                if verbose:
+                    print(f"      ERROR: Agent {aid} trajectory length {traj_len} != expected {expected_len}")
+                return False, conflict_info
+
+        for offset in range(horizon):
+            t_global = t_start + offset
+            # BUGFIX: Add bounds checking before accessing trajectories
+            try:
+                pos_now_joint = {aid: joint_trajs[aid][offset] for aid in agents_in_collision}
+                pos_next_joint = {aid: joint_trajs[aid][offset + 1] for aid in agents_in_collision}
+            except (KeyError, IndexError) as e:
+                if verbose:
+                    print(f"      ERROR: Index out of bounds at offset {offset}: {e}")
+                return False, conflict_info
+
+            # Joint vs joint vertex
+            seen = {}
+            for aid, pos in pos_next_joint.items():
+                if pos in seen:
+                    if verbose:
+                        print(f"      Conflict (joint-joint vertex) at t={t_global+1}: {aid},{seen[pos]} -> {pos}")
+                    return False, conflict_info
+                seen[pos] = aid
+
+            # Joint vs joint edge swap
+            joint_list = list(agents_in_collision)
+            for i in range(len(joint_list)):
+                for j in range(i + 1, len(joint_list)):
+                    ai, aj = joint_list[i], joint_list[j]
+                    if pos_now_joint[ai] == pos_next_joint[aj] and pos_now_joint[aj] == pos_next_joint[ai]:
+                        if verbose:
+                            print(f"      Conflict (joint-joint edge swap) at t={t_global}->{t_global+1}: {ai}<->{aj}")
+                        return False, conflict_info
+
+            # Joint vs others
+            for aid in agents_in_collision:
+                pos_next = pos_next_joint[aid]
+                for oid in other_agents:
+                    other_now = agent_pos_at(oid, t_global)
+                    other_next = agent_pos_at(oid, t_global + 1)
+
+                    if pos_next == other_next:
+                        if verbose:
+                            print(f"      Conflict (joint-other vertex) at t={t_global+1}: {aid} & {oid} -> {pos_next}")
+                        # REFINEMENT #4: Track which outside agent is conflicting
+                        conflict_info['joint_other_conflicts'][oid] += 1
+                        return False, conflict_info
+
+                    if pos_now_joint[aid] == other_next and other_now == pos_next:
+                        if verbose:
+                            print(f"      Conflict (joint-other edge swap) at t={t_global}->{t_global+1}: {aid}<->{oid}")
+                        # REFINEMENT #4: Track which outside agent is conflicting
+                        conflict_info['joint_other_conflicts'][oid] += 1
+                        return False, conflict_info
+
+        return True, conflict_info
+
+    def search_window(t_start, t_goal_sub):
+        start_positions = tuple(agent_pos_at(aid, t_start) for aid in agents_in_collision)
+
+        # BUGFIX: Clamp subgoal time to trajectory length to avoid degenerate search
+        # where start == subgoal due to trajectory being shorter than planning window
+        subgoal_positions = []
+        for aid in agents_in_collision:
+            idx = aid - 1
+            traj = current_trajectories[idx]
+            # Use the trajectory length to determine a realistic subgoal time
+            if traj:
+                t_subgoal_clamped = min(t_goal_sub, len(traj) - 1)
+            else:
+                t_subgoal_clamped = t_goal_sub
+            subgoal_positions.append(agent_pos_at(aid, t_subgoal_clamped))
+        subgoal_positions = tuple(subgoal_positions)
+
+        if verbose:
+            print(f"    Joint A* window: coll_time={coll_time}, "
+                  f"t_start={t_start}, t_goal_sub={t_goal_sub}, agents={agents_in_collision}")
+            print(f"    Start positions: {start_positions}")
+            print(f"    Subgoal positions: {subgoal_positions}")
+            if start_positions == subgoal_positions:
+                print(f"    WARNING: Start and subgoal are identical! This will create degenerate search.")
+
+        def heuristic(positions):
+            h_val = 0
+            for pos, subgoal in zip(positions, subgoal_positions):
+                h_val += abs(pos[0] - subgoal[0]) + abs(pos[1] - subgoal[1])
+            return h_val
+
+        min_depth_needed = max(1, t_goal_sub - t_start)
+        max_depth = max(min_depth_needed + 3, min_depth_needed)
+
+        frontier = []
+        counter = itertools.count()
+        heapq.heappush(frontier, (heuristic(start_positions), 0, next(counter), start_positions, []))
+        visited = set()
+        expansions = 0
+        start_clock = time.perf_counter()
+
+        while frontier and expansions < max_expansions:
+            if time.perf_counter() - start_clock > time_budget:
+                break
+
+            f, g, _, positions, action_history = heapq.heappop(frontier)
+            expansions += 1
+
+            goals_reached = all(
+                tuple(map(int, positions[i])) == tuple(map(int, subgoal_positions[i]))
+                for i in range(num_joint_agents)
+            )
+            if goals_reached:
+                expected_len = max(0, t_goal_sub - t_start)
+                if g > expected_len:
+                    # Too long for the local window, keep searching.
+                    continue
+
+                if g < expected_len:
+                    pad_steps = expected_len - g
+                    stay_tuple = tuple(4 for _ in range(num_joint_agents))
+                    action_history = action_history + [stay_tuple] * pad_steps
+                    g = expected_len
+
+                joint_plans = {aid: [] for aid in agents_in_collision}
+                joint_trajs = {aid: [pos] for aid, pos in zip(agents_in_collision, start_positions)}
+
+                for actions in action_history:
+                    for idx, aid in enumerate(agents_in_collision):
+                        act = actions[idx]
+                        dr, dc = ACTIONS[act]
+                        prev = joint_trajs[aid][-1]
+                        new_pos = (prev[0] + dr, prev[1] + dc)
+                        joint_trajs[aid].append(new_pos)
+                        joint_plans[aid].append(act)
+
+                # REFINEMENT #4: Unpack tuple return (success, conflict_info)
+                conflict_check_success, conflict_info = check_joint_segment_conflicts(
+                    agents_in_collision,
+                    joint_trajs,
+                    t_start,
+                    t_goal_sub,
+                    agent_pos_at,
+                    other_agents,
+                    verbose=verbose
+                )
+                if not conflict_check_success:
+                    if verbose:
+                        print("    Joint A* candidate plan has local conflicts → discarding and continuing search")
+                    continue
+
+                if verbose:
+                    print(f"    Joint A* success in {g} steps (expanded {expansions} nodes) window [{t_start},{t_goal_sub}]")
+                    # Print joint plans for debugging
+                    for aid in agents_in_collision:
+                        plan_str = " → ".join([f"{ACTIONS[act]}" for act in joint_plans[aid]])
+                        print(f"      Agent {aid} joint plan: {joint_plans[aid][:15]}{'...' if len(joint_plans[aid]) > 15 else ''}")
+                return True, joint_plans, joint_trajs, t_start, t_goal_sub
+
+            if g >= max_depth:
+                continue
+
+            key = (positions, g)
+            if key in visited:
+                continue
+            visited.add(key)
+
+            time_step = t_start + g
+
+            # Avoid states already colliding with reserved agents
+            reserved_now = reserved_positions_at(time_step)
+            if any(pos in reserved_now for pos in positions):
+                continue
+
+            move_options = []
+            for pos in positions:
+                opts = []
+                for act_idx, (dr, dc) in enumerate(ACTIONS):
+                    nr, nc = pos[0] + dr, pos[1] + dc
+
+                    # Determine if cell is blocked
+                    is_blocked = False
+                    if use_time_based_blocking:
+                        # Time-aware blocking: check if cell is blocked at next timestep
+                        t_global_next = time_step + 1
+                        if blocked_by_time and t_global_next in blocked_by_time:
+                            is_blocked = (nr, nc) in blocked_by_time[t_global_next]
+                    else:
+                        # Spatial blocking: backward compatible with existing behavior
+                        if blocked_cells:
+                            is_blocked = (nr, nc) in blocked_cells
+
+                    if (0 <= nr < rows and 0 <= nc < cols and pristine_static_grid[nr, nc] == 0
+                        and not is_blocked):
+                        opts.append((act_idx, (nr, nc)))
+                move_options.append(opts)
+
+            for combo in itertools.product(*move_options):
+                next_positions = tuple(item[1] for item in combo)
+                actions_tuple = tuple(item[0] for item in combo)
+
+                # Internal vertex conflicts
+                if len(set(next_positions)) < num_joint_agents:
+                    continue
+
+                # Internal edge conflicts
+                edge_conflict = False
+                for i in range(num_joint_agents):
+                    for j in range(i + 1, num_joint_agents):
+                        if positions[i] == next_positions[j] and positions[j] == next_positions[i]:
+                            edge_conflict = True
+                            break
+                    if edge_conflict:
+                        break
+                if edge_conflict:
+                    continue
+
+                # Conflicts with other agents' reservations
+                reserved_next = reserved_positions_at(time_step + 1)
+                if any(pos in reserved_next for pos in next_positions):
+                    continue
+
+                reserved_moves = reserved_moves_at(time_step)
+                swap_with_reserved = False
+                for idx, move in enumerate(next_positions):
+                    prev_pos = positions[idx]
+                    for res_prev, res_next in reserved_moves:
+                        if move == res_prev and prev_pos == res_next:
+                            swap_with_reserved = True
+                            break
+                    if swap_with_reserved:
+                        break
+                if swap_with_reserved:
+                    continue
+
+                new_actions = action_history + [actions_tuple]
+                g1 = g + 1
+                h1 = heuristic(next_positions)
+                heapq.heappush(frontier, (g1 + h1, g1, next(counter), next_positions, new_actions))
+
+        return False, {}, {}, t_start, t_goal_sub
+
+    for expand in range(max_expansion_steps + 1):
+        joint_rewind = base_rewind + expand
+        joint_horizon = base_horizon + expand
+        t_start = max(0, coll_time - joint_rewind)
+        t_goal_sub = coll_time + joint_horizon
+
+        # REFINEMENT #2: Window bounds validation
+        # Check 1: t_start must be non-negative and less than collision time
+        if t_start >= coll_time:
+            if verbose:
+                print(f"    Window validation FAILED: t_start ({t_start}) >= coll_time ({coll_time})")
+            continue
+
+        # Check 2: Window doesn't exceed trajectory bounds
+        max_traj_len = 0
+        for aid in agents_in_collision:
+            idx = aid - 1
+            traj = current_trajectories[idx]
+            if traj:
+                max_traj_len = max(max_traj_len, len(traj))
+
+        if max_traj_len > 0 and t_goal_sub > max_traj_len - 1:
+            if verbose:
+                print(f"    Window validation FAILED: t_goal_sub ({t_goal_sub}) exceeds max trajectory length ({max_traj_len - 1})")
+            continue
+
+        # Check 3: Start position consistency - verify agents are at expected positions at t_start
+        position_check_failed = False
+        for aid in agents_in_collision:
+            idx = aid - 1
+            expected_pos = agent_pos_at(aid, t_start)
+            traj = current_trajectories[idx]
+            if traj and t_start < len(traj):
+                actual_pos = tuple(map(int, traj[t_start]))
+                if expected_pos != actual_pos:
+                    if verbose:
+                        print(f"    Window validation FAILED: Agent {aid} position mismatch at t_start ({t_start}): expected {expected_pos}, got {actual_pos}")
+                    position_check_failed = True
+                    break
+
+        if position_check_failed:
+            continue
+
+        success, plans, trajs, ts, tg = search_window(t_start, t_goal_sub)
+        if success:
+            return success, plans, trajs, ts, tg
+
+    if verbose:
+        print(f"    Joint A* failed after expanding window to rewind={base_rewind + max_expansion_steps}, horizon={base_horizon + max_expansion_steps}")
+
+    # REFINEMENT #4: Escalation logic - promote blocking outside agents into joint group
+    # Track cumulative conflicts from outside agents across all expansion attempts
+    cumulative_conflicts = defaultdict(int)  # oid -> total conflict count
+
+    # Re-run expansion attempts to collect conflict information
+    for expand in range(max_expansion_steps + 1):
+        joint_rewind = base_rewind + expand
+        joint_horizon = base_horizon + expand
+        t_start = max(0, coll_time - joint_rewind)
+        t_goal_sub = coll_time + joint_horizon
+
+        # Quick validation (same as before)
+        if t_start >= coll_time:
+            continue
+        max_traj_len = 0
+        for aid in agents_in_collision:
+            idx = aid - 1
+            traj = current_trajectories[idx]
+            if traj:
+                max_traj_len = max(max_traj_len, len(traj))
+        if max_traj_len > 0 and t_goal_sub > max_traj_len - 1:
+            continue
+
+        # Run a lightweight search to collect conflict info (don't store results)
+        # We'll detect conflicts during this attempt
+        start_positions = tuple(agent_pos_at(aid, t_start) for aid in agents_in_collision)
+        subgoal_positions = []
+        for aid in agents_in_collision:
+            idx = aid - 1
+            traj = current_trajectories[idx]
+            if traj:
+                t_subgoal_clamped = min(t_goal_sub, len(traj) - 1)
+            else:
+                t_subgoal_clamped = t_goal_sub
+            subgoal_positions.append(agent_pos_at(aid, t_subgoal_clamped))
+        subgoal_positions = tuple(subgoal_positions)
+
+        # Minimal A* search just to collect conflict data
+        frontier = []
+        counter = itertools.count()
+        heapq.heappush(frontier, (0, 0, next(counter), start_positions, []))
+        visited = set()
+        expansions = 0
+
+        while frontier and expansions < 500:  # Limited to 500 expansions for conflict discovery
+            f, g, _, positions, action_history = heapq.heappop(frontier)
+            expansions += 1
+
+            if g >= 3:  # Only check first few steps for conflicts
+                break
+
+            key = (positions, g)
+            if key in visited:
+                continue
+            visited.add(key)
+
+            time_step = t_start + g
+            move_options = []
+            for pos in positions:
+                opts = []
+                for act_idx, (dr, dc) in enumerate(ACTIONS):
+                    nr, nc = pos[0] + dr, pos[1] + dc
+                    if (0 <= nr < rows and 0 <= nc < cols and pristine_static_grid[nr, nc] == 0):
+                        opts.append((act_idx, (nr, nc)))
+                move_options.append(opts)
+
+            for combo in itertools.product(*move_options):
+                next_positions = tuple(item[1] for item in combo)
+                actions_tuple = tuple(item[0] for item in combo)
+
+                # Skip if internal conflicts
+                if len(set(next_positions)) < num_joint_agents:
+                    continue
+                edge_conflict = False
+                for i in range(num_joint_agents):
+                    for j in range(i + 1, num_joint_agents):
+                        if positions[i] == next_positions[j] and positions[j] == next_positions[i]:
+                            edge_conflict = True
+                            break
+                    if edge_conflict:
+                        break
+                if edge_conflict:
+                    continue
+
+                # Check for conflicts with other agents - accumulate them
+                for idx, aid in enumerate(agents_in_collision):
+                    pos_now = positions[idx]
+                    pos_next = next_positions[idx]
+                    for oid in other_agents:
+                        other_now = agent_pos_at(oid, time_step)
+                        other_next = agent_pos_at(oid, time_step + 1)
+                        if pos_next == other_next or (pos_now == other_next and other_now == pos_next):
+                            cumulative_conflicts[oid] += 1
+
+                new_actions = action_history + [actions_tuple]
+                g1 = g + 1
+                heapq.heappush(frontier, (g1, g1, next(counter), next_positions, new_actions))
+
+    # Check if any outside agent caused ≥3 repeated conflicts
+    blocking_agent = None
+    max_conflicts = 0
+    for oid, conflict_count in cumulative_conflicts.items():
+        if conflict_count >= 3 and conflict_count > max_conflicts:
+            max_conflicts = conflict_count
+            blocking_agent = oid
+        elif conflict_count >= 3 and conflict_count == max_conflicts and (blocking_agent is None or oid < blocking_agent):
+            blocking_agent = oid  # Tie-break by agent ID
+
+    # REFINEMENT #4: If we found a blocking agent and have capacity, escalate
+    if blocking_agent and num_joint_agents < max_agents:
+        if verbose:
+            print(f"    Escalating blocking agent {blocking_agent} (caused {max_conflicts} conflicts) into joint group")
+        escalated_collision = dict(collision)
+        escalated_collision['agents'] = set(agents_in_collision) | {blocking_agent}
+        # Recursively try with escalated group
+        return try_joint_astar_planning(
+            escalated_collision, current_trajectories, agent_goals, agent_starts,
+            pristine_static_grid, heuristic_dist_map,
+            max_agents=max_agents,
+            time_budget=time_budget * 1.5,  # Give escalation more time
+            max_expansions=max_expansions,
+            verbose=verbose,
+            base_rewind=base_rewind,
+            base_horizon=base_horizon,
+            max_expansion_steps=max_expansion_steps - 2,  # Fewer expansions for escalation
+            blocked_cells=blocked_cells,
+            blocked_by_time=blocked_by_time,
+            use_time_based_blocking=use_time_based_blocking
+        )
+
+    return False, {}, {}, None, None
+
+
+def try_joint_astar_with_conflict_blocking(
+    collision,
+    current_trajectories,
+    agent_goals,
+    agent_starts,
+    pristine_static_grid,
+    heuristic_dist_map,
+    max_agents=4,
+    time_budget=2.0,
+    max_expansions=20000,
+    verbose=False,
+    base_rewind=7,
+    base_horizon=15,
+    max_expansion_steps=8,
+    max_conflict_retries=3,
+    use_time_based_blocking=True
+):
+    """
+    Wrapper around try_joint_astar_planning that retries with conflict blocking.
+
+    When Joint A* fails to resolve a collision, identify which agents are blocking
+    the search and temporarily add their cells as obstacles, forcing the planner
+    to find a completely different route.
+    """
+    agents_in_collision = sorted(list(collision['agents']))
+    all_agent_ids = set(range(1, len(agent_goals) + 1))
+    other_agents = sorted(all_agent_ids - set(agents_in_collision))
+    coll_time = collision['time']
+
+    # First attempt: no blocked cells
+    success, plans, trajs, t_start, t_goal_sub = try_joint_astar_planning(
+        collision, current_trajectories, agent_goals, agent_starts,
+        pristine_static_grid, heuristic_dist_map,
+        max_agents=max_agents,
+        time_budget=time_budget,
+        max_expansions=max_expansions,
+        verbose=verbose,
+        base_rewind=base_rewind,
+        base_horizon=base_horizon,
+        max_expansion_steps=max_expansion_steps,
+        blocked_cells=None,
+        blocked_by_time=None,
+        use_time_based_blocking=use_time_based_blocking
+    )
+
+    if success:
+        return success, plans, trajs, t_start, t_goal_sub
+
+    if not other_agents:
+        # No other agents to block, can't retry
+        return False, {}, {}, None, None
+
+    # If failed, retry with blocking other agents' cells
+    for retry_attempt in range(max_conflict_retries):
+        if verbose:
+            print(f"      Joint A* failed, attempting retry {retry_attempt + 1}/{max_conflict_retries} with conflict cell blocking...")
+
+        # Collect positions of other agents during an extended planning window
+        # Expand the window slightly more each retry to capture more conflict cells
+        search_rewind = base_rewind + (retry_attempt * 2)
+        search_horizon = base_horizon + (retry_attempt * 2)
+
+        if use_time_based_blocking:
+            # Build time-based blocking dictionary: blocked_by_time[t_global] = set(cells)
+            blocked_by_time = {}
+            max_traj_len = max((len(current_trajectories[oid - 1]) for oid in other_agents
+                               if current_trajectories[oid - 1]), default=0)
+
+            for t_global in range(max(0, coll_time - search_rewind),
+                                 min(max_traj_len, coll_time + search_horizon + 1)):
+                blocked_by_time[t_global] = set()
+                for oid in other_agents:
+                    idx = oid - 1
+                    traj = current_trajectories[idx]
+                    if traj and t_global < len(traj):
+                        pos = tuple(map(int, traj[t_global]))
+                        blocked_by_time[t_global].add(pos)
+
+            blocked_cells = None
+            if verbose:
+                total_blocked_entries = sum(len(cells) for cells in blocked_by_time.values())
+                print(f"        Built time-based blocking: {len(blocked_by_time)} timesteps with {total_blocked_entries} total cell-time pairs")
+        else:
+            # Build spatial blocking: single set of all blocked cells
+            blocked_cells = set()
+            for oid in other_agents:
+                idx = oid - 1
+                traj = current_trajectories[idx]
+                if traj:
+                    # Block cells from extended window
+                    for t in range(max(0, coll_time - search_rewind),
+                                  min(len(traj), coll_time + search_horizon + 1)):
+                        pos = tuple(map(int, traj[t]))
+                        blocked_cells.add(pos)
+
+            blocked_by_time = None
+            if verbose:
+                print(f"        Blocked {len(blocked_cells)} cells from other agents during planning window")
+
+        # Retry Joint A* with blocked cells (spatial or time-based depending on flag)
+        success, plans, trajs, t_start, t_goal_sub = try_joint_astar_planning(
+            collision, current_trajectories, agent_goals, agent_starts,
+            pristine_static_grid, heuristic_dist_map,
+            max_agents=max_agents,
+            time_budget=time_budget,
+            max_expansions=max_expansions,
+            verbose=verbose,
+            base_rewind=base_rewind,
+            base_horizon=base_horizon,
+            max_expansion_steps=max_expansion_steps,
+            blocked_cells=blocked_cells,
+            blocked_by_time=blocked_by_time,
+            use_time_based_blocking=use_time_based_blocking
+        )
+
+        if success:
+            if verbose:
+                print(f"      ✓ Joint A* succeeded with conflict cell blocking on retry {retry_attempt + 1}")
+            return success, plans, trajs, t_start, t_goal_sub
+
+    if verbose:
+        print(f"      ✗ Joint A* failed even after {max_conflict_retries} retries with conflict blocking")
+    return False, {}, {}, None, None
+
+def fix_collisions(
+    initial_agent_plans,
+    initial_agent_trajectories,
+    agent_envs,
+    model,
+    run_counters,
+    device,
+    log_filepath=None,
+    replan_strategy="best",
+    info_setting="all",
+    search_type="astar",
+    algo="ppo",
+    timeout=10.0,
+    heuristic_weight=1.0,
+    max_expansions=200,
+    time_limit=60,
+    max_passes=10000,
+    joint_rewind=7,
+    joint_horizon=15,
+    joint_expansion_steps=8,
+    use_time_based_blocking=True,
+    verbose=True
+):
+    """
+    Clean 3-strategy collision resolution:
+    1. STATIC: Block collision cells, replan (attempt once per collision)
+    2. DYNAMIC: Share blocker trajectory, replan (attempt once per collision)
+    3. JOINT A*: Short-horizon joint planning for persistent collisions
+
+    Args:
+        joint_rewind: Steps to rewind from collision time in joint A* (default 7, was 3)
+        joint_horizon: Steps to look ahead from collision time in joint A* (default 15, was 6)
+        joint_expansion_steps: Times to expand search window if joint A* fails (default 8, was 3)
+        max_passes: Maximum passes to attempt (default 10000, was 50)
+        time_limit: Overall time budget in seconds (default 60)
+    """
+    overall_start_time = time.perf_counter()
+
+    # Initialize counters
+    if run_counters is None:
+        run_counters = {}
+    for key in ['replan_attempts_static', 'replan_success_static',
+                'replan_attempts_dynamic', 'replan_success_dynamic',
+                'replan_attempts_joint', 'replan_success_joint',
+                'collisions_total']:
+        run_counters.setdefault(key, 0)
+
+    # Copy initial plans and trajectories
+    current_plans = [list(p) for p in initial_agent_plans]
+    current_trajectories = [list(t) for t in initial_agent_trajectories]
+
+    num_agents = len(current_plans)
+    agent_goals = [tuple(map(int, env.env.goal_pos)) for env in agent_envs]
+    agent_starts = [tuple(map(int, env.env.agent_pos)) for env in agent_envs]
+
+    # Get pristine static grid
+    pristine_static_grid = agent_envs[0].env.grid.copy()
+    for r in range(pristine_static_grid.shape[0]):
+        for c in range(pristine_static_grid.shape[1]):
+            if pristine_static_grid[r, c] != -1:
+                pristine_static_grid[r, c] = 0
+
+    # Precompute heuristic distances for coordinated planning
+    if verbose:
+        print(f"\n=== Collision Resolution Started ===")
+        print(f"Grid: {pristine_static_grid.shape}, Agents: {num_agents}")
+        print(f"Strategy: STATIC + DYNAMIC + JOINT A*")
+        print(f"Precomputing heuristic distances...")
+
+    heuristic_dist_map = compute_heuristic_distances(pristine_static_grid, agent_goals)
+
+    # Track finished agents
+    finished_agents = set()
+    for i, (traj, goal) in enumerate(zip(current_trajectories, agent_goals)):
+        if traj and tuple(map(int, traj[-1])) == tuple(map(int, goal)):
+            finished_agents.add(i + 1)  # Agent IDs are 1-indexed
+
+    if verbose:
+        print(f"Finished agents: {finished_agents}")
+
+    info_tracker = InfoSharingTracker()
+    info_tracker.record_initial_submission(initial_agent_trajectories)
+
+    # History tracking
+    static_block_hist = defaultdict(set)
+    collision_attempts = defaultdict(int)
+    collision_joint_astar_failed = set()  # Track collisions where Joint A* failed (skip in same pass)
+
+    # Per-collision, per-strategy attempt counters (refinement #1)
+    collision_static_attempts = defaultdict(int)      # coll_key -> count
+    collision_dynamic_attempts = defaultdict(int)     # coll_key -> count
+    collision_joint_attempts = defaultdict(int)       # coll_key -> count
+
+    # Constants
+    INIT_REWIND = 3
+    MAX_REWIND_STATIC = 7
+    MAX_REWIND_DYN = 7
+
+    # Strategy attempt limits (refinement #1)
+    MAX_STATIC_ATTEMPTS = 1
+    MAX_DYNAMIC_ATTEMPTS = 1
+    MAX_JOINT_ATTEMPTS = 1
+
+    # Track unresolved collisions for DEFER (refinement #3)
+    unresolved_collisions = set()  # coll_keys where all strategies have been exhausted
+
+    # Track escalation attempts for each collision (refinement #4)
+    collision_escalation_attempts = defaultdict(int)  # coll_key -> escalation attempt count (max 2)
+    collision_escalated_agents = defaultdict(set)  # coll_key -> set of agents already escalated into joint group
+
+    # Main resolution loop
+    for pass_num in range(1, max_passes + 1):
+        elapsed = time.perf_counter() - overall_start_time
+        if elapsed > time_limit:
+            if verbose:
+                print(f"\n✗ Time limit exceeded ({elapsed:.2f}s)")
+            break
+
+        # Reset Joint A* failed set for this pass (allow retry if other collisions clear)
+        collision_joint_astar_failed = set()
+
+        if verbose:
+            print(f"\n--- Pass {pass_num}/{max_passes} (Elapsed: {elapsed:.2f}s) ---")
+
+        # Detect collisions
+        collisions = analyze_collisions(current_trajectories, agent_goals, agent_starts, pristine_static_grid)
+        run_counters['collisions_total'] += len(collisions)
+
+        if not collisions:
+            if verbose:
+                print(f"✓ No collisions found! Resolution complete.")
+            break
+
+        if verbose:
+            print(f"Detected {len(collisions)} collisions")
+
+        # Sort collisions by time
+        collisions_sorted = sorted(collisions, key=lambda c: (c['time'], min(c['agents'])))
+
+        any_fix_this_pass = False
+
+        for coll in collisions_sorted:
+            coll_key = (coll['time'], coll['type'], cell_key(coll['cell']), frozenset(coll['agents']))
+            collision_attempts[coll_key] += 1
+            attempt_num = collision_attempts[coll_key]
+
+            if verbose:
+                print(f"\n  Collision: T={coll['time']}, Type={coll['type']}, "
+                      f"Cell={coll['cell']}, Agents={list(coll['agents'])}, Attempt={attempt_num}")
+
+            # Re-check if collision still exists
+            current_colls = analyze_collisions(current_trajectories, agent_goals, pristine_static_grid)
+            still_exists = any(
+                (c['time'], c['type'], cell_key(c['cell']), frozenset(c['agents'])) == coll_key
+                for c in current_colls
+            )
+
+            if not still_exists:
+                if verbose:
+                    print(f"  ✓ Collision already resolved")
+                continue
+
+            agents_to_try = list(coll['agents'])
+            if replan_strategy == "random":
+                agents_to_try = [random.choice(agents_to_try)]
+
+            fixed = False
+
+            # STRATEGY 1: STATIC (refinement #1: try up to 3 times per collision)
+            if collision_static_attempts[coll_key] < MAX_STATIC_ATTEMPTS:
+                collision_static_attempts[coll_key] += 1
+                attempt_num_static = collision_static_attempts[coll_key]
+
+                for agent_id in agents_to_try:
+                    idx = agent_id - 1
+
+                    if verbose:
+                        print(f"  → Trying STATIC for Agent {agent_id} (attempt {attempt_num_static}/{MAX_STATIC_ATTEMPTS})")
+
+                    run_counters['replan_attempts_static'] += 1
+
+                    # Determine cells to block
+                    if coll['type'] == 'vertex':
+                        cells_to_block = [tuple(map(int, coll['cell']))]
+                    elif coll['type'] == 'edge':
+                        cells_to_block = [tuple(map(int, c)) for c in coll['cell']]
+                    else:
+                        obs_cell = tuple(map(int, coll['cell']))
+                        cells_to_block = [obs_cell]
+
+                    new_cells_to_block = [c for c in cells_to_block if c not in static_block_hist[idx]]
+
+                    if not new_cells_to_block:
+                        rewind = min(MAX_REWIND_STATIC, INIT_REWIND + attempt_num + 3)
+                    else:
+                        rewind = min(MAX_REWIND_STATIC, INIT_REWIND + attempt_num - 1)
+
+                    env_copy = copy.deepcopy(agent_envs[idx])
+                    replan_time = max(0, coll['time'] - rewind)
+
+                    if current_trajectories[idx] and replan_time < len(current_trajectories[idx]):
+                        replan_pos = tuple(map(int, current_trajectories[idx][replan_time]))
+                    else:
+                        replan_pos = agent_starts[idx]
+
+                    planning_grid = pristine_static_grid.copy()
+
+                    for cell in new_cells_to_block:
+                        if 0 <= cell[0] < planning_grid.shape[0] and 0 <= cell[1] < planning_grid.shape[1]:
+                            planning_grid[cell[0], cell[1]] = -1
+
+                    env_copy.env.grid = planning_grid
+                    env_copy.env.agent_pos = replan_pos
+                    env_copy.env.goal_pos = agent_goals[idx]
+
+                    new_plan_segment = plan_with_search(
+                        env_copy, model, device, search_type, algo,
+                        timeout, heuristic_weight, max_expansions
+                    )
+
+                    if new_plan_segment:
+                        prefix_actions = current_plans[idx][:replan_time] if current_plans[idx] else []
+                        new_full_plan = prefix_actions + new_plan_segment
+
+                        sim_env = copy.deepcopy(agent_envs[idx])
+                        sim_env.env.agent_pos = agent_starts[idx]
+                        new_traj = simulate_plan(sim_env, new_full_plan)
+
+                        if new_traj:
+                            temp_trajs = list(current_trajectories)
+                            temp_trajs[idx] = new_traj
+                            new_colls = analyze_collisions(temp_trajs, agent_goals, pristine_static_grid)
+
+                            coll_resolved = not any(
+                                (c['time'], c['type'], cell_key(c['cell']), frozenset(c['agents'])) == coll_key
+                                for c in new_colls
+                            )
+
+                            if coll_resolved:
+                                current_plans[idx] = new_full_plan
+                                current_trajectories[idx] = new_traj
+
+                                # BUGFIX: Trim trailing WAITs if agent reached goal
+                                current_plans[idx] = trim_trailing_waits(current_plans[idx], current_trajectories[idx], agent_goals[idx])
+
+                                if info_tracker:
+                                    info_tracker.record_static_alert(new_cells_to_block)
+                                    info_tracker.record_revised_submission(new_traj)
+
+                                static_block_hist[idx].update(new_cells_to_block)
+
+                                run_counters['replan_success_static'] += 1
+                                any_fix_this_pass = True
+                                fixed = True
+
+                                if verbose:
+                                    print(f"  ✓ STATIC successful for Agent {agent_id}")
+
+                                break
+            elif verbose and collision_static_attempts[coll_key] >= MAX_STATIC_ATTEMPTS:
+                print(f"  ✗ STATIC exhausted ({MAX_STATIC_ATTEMPTS} attempts), skipping")
+
+            if fixed:
+                break  # Exit loop to re-detect collisions
+
+            # STRATEGY 2: DYNAMIC (refinement #1: try up to 3 times per collision)
+            if not fixed and collision_dynamic_attempts[coll_key] < MAX_DYNAMIC_ATTEMPTS:
+                collision_dynamic_attempts[coll_key] += 1
+                attempt_num_dynamic = collision_dynamic_attempts[coll_key]
+
+                for agent_id in agents_to_try:
+                    idx = agent_id - 1
+                    other_agents = [aid for aid in coll['agents'] if aid != agent_id]
+
+                    if not other_agents:
+                        continue
+
+                    blocker_id = random.choice(other_agents)
+                    blocker_idx = blocker_id - 1
+
+                    if verbose:
+                        print(f"  → Trying DYNAMIC for Agent {agent_id} (blocker: {blocker_id}) (attempt {attempt_num_dynamic}/{MAX_DYNAMIC_ATTEMPTS})")
+
+                    run_counters['replan_attempts_dynamic'] += 1
+
+                    env_copy = copy.deepcopy(agent_envs[idx])
+                    rewind = min(MAX_REWIND_DYN, INIT_REWIND + attempt_num - 1)
+                    replan_time = max(0, coll['time'] - rewind)
+
+                    if current_trajectories[idx] and replan_time < len(current_trajectories[idx]):
+                        replan_pos = tuple(map(int, current_trajectories[idx][replan_time]))
+                    else:
+                        replan_pos = agent_starts[idx]
+
+                    blocker_traj = current_trajectories[blocker_idx]
+                    if not blocker_traj:
+                        continue
+
+                    obs_start_t = replan_time
+                    obs_end_t = min(len(blocker_traj) - 1, replan_time + 2 * rewind)
+
+                    if obs_start_t >= len(blocker_traj) or obs_start_t > obs_end_t:
+                        continue
+
+                    obs_path = [tuple(map(int, p)) for p in blocker_traj[obs_start_t:obs_end_t + 1]]
+
+                    if not obs_path:
+                        continue
+
+                    planning_grid = pristine_static_grid.copy()
+                    env_copy.env.grid = planning_grid
+                    env_copy.env.agent_pos = replan_pos
+                    env_copy.env.goal_pos = agent_goals[idx]
+                    env_copy.env.dynamic_info = [{
+                        'pos': obs_path[0],
+                        'goal': obs_path[-1],
+                        'path': deque(obs_path),
+                        'stop_after_goal': True
+                    }]
+                    env_copy.env.num_dynamic_obstacles = 1
+
+                    new_plan_segment = plan_with_search(
+                        env_copy, model, device, search_type, algo,
+                        timeout, heuristic_weight, max_expansions
+                    )
+
+                    if new_plan_segment:
+                        prefix_actions = current_plans[idx][:replan_time] if current_plans[idx] else []
+                        new_full_plan = prefix_actions + new_plan_segment
+
+                        sim_env = copy.deepcopy(agent_envs[idx])
+                        sim_env.env.agent_pos = agent_starts[idx]
+                        new_traj = simulate_plan(sim_env, new_full_plan)
+
+                        if new_traj:
+                            temp_trajs = list(current_trajectories)
+                            temp_trajs[idx] = new_traj
+                            new_colls = analyze_collisions(temp_trajs, agent_goals, pristine_static_grid)
+
+                            coll_resolved = not any(
+                                (c['time'], c['type'], cell_key(c['cell']), frozenset(c['agents'])) == coll_key
+                                for c in new_colls
+                            )
+
+                            if coll_resolved:
+                                current_plans[idx] = new_full_plan
+                                current_trajectories[idx] = new_traj
+
+                                # BUGFIX: Trim trailing WAITs if agent reached goal
+                                current_plans[idx] = trim_trailing_waits(current_plans[idx], current_trajectories[idx], agent_goals[idx])
+
+                                if info_tracker:
+                                    info_tracker.record_dynamic_alert(obs_path)
+                                    info_tracker.record_revised_submission(new_traj)
+
+                                run_counters['replan_success_dynamic'] += 1
+                                any_fix_this_pass = True
+                                fixed = True
+
+                                if verbose:
+                                    print(f"  ✓ DYNAMIC successful for Agent {agent_id}")
+
+                                break
+            elif not fixed and verbose and collision_dynamic_attempts[coll_key] >= MAX_DYNAMIC_ATTEMPTS:
+                print(f"  ✗ DYNAMIC exhausted ({MAX_DYNAMIC_ATTEMPTS} attempts), skipping")
+
+            if fixed:
+                break  # Exit loop to re-detect collisions
+
+            # STRATEGY 3: Joint A* (refinement #1: up to 5 attempts total per collision)
+            if not fixed:
+                # Check if strategy limits have been reached
+                static_exhausted = collision_static_attempts[coll_key] >= MAX_STATIC_ATTEMPTS
+                dynamic_exhausted = collision_dynamic_attempts[coll_key] >= MAX_DYNAMIC_ATTEMPTS
+                joint_exhausted = collision_joint_attempts[coll_key] >= MAX_JOINT_ATTEMPTS
+
+                # Try Joint A* if: (STATIC tried OR exhausted) AND (DYNAMIC tried OR exhausted) AND Joint not exhausted
+                can_try_joint = (
+                    (collision_static_attempts[coll_key] > 0 or static_exhausted) and
+                    (collision_dynamic_attempts[coll_key] > 0 or dynamic_exhausted) and
+                    not joint_exhausted
+                )
+            else:
+                can_try_joint = False
+
+            if can_try_joint:
+                joint_success = False  # Initialize (will be set if we attempt)
+
+                # OPTIMIZATION: Skip Joint A* if it failed in this pass already
+                if coll_key in collision_joint_astar_failed:
+                    if verbose:
+                        print(f"  ✗ Joint A* already failed for this collision this pass, skipping (will retry in next pass)")
+                    # Continue to next collision, will retry in next pass
+                else:
+                    collision_joint_attempts[coll_key] += 1
+                    attempt_num_joint = collision_joint_attempts[coll_key]
+
+                    if verbose:
+                        print(f"  → Trying Joint A* (attempt {attempt_num_joint}/{MAX_JOINT_ATTEMPTS})")
+
+                    run_counters['replan_attempts_joint'] += 1
+
+                    joint_success, joint_plan_segments, _, t_start, t_goal_sub = try_joint_astar_planning(
+                        coll, current_trajectories, agent_goals, agent_starts,
+                        pristine_static_grid, heuristic_dist_map,
+                        verbose=verbose,
+                        base_rewind=joint_rewind,
+                        base_horizon=joint_horizon,
+                        max_expansion_steps=joint_expansion_steps,
+                        use_time_based_blocking=use_time_based_blocking
+                    )
+
+                    # OPTIMIZATION: Track if Joint A* failed so we don't retry in same pass
+                    if not joint_success:
+                        collision_joint_astar_failed.add(coll_key)
+                        if verbose:
+                            print(f"  ✗ Joint A* failed, will skip this collision for rest of pass")
+
+                if joint_success:
+                    if t_start is None or t_goal_sub is None:
+                        joint_success = False
+                        continue
+
+                    staged_plans = {}
+                    staged_trajs = {}
+                    temp_trajs = list(current_trajectories)
+
+                    for aid, plan_segment in joint_plan_segments.items():
+                        idx = aid - 1
+                        plan_len = len(current_plans[idx]) if current_plans[idx] else 0
+                        extended_plan = list(current_plans[idx]) if current_plans[idx] else []
+
+                        # BUGFIX: Don't clamp t_start/t_goal_sub to plan_len
+                        # Use actual values from joint A* search
+                        # If plan is too short, extend it with WAIT actions to reach t_start
+                        if t_start > plan_len:
+                            # Extend plan with WAIT actions (action 4 = WAIT)
+                            num_waits_needed = t_start - plan_len
+                            extended_plan.extend([4] * num_waits_needed)
+                            if verbose:
+                                print(f"    Extended agent {aid} plan: added {num_waits_needed} WAIT actions ({plan_len} -> {t_start})")
+                            plan_len = len(extended_plan)
+
+                        # Validate that plan_segment has expected length
+                        expected_segment_len = t_goal_sub - t_start
+                        actual_segment_len = len(plan_segment)
+                        if actual_segment_len != expected_segment_len:
+                            if verbose:
+                                print(f"    WARNING: Agent {aid} segment length mismatch: expected {expected_segment_len}, got {actual_segment_len}")
+                            # This is a sign something went wrong in joint A* planning, but we can still try
+
+                        # Use extended_plan which may have WAIT actions added
+                        prefix_actions = extended_plan[:t_start] if extended_plan else []
+                        # If t_goal_sub > plan_len, the suffix is empty (plan extends naturally)
+                        original_suffix = extended_plan[t_goal_sub:] if extended_plan else []
+
+                        # BUGFIX: Validate that prefix leads to the expected joint A* start position
+                        # If t_start > 0, we need to check that the prefix reaches the joint A* starting point
+                        if t_start > 0 and prefix_actions:
+                            # Simulate just the prefix to see where it ends
+                            prefix_env = copy.deepcopy(agent_envs[idx])
+                            prefix_env.env.agent_pos = agent_starts[idx]
+                            prefix_traj = simulate_plan(prefix_env, prefix_actions)
+
+                            if prefix_traj is None:
+                                if verbose:
+                                    print(f"    ERROR: Prefix for agent {aid} is invalid (moves out of bounds/obstacles)")
+                                joint_success = False
+                                break
+
+                            prefix_end_pos = tuple(map(int, prefix_traj[-1]))
+                            expected_segment_start = tuple(map(int, current_trajectories[idx][t_start])) if t_start < len(current_trajectories[idx]) else None
+
+                            if expected_segment_start and prefix_end_pos != expected_segment_start:
+                                if verbose:
+                                    print(f"    ERROR: Agent {aid} prefix ends at {prefix_end_pos} but joint A* expects start at {expected_segment_start}")
+                                joint_success = False
+                                break
+
+                        new_full_plan = prefix_actions + plan_segment + original_suffix
+
+                        if verbose:
+                            print(
+                                f"    Splicing agent {aid}: plan_len={plan_len}, "
+                                f"t_start={t_start}, t_goal_sub={t_goal_sub}, "
+                                f"segment_len={len(plan_segment)}"
+                            )
+
+                        sim_env = copy.deepcopy(agent_envs[idx])
+                        sim_env.env.agent_pos = agent_starts[idx]
+                        new_traj = simulate_plan(sim_env, new_full_plan)
+
+                        if not new_traj:
+                            if verbose:
+                                print(f"    ERROR: Simulating spliced plan for agent {aid} failed (invalid moves)")
+                            joint_success = False
+                            break
+
+                        staged_plans[aid] = new_full_plan
+                        staged_trajs[aid] = new_traj
+                        temp_trajs[idx] = new_traj
+
+                    if joint_success:
+                        new_colls = analyze_collisions(temp_trajs, agent_goals, pristine_static_grid)
+
+                        coll_resolved = not any(
+                            (c['time'], c['type'], cell_key(c['cell']), frozenset(c['agents'])) == coll_key
+                            for c in new_colls
+                        )
+
+                        # BUGFIX: Only accept if the SPECIFIC collision was resolved
+                        # AND we didn't significantly increase collisions
+                        # (Use AND, not OR - we must actually fix the collision)
+                        if coll_resolved and len(new_colls) <= len(collisions):
+                            if verbose:
+                                print(f"    ✓ Joint plan accepted!")
+                                for aid, new_plan in staged_plans.items():
+                                    print(f"      Final plan for Agent {aid}: {new_plan}")
+
+                            for aid, new_plan in staged_plans.items():
+                                current_plans[aid - 1] = new_plan
+                            for aid, new_traj in staged_trajs.items():
+                                current_trajectories[aid - 1] = new_traj
+                                if info_tracker:
+                                    info_tracker.record_revised_submission(new_traj)
+
+                            # NOTE: DO NOT trim WAITs here! Joint A* has carefully constructed
+                            # these plans to resolve collisions. The global cleanup phase will
+                            # handle all plan trimming uniformly across all agents.
+                            if info_tracker:
+                                info_tracker.record_pibt_alert(sum(len(t) for t in staged_trajs.values()))
+
+                            run_counters['replan_success_joint'] += 1
+                            any_fix_this_pass = True
+                            fixed = True
+
+                            if verbose:
+                                print(f"  ✓ Joint A* successful")
+                                print(f"    Reduced collisions from {len(collisions)} to {len(new_colls)}")
+
+                            break
+                        else:
+                            if verbose:
+                                if not coll_resolved:
+                                    print(f"    ✗ Joint plan REJECTED: collision not resolved")
+                                if len(new_colls) > len(collisions):
+                                    print(f"    ✗ Joint plan REJECTED: created new collisions ({len(collisions)} -> {len(new_colls)})")
+
+            # REFINEMENT #1 & #3: Log exhausted message and track unresolved collisions
+            if not fixed and verbose:
+                static_exhausted = collision_static_attempts[coll_key] >= MAX_STATIC_ATTEMPTS
+                dynamic_exhausted = collision_dynamic_attempts[coll_key] >= MAX_DYNAMIC_ATTEMPTS
+                joint_exhausted = collision_joint_attempts[coll_key] >= MAX_JOINT_ATTEMPTS
+
+                if static_exhausted and dynamic_exhausted and joint_exhausted:
+                    print(f"  ✗ All strategies exhausted (STATIC:{MAX_STATIC_ATTEMPTS}, DYNAMIC:{MAX_DYNAMIC_ATTEMPTS}, Joint A*:{MAX_JOINT_ATTEMPTS}), marking for DEFER")
+                    unresolved_collisions.add(coll_key)  # REFINEMENT #3: Track unresolved
+                else:
+                    print(f"  ✗ Could not resolve collision")
+
+        if not any_fix_this_pass:
+            if verbose:
+                print(f"\n✗ No progress in this pass")
+                print(f"→ Attempting DEFER strategy: defer one agent per collision...")
+
+            # STRATEGY 5: DEFER - Make one agent wait at start until others finish
+            # REFINEMENT #3: Multi-collision DEFER with agent selection heuristic
+            remaining_colls = analyze_collisions(current_trajectories, agent_goals, pristine_static_grid)
+            if remaining_colls:
+                deferred_agents = set()  # Track which agents are deferred
+                any_deferred = False
+
+                # REFINEMENT #3: Process up to 5 collisions per pass
+                for coll in remaining_colls[:5]:
+                    agents_in_coll = list(coll['agents'])
+
+                    # REFINEMENT #3: Agent selection heuristic - max distance-to-goal with smallest ID tie-break
+                    agent_to_defer = None
+                    max_distance = -1
+
+                    for aid in agents_in_coll:
+                        idx = aid - 1
+                        # Get current position from trajectory or start position
+                        traj = current_trajectories[idx]
+                        if traj and len(traj) > 0:
+                            current_pos = tuple(map(int, traj[0]))
+                        else:
+                            current_pos = agent_starts[idx]
+
+                        # Get distance-to-goal using heuristic_dist_map
+                        dist_to_goal = heuristic_dist_map[current_pos][idx] if heuristic_dist_map and current_pos in heuristic_dist_map else 0
+
+                        # Select agent with max distance (or smallest ID if tied)
+                        if dist_to_goal > max_distance or (dist_to_goal == max_distance and (agent_to_defer is None or aid < agent_to_defer)):
+                            max_distance = dist_to_goal
+                            agent_to_defer = aid
+
+                    # Fallback to first agent if heuristic not available
+                    if agent_to_defer is None:
+                        agent_to_defer = min(agents_in_coll)
+
+                    if verbose:
+                        print(f"  Deferring Agent {agent_to_defer} (max dist-to-goal: {max_distance}, collision at T={coll['time']}, Cell={coll['cell']})")
+
+                    deferred_agents.add(agent_to_defer)
+                    idx = agent_to_defer - 1
+
+                    # Create a plan that waits at start until a safe time
+                    # Estimate safe time = max collision time in non-deferred agents + buffer
+                    non_deferred_trajs = [
+                        current_trajectories[i] for i in range(len(current_trajectories))
+                        if (i + 1) not in deferred_agents
+                    ]
+
+                    if non_deferred_trajs:
+                        max_time_needed = max(len(t) for t in non_deferred_trajs if t) if any(non_deferred_trajs) else 0
+                    else:
+                        max_time_needed = 0
+
+                    safe_start_time = max_time_needed + 2  # Start after others finish + buffer
+
+                    # Create defer plan: WAIT until safe_start_time (only waits, no original plan)
+                    # BUGFIX: Don't append original plan - it has collisions. We'll replan later.
+                    defer_plan = [4] * safe_start_time  # 4 = WAIT action (only WAITs)
+
+                    # Simulate the defer plan
+                    defer_env = copy.deepcopy(agent_envs[idx])
+                    defer_env.env.agent_pos = agent_starts[idx]
+                    defer_traj = simulate_plan(defer_env, defer_plan)
+
+                    if defer_traj:
+                        current_plans[idx] = defer_plan
+                        current_trajectories[idx] = defer_traj
+                        any_deferred = True
+
+                        if verbose:
+                            print(f"  ✓ Agent {agent_to_defer} deferred: will wait {safe_start_time} steps at {agent_starts[idx]}")
+
+                # If we deferred agents, re-check collisions among non-deferred
+                if any_deferred:
+                    # Check if non-deferred agents have collisions
+                    non_deferred_trajs = [
+                        current_trajectories[i] for i in range(len(current_trajectories))
+                        if (i + 1) not in deferred_agents
+                    ]
+
+                    non_deferred_colls = analyze_collisions(non_deferred_trajs, agent_goals, pristine_static_grid)
+
+                    if not non_deferred_colls:
+                        if verbose:
+                            print(f"  ✓ No collisions among non-deferred agents!")
+                            print(f"→ Now replanning deferred agents...")
+
+                        # Now replan each deferred agent: WAIT + A* path
+                        for def_agent_id in deferred_agents:
+                            def_idx = def_agent_id - 1
+                            def_start = agent_starts[def_idx]
+                            def_goal = agent_goals[def_idx]
+
+                            # Get how long this agent waited at start
+                            wait_time = len(current_plans[def_idx])  # All were WAIT actions
+
+                            if verbose:
+                                print(f"  → Replanning deferred Agent {def_agent_id}: WAIT {wait_time} steps, then plan to goal...")
+
+                            # Step 1: Plan path from start to goal using simple A*
+                            planning_env = copy.deepcopy(agent_envs[def_idx])
+                            planning_env.env.agent_pos = def_start
+                            astar_plan = astar(planning_env, timeout=10.0, heuristic_weight=2.0)
+
+                            if not astar_plan:
+                                if verbose:
+                                    print(f"  ✗ Could not plan path for deferred Agent {def_agent_id}")
+                                continue
+
+                            # Step 2: Create full plan = WAIT + A*
+                            full_plan = [4] * wait_time + astar_plan  # WAIT then move
+
+                            # Step 3: Simulate full plan
+                            sim_env = copy.deepcopy(agent_envs[def_idx])
+                            sim_env.env.agent_pos = def_start
+                            full_traj = simulate_plan(sim_env, full_plan)
+
+                            if not full_traj:
+                                if verbose:
+                                    print(f"  ✗ Simulating plan for deferred Agent {def_agent_id} failed")
+                                continue
+
+                            # Step 4: Check if this creates any collisions
+                            test_trajs = list(current_trajectories)
+                            test_trajs[def_idx] = full_traj
+
+                            deferred_colls = analyze_collisions(test_trajs, agent_goals, pristine_static_grid)
+
+                            if not deferred_colls:
+                                # No collisions! Accept this plan
+                                current_plans[def_idx] = full_plan
+                                current_trajectories[def_idx] = full_traj
+
+                                # BUGFIX: Trim trailing WAITs if agent reached goal
+                                current_plans[def_idx] = trim_trailing_waits(current_plans[def_idx], current_trajectories[def_idx], agent_goals[def_idx])
+
+                                if verbose:
+                                    print(f"  ✓ Replanned deferred Agent {def_agent_id}: WAIT {wait_time} + {len(astar_plan)} moves (no collisions)")
+                            else:
+                                # Collisions exist, use Joint A* to resolve with one colliding agent
+                                if verbose:
+                                    print(f"  ⚠ {len(deferred_colls)} collisions found, using Joint A* to resolve...")
+
+                                for col in deferred_colls[:1]:  # Handle first collision
+                                    # Find the other agent in this collision
+                                    other_agents = [a for a in col['agents'] if a != def_agent_id]
+                                    if not other_agents:
+                                        continue
+
+                                    # Use Joint A* between deferred and blocking agent
+                                    collision_to_resolve = {
+                                        'time': col['time'],
+                                        'type': col['type'],
+                                        'cell': col['cell'],
+                                        'agents': {def_agent_id, other_agents[0]}
+                                    }
+
+                                    joint_success, joint_plans_res, joint_trajs_res, t_j_start, t_j_goal = try_joint_astar_planning(
+                                        collision_to_resolve,
+                                        test_trajs,  # Use test_trajs which has the deferred agent's attempt
+                                        agent_goals,
+                                        agent_starts,
+                                        pristine_static_grid,
+                                        heuristic_dist_map,
+                                        max_agents=2,
+                                        time_budget=5.0,
+                                        max_expansions=50000,
+                                        verbose=False,
+                                        base_rewind=joint_rewind,
+                                        base_horizon=joint_horizon,
+                                        max_expansion_steps=joint_expansion_steps,
+                                        use_time_based_blocking=use_time_based_blocking
+                                    )
+
+                                    if joint_success and def_agent_id in joint_trajs_res and t_j_start is not None and t_j_goal is not None:
+                                        # BUGFIX: Properly splice Joint A* plans instead of truncating them
+
+                                        # For deferred agent: splice into current plan
+                                        def_prefix = current_plans[def_idx][:t_j_start] if current_plans[def_idx] else []
+                                        def_suffix = current_plans[def_idx][t_j_goal:] if current_plans[def_idx] else []
+                                        deferred_spliced_plan = def_prefix + joint_plans_res[def_agent_id] + def_suffix
+
+                                        def_sim_env = copy.deepcopy(agent_envs[def_idx])
+                                        def_sim_env.env.agent_pos = agent_starts[def_idx]
+                                        deferred_spliced_traj = simulate_plan(def_sim_env, deferred_spliced_plan)
+
+                                        if not deferred_spliced_traj:
+                                            if verbose:
+                                                print(f"  ✗ Joint A* splice failed for deferred Agent {def_agent_id}")
+                                            break
+
+                                        # For other agent: splice into current plan (don't truncate!)
+                                        other_idx = other_agents[0] - 1
+                                        other_prefix = current_plans[other_idx][:t_j_start] if current_plans[other_idx] else []
+                                        other_suffix = current_plans[other_idx][t_j_goal:] if current_plans[other_idx] else []
+                                        other_spliced_plan = other_prefix + joint_plans_res[other_agents[0]] + other_suffix
+
+                                        other_sim_env = copy.deepcopy(agent_envs[other_idx])
+                                        other_sim_env.env.agent_pos = agent_starts[other_idx]
+                                        other_spliced_traj = simulate_plan(other_sim_env, other_spliced_plan)
+
+                                        if not other_spliced_traj:
+                                            if verbose:
+                                                print(f"  ✗ Joint A* splice failed for Agent {other_agents[0]}")
+                                            break
+
+                                        # Apply spliced plans
+                                        current_plans[def_idx] = deferred_spliced_plan
+                                        current_trajectories[def_idx] = deferred_spliced_traj
+                                        current_plans[other_idx] = other_spliced_plan
+                                        current_trajectories[other_idx] = other_spliced_traj
+
+                                        # BUGFIX: Trim trailing WAITs for both agents
+                                        current_plans[def_idx] = trim_trailing_waits(current_plans[def_idx], current_trajectories[def_idx], agent_goals[def_idx])
+                                        current_plans[other_idx] = trim_trailing_waits(current_plans[other_idx], current_trajectories[other_idx], agent_goals[other_idx])
+
+                                        if verbose:
+                                            print(f"  ✓ Joint A* resolved collision between Agent {def_agent_id} and Agent {other_agents[0]}")
+                                        break
+                                    else:
+                                        if verbose:
+                                            print(f"  ✗ Joint A* failed, keeping simple plan (may have collisions)")
+                                        # Keep the simple WAIT + A* plan anyway
+                                        current_plans[def_idx] = full_plan
+                                        current_trajectories[def_idx] = full_traj
+
+                                        # BUGFIX: Trim trailing WAITs if agent reached goal
+                                        current_plans[def_idx] = trim_trailing_waits(current_plans[def_idx], current_trajectories[def_idx], agent_goals[def_idx])
+                                        break
+
+                        any_fix_this_pass = True  # Continue looping
+                    else:
+                        if verbose:
+                            print(f"  ✗ Still {len(non_deferred_colls)} collisions among non-deferred, stopping")
+                        break
+                else:
+                    if verbose:
+                        print(f"  ✗ Could not defer agents, stopping")
+                    break
+            else:
+                if verbose:
+                    print(f"  No remaining collisions, done!")
+                break
+
+    # GLOBAL CLEANUP: Trim trailing WAITs across all agents synchronously
+    # Find the global makespan: the last timestep where ANY agent takes a non-WAIT action
+    if verbose:
+        print(f"\n=== Global Cleanup ===")
+        print(f"Trimming trailing WAITs across all agents...")
+
+    # Find max plan length
+    max_plan_len = max((len(p) for p in current_plans if p), default=0)
+
+    if max_plan_len > 0:
+        # Work backwards from max length to find last non-WAIT action
+        global_makespan = 0
+        for timestep in range(max_plan_len - 1, -1, -1):
+            # Check if any agent has a non-WAIT action at this timestep
+            has_non_wait = False
+            for idx in range(num_agents):
+                plan = current_plans[idx]
+                if timestep < len(plan) and plan[timestep] != 4:  # 4 = WAIT
+                    has_non_wait = True
+                    break
+
+            if has_non_wait:
+                global_makespan = timestep + 1  # Length up to this point
+                break
+
+        if verbose:
+            print(f"  Global makespan: {global_makespan} (max plan was {max_plan_len})")
+
+        # Trim all agents to global_makespan
+        agents_trimmed = 0
+        for idx in range(num_agents):
+            original_len = len(current_plans[idx])
+            if original_len > global_makespan:
+                # Trim plan
+                current_plans[idx] = current_plans[idx][:global_makespan]
+                agents_trimmed += 1
+                if verbose:
+                    print(f"  Agent {idx + 1}: trimmed {original_len - global_makespan} steps (was {original_len}, now {global_makespan})")
+
+        # NEW: Pad all plans to global_makespan with WAIT actions
+        # This ensures all agents have synchronized trajectory lengths
+        agents_padded = 0
+        for idx in range(num_agents):
+            current_len = len(current_plans[idx])
+            if current_len < global_makespan:
+                # Pad with WAIT actions (4)
+                num_waits = global_makespan - current_len
+                current_plans[idx].extend([4] * num_waits)
+                agents_padded += 1
+                if verbose:
+                    print(f"  Agent {idx + 1}: padded with {num_waits} WAIT actions (was {current_len}, now {global_makespan})")
+
+        if verbose:
+            print(f"  All plans now synchronized to length {global_makespan}")
+
+        # CRITICAL: Re-simulate ALL trajectories after trimming and padding plans
+        # (Some trajectories may be cached from old collision resolution and don't match trimmed plans)
+        if verbose:
+            print(f"  Re-simulating all trajectories to match trimmed plans...")
+
+        failed_resims = []
+        for idx in range(num_agents):
+            trim_env = copy.deepcopy(agent_envs[idx])
+            trim_env.env.agent_pos = agent_starts[idx]
+            trimmed_traj = simulate_plan(trim_env, current_plans[idx])
+            if trimmed_traj:
+                current_trajectories[idx] = trimmed_traj
+            else:
+                # Re-simulation failed - trajectory is out of sync with plan!
+                failed_resims.append(idx + 1)
+                if verbose:
+                    print(f"  ⚠ WARNING: Re-simulation failed for Agent {idx + 1}, plan length={len(current_plans[idx])}")
+                    print(f"    Old trajectory length: {len(current_trajectories[idx])}")
+                    print(f"    Plan: {current_plans[idx][:20]}...")  # Print first 20 actions
+
+                # Fallback: Create minimal trajectory that matches plan length
+                # This ensures plans and trajectories are in sync for JSON logging
+                fallback_traj = [tuple(agent_starts[idx])]  # Start position
+                current_pos = list(agent_starts[idx])
+
+                movements = {
+                    0: (-1, 0),  # Up
+                    1: (1, 0),   # Down
+                    2: (0, -1),  # Left
+                    3: (0, 1),   # Right
+                    4: (0, 0)    # Wait
+                }
+
+                for action in current_plans[idx]:
+                    if isinstance(action, (list, tuple)):
+                        action = action[0] if action else 4
+                    dr, dc = movements.get(int(action), (0, 0))
+                    current_pos[0] += dr
+                    current_pos[1] += dc
+                    fallback_traj.append(tuple(current_pos))
+
+                current_trajectories[idx] = fallback_traj
+                if verbose:
+                    print(f"    Using fallback trajectory (length={len(fallback_traj)})")
+
+        # Verification: Check all trajectories are synchronized
+        traj_lengths_after = [len(t) if t else 0 for t in current_trajectories]
+        plan_lengths_after = [len(p) if p else 0 for p in current_plans]
+
+        if verbose:
+            print(f"  [DEBUG] After re-simulation:")
+            print(f"    Plan lengths: {plan_lengths_after}")
+            print(f"    Traj lengths: {traj_lengths_after}")
+
+            # Verify synchronization (all should be global_makespan + 1 position for traj)
+            all_synced = all(len(t) == global_makespan + 1 for t in current_trajectories if t)
+            if all_synced:
+                print(f"    ✓ All trajectories synchronized to length {global_makespan + 1}")
+            else:
+                print(f"    ⚠ WARNING: Trajectories not fully synchronized!")
+                for idx, traj in enumerate(current_trajectories):
+                    if traj and len(traj) != global_makespan + 1:
+                        print(f"      Agent {idx + 1}: trajectory length {len(traj)} (expected {global_makespan + 1})")
+
+        if verbose:
+            if failed_resims:
+                print(f"Global cleanup complete: trimmed {agents_trimmed} agents, padded {agents_padded} agents, re-simulated all trajectories")
+                print(f"  ⚠ {len(failed_resims)} agents had re-simulation failures: {failed_resims}")
+            else:
+                print(f"Global cleanup complete: trimmed {agents_trimmed} agents, padded {agents_padded} agents, re-simulated all trajectories")
+    else:
+        if verbose:
+            print(f"  No plans to trim")
+
+    # BUGFIX: Final collision check AFTER global cleanup to catch goal-cell collisions
+    # (must happen after trajectories are synchronized to same length)
+    if verbose:
+        print(f"\n=== Final Collision Check (after cleanup) ===")
+
+    final_collisions = analyze_collisions(current_trajectories, agent_goals, pristine_static_grid)
+    debug_colls = debug_scan_collisions(current_trajectories)
+
+    # DEBUG: Check trajectory lengths and potential late collisions
+    if verbose:
+        traj_lengths = [len(t) if t else 0 for t in current_trajectories]
+        max_traj_len = max(traj_lengths) if traj_lengths else 0
+        print(f"[DEBUG] Trajectory lengths after cleanup: {traj_lengths}")
+        print(f"[DEBUG] Max trajectory length: {max_traj_len}")
+        if max_traj_len > 0:
+            collision_count_by_time = {}
+            for t in range(max_traj_len):
+                positions_at_t = {}
+                for idx, traj in enumerate(current_trajectories):
+                    if traj:
+                        # Get position: actual if t < len, otherwise last position
+                        pos = tuple(map(int, traj[t] if t < len(traj) else traj[-1]))
+                        if pos not in positions_at_t:
+                            positions_at_t[pos] = []
+                        positions_at_t[pos].append(idx + 1)
+                # Check for collisions at this timestep
+                for pos, agents in positions_at_t.items():
+                    if len(agents) > 1:
+                        print(f"[DEBUG] Collision detected at t={t}: agents {agents} at {pos}")
+                        collision_count_by_time[t] = collision_count_by_time.get(t, 0) + 1
+
+    unique_colls = set()
+    for c in final_collisions:
+        unique_colls.add((c['time'], c['type'], cell_key(c['cell']), frozenset(c['agents'])))
+
+    timed_out = (time.perf_counter() - overall_start_time) > time_limit
+
+    if verbose:
+        print(f"\n=== Resolution Complete ===")
+        print(f"Time: {time.perf_counter() - overall_start_time:.2f}s")
+        print(f"Passes: {pass_num}")
+        print(f"Final collisions: {len(final_collisions)}")
+        print(f"Timed out: {timed_out}")
+        print(f"[DEBUG] analyze_collisions says: {len(final_collisions)} collisions")
+        print(f"[DEBUG] debug_scan_collisions says: {len(debug_colls)} collisions")
+        if final_collisions:
+            print("[DEBUG] Sample final collisions:", [
+                {
+                    'time': c['time'],
+                    'type': c['type'],
+                    'cell': c['cell'],
+                    'agents': sorted(list(c['agents'])) if isinstance(c['agents'], (set, list)) else c['agents'],
+                }
+                for c in final_collisions[:5]
+            ])
+        info_tracker.report()
+
+    # POST-CLEANUP COLLISION RESOLUTION
+    # If collisions were revealed during cleanup (due to padding), try to fix them
+    if final_collisions and len(final_collisions) > 0:
+        if verbose:
+            print(f"\n=== Post-Cleanup Collision Resolution ===")
+            print(f"Found {len(final_collisions)} collisions after global cleanup")
+            print(f"Attempting to resolve these remaining collisions...")
+
+        max_cleanup_passes = 10
+        cleanup_pass = 0
+        cleanup_colls_fixed = 0
+
+        while cleanup_pass < max_cleanup_passes and len(final_collisions) > 0:
+            cleanup_pass += 1
+            elapsed = time.perf_counter() - overall_start_time
+            if elapsed > time_limit:
+                if verbose:
+                    print(f"⏱ Time limit exceeded during post-cleanup resolution")
+                break
+
+            if verbose:
+                print(f"\n  Post-Cleanup Pass {cleanup_pass}/{max_cleanup_passes}")
+
+            any_fixed_this_pass = False
+
+            for coll in final_collisions[:3]:  # Try to fix first 3 collisions only
+                coll_key = (coll['time'], coll['type'], cell_key(coll['cell']), frozenset(coll['agents']))
+                agents_in_collision = list(coll['agents'])
+
+                if verbose:
+                    print(f"    Trying to fix: T={coll['time']}, Type={coll['type']}, Agents={agents_in_collision}")
+
+                # Try JOINT A* with conflict blocking for cleanup collisions
+                success, joint_plans, _, t_start, t_goal_sub = try_joint_astar_with_conflict_blocking(
+                    coll, current_trajectories, agent_goals, agent_starts,
+                    pristine_static_grid, heuristic_dist_map,
+                    max_agents=min(4, len(agents_in_collision)),
+                    time_budget=1.0,  # Short timeout for cleanup phase
+                    max_expansions=10000,
+                    verbose=verbose,
+                    base_rewind=joint_rewind,
+                    base_horizon=joint_horizon,
+                    max_expansion_steps=4,  # Shorter expansion steps
+                    max_conflict_retries=3,  # Retry with blocking if initial fails
+                    use_time_based_blocking=use_time_based_blocking
+                )
+
+                if success and t_start is not None and t_goal_sub is not None:
+                    # Splice and apply the joint plans
+                    temp_trajs = list(current_trajectories)
+                    all_valid = True
+
+                    for aid, plan_segment in joint_plans.items():
+                        idx = aid - 1
+                        plan_len = len(current_plans[idx]) if current_plans[idx] else 0
+                        extended_plan = list(current_plans[idx]) if current_plans[idx] else []
+
+                        # Extend if needed
+                        if t_start > plan_len:
+                            num_waits = t_start - plan_len
+                            extended_plan.extend([4] * num_waits)
+                            plan_len = len(extended_plan)
+
+                        prefix_actions = extended_plan[:t_start] if extended_plan else []
+                        original_suffix = extended_plan[t_goal_sub:] if extended_plan else []
+                        new_full_plan = prefix_actions + plan_segment + original_suffix
+
+                        sim_env = copy.deepcopy(agent_envs[idx])
+                        sim_env.env.agent_pos = agent_starts[idx]
+                        new_traj = simulate_plan(sim_env, new_full_plan)
+
+                        if new_traj:
+                            current_plans[idx] = new_full_plan
+                            current_trajectories[idx] = new_traj
+                            temp_trajs[idx] = new_traj
+                        else:
+                            all_valid = False
+                            if verbose:
+                                print(f"      ✗ Simulation failed for agent {aid}")
+                            break
+
+                    if all_valid:
+                        # Check if collision is resolved
+                        new_colls = analyze_collisions(temp_trajs, agent_goals, pristine_static_grid)
+                        still_exists = any(
+                            (c['time'], c['type'], cell_key(c['cell']), frozenset(c['agents'])) == coll_key
+                            for c in new_colls
+                        )
+
+                        if not still_exists:
+                            if verbose:
+                                print(f"      ✓ Collision resolved!")
+                            any_fixed_this_pass = True
+                            cleanup_colls_fixed += 1
+                            final_collisions = new_colls
+                            break  # Recompute from new state
+
+            if any_fixed_this_pass:
+                # Re-detect collisions for next iteration
+                final_collisions = analyze_collisions(current_trajectories, agent_goals, pristine_static_grid)
+            else:
+                if verbose:
+                    print(f"  No progress in this pass, stopping post-cleanup resolution")
+                break
+
+        if verbose:
+            if cleanup_colls_fixed > 0:
+                print(f"\n✓ Post-cleanup resolution fixed {cleanup_colls_fixed} collisions")
+                print(f"  Remaining: {len(final_collisions)} collisions")
+            else:
+                print(f"\n✗ Post-cleanup resolution could not fix remaining collisions")
+
+    # Calculate MAPF metrics
+    makespan = max((len(t) for t in current_trajectories if t), default=0)
+    sum_of_costs = sum(len(p) for p in current_plans)
+    avg_path_length = sum_of_costs / num_agents if num_agents > 0 else 0
+
+    if verbose:
+        print(f"\n=== MAPF Metrics ===")
+        print(f"Makespan (longest trajectory):  {makespan}")
+        print(f"Sum of Costs (SOC):             {sum_of_costs}")
+        print(f"Average Path Length:            {avg_path_length:.2f}")
+        print(f"Total Agents:                   {num_agents}")
+        print(f"Agents at Goal:                 {sum(1 for i, traj in enumerate(current_trajectories) if traj and tuple(map(int, traj[-1])) == tuple(map(int, agent_goals[i])))}")
+        print(f"Final Collision Count:          {len(final_collisions)}")
+
+    log_data = {
+        'info_sharing': info_tracker.to_dict(),
+        'passes': pass_num,
+        'time': time.perf_counter() - overall_start_time,
+        'final_collisions': len(final_collisions)
+    }
+
+    return current_plans, current_trajectories, len(unique_colls), timed_out, log_data

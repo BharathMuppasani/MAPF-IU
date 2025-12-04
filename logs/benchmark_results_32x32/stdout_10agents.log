@@ -1,0 +1,108 @@
+Using device: mps
+→ Running single instance from: test_data/maps/benchmark_converted/scene_even_10agents.txt
+✓ Log directory created (if needed): /Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/logs/benchmark_results_32x32
+Loaded instance from 'test_data/maps/benchmark_converted/scene_even_10agents.txt': 10 agents, grid size (32, 32).
+Instance has 10 agents.
+
+=== Collision Resolution Started ===
+Grid: (32, 32), Agents: 10
+Strategy: STATIC + DYNAMIC + JOINT A*
+Precomputing heuristic distances...
+Finished agents: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+--- Pass 1/10000 (Elapsed: 0.02s) ---
+Detected 2 collisions
+
+  Collision: T=13, Type=vertex, Cell=(19, 16), Agents=[3, 10], Attempt=1
+  → Trying STATIC for Agent 3
+  → Trying STATIC for Agent 10
+  → Trying DYNAMIC for Agent 3 (blocker: 10)
+  → Trying DYNAMIC for Agent 10 (blocker: 3)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=13, t_start=6, t_goal_sub=28, agents=[3, 10]
+    Start positions: ((12, 16), (21, 17))
+    Subgoal positions: ((18, 4), (19, 16))
+    Joint A* success in 22 steps (expanded 84 nodes) window [6,28]
+      Agent 3 joint plan: [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]...
+      Agent 10 joint plan: [0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]...
+    Splicing agent 3: plan_len=33, t_start=6, t_goal_sub=28, segment_len=22
+    Splicing agent 10: plan_len=9, t_start=6, t_goal_sub=28, segment_len=22
+    ✓ Joint plan accepted!
+      Final plan for Agent 3: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 4, 4, 4, 4, 2, 2, 1, 1, 2]
+      Final plan for Agent 10: [0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 2 to 1
+
+--- Pass 2/10000 (Elapsed: 30.21s) ---
+Detected 1 collisions
+
+  Collision: T=31, Type=vertex, Cell=(27, 23), Agents=[2, 4], Attempt=1
+  → Trying STATIC for Agent 2
+  → Trying STATIC for Agent 4
+  ✓ STATIC successful for Agent 4
+
+--- Pass 3/10000 (Elapsed: 48.04s) ---
+✓ No collisions found! Resolution complete.
+
+=== Global Cleanup ===
+Trimming trailing WAITs across all agents...
+  Global makespan: 48 (max plan was 48)
+  Agent 1: padded with 37 WAIT actions (was 11, now 48)
+  Agent 2: padded with 37 WAIT actions (was 11, now 48)
+  Agent 3: padded with 15 WAIT actions (was 33, now 48)
+  Agent 4: padded with 9 WAIT actions (was 39, now 48)
+  Agent 5: padded with 41 WAIT actions (was 7, now 48)
+  Agent 6: padded with 3 WAIT actions (was 45, now 48)
+  Agent 7: padded with 45 WAIT actions (was 3, now 48)
+  Agent 9: padded with 4 WAIT actions (was 44, now 48)
+  Agent 10: padded with 20 WAIT actions (was 28, now 48)
+  All plans now synchronized to length 48
+  Re-simulating all trajectories to match trimmed plans...
+  [DEBUG] After re-simulation:
+    Plan lengths: [48, 48, 48, 48, 48, 48, 48, 48, 48, 48]
+    Traj lengths: [49, 49, 49, 49, 49, 49, 49, 49, 49, 49]
+    ✓ All trajectories synchronized to length 49
+Global cleanup complete: trimmed 0 agents, padded 9 agents, re-simulated all trajectories
+
+=== Final Collision Check (after cleanup) ===
+[DEBUG] Trajectory lengths after cleanup: [49, 49, 49, 49, 49, 49, 49, 49, 49, 49]
+[DEBUG] Max trajectory length: 49
+
+=== Resolution Complete ===
+Time: 48.05s
+Passes: 3
+Final collisions: 0
+Timed out: False
+[DEBUG] analyze_collisions says: 0 collisions
+[DEBUG] debug_scan_collisions says: 0 collisions
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 260
+  - Revised Path Submission IU: 103
+  - Conflict Alert IU:          64
+    - Static Alerts:      1 IU
+    - Dynamic Alerts:     0 IU
+    - Joint A* Planning:  63 IU
+-----------------------------------
+  Total Information Load (IU):  427
+-----------------------------------
+
+=== MAPF Metrics ===
+Makespan (longest trajectory):  49
+Sum of Costs (SOC):             480
+Average Path Length:            48.00
+Total Agents:                   10
+Agents at Goal:                 10
+Final Collision Count:          0
+✔ Detailed execution log saved to 'logs/benchmark_results_32x32/scene_even_10agents.json'
+Analysis Complete. Success: 100.00%, Time: 48.06s
+Agent 1 Final Plan: [1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 2 Final Plan: [1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 3 Final Plan: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 4, 4, 4, 4, 2, 2, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 4 Final Plan: [3, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 5 Final Plan: [1, 1, 1, 1, 1, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 6 Final Plan: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 3, 3, 3, 3, 1, 3, 3, 0, 0, 0, 3, 3, 3, 3, 4, 4, 4]
+Agent 7 Final Plan: [3, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 8 Final Plan: [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2]
+Agent 9 Final Plan: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4]
+Agent 10 Final Plan: [0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]

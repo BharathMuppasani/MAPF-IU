@@ -1,0 +1,3614 @@
+ScalableMulti-AgentPathFindingusingCollision-AwareDynamicAlertMask
+andaHybridExecutionStrategy
+BharathMuppasani,RitirupaDey,BiplavSrivastava,VigneshNarayanan
+UniversityofSouthCarolina,USA
+bharath@email.sc.edu,deyr@email.sc.edu,vignar@sc.edu,biplav.s@sc.edu
+Abstract
+Multi-agent pathnding (MAPF) remains a critical problem
+inroboticsandautonomoussystems,whereagentsmustnav-
+igate shared spaces efciently while avoiding conicts. Tra-
+ditional centralized algorithms that have global information,
+such as Conict-Based Search (CBS), provide high-quality
+solutions but become computationally expensive in large-
+scalescenariosduetothecombinatorialexplosionofconicts
+that need resolution. Conversely, distributed approaches that
+have local information, particularly learning-based methods,
+offer better scalability by operating with relaxed information
+availability, yet often at the cost of solution quality. To ad-
+dress these limitations, we propose a hybrid framework that
+combinesdecentralizedpathplanningwithalightweightcen-
+tralized coordinator. Our framework leverages reinforcement
+learning (RL) for decentralized planning, enabling agents to
+adapt their planning based on minimal, targeted alertsŒsuch
+asstaticconict-cellagsorbriefconicttracksŒthataredy-
+namicallysharedinformationfromthecentralcoordinatorfor
+effective conict resolution. We empirically study the effect
+of the information available to an agent on its planning per-
+formance. Our approach reduces the inter-agent information
+sharing compared to fully centralized and distributed meth-
+ods, while still consistently nding feasible, collision-free
+solutionsŒeven in large-scale scenarios having higher agent
+counts.
+1 Introduction
+Multi-Agent Path Finding (MAPF) addresses the funda-
+mentalchallengeofcomputingcollision-freetrajectoriesfor
+multiple agents navigating a shared environment. Its effec-
+tive solving is crucial for deploying a wide array of multi-
+agent systems, from automated warehouses and robotic
+swarms to autonomous vehicle coordination (Sharon et al.
+2015). Despite its practical signicance, MAPF is compu-
+tationally demanding, classied as NP-hard in its general
+form, which can render traditional centralized search meth-
+odsintractableasthenumberofagentsorthecomplexityof
+the environment increases (Ren et al. 2025; Sartoretti et al.
+2019).
+Extensive research in MAPF has explored various coor-
+dination paradigms, each with different implications for in-
+formation availability and system performance. Centralized
+Copyright © 2026, Association for the Advancement of Articial
+Intelligence(www.aaai.org).Allrightsreserved.
+Figure 1:
+An example MAPF problem and our four-stage plan-
+ningpipeline.
+Left:
+Threeagents(A1,A2,A3)navigateagridwith
+static obstacles (dark gray). The diagram illustrates a future vertex
+collision (red X), where two agents would occupy the same cell,
+andanedgecollision(redarrows),whereagentswouldswapadja-
+cent cells.
+Top Right:
+The varying levels of information available
+to Agent A1 under centralized (all agent positions and goals), dis-
+tributed(nearbyagentpositionsandgoals),anddecentralized(only
+nearbyagentpositions)paradigms.
+BottomRight:
+Thefourstages
+of our framework, from initial Path Planning (S1) to Collision De-
+tection(S2),Resolution(S3),andReplanning(S4).
+approaches, such as Conict-Based Search (CBS) (Sharon
+et al. 2015) and its efciency-focused variant ICBS (Bo-
+yarskietal.2015),typicallyassumefullobservabilityofthe
+environmentandagentstates,helpingthemgenerateoptimal
+plans.However,asthenumberofagentsorthesizeoftheen-
+vironment increases, joint planning and conict resolution
+become computationally expensive. Additionally, requiring
+agentstosharefullinformationraisesprivacyconcerns,lim-
+iting applicability in condential settings motivating strate-
+gies that reduce reliance on global information. Early de-
+coupled methods like
+M
+
+(Wagner and Choset 2011) be-
+ginwithindividualplansandonlycoordinateagentsincon-
+ict, offering scalability but often sacricing optimality or
+completeness. More recently, Multi-Agent Reinforcement
+Learning(MARL)hasemergedtoaddresscoordinationand
+partial observability in dynamic settings. For example, PRI-
+MAL (Sartoretti et al. 2019) trains agents to plan using
+partial views, learning implicit coordination, while meth-
+odslikeFOLLOWER(Skrynniketal.2024)reduceexplicit
+communication by relying on global heuristic maps. These
+decentralized methods improve scalability but may reduce
+
+solution quality and leave conicts unresolved due to lim-
+itedinformation.
+To address these limitations, we propose a novel hy-
+brid MAPF framework that combines decentralized plan-
+ning with a lightweight centralized coordinator, focusing
+on minimizing inter-agent information sharing while main-
+taining solution feasibility. Our ndings show that minimal,
+targeted alerts are sufcient, reducing the total information
+load by an estimated
+˘
+93%
+compared to a continuous-
+observationdistributedparadigm(seeAppendixA.1).Inour
+approach, agents primarily rely on decentralized, reinforce-
+mentlearning-basedneuralnetworkplannersthatoperateon
+local observations (e.g., position coordinates), eliminating
+the need for global information as well as local egocentric
+maps. A central coordinator oversees agent trajectories, in-
+tervening selectively by dynamically sharing targeted infor-
+mation to prompt localized re-planning when conicts are
+anticipated. This work's contributions are centered on this
+selectivecoordinationstrategy.Weintroduce
+(1)anovelhy-
+brid framework
+with this on-demand alert mechanism and
+provide
+(2)acomprehensiveempiricalevaluation
+demon-
+strating that our planning policy generalizes robustly from
+a simple training regimen to larger, more complex environ-
+ments. Our evaluation is guided by two key research ques-
+tions:
+(RQ1)
+Given the observation constraints of a decen-
+tralized setup, can an effective MAPF algorithm be created
+with one agent knowing nothing about other agents? If not,
+what information must it need at a minimum? and
+(RQ2)
+How does the proposed hybrid method compare to leading
+alternative search- and learning-based approaches in terms
+ofperformance,solutionquality,andscalability?
+2 BackgroundandLiteratureReview
+2.1 Multi-AgentPathFinding
+Let
+G
+= (
+V;E
+)
+beanundirectedgraph,where
+V
+isthesetof
+vertices(gridcells)and
+E
+
+V
+
+V
+isthesetofedgescon-
+nectingadjacentcells.Ateamof
+n
+agents
+A
+=
+f
+a
+1
+;:::;a
+n
+g
+must move from start vertices
+s
+i
+2
+V
+to goal vertices
+g
+i
+2
+V
+,where
+(
+s
+i
+;g
+i
+)
+6
+= (
+s
+j
+;g
+j
+)
+;
+8
+i
+6
+=
+j
+:
+i;j
+2 f
+1
+;:::;n
+g
+.Time
+is discretized into steps
+t
+= 0
+;
+1
+;
+2
+;:::
+, and at each step, an
+agent may either move along an edge or wait. A path for
+agent
+a
+i
+is a sequence
+ˇ
+i
+= (
+v
+i
+0
+;v
+i
+1
+;:::;v
+i
+T
+i
+)
+with
+v
+i
+0
+=
+s
+i
+and
+v
+i
+T
+i
+=
+g
+i
+.AsolutiontoMAPFis
+ =
+f
+ˇ
+1
+;:::;ˇ
+n
+g
+,and
+it is collision-free if for all
+i
+6
+=
+j
+and all
+t
+,
+v
+i
+t
+6
+=
+v
+j
+t
+(vertex
+collision free) and
+(
+v
+i
+t
+;v
+i
+t
++1
+)
+6
+= (
+v
+j
+t
++1
+;v
+j
+t
+)
+(edge collision
+free).TheprimarygoalinstandardMAPFistypicallytond
+apathset
+
+thatiscollision-free(Sharonetal.2015).Com-
+monefciencyobjectivesincludeminimizingthemakespan,
+max
+i
+T
+i
+,minimizingthesumofindividualcompletiontimes
+(sum-of-costs),
+P
+i
+T
+i
+, or minimizing the number of colli-
+sions.
+An important consideration in dening a MAPF problem
+instancearisesfromagentspotentiallyreachingtheirtargets
+at different time steps, thus requiring a clear denition of
+howanagentbehavesafterithasreacheditstarget
+g
+i
+attime
+T
+i
+, but while other agents may still be en route. Two com-
+mon settings are used to address this scenario (Stern et al.
+2019a). The rst setting, typically referred to as
+stay at tar-
+get
+, considers that an agent, upon reaching its goal, remains
+at that vertex until all other agents in the team have also
+reached their respective targets. This waiting agent contin-
+ues to occupy its target vertex, potentially causing conicts
+if another agent's plan requires traversing or occupying that
+vertex at any time
+t
+
+T
+i
+up to the completion time of the
+entire solution. The second setting,
+disappear at target
+, as-
+sumesanagentiseffectivelyremovedfromtheenvironment
+immediatelyuponreachingitstarget.Consequently,itspath
+concludes at time
+T
+i
+, and it poses no further collision risk
+nor occupies any vertex for
+t > T
+i
+. In our work, we adopt
+thesecondsetting,
+disappearattarget
+.Thissettingispartic-
+ularlyrelevantforapplicationslikedronedelivery,wherean
+agent's task is considered complete upon arrival at a target
+location.
+2.2 CoordinationParadigms
+AsformalizedbySharonetal.(Sharonetal.2015),solution
+approaches to MAPF problems can be categorized based
+on their coordination strategy. We extend this by focusing
+on three key elements: state observability (global vs. local),
+communication (allowed vs. none), and control (centralized
+vs. decentralized). In
+centralized
+paradigms, a global plan-
+ner with full observability of the entire state controls all
+agents, and communication is implicit through this central
+controller. By contrast, other approaches grant agents local
+control over their actions. Within this category, we draw a
+key distinction based on communication: In
+distributed
+ap-
+proaches, agents that plan their own paths are allowed to
+explicitly exchange information, such as local observations,
+intended paths, or goals, with other agents to achieve coop-
+erative behavior. In
+decentralized
+MAPF, as dened in this
+work, inter-agent communication during execution is elim-
+inated. Agents plan and act entirely independently, relying
+only on their own local information. Finally,
+hybrid
+frame-
+works, like the one we propose, combine these elements.
+They typically employ a central coordination mechanism
+that has full observability to detect conicts and selectively
+intervene, while agents otherwise plan in a decentralized
+manner. In our work, we adopt a hybrid framework with a
+customized information sharing mechanism as described in
+Section3.
+2.3 LiteratureReview
+Search-based Methods:
+Research on MAPF has evolved
+from centralized to more scalable methods. Early ad-
+vancements include
+M
+
+, which dynamically couples agent
+searches upon conict for optimality and completeness
+(WagnerandChoset2011),andIncreasingCostTreeSearch
+(ICTS), which employs cost allocation and then checks for
+conict-freesolutionsfromsetsofsingle-agentpaths,yield-
+ing signicant speedups over joint-space search (Sharon
+et al. 2013). A pivotal development was CBS, where agents
+independently plan paths using
+A
+
+, and a centralized detec-
+tor resolves conicts by branching with new constraints for
+involved agents, ensuring optimality (Sharon et al. 2015).
+To enhance scalability while preserving optimality, variants
+suchasICBSintegratecardinalityheuristicsandmeta-agent
+
+merging to accelerate convergence (Boyarski et al. 2015).
+For very large instances, suboptimal repair strategies like
+LargeNeighborhoodSearch(LNS)generateinitialsolutions
+(often via prioritized planning) and iteratively repair collid-
+ing agent subsets under a centralized control loop (Li et al.
+2022). However, these methods face scalability challenges
+as the number of agents increases and often depend on ex-
+tensiveglobalinformationforcoordination.
+Learning-based Methods:
+In parallel, learning-based
+approaches address partial observability and communica-
+tion constraints. PRIMAL and PRIMAL2 train decentral-
+ized policies via a combination of imitation learning from
+an expert centralized planner and reinforcement learning
+(PRIMAL2 enhancing local observations for better coor-
+dination), effectively implementing a centralized training
+and decentralized execution (CTDE) paradigm (Sartoretti
+et al. 2019; Damani et al. 2021b). SCRIMP introduces a
+transformer-based communication module enabling agents
+with limited elds of view to coordinate effectively, achiev-
+ing decentralized coordination without a central execution-
+time coordinator (Wang et al. 2023). To function in real-
+world settings, each agent must carry onboard sensing,
+e.g., RGB-D cameras or LiDAR scanners, and implement
+an inter-agent communication protocol for goal disclosure,
+which introduces additional computational overhead and
+raises privacy concerns. While offering adaptability and de-
+centralized execution, learning-based methods can require
+signicant training data, may struggle with generalization,
+and often provide weaker guarantees on solution quality or
+completenesswhenrelyingpurelyonlocalinformation.
+Hybrid Methods:
+Hybrid planning-learning paradigms
+seekthestrengthsofbothworlds.Authorsin(Skrynniketal.
+2024) introduce FOLLOWER, which involves each agent
+using a congestion-aware
+A
+
+planner to determine its sub-
+goals, then executing a fully decentralized RL policy for
+lifelong replanning. More recently, hybrid frameworks like
+LNS2+RL, introduced by Li et al., have emerged, augment-
+ing LNS by employing MARL for early, localized conict
+resolution, then relying on efcient search-based planning
+for nal renement (Wang et al. 2025). These existing hy-
+brid approaches, while innovative, can involve complex in-
+tegrations and may still face trade-offs between optimality,
+scalability,orspecicinformationdependencies(likeglobal
+congestionmaps(Skrynniketal.2024)).
+ToenableastructuredcomparisonofdiverseMAPFtech-
+niques(search-based,learning-based,andhybrid),weadopt
+the four-stage MAPF pipeline: S1 (Agent Planning), S2
+(Collision Detection), S3 (Collision Avoidance Policy), and
+S4 (Agent Replanning). Within this structure, CBS uses
+decentralized A* search for S1/S4 and centralized high
+level solver for collision resolution in S2/S3 for optimality
+(Sharon et al. 2015). LNS employs a centralized loop for
+all four stages, managing path generation, detection, repair,
+and subset replanning, thereby trading optimality for scal-
+ability (Li et al. 2022). Learning-based planners like PRI-
+MAL and SCRIMP typically use local observations for de-
+centralized S1-S4 execution, coordinating without a central
+controller (Sartoretti et al. 2019; Wang et al. 2023); how-
+ever, practical deployments can require sensors (eg., cam-
+era,LiDARetc.)andcommunication,addingcomputational
+overheadandincreasesensingcost.Hybridmethodssuchas
+FOLLOWERuseglobalcongestionmapswith
+A
+
+searchfor
+S1, then decentralized RL policy for S2-S4, often without
+further communication (Skrynnik et al. 2024). LNS2+RL
+applies centralized LNS for S1-S3, while S4 uses a hybrid
+policy (MARL or prioritized planning) for subsets, balanc-
+ingkeytrade-offs(Wangetal.2025).RefertoTable2inthe
+Appendix Section A.2 for a detailed categorization of these
+methodologies.
+Together, these works highlight key limitations of exist-
+ing MAPF paradigms: centralized methods face scalabil-
+ity and privacy concerns; purely learning-based approaches
+compromise solution quality; and current hybrid solutions
+often still depend on signicant centralized communication
+or coordination overhead with higher sensing cost. The hy-
+brid framework introduced in Section 3, which is the focus
+ofourwork,isspecicallydesignedtomitigatetheselimita-
+tions.Itstrategicallyreducesinter-agentinformationsharing
+tomaintainsolutionfeasibility,therebyaddressingtheafore-
+mentioned information management challenges while also
+aiming to preclude the additional sensing costs and compu-
+tationaloverheadcommoninlearning-basedmethods.
+3 Methodology
+3.1 ApproachSummary
+We propose a hybrid coordination framework that lever-
+ages decentralized RL-based path planning together with
+centralized collision detection and control. While conceptu-
+ally similar to the high-level loop of Conict-Based Search
+(CBS), our framework differs signicantly in its resolution
+step:itdoesnotbuildaconstrainttreeorperformbacktrack-
+ing, instead issuing targeted alerts that prompt heuristic-
+based replanning from the local RL agent. The proposed
+method'sfour-stageMAPFpipelineisdetailedbelow.
+S1: Decentralized Path Planning
+Each agent
+a
+k
+gener-
+atesanindependenttrajectory
+ˆ
+k
+=
+ˇ
+
+(
+s
+k
+;g
+k
+) = (
+v
+k
+0
+;:::;v
+k
+˝
+k
+)
+;
+(1)
+where
+v
+k
+0
+=
+s
+k
+,
+v
+k
+˝
+k
+=
+g
+k
+, and
+ˇ
+
+is a parameterized RL
+policy trained to minimize path length and local collision
+risk over a planning horizon
+H
+. No information about other
+agents is exchanged during this stage. Let
+˝
+i
+denote the set
+of makespan of each agent and
+˝
+=
+f
+˝
+1
+;:::;˝
+n
+g
+be the set
+ofallsuchmakespans.
+S2ŒS3: Centralized Collision Detection and Control
+A
+centralmoduletakesasinputtheindependenttrajectoriesof
+alltheagents
+ˆ
+=
+f
+ˆ
+1
+;:::;ˆ
+n
+g
+alongwiththemakespanset
+˝
+,andidentiesallvertexandedgeconicts,using
+C
+(
+ˆ;˝
+) =
+f
+(
+t
+j
+;
+
+c
+;A
+c
+)
+j
+(
+v
+k
+t
+j
+=
+v
+l
+t
+j
+:= 
+c
+)
+_
+((
+v
+k
+t
+j
+;v
+k
+t
+j
++1
+) = (
+v
+l
+t
+j
++1
+;v
+l
+t
+j
+) := 
+c
+)
+g
+(2)
+A
+c
+=
+ff
+a
+k
+; a
+l
+g
+:
+ˆ
+k
+jf
+t
+j
+g
+=
+ˆ
+l
+jf
+t
+j
+g
+= 
+c
+_
+ˆ
+k
+j
+f
+(
+t
+j
+;t
+j
++1
+)
+g
+=
+ˆ
+l
+jf
+(
+t
+j
+;t
+j
++1
+)
+g
+= 
+c
+;
+8
+k
+6
+=
+l
+g
+;
+(3)
+
+where
+ˆ
+k
+jf
+t
+j
+g
+and
+ˆ
+k
+jf
+(
+t
+j
+;t
+j
++1
+)
+g
+denotes the position of
+the
+k
+th
+agentatstep
+t
+j
+andsteps(
+t
+j
+,
+t
+j
++1
+),respectively.
+For each conict
+c
+= (
+t
+j
+;
+
+c
+;A
+c
+)
+2
+C
+(
+ˆ;˝
+)
+, which oc-
+curs at timestep
+t
+j
+, the controller issues an alert
+A
+dened
+as
+A
+(
+c
+) =
+
+c
+k
+= (
+a
+c
+k
+;t
+j
+
+r
+;
+
+c
+)
+;r
+
+j;
+(4)
+wherepolicy
+
+c
+k
+isusedtoselectanagent
+a
+c
+k
+2
+A
+c
+.Ex-
+amplepoliciesforthisagentselectionisdescribedinSection
+3.2. Once an alert is issued to an agent, the selected agent is
+prompted to perform a constrained replanning of its trajec-
+tory for a rollout window
+f
+t
+c
+k
+j
+
+r
+;:::;t
+c
+k
+j
+;:::;˝
+c
+k
+g
+, where
+r
+istherewindwindowbyavoidingthecollisionset
+
+c
+.
+S4: Decentralized Replanning
+Upon receiving a colli-
+sionalert,agent
+a
+c
+k
+truncatesitspathat
+v
+c
+k
+t
+j
+
+r
+,denotedas
+ˆ
+c
+k
+j
+t
+j
+
+r
+
+1
+= (
+v
+c
+k
+0
+;:::;v
+c
+k
+t
+j
+
+r
+
+1
+)
+:
+(5)
+Theagentthengeneratesanewpathsegment
+ˆ
+0
+c
+k
+from
+v
+c
+k
+t
+j
+
+r
+to its goal
+g
+c
+k
+by applying its RL policy
+ˇ
+
+. This replan-
+ningincorporatesnewconstraintsderivedfromthealert.For
+static obstacle avoidance
+(S4.1)
+, the policy is typically de-
+rived by incorporating a xed constraint, wherein the agent
+is supposed to avoid forbidden cells, as captured in Eq. 6,
+where
+
+c
+represents the set of static cells identied in the
+alert,andasegmentofthenewpathisgeneratedas:
+ˆ
+0
+c
+k
+=
+ˇ
+
+(
+v
+c
+k
+t
+j
+
+r
+;g
+c
+k
+j
+v
+c
+k
+t
+i
+=
+2
+
+c
+;i
+
+j
+
+r
+)
+:
+(6)
+Alternatively,fordynamicobstacleavoidance
+(S4.2)
+,there-
+planningmustaccountforthepredictedmovementsofother
+agents involved in the collision. In this case, the RL policy
+isconditionedonthesub-pathsoftheconictingagents
+ˆ
+0
+c
+k
+=
+ˇ
+
+(
+v
+c
+k
+t
+j
+
+r
+;g
+c
+k
+j
+v
+c
+k
+t
+6
+=
+v
+c
+l
+t
+;v
+c
+l
+t
+2
+ˆ
+c
+l
+;
+8
+l
+6
+=
+k;a
+c
+l
+2
+A
+c
+;
+8
+t
+2
+[
+t
+j
+
+r
+;t
+j
++
+r
+])
+:
+(7)
+The information guiding the replanningŒwhether it con-
+stitutes minimal details such as static obstacle constraints
+(Eq. 6), or more detailed sub-path information about col-
+liding agents' paths treated as dynamic obstacles (Eq. 7)Œ
+is integrated into the RL agent's decision-making process
+(by modifying its state representation, more details in the
+Section 3.2) to guide it towards a conict-free solution. The
+agent'snewcompletetrajectory
+ˆ
+new
+c
+k
+isformedbyconcate-
+natingtheinitialsegmentwiththenewlyplannedone,given
+by
+ˆ
+new
+c
+k
+=
+ˆ
+c
+k
+j
+t
+j
+
+r
+k
+ˆ
+0
+c
+k
+:
+(8)
+Thisupdatedtrajectoryissubmittedtothecentralcontroller.
+Thisiterativecycleofdetection(S2),control(S3),andselec-
+tive replanning (S4) continues until a globally conict-free
+solutionisachieved(
+C
+(
+ˆ;˝
+) =
+;
+).
+Our hybrid MAPF framework manages a precise ow of
+information,essentialtosupportourclaimsofreducedinfor-
+mation sharing and adaptive planning. The process begins
+with fully decentralized agent planning (S1), where each
+RL-driven agent uses only its local information before sub-
+mitting its intended path
+ˆ
+k
+to a central coordinator. This
+coordinator, leveraging its global observation of all submit-
+ted paths, performs collision detection (S2) to identify the
+set of all potential conicts
+C
+(
+ˆ;˝
+)
+. Following detection,
+the central control module (S3) issues targeted alerts; it se-
+lects a specic agent
+a
+c
+k
+and determines the rewind point
+t
+j
+
+r
+from which the agent must replan, effectively issu-
+ing an alert
+A
+(
+c
+)
+. S3 also governs the level of informa-
+tiontobesharedforthesubsequentdecentralizedreplanning
+(S4). Initially, the alerted agent
+a
+c
+k
+attempts to resolve the
+conict using minimal information, typically by treating its
+own conicting path segment
+
+c
+as a static obstacle (S4.1).
+If this localized, low-information approach proves insuf-
+cient, S3 then shares additional information with the agentŒ
+specically, a subset ofthe path of other directly conicting
+agentsŒfor a more informed replan (S4.2). This tiered strat-
+egyŠfrom purely local information in S1, to targeted alerts
+fromS3,andthentoprogressivelydetailedyetstilllocalized
+conict information for S4Šensures that inter-agent infor-
+mation sharing is demand-driven and sparse. Agents com-
+municate their revised plans
+ˆ
+new
+c
+k
+back to the coordinator,
+and this iterative cycle of detection and selective, adaptive
+replanning continues until a globally conict-free solution
+is achieved (
+C
+(
+ˆ;˝
+) =
+;
+). This methodology substantiates
+ourframework'sabilitytoensurefeasibilitywhileoperating
+withsignicantlyreducedinformationexchange.
+3.2 PolicyRepresentation
+(S1 & S4) Decentralized Path Planning:
+In our pro-
+posed framework, we address the challenges of decentral-
+izedmulti-agentpathndingindynamicenvironmentsbyin-
+tegratingcollisionawarenessdirectlyintotheagent'sobser-
+vation. Our approach leverages an RL-based decentralized
+plannerthatreceivesamulti-channelgridobservation.
+Observation Space:
+Each agent's observation is a tensor
+s
+2
+R
+H
+
+W
+
+4
+, where
+H
+and
+W
+are the height and width of
+thegrid.Thefourchannelscorrespondto:(a)
+ObstacleMap
+-
+A binary map (1 if a static obstacle is present, 0 otherwise).
+(b)
+AgentMap
+- A binary map marking the agent's current
+position. (c)
+GoalMap
+- A binary map indicating the goal
+position.(d)
+AlertMask
+-Adynamiccollisionalertmap(ini-
+tiallyallzeros,updatedduringexecution).Thisalertmaskis
+updated online by a centralized collision detection module
+that simulates timely collision alerts. In addition, the obser-
+vation includes low-dimensional features comprising a unit
+vector pointing from the agent's current position to the goal
+andtheEuclideandistance.
+Action Space:
+The agent operates in a discrete action
+space,
+A
+=
+f
+0
+;
+1
+;
+2
+;
+3
+;
+4
+g
+, corresponding to movements in
+the four cardinal directions (e.g., Up, Down, Left, Right,
+WAIT).
+Reward Structure
+Our reward function, similar to PRI-
+MAL (Sartoretti et al. 2019), promotes efcient, collision-
+free navigation and discourages unproductive behaviors.
+Agents receive +20 for reaching the goal. Penalties include:
+-3forcollisionswithobstacles,-2fortimeout,-0.02pertime
+step taken (to encourage efciency), and -0.1 for a `WAIT'
+action, a penalty that encourages path progression over sta-
+tionarywaiting.Anadditional-0.05penaltyisappliedifthe
+agentisnearadynamicobstacle.
+
+(S2) Rule-Based Collision Detection:
+The collision de-
+tection module (S2) functions as a deterministic, rule-based
+system. It takes the set of all current agent trajectories
+ˆ
+=
+f
+ˆ
+1
+;:::;ˆ
+n
+g
+and their makespans
+˝
+as input. For each
+timestep
+t
+=
+f
+0
+;
+1
+;:::;T
+M
+g
+upto the maximum makespan
+(
+T
+M
+), the module systematically scans for two primary
+typesofconicts:vertexconicts(where
+v
+k
+t
+=
+v
+`
+t
+for
+k
+6
+=
+`
+)
+and edge conicts (where
+(
+v
+k
+t
+;v
+k
+t
++1
+) = (
+v
+`
+t
++1
+;v
+`
+t
+)
+for
+k
+6
+=
+`
+).Upondetectingaconict,characterizedas
+c
+= (
+t;v;A
+c
+)
+where
+A
+c
+is the set of agents involved, S2 reports this con-
+ict
+c
+totheS3controlmoduleforresolution.Thedetection
+process for all conicts is computationally efcient, with a
+time complexity of
+O
+
+P
+k
+j
+ˆ
+k
+j
+
+per cycle, linear in the sum
+ofallagentpathlengths.
+(S3) Heuristic-Based Collision Avoidance Control:
+Upon notication of a conict
+c
+= (
+t;v;A
+c
+)
+from S2, the
+S3 control module formulates and issues an alert
+A
+(
+c
+)
+to a
+selected agent. This involves choosing an agent
+a
+c
+k
+2
+A
+c
+toreplan,determiningitsreplanstartpoint
+t
+j
+
+r
+byselecting
+anappropriaterewindvalue
+r
+,andspecifyingthereplanning
+approach. We consider three agent selection policies (from
+A
+c
+): (i)
+Random
+choice (i.e.,
+a
+c
+k
+˘
+UniformRandom
+(
+A
+c
+)
+),
+(ii) selecting the agent
+Farthest
+from its goal (
+g
+a
+) based
+on Manhattan distance
+d
+Manh
+(
+v
+a
+t
+j
+
+r
+;g
+a
+)
+, or (iii) identify-
+ing the agent with the
+Fewest Future Collisions (FFC)
+, i.e.,
+a
+c
+k
+= argmin
+a
+2
+A
+c
+
+
+f
+~
+c
+j
+~
+c
+2
+C
+(
+ˆ;˝
+)
+; a
+2
+A
+~
+c
+g
+
+
+. In our
+work, we present the results with
+FFC
+agent selection pol-
+icy. We present the comparative results considering other
+policies in the Appendix Section A.4. S3 then dictates the
+replanning formulation, choosing either
+Static Obstacle Re-
+planning
+(where
+a
+c
+k
+avoidsitsownproblematicvertices
+v
+c
+)
+or
+Dynamic Obstacle Replanning
+(where
+a
+c
+k
+avoids speci-
+ed sub-path trajectories
+v
+c
+l
+t
+2
+ˆ
+c
+l
+;
+8
+l
+6
+=
+k;a
+c
+l
+2
+A
+c
+;
+8
+t
+2
+f
+t
+j
+
+r
+;:::;t
+j
++
+r
+g
+of other conicting agents
+a
+`
+2
+A
+c
+). Our
+frameworkinitiallyemploys
+StaticObstacleReplanning
+for
+resolvingaconict;ifthisapproachprovesinsufcienttore-
+solvetheconict,
+DynamicObstacleReplanning
+isutilized.
+Abalationstudyconsideringindividualreplanningstrategies
+and their implication on our framework's performance is
+presentedintheAppendixTable5.
+4 ExperimentalSetup
+In this section we rst describe how we train the per-agent
+navigation policy used in stage S1, then detail the maps,
+problem instances, and competing planners used to evalu-
+ate stages S2ŒS4, and dene the performance metrics used
+toevaluate.
+Training Procedure
+We train a parametrized RL model
+Q
+
+(
+s;a
+)
+using the DDQN algorithm(Van Hasselt, Guez,
+andSilver2016),incorporatingprioritizedexperiencereplay
+(PER) and
+"
+-greedy exploration, to enable an agent to navi-
+gatetoaspeciedgoalinthepresenceofbothstaticanddy-
+namic obstacles. Each dynamic obstacle possesses a hidden
+goal and follows precomputed trajectories, executing only
+valid moves; this allows for the simulation of online col-
+lision alerts during inference from the S3 stage. Training is
+performedfor
+30000
+episodesonan
+11
+
+11
+mazegrid,with
+each episode capped at a maximum of
+T
+max
+= 50
+steps.
+The curriculum for environmental complexity is scheduled
+asfollows:duringtherst500episodes,static-obstacleden-
+sity
+ˆ
+s
+= 0
+:
+10
+and dynamic-obstacle count
+n
+d
+= 0
+; from
+episode 500 to 2999,
+ˆ
+s
+= 0
+:
+10
+and
+n
+d
+= 1
+; from episode
+3000 to 5999,
+ˆ
+s
+= 0
+:
+20
+and
+n
+d
+= 2
+; and for episode 6000
+onward,
+ˆ
+s
+= 0
+:
+30
+and
+n
+d
+= 4
+.
+Input observations are normalized to zero mean and
+unit variance before being fed to the network. Transitions
+(
+s
+t
+;a
+t
+;r
+t
+;s
+t
++1
+)
+are stored in a prioritized experience re-
+play buffer of size
+10
+6
+. At each learning step, a mini-batch
+of
+128
+transitions is sampled. The agent selects actions us-
+ing an
+"
+-greedy policy, where
+"
+decays from
+"
+0
+= 1
+:
+0
+to
+0
+:
+01
+over the course of training according to
+"
+t
++1
+=
+max(0
+:
+01
+;
+0
+:
+999
+"
+t
+)
+. Crucially, during both exploration and
+exploitation (e.g., when calculating the target Q-value),
+only actions
+a
+t
+deemed valid by an action mask
+m
+t
+2
+f
+0
+;
+1
+g
+jAj
+are considered for efcient exploration (Damani
+etal.2021b).
+The Q-network parameters
+
+are updated via gradient de-
+scent using the Adam optimizer with a learning rate
+
+=
+3
+
+10
+
+4
+. The discount factor is
+
+= 0
+:
+97
+. A separate
+target network, with parameters
+
+
+, provides stable targets
+and is updated by copying
+
+every 300 steps. Updates min-
+imize the prioritized, importance-weighted Bellman error.
+The target value
+y
+t
+and TD-error
+
+t
+are computed as:
+y
+t
+=
+r
+t
++
+Q
+
+
+
+s
+t
++1
+;
+argmax
+a
+0
+Q
+
+(
+s
+t
++1
+;a
+0
+)
+s.t.
+m
+t
+(
+a
+0
+) = 1
+
+;
+
+t
+=
+y
+t
+
+Q
+
+(
+s
+t
+;a
+t
+)
+;
+The loss function is then calculated
+as
+L
+(
+
+) =
+E
+i
+˘
+p
+(
+i
+)
+
+w
+i
+
+2
+i
+
+;
+where the sampling probability
+p
+(
+i
+)
+/ j
+
+i
+j
+
+(
+
+is a hyperparameter for PER) and
+w
+i
+are
+importance-sampling weights that correct for the bias intro-
+ducedbyprioritizedsampling.
+In addition to the DDQN model, a Proximal Policy Op-
+timization (PPO) based model was also trained; details re-
+garding its architecture (including the one used for DDQN
+model) and training procedure, along with comparative per-
+formance, are provided in the Appendix Section A.3. The
+DDQN model was selected due to its superior performance
+overthePPOmodel-resultsarepresentedinTable3.
+Evaluation Scenarios and Baselines
+We evaluate our
+framework's performance and scalability across three dis-
+tinct grid congurations, representing two primary map
+types: maze and warehouse. All evaluations use ten ran-
+domly generated problem instances per conguration. For
+themazemaptype,wetestonan
+11
+
+11
+gridwithapprox-
+imately 45% static obstacles (5 to 20 agents) and a larger
+21
+
+21
+grid with approximately 35% static obstacles (32,
+64, and 96 agents). For the warehouse map type, we uti-
+lize a
+25
+
+25
+grid layout with approximately 24% static
+obstacles as shelves (32, 64, and 96 agents). Our proposed
+hybrid framework is evaluated through two variants, Alert-
+BFS and Alert-A*, which are named based on their RL pol-
+icyrolloutstrategy(
+Breadth-FirstSearch
+or
+weightedA-star
+search
+, respectively). The impact of our specic replanning
+strategies is further analyzed in an ablation study in Ap-
+pendix Table 5. These are compared against search-based
+planners, Conict-Based Search (CBS) (Sharon et al. 2015)
+andImprovedCBS(ICBS)(Boyarskietal.2015),andlead-
+
+ing learning-based online planners PRIMAL (Damani et al.
+2021a)andSCRIMP(Wangetal.2023)withtheMAPFfor-
+mulation of
+disappear at goal
+. While our framework vari-
+ants operate within our proposed four-stage pipeline (S1Œ
+S4), the baseline methods are executed as standalone algo-
+rithms. Per-instance time limits are 50 seconds for
+11
+
+11
+mazes,30minutesfor
+21
+
+21
+mazes,and1hourfor
+25
+
+25
+warehousescenarios.Foronlineplanners,thesteplimitsare
+256forthe
+11
+
+11
+maze,and512forboththe
+21
+
+21
+maze
+andthe
+25
+
+25
+warehouse,asdetailedinTable1.Additional
+results on various other map congurations are provided in
+theAppendixSectionA.4.
+PerformanceCriteria
+WeevaluateourMAPFframework
+using standard metrics.
+Success Rate (SR)
+is the proportion
+of instances solved within dened time limits. For success-
+ful instances,
+Makespan (MS)
+measures the time until the
+last agent reaches its goal. The number of
+Collisions (CO)
+measuresthetotalcountofpathdisagreementsdetectedand
+successfully resolved by the framework to produce the nal
+collision-free solution. A non-zero CO in a successful run
+reects the planner's total conict resolution workload. Fi-
+nally, total
+Time (T)
+measures the computational cost until
+a solution is found or the time limit is exceeded. Learning-
+basedmethodsareevaluatedbytheaveragenumberofsteps
+takenintheenvironment.
+5 ResultsandDiscussion
+Here we present an empirical study, evaluating our central
+hypothesis:
+a MAPF framework with strategically reduced
+information sharing can achieve robust performance.
+We
+addressour
+RQs
+concerningminimalinformationneedsand
+comparative performance against approaches with different
+information paradigms using the experimental results pre-
+sentedinTable1.
+(RQ1):
+Given the observation constraints of a decentral-
+izedsetup,cananeffectiveMAPFalgorithmbecreatedwith
+one agent knowing nothing about other agents? If not, what
+informationmustitneedataminimum?
+Ans.
+NoŠifagents
+have zero knowledge of one another, MAPF fails, losing
+completenessguarantees;butsolutionsarepossiblewithtar-
+geted,minimalinformationsharing.Table5intheappendix
+presentscomparativeresultsforvariousinter-agentinforma-
+tionsharingsettings.
+Now, we turn our attention to the strategically limited
+minimalinformationsharingcase.Inourframework,strate-
+gicallyinformedalertsconveyeither(S4.1)staticconstraints
+(the conicting cell) or (S4.2) slightly richer, yet still local-
+ized, dynamic constraints (the sub-path of only the directly
+conicting agent(s) for a short horizon). Table 1 shows per-
+formance comparison of considered methodologies across
+11x11 maze (a), 21x21 maze (b), and
+25
+
+25
+(c) ware-
+house maps, respectively. As shown in Table 1, the perfor-
+mance of our framework, where agents initially plan with
+only local information and receive minimal, targeted alerts
+fromacentralcoordinatoruponconict,achieveshighSuc-
+cess Rates (SR). Specically, on the
+11
+
+11
+and
+21
+
+21
+maze grids, SRs are high (90%-100%). On the more struc-
+tured
+25
+
+25
+warehouse map (Table 1c), Alert-BFS and
+Alert-A* also achieve 100% SR for 32 and 64 agents, with
+Alert-A* maintaining a 60% SR in the dense agent scenario
+(96agents),demonstratingeffectivenessacrossdifferenten-
+vironmenttypeswiththisminimalinformationsharingstrat-
+egy.Thissuccesswithminimalinter-agentinformationcon-
+trasts sharply with alternatives. Centralized planners (
+CBS
+,
+ICBS
+) demand
+complete global knowledge
+of all agents'
+paths, a requirement that, while enabling optimality, leads
+to their low SR due to the combinatorial explosion in con-
+ict resolution within practical time limits. In contrast, dis-
+tributed learning frameworks (
+PRIMAL
+&
+SCRIMP
+) often
+operate under the assumption that each planning agent pos-
+sesses
+full observation, of other agents and their goals, in
+a local eld of view
+. While this localized observation can
+facilitatedecentralizeddecision-making,itimpliesacontin-
+uous and potentially substantial information gathering (e.g.,
+via onboard cameras or LiDAR sensors) and processing re-
+quirementforeachagent.
+The success of our method across maze and warehouse
+environments underscores that this on-demand information
+is sufcient for high SR, thereby avoiding the continuous,
+dense local information exchange. Our quantitative anal-
+ysis, detailed in the Appendix A.1, shows that this on-
+demand alert mechanism reduces the total information load
+by
+˘
+93%
+comparedtoacontinuous-observationdistributed
+paradigminthisscenario.
+(RQ2):
+Howdoestheproposedhybridmethodcompareto
+leading alternative search- and learning-based approaches
+in terms of performance, solution quality, and scalability?
+Ans.
+Our hybrid framework exhibits a compelling bal-
+ance of performance and scalability with distinct trade-offs
+against established search-based and learning-based meth-
+ods,asdetailedinTable1.
+Our Python-based framework demonstrates higher SR
+and scalability compared to search-based optimal solvers.
+CBS/ICBS
+(C++ based) shows constantly lower SR with in-
+creasing environment complexity, failing to solve any in-
+stances on the
+21
+
+21
+maze (for 32+ agents) and the
+25
+
+25
+warehouse map. While
+CBS/ICBS
+achieves opti-
+malMSwhentheysolve(Table1a),theirreportedCollision
+(CO) counts (Table 1a) for such cases are very high; our
+methodsreportsignicantlyfewercollisionswhentheysuc-
+ceedonthesesmallermaps.
+PRIMAL
+exhibitslowSRacrossalltestedcongurations,
+oftenhittingsteplimitswithoutsuccess.
+SCRIMP
+isastrong
+learning-basedperformerwithfastinferencetimesandgood
+MS. On the
+11
+
+11
+and
+21
+
+21
+mazes, its SR is compara-
+ble or better than our methods in some low-density cases,
+but can decline in denser scenarios (
+21
+
+21
+, 64 agents:
+SCRIMP
+20% SR vs.
+Alert-BFS
+90% SR). On the
+25
+
+25
+warehouse map,
+SCRIMP
+maintains 100% SR for 32 and
+64 agents, and achieves 90% SR for 96 agents, outperform-
+ing Alert-BFS (10% SR) and Alert-A* (60% SR) at this
+highest agent count in terms of success. However, SCRIMP
+also demonstrates signicantly lower CO values than our
+methods across all successful warehouse instances attribut-
+ing to its efcient multi-agent training. A critical factor for
+online planners is the ofine training investment. For in-
+stance,
+PRIMAL
+'sextensivetrainingonvariedmapsizesin-
+
+Table1:
+Comparisonofperformancemetricsfordifferentmethodsonan
+11
+
+11
+grid(5Œ20agents,
+˘
+45%obstacles),a
+21
+
+21
+grid(32,64,
+and 96 agents,
+˘
+35% obstacles), and a
+25
+
+25
+warehouse grid (32, 64, 96 agents,
+˘
+24% obstacles). Results are averaged over 10 problem
+instances per conguration. Key metrics include Success Rate (SR), Makespan (MS), Collisions (CO), and Time (T), with Time averaged
+over all trials. For learning-based methods, the average steps taken while solving the problem instances are presented in brackets along with
+averagewall-clocktimetaken.
+(a)11x11mazewith50sec.timelimitperprobleminstance(
+256
+stepsforlearning-basedmethods)
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(s)(
+#
+)
+Methods 5-10 11-15 16-20 5-10 11-15 16-20 5-10 11-15 16-20 5-10 11-15 16-20
+Alert-BFS
+100.00% 100.00% 98.00%
+17.8 23.6 27.4 9 53 191 1.1 4.2 11.8
+Alert-A*
+100.00%
+96.00% 82.00% 16.1 20.7 24.0 10 59 173 3.3 12.0 25.8
+CBS 85.00% 34.00% 2.00%
+13.8 14.3
+17.0 559 8785 3895 8.3 30.7 35.3
+ICBS 85.00% 26.00% 10.00% 14.0 14.8
+12.8
+885 3486 1466 5.9 25.1 28.6
+PRIMAL 61.67% 48.00% 28.00% 71.7 89.9 104.8 - - - 1.4(142) 3.4(176) 6.1(214)
+SCRIMP 95.00% 70.00% 60.00% 19.3 28.6 38.8
+1 2 8 0.4(31) 1.6(97) 3.9(124)
+(b)21x21mazewith30min.timelimitperprobleminstance(
+512
+stepsforlearning-basedmethods)
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 32 64 96 32 64 96 32 64 96 32 64 96
+Alert-BFS
+100.00% 90.00%
+0.00% 86.6 131.4 - 528 18909 - 2.7 23.9 30.0
+Alert-A*
+100.00%
+80.00% 0.00%
+41.4 72.0
+- 457
+11379
+- 3.3 23.5 30.0
+CBS 0.00% 0.00% 0.00% - - - - - - 30.0 30.0 30.0
+ICBS 0.00% 0.00% 0.00% - - - - - - 30.0 30.0 30.0
+PRIMAL 0.00% 0.00% 0.00% - - - - - - 0.8(512) 2.1(512) 1.8(512)
+SCRIMP
+100.00%
+20.00%
+10.00%
+65.9 135.0
+94.0 15 220 357 0.1(66) 1.0(437) 2.4(470)
+(c)25x25warehousewith1hourtimelimitperprobleminstance(
+512
+stepsforlearning-basedmethods)
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 32 64 96 32 64 96 32 64 96 32 64 96
+Alert-BFS
+100.00% 100.00%
+10.00% 94.3 125.9
+96.0
+237 6379 26553 5.2 28.0 59.5
+Alert-A*
+100.00% 100.00%
+60.00%
+40.5 43.7 50.8
+211 3129 16277 4.7 19.2 51.8
+CBS 0.00% 0.00% 0.00% - - - - - - 60.0 60.0 60.0
+ICBS 10.00% 0.00% 0.00% 38.0 - - 123107 - - 57.9 60.0 60.0
+PRIMAL 0.00% 0.00% 0.00% - - - - - - 1.0(512) 3.1(512) 6.6(512)
+SCRIMP
+100.00% 100.00% 90.00%
+60.2 49.0 101.7
+2 14 161 0.1(60) 0.3(49) 1.1(143)
+volved approximately 20 days on signicant computational
+resources(Damanietal.2021a).
+SCRIMP
+,withitssophisti-
+cated transformer-based architecture and PPO training, also
+implies a substantial training regimen across diverse con-
+gurations to achieve its reported performance (Wang et al.
+2023). In contrast, our RL planning model, trained only on
+11
+
+11
+maze grids, was developed with a comparatively
+modest regimen: training was conducted on a Mac Mini
+equippedwithanAppleM4Prochip(14-coreCPU,20-core
+GPU, 16-core Neural Engine) and 48GB unied memory,
+runningforapproximately6to8hours.Itssubsequenteffec-
+tive performance when tested on different map types (map
+and warehouse) and larger grid sizes (up to
+25
+
+25
+) indi-
+catesstronggeneralizationfromthissimplertrainingsetup.
+6 Conclusions
+Our hybrid framework combines decentralized RL-based
+planning with only minimal, targeted coordinated alertsŒ
+static conict cell ags or brief conict tracksŒto maintain
+better SR across various challenging scenarios. While it in-
+curs more collisions (CO) and sometimes longer makespan
+(MS)comparedtohighlyspecializedmethodslikeSCRIMP,
+and its SR declines in extremely dense scenarios, it often
+delivers better overall feasibility and scalability, in scenar-
+ios with increasing agent counts, than purely search-based
+methods and PRIMAL by strategically sharing minimum
+inter-agentinformation.
+Effectivemulti-agentcoordinationwithreducedinforma-
+tion exchange, as explored in this research, will lead to
+privacy-aware automated systems, enabling broader use in
+complex privacy-preserving applications like autonomous
+driving. Despite these promising results, our work has limi-
+tations. The current framework, optimized for
+disappear at
+target
+setting,mayfacechallengesin
+stayattarget
+behavior.
+Future work will investigate the minimal information nec-
+essary to effectively manage these
+stay at target
+scenarios,
+aimingtoextendtheframework'sapplicabilitywithoutcom-
+promisingitscoreprincipleofsparseinformationexchange.
+Additionally, an ablation study of richer
+AlertMask
+en-
+codings, like dynamic occupancy maps, could improve re-
+planningefciency.
+
+References
+Boyarski, E.; Felner, A.; Stern, R.; Sharon, G.; Betzalel,
+O.; Tolpin, D.; and Shimony, E. 2015. Icbs: The improved
+conict-based search algorithm for multi-agent pathnding.
+In
+Proceedings of the International Symposium on Combi-
+natorialSearch
+,volume6,223Œ225.
+Damani, M.; Luo, Z.; Wenzel, E.; and Sartoretti, G. 2021a.
+PRIMAL
+2
+: Pathnding via reinforcement and imitation
+multi-agent learning-lifelong.
+IEEE Robotics and Automa-
+tionLetters
+,6(2):2666Œ2673.
+Damani, M.; Luo, Z.; Wenzel, E.; and Sartoretti, G. 2021b.
+PRIMAL2: Pathnding via Reinforcement and Imitation
+Multi-Agent LearningŠLifelong.
+IEEE Robotics and Au-
+tomationLetters
+,6(2):2666Œ2673.
+He,K.;Zhang,X.;Ren,S.;andSun,J.2016. DeepResidual
+LearningforImageRecognition.In
+ProceedingsoftheIEEE
+Conference on Computer Vision and Pattern Recognition
+,
+770Œ778.
+Li, J.; Chen, Z.; Harabor, D.; Stuckey, P. J.; and Koenig, S.
+2022. MAPF-LNS2: Fast Repairing for Multi-Agent Path
+Finding via Large Neighborhood Search. In
+Proceedings of
+the AAAI Conference on Articial Intelligence
+, volume 36,
+10256Œ10265.
+Ren, J.; Eric, E.; Kumar, T. K. S.; Koenig, S.; and Ayanian,
+N. 2025. Empirical Hardness in Multi-Agent Pathnding:
+Research Challenges and Opportunities. In
+Blue Sky paper
+at24thInternationalConferenceonAutonomousAgentsand
+MultiagentSystems
+.
+Sartoretti, G.; et al. 2019. PRIMAL: Pathnding via Re-
+inforcement and Imitation Multi-Agent Learning.
+IEEE
+RoboticsandAutomationLetters
+,4(3):2559Œ2566.
+Schulman, J.; Levine, S.; Abbeel, P.; Jordan, M. I.; and
+Moritz,P.2015a. TrustRegionPolicyOptimization. In
+Pro-
+ceedingsoftheInternationalConferenceonMachineLearn-
+ing
+,1889Œ1897.PMLR.
+Schulman, J.; Moritz, P.; Levine, S.; Jordan, M. I.; and
+Abbeel, P. 2015b. High-Dimensional Continuous Control
+Using Generalized Advantage Estimation.
+arXiv preprint
+arXiv:1506.02438
+.
+Schulman, J.; Wolski, F.; Dhariwal, P.; Radford, A.; and
+Klimov,O.2017.ProximalPolicyOptimizationAlgorithms.
+arXivpreprintarXiv:1707.06347
+.
+Sharon,G.;Stern,R.;Felner,A.;andSturtevant,N.R.2015.
+Conict-Based Search for Optimal Multi-Agent Pathnd-
+ing.
+ArticialIntelligence
+,219:40Œ66.
+Sharon,G.;Stern,R.;Goldenberg,M.;andFelner,A.2013.
+The Increasing Cost Tree Search for Optimal Multi-Agent
+Pathnding.
+ArticialIntelligence
+,195(C):470Œ495.
+Skrynnik,A.;Andreychuk,A.;Nesterova,M.;Yakovlev,K.;
+and Panov, A. 2024. Learn to Follow: Decentralized Life-
+long Multi-Agent Pathnding via Planning and Learning.
+In
+Proceedings of the AAAI Conference on Articial Intel-
+ligence
+,volume38,17541Œ17549.
+Stern, R.; Sturtevant, N.; Felner, A.; Koenig, S.; Ma, H.;
+Walker, T.; Li, J.; Atzmon, D.; Cohen, L.; Kumar, T.; et al.
+2019a. Multi-agent pathnding: Denitions, variants, and
+benchmarks.In
+ProceedingsoftheInternationalSymposium
+onCombinatorialSearch
+,volume10,151Œ158.
+Stern, R.; Sturtevant, N. R.; Felner, A.; Koenig, S.; Ma, H.;
+Walker,T.T.;Li,J.;Atzmon,D.;Cohen,L.;Kumar,T.K.S.;
+Boyarski, E.; and Bartak, R. 2019b. Multi-Agent Pathnd-
+ing: Denitions, Variants, and Benchmarks.
+Symposium on
+CombinatorialSearch(SoCS)
+,151Œ158.
+Van Hasselt, H.; Guez, A.; and Silver, D. 2016. Deep rein-
+forcement learning with double q-learning. In
+Proceedings
+oftheAAAIconferenceonarticialintelligence
+,volume30.
+Wagner, G.; and Choset, H. 2011. M*: A Complete Mul-
+tirobot Path Planning Algorithm with Performance Bounds.
+In
+Proceedings of the IEEE/RSJ International Conference
+onIntelligentRobotsandSystems(IROS)
+,3260Œ3267.
+Wang, Y.; Duhan, T.; Li, J.; and Sartoretti, G. A. 2025.
+LNS2+RL: Combining Multi-agent Reinforcement Learn-
+ing with Large Neighborhood Search in Multi-agent Path
+Finding. In
+Proceedings of the AAAI Conference on Arti-
+cialIntelligence
+.
+Wang, Y.; Xiang, B.; Huang, S.; and Sartoretti, G. 2023.
+Scrimp: Scalable communication for reinforcement-and
+imitation-learning-based multi-agent pathnding. In
+2023
+IEEE/RSJ International Conference on Intelligent Robots
+andSystems(IROS)
+,9301Œ9308.IEEE.
+
+A Appendix
+AppendixContents
+A.1.AQuantitativeModelofInformationLoad ........10
+A.2.Literaturereview ...............................10
+LiteratureCategorizationTable2 ............12
+A.3.TrainingMethods .............................. 11
+A.3.PPOTrainingProcedure ....................11
+A.3.NeuralNetworkArchitecture ............... 12
+A.3.ModelComparison ........................ 13
+DDQNtrainingperformance-Figure2 ........
+PPOtrainingperformance-Figure3 ...........
+A.3.ModelComparison ........................ 14
+Table3 ......................................
+A.4.AdditionalExperiments .........................14
+A.4.AgentSelectionPolicyComparison ......... 14
+Table4 ................................... 16
+A.4.Inter-agentInformationSharingComparison . 17
+Table5 ................................... 18
+A.4.BenchmarkDatasetEvaluation ..............17
+Table6 ................................... 19
+
+A.1 AQuantitativeModelofInformationLoad
+To quantitatively support our claim of reduced informa-
+tion sharing, we developed a simplied model to esti-
+mate the ﬂTotal Information Loadﬂ of different coordina-
+tion paradigms. This model is based on a simple
+Informa-
+tionUnit(IU)
+,denedasthedatarequiredtorepresentone
+agent'sstate(e.g.,itscoordinates)atasingletimestep.
+Model Assumptions
+Our calculation is based on the
+11x11 maze scenario with 20 agents
+, using metrics from
+thesuccessful
+Alert-BFS
+runsinTable1a.
+1.
+Scenario Data:
+We use a 20-agent instance (N=20)
+solved with a makespan (T) of
+27 timesteps
+and requir-
+ingtheresolutionof
+191conicts
+(C).
+2.
+AveragePathLength(L):
+Weassumeanaverageinitial
+pathlengthof
+25steps
+peragent.
+3.
+Agent Density (D):
+For a distributed method like PRI-
+MAL with a 10x10 FoV on an 11x11 grid, each agent
+has near-global vision. Therefore, each agent continu-
+ously observes all other N-1 agents. We set the average
+density(D)to
+19neighbors
+.
+4.
+Alert Size (
+I
+alert
+):
+We assume each conict alert sent by
+ourcoordinatorisaminimal,staticalertcosting
+1IU
+.
+ComparativeCalculation
+Distributed Method (e.g., PRIMAL)
+The information
+load is the continuous sensing and processing of all visible
+neighbors by every agent at every timestep. The formula is
+Info
+Distributed
+=
+N
+
+T
+
+D
+.
+Info
+Dist.
+= 20
+
+27
+
+19
+=
+10,260IU
+Our Hybrid Method (Alert-X)
+The load is the one-time
+pathsharinginadditiontoallsubsequenttargetedalerts.The
+formulaisInfo
+Alert-X
+= (
+N
+
+L
+)+(
+C
+
+I
+alert
+)
+.
+Info
+Alert-X
+= (20
+
+25)+(191
+
+1)
+= 500+191
+=
+691IU
+Conclusion
+This analysis highlights the difference in in-
+formationarchitecture.Thedistributedmethodrequireseach
+of its 20 agents to continuously sense and process a heavy
+streamoflocaldata,amountingtoatotalloadof
+10,260IU
+.
+Incontrast,ourhybridmethodofoadsthisburdentoacen-
+tralcoordinator,resultinginatotalinformationloadofonly
+691IU
+.
+Thisrepresentsa
+˘
+93%reductioninthetotalinforma-
+tion load
+, quantifying the efciency of our on-demand alert
+system.Whileourmethodhasacentralcoordinator,thebur-
+den on each individual agent is drastically lower, as it does
+not require constant, high-bandwidth sensing of its environ-
+ment.
+A.2 Literaturereview
+Conict-Based Search (CBS)
+S1 Œ Agent Planning: De-
+centralized
+: Each agent independently computes its path
+from the start to the goal using a single-agent pathnding
+algorithm (e.g.,
+A
+
+). This decentralized planning allows for
+efcient initial path computation without considering other
+agents.
+S2 Œ Collision Detection: Centralized
+: After individual
+paths are planned, CBS centrally examines these paths to
+detectconicts,suchastwoagentsoccupyingthesameloca-
+tionatthesametime(vertexconicts)orswappingpositions
+simultaneously (edge conicts). This centralized detection
+ensuressystematicidenticationofallpotentialconicts.
+S3 Œ Collision Avoidance Policy: Centralized
+: Upon de-
+tecting a conict, CBS resolves it by adding constraints to
+the agents' paths. Specically, it creates two new branches
+inaconstrainttree,eachimposingarestrictionononeofthe
+conictingagentstoavoidtheconict.Thiscentralizedpol-
+icyensuresoptimalconictresolutionbyexploringdifferent
+constraintcombinations(Sharonetal.2015).
+S4 Œ Agent Replanning: Decentralized
+: With new con-
+straintsinplace,onlytheagentsaffectedbytheseconstraints
+replan their paths. Each affected agent independently com-
+putesanewpaththatadherestotheaddedconstraints,main-
+tainingthedecentralizednatureofthereplanningprocess.
+Large Neighborhood Search (LNS)
+S1 Œ Agent Plan-
+ning: Centralized
+: LNS-based methods, such as MAPF-
+LNS2, begin with a centralized planning phase where ini-
+tial paths for all agents are computed using a fast, subopti-
+mal solver like Prioritized Planning (PP). This initial solu-
+tion may contain conicts but serves as a starting point for
+furtherrenement(Lietal.2022).
+S2 Œ Collision Detection: Centralized
+: The system cen-
+trally identies conicts (e.g., vertex or edge collisions) in
+the initial set of paths. This global analysis ensures that all
+potential conicts are detected and can be addressed in sub-
+sequentsteps.
+S3 Œ Collision Avoidance Policy: Centralized
+: LNS em-
+ploys a centralized strategy to resolve conicts by select-
+ing subsets of agents (the ﬂneighborhoodﬂ) involved in col-
+lisions and replanning their paths. Techniques like Safe In-
+terval Path Planning with Soft Constraints (SIPPS) are used
+to minimize the number of conicts during this replanning
+phase.
+S4 Œ Agent Replanning: Centralized
+: The selected subset
+of agents undergoes centralized replanning to resolve con-
+icts, while the paths of other agents remain unchanged.
+This process iterates, with different neighborhoods selected
+ineachiteration,untilaconict-freesetofpathsisachieved
+orapredenedtimelimitisreached.
+PRIMAL and PRIMAL2
+S1 Œ Agent Planning: Dis-
+tributed
+: In both PRIMAL and PRIMAL2, each agent in-
+dependently plans its path using policies learned through a
+combination of RL and IL. These policies are trained to en-
+ableagentstonavigatetowardstheirgoalsbasedonlocalob-
+servations without centralized coordination (Sartoretti et al.
+2019;Damanietal.2021b).
+S2 Œ Collision Detection: Distributed
+: Agents detect po-
+tentialcollisionsbasedontheirlocalobservationsoftheen-
+vironment.Theydonotrelyonacentralizedsystemtoiden-
+tify conicts but instead use their learned policies to antici-
+pateandrespondtonearbyagents.
+
+S3 Œ Collision Avoidance Policy: Distributed
+: Collision
+avoidance is handled through the agents' learned behaviors.
+In PRIMAL2, enhancements such as improved observation
+types have been introduced to facilitate better implicit co-
+ordination among agents, especially in dense and structured
+environments.
+S4ŒAgentReplanning:Distributed
+:Agentscontinuously
+replan their paths in response to changes in their local envi-
+ronment. This reactive planning allows them to adapt to dy-
+namic scenarios, such as new goal assignments in lifelong
+MAPFsettings.
+SCRIMP
+S1 Œ Agent Planning: Distributed
+: Each agent
+independently plans its path using a policy learned through
+a combination of RL and IL. Agents rely on a small local
+FOV (as small as 3×3) and a transformer-based communi-
+cation mechanism to share information with nearby agents,
+enabling them to make informed decisions despite limited
+localobservations(Wangetal.2023).
+S2 Œ Collision Detection: Distributed
+: Agents detect po-
+tential collisions based on their local observations and the
+messages received from neighboring agents through the
+communicationmechanism.Thisdecentralizedapproachal-
+lowsagentstoanticipateandrespondtonearbyagentswith-
+outcentralizedcoordination.
+S3 Œ Collision Avoidance Policy: Distributed
+: Collision
+avoidance is handled through the agents' learned policies,
+which incorporate a state-value-based tie-breaking strategy.
+This strategy enables agents to resolve conicts in symmet-
+ricsituationsbyassigningprioritiesbasedonpredictedlong-
+termcollectivebenetsanddistancestogoals.
+S4ŒAgentReplanning:Distributed
+:Agentscontinuously
+replan their paths in response to changes in their local en-
+vironment, leveraging intrinsic rewards to encourage explo-
+rationandmitigatethelong-termcreditassignmentproblem.
+This decentralized replanning allows agents to adapt to dy-
+namicscenarioseffectively.
+Learn to Follow (FOLLOWER)
+S1 Œ Agent Planning:
+Decentralized
+: Each agent independently plans its path to
+the assigned goal using a heuristic search algorithm (e.g.,
+A*). To mitigate congestion, the planner incorporates a
+heatmap-basedcostfunctionthatpenalizesfrequentlyoccu-
+piedareas,encouragingagentstochooselesscrowdedpaths.
+A sub-goal (waypoint) is selected along the planned path to
+guideshort-termmovement(Skrynniketal.2024).
+S2 Œ Collision Detection: Decentralized
+: Agents detect
+potential collisions based on their local observations. They
+do not rely on a centralized system to identify conicts but
+instead use their learned policies to anticipate and respond
+tonearbyagents.
+S3 Œ Collision Avoidance Policy: Decentralized
+: Colli-
+sion avoidance is handled through the agents' learned be-
+haviors. A neural network-based policy guides the agent to-
+ward its sub-goal while avoiding collisions. The policy is
+trainedusingreinforcementlearning,leveraginglocalobser-
+vations without requiring global state information or inter-
+agentcommunication.
+S4 Œ Agent Replanning: Decentralized
+: Agents continu-
+ouslyreplantheirpathsinresponsetochangesintheirlocal
+environment.Thisreactiveplanningallowsthemtoadaptto
+dynamicscenarios,suchasnewgoalassignmentsinlifelong
+MAPFsettings.
+LNS2+RL
+S1 Œ Agent Planning: Centralized
+: LNS2+RL
+beginsbycentrallygeneratinginitialpathsforallagentsus-
+ingafast,suboptimalmethodlikePrioritizedPlanning(PP).
+This initial solution may contain collisions but serves as a
+startingpointforfurtherrenement(Wangetal.2025).
+S2 Œ Collision Detection: Centralized
+: The system cen-
+trally identies conicts (e.g., vertex or edge collisions) in
+the initial set of paths. This global analysis ensures that all
+potential conicts are detected and can be addressed in sub-
+sequentsteps.
+S3 Œ Collision Avoidance Policy: Hybrid
+: LNS2+RL em-
+ploys a hybrid strategy for collision avoidance:
+Early Iter-
+ations:
+Utilizes a MARL policy to replan paths for subsets
+of agents involved in conicts. This decentralized compo-
+nent allows agents to learn cooperative behaviors to avoid
+collisions.
+Later Iterations:
+Switches to a centralized PP
+algorithm for replanning, aiming to quickly resolve any re-
+mainingconicts.
+S4ŒAgentReplanning:Hybrid
+:ReplanninginLNS2+RL
+isconductedinahybridmanner:
+EarlyIterations:
+Selected
+subsetsofagentsundergodecentralizedreplanningusingthe
+MARL policy, promoting cooperative behavior.
+Later Iter-
+ations:
+Replanning shifts to a centralized approach using
+PP,focusingonefciencyandresolvinganyremainingcon-
+icts.
+A.3 TrainingMethods
+PPO Training Procedure
+We train a single-agent nav-
+igation policy
+ˇ
+
+to reach a specied goal in the presence
+ofbothstaticanddynamicobstacles.Dynamicobstaclesare
+each assigned a hidden goal and follow a precomputed tra-
+jectory, executing only valid moves; this setup allows us to
+generateonlinecollisionalertsduringinference(cf.stageS3
+ofourxŒcollisionsalgorithm).
+TrainingisperformedwithProximalPolicyOptimization
+(PPO) (Schulman et al. 2017) on an
+11
+
+11
+maze grid for
+30
+;
+000
+episodes. Throughout the rst
+15
+;
+000
+episodes, we
+linearlyincreasethestatic-obstacledensityfrom
+0%
+to
+30%
+andthenumberofdynamicobstaclesfrom0to4.
+Ateachtimestep
+t
+,wecomputethediscountedreturn
+R
+t
+=
+T
+
+t
+X
+l
+=0
+
+l
+r
+t
++
+l
+;
+and the advantage estimate using Generalized Advantage
+Estimation(GAE)(Schulmanetal.2015b):
+A
+t
+=
+R
+t
+
+V
+
+(
+s
+t
+)
+;
+where
+
+= 0
+:
+95
+and
+V
+
+(
+s
+t
+)
+isthevaluefunction.
+ThePPOsurrogateobjectiveis
+L
+PPO
+(
+
+) =
+
+E
+t
+
+min
+
+r
+t
+A
+t
+;
+clip(
+r
+t
+;
+1
+
+";
+1+
+"
+)
+A
+t
+
++
+c
+v
+E
+t
+
+V
+
+(
+s
+t
+)
+
+R
+t
+
+2
+
+
+c
+e
+E
+t
+
+H
+
+ˇ
+
+(
+ j
+s
+t
+)
+
+;
+
+Table 2: Related Literature Categorization into Œ S1: Agent Planning; S2: Collision Detection; S3: Collision avoidance policy;
+S4:AgentReplanning(SB:SearchBased;LB:LearningBased)
+Method S1 S2 S3 S4
+Our*
+Decentralized Centralized Centralized Decentralized
+(SB)CBS Decentralized Centralized Centralized Centralized
+(SB)LNS Centralized Centralized Centralized Centralized
+(LB) PRI-
+MAL &
+PRIMAL-2
+Distributed Distributed Distributed Distributed
+(LB)
+SCRIMP
+Distributed Distributed Distributed Distributed
+(LB) Learn to
+Follow
+Decentralized Decentralized Decentralized Decentralized
+(LB)
+LNS2+RL
+Centralized Centralized Hybrid Hybrid
+where
+r
+t
+=
+ˇ
+
+(
+a
+t
+j
+s
+t
+)
+ˇ
+
+old
+(
+a
+t
+j
+s
+t
+)
+,
+"
+= 0
+:
+2
+,
+c
+v
+= 0
+:
+5
+, and
+c
+e
+are lin-
+early annealed from 0.05 down to 0.01 over the rst
+5
+;
+000
+episodes. PPO inherits many of the stability guarantees of
+trust-regionmethods(Schulmanetal.2015a).
+To encourage the agent to distinguish valid from invalid
+moves,weaddabinarycross-entropyloss
+L
+valid
+(
+
+) =
+E
+t
+
+BCE
+
+z
+t
+;m
+t
+
+;
+where
+z
+t
+2
+R
+jAj
+are the network logits,
+m
+t
+2 f
+0
+;
+1
+g
+jAj
+is
+theaction-validitymask,and
+BCE(
+z;m
+) =
+
+jAj
+X
+i
+=1
+
+m
+i
+log
+˙
+(
+z
+i
+)+(1
+
+m
+i
+)log
+
+1
+
+˙
+(
+z
+i
+)
+
+:
+Thefullobjectiveis
+L
+(
+
+) =
+L
+PPO
+(
+
+)+
+
+valid
+L
+valid
+(
+
+)
+;
+where
+
+valid
+ischosenempirically.Duringbothtrainingand
+inference, we sample only actions agged as valid by
+m
+t
+,
+whichacceleratesconvergenceandimprovessafety.
+Aftertraining,thepolicy
+ˇ
+
+isusedinstageS1togenerate
+initial trajectories and in stage S4 to replan whenever the
+centralizedcollisiondetector(stageS2)issuesanalert.
+NeuralNetworkArchitecture
+ResNetDQN Network Architecture for DDQN Training
+ResNetDQN is a residual-network architecture for approxi-
+mating the action-value function
+Q
+ˇ
+(
+s;a
+)
+in grid-based en-
+vironmentstrainedusingtheDDQNalgorithm(VanHasselt,
+Guez, and Silver 2016). It combines a deep convolutional
+stem with residual blocks (He et al. 2016), early fusion of
+low-dimensionalfeatures,hierarchicaldownsampling,anda
+late-fusionMLPtooutputoneQ-valueperaction.
+NetworkOverview
+1.
+Input:
+(
+B;
+6
+;H;W
+)
+tensor comprising four binary
+masks (obstacle, agent, goal, dynamic) plus normalized
+x
+-and
+y
+-coordinatechannels,anda
+(
+B;
+3)
+low-dimvec-
+torof
+f
+direction
+,
+distance
+g
+.
+2.
+ConvStem&ResidualBlocks:
+3
+
+3
+conv(6
+ˇ
+32chan-
+nels, stride=1, pad=1) + BatchNorm + ReLU, then two
+ResidualBlock(32
+ˇ
+32)
+withdilationrates1and2.
+3.
+Early Fusion:
+Project low-dim (3
+ˇ
+16), tile to
+(
+B;
+16
+;H;W
+)
+, concat with conv features
+ˇ
+48
+channels, then
+3
+
+3
+conv (48
+ˇ
+32) + BatchNorm +
+ReLU.
+4.
+Downsampling Stage 1:
+3
+
+3
+conv (32
+ˇ
+64, stride=2,
+pad=1) + BatchNorm + ReLU, followed by two
+ResidualBlock(64
+ˇ
+64)
+withdilationrates2and4.
+5.
+Downsampling Stage 2:
+3
+
+3
+conv (64
+ˇ
+128, stride=2,
+pad=1) + BatchNorm + ReLU, followed by two
+ResidualBlock(128
+ˇ
+128)
+with dilation rates 4
+and1.
+6.
+Global Pooling & Late Fusion:
+AdaptiveAvgPool2d
+ˇ
+128-dim vector
+u
+. In parallel, map low-dim
+ˇ
+256, map
+u
+!
+256
+,concat
+ˇ
+512
+ˇ
+256viaFC+ReLU.
+7.
+Output:
+Linearlayer(256
+ˇ
+jAj
+)producesQ-values.
+8.
+Initialization:
+All conv and linear weights: Xavier-
+uniform;allbiases:zero.
+ImplementationandPackages
+Ł
+torch
+,
+torch.nn
+,
+torch.nn.functional
+: de-
+nemodules,layers,activations.
+Ł
+AdaptiveAvgPool2d
+,
+BatchNorm2d
+,
+Conv2d
+,
+Linear
+:corebuildingblocks.
+ResNet-based ActorŒCritic Architecture for PPO Train-
+ing
+The PPOActorCritic model shares the same ResNet
+encoderasResNetDQN(convstem,residualblocks,fusion,
+downsampling, pooling) (He et al. 2016), producing a 256-
+dimembedding.ItsplitsintotwoGRU-basedheadsforpol-
+icy (actor) and value (critic), trained via PPO (Schulman
+etal.2017).
+NetworkOverview
+1.
+Shared Encoder:
+Follows Steps 1Œ4 from ResNetDQN,
+yieldinga256-dimhidden
+h
+shared
+.
+
+2.
+Actor Head:
+GRUCell(256
+ˇ
+256) updates hidden state
+h
+ˇ
+t
+;Linear(256
+ˇ
+jAj
+)producesactionlogits.
+3.
+Critic Head:
+GRUCell(256
+ˇ
+256) updates hidden state
+h
+V
+t
+; Linear(256
+ˇ
+1) produces scalar state-value esti-
+mate.
+4.
+Initialization:
+SameXavier-uniformforallweights,zero
+biases.
+ImplementationandPackages
+Ł
+torch
+,
+torch.nn
+,
+torch.nn.functional
+: de-
+neencoder,GRUs,heads.
+Ł
+GRUCell
+,
+Linear
+:recurrentandoutputmodules.
+Figure2:Theplotillustratesthetrainingperformanceofthe
+Double Deep Q-Network (DDQN)
+algorithm. Episode re-
+wards(red),sampleefciencymeasuredbyrewardspertotal
+frames(purple),trainingloss(blue),andepisodelength(or-
+ange)arepresentedacrossepisodes.Smoothedcurvesrepre-
+sentmovingaverages,enhancingthevisibilityofunderlying
+performancetrends.
+Figure3:Theplotillustratesthetrainingperformanceofthe
+Proximal Policy Optimization (PPO)
+algorithm, capturing
+episode rewards (red). Episode rewards (red), sample ef-
+ciencymeasuredbyrewardspertotalframes(purple),train-
+ing loss (blue), and episode length (orange) are presented
+across episodes. Smoothed curves represent moving aver-
+ages, enhancing the visibility of underlying performance
+trends.
+TrainingResults
+
+ModelComparison
+A.4 AdditionalExperiments
+We present a model comparison trained using DDQN and
+PPO reinforcement learning algorithms, Table 3, in Section
+A.3. This section details further empirical evaluations and
+anablationstudyofourframework.
+An ablation study of different agent selection policies is
+detailed in Table 4. We have considered the information
+sharingsetting/replanningstrategyas
+Static&DynamicOb-
+stacleReplanning
+.
+Furthermore, a comparison of replanning settings for
+static and dynamic obstacles is provided in Table 5, which
+reects different information sharing settings as detailed in
+ourmainpaper.Here,weconsideredtheagentselectionpol-
+icyas
+FewestFutureCollisions(FFC)
+.
+We also present extended analyses on MovingAI lab's
+MAPFbenchmarkdataset(Sternetal.2019b)Œrandommap
+32
+
+32
+
+10
+environmentwithvariousagentcounts[8,16,
+32,64,96],resultspresentedinSectionA.4.
+AgentSelectionPolicyComparison
+
+Table3:Performancecomparisonofreinforcementlearningmethods(BFS-DQN,BFS-PPO,A*-DQN,A*-PPO)acrossdiffer-
+ent grid environments and agent counts. Results are averaged over 10 problem instances per conguration. Evaluated metrics
+include Success Rate (SR), Makespan (MS), Collisions (CO), and Time (T), with the Time metric averaged over all trials.
+ShowsthatthemodeltrainedusingDDQN,selectedforourmainpaper,yieldsbetterresultsoverPPOmodel.
+(a)11x11mazegrid,
+˘
+45%staticobstacles(5Œ20agents).Timeinseconds.
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(s)(
+#
+)
+Methods 5-10 11-15 16-20 5-10 11-15 16-20 5-10 11-15 16-20 5-10 11-15 16-20
+BFS-DDQN
+100.00% 100.00% 98.00%
+17.8 23.6 27.4
+9
+53 191
+1.1 4.2 11.8
+BFS-PPO
+100.00%
+94.00% 74.00% 22.1 28.6 28.6
+9 48 125
+4.9 16.5 31.8
+A*-DDQN
+100.00%
+96.00% 82.00%
+16.1 20.7 24.0
+10 59 173 3.3 12.0 25.8
+A*-PPO
+100.00%
+96.00% 74.00% 16.6 21.4 25.2 10 60 171 3.9 14.4 30.4
+(b)21x21mazegrid,
+˘
+35%staticobstacles(32,64,and96agents).Timeinminutes.
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 32 64 96 32 64 96 32 64 96 32 64 96
+BFS-DDQN
+100.00% 90.00%
+0.00% 86.6 131.4 - 528 18909 -
+2.7
+23.9 33.5
+BFS-PPO
+100.00%
+0.00% 0.00% 87.6 - - 463 - - 11.2 30.2 31.1
+A*-DDQN
+100.00%
+80.00% 0.00% 41.4
+72.0
+- 457 11379 - 3.3
+23.5
+33.4
+A*-PPO
+100.00%
+0.00% 0.00%
+39.6
+78.3 -
+407 10761
+- 6.2 27.0 30.2
+(c)25x25warehousegrid,
+˘
+24%staticobstacles(32,64,and96agents).Timeinminutes.
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 32 64 96 32 64 96 32 64 96 32 64 96
+BFS-DDQN
+100.00% 100.00%
+10.00% 94.3 125.9 96.0 237 6379 26553 5.2 28.0 59.5
+BFS-PPO
+100.00%
+40.00% 0.00% 93.6 130.0 - 231 3740 - 15.2 57.3 60.2
+A*-DDQN
+100.00% 100.00% 60.00% 40.5
+43.7
+50.8
+211 3129
+16277 4.7 19.2 51.8
+A*-PPO
+100.00% 100.00%
+40.00% 41.6
+42.4
+51.5
+179 3117
+17382 5.7 30.0 55.4
+
+Table 4: Performance comparison of Agent Selection Policies (Random, Farthest, Fewest Future Collisions - FFC) for Alert-
+BFSandAlert-A*methodsacrossdifferentgridenvironmentsandagentcounts.MetricsincludeSuccessRate(SR),Makespan
+(MS), Collisions (CO), and Time (T). Results are averaged over 10 problem instances per conguration. Best performance
+across policies for each method and agent group is bolded.
+Using Static & Dynamic obstacle replanning
+.
+Shows that, among
+the choices [random, farthest & fewest future collisions (FFC)], the FFC policy, selected for our main paper, yields best
+resultsacrossthedifferentmapcongurations.
+(a)11x11maze,
+˘
+45%staticobstacles(5Œ20agents).Timeinseconds(s).
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(s)(
+#
+)
+Methods 5-10 11-15 16-20 5-10 11-15 16-20 5-10 11-15 16-20 5-10 11-15 16-20
+Policy:RandomAgentSelection
+Alert-BFS 98.33% 98.00% 82.00% 20.5 24.6 32.7 20 108 517 2.0 5.8 22.6
+Alert-A* 98.33% 96.00% 50.00% 17.8 23.6 24.3 16 122 259 4.3 15.7 35.6
+Policy:FarthestAgentSelection
+Alert-BFS
+100.00%
+94.00% 90.00% 19.8 24.6 30.3 14 91 387 1.2 6.9 17.8
+Alert-A* 98.33% 84.00% 62.00% 18.9 23.3 26.5 14 96 224 4.6 18.3 35.1
+Policy:FewestFutureCollisions(FFC)
+Alert-BFS
+100.00% 100.00% 98.00%
+17.8 23.6 27.4
+9 53
+191
+1.1 4.2 11.8
+Alert-A*
+100.00%
+96.00% 82.00%
+16.1 20.7 24.0
+10 59
+173
+3.3 12.0 25.8
+(b)21x21mazegrid,
+˘
+35%staticobstacles(32,64,and96agents).Timeinminutes(min).
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 32 64 96 32 64 96 32 64 96 32 64 96
+Policy:RandomAgentSelection
+Alert-BFS
+100.00%
+0.00% 0.00% 99.2 - - 1670 - - 4.1 30.1 30.4
+Alert-A*
+100.00%
+0.00% 0.00% 48.8 - - 931 - - 6.1 30.2 30.2
+Policy:FarthestAgentSelection
+Alert-BFS
+100.00%
+0.00% 0.00% 93.5 - - 1216 - - 3.1 30.2 30.2
+Alert-A*
+100.00%
+10.00% 0.00% 47.5
+64.0
+- 697 14654 - 5.3 29.8 30.3
+Policy:FewestFutureCollisions(FFC)
+Alert-BFS
+100.00% 90.00%
+0.00% 86.6 131.4 - 528 18909 -
+2.7
+23.9 30.5
+Alert-A*
+100.00%
+80.00% 0.00%
+41.4 72.0
+-
+457 11379
+- 3.3
+23.5
+30.4
+(c)25x25warehousegrid,
+˘
+24%staticobstacles(32,64,and96agents).Timeinminutes(min).
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 32 64 96 32 64 96 32 64 96 32 64 96
+Policy:RandomAgentSelection
+Alert-BFS
+100.00%
+20.00% 0.00% 119.0 139.0 - 722 23853 - 12.4 57.9 60.1
+Alert-A*
+100.00% 100.00%
+0.00% 42.4 54.6 - 302 5788 - 6.0 37.9 60.1
+Policy:FarthestAgentSelection
+Alert-BFS
+100.00%
+60.00% 0.00% 83.4 126.0 - 455 9836 - 8.5 47.6 60.8
+Alert-A*
+100.00% 100.00%
+0.00% 45.0 59.4 - 268 4644 - 6.4 34.9 60.1
+Policy:FewestFutureCollisions(FFC)
+Alert-BFS
+100.00% 100.00%
+10.00% 94.3 125.9 96.0 237 6379 26553 5.2 28.0 59.5
+Alert-A*
+100.00% 100.00% 60.00% 40.5 43.7 50.8 211 3129 16277 4.7 19.2 51.8
+
+Inter-agentInformationSharingComparison
+MapConguration
+:
+32
+
+32
+
+10
+RandomMap
+Therandommap
+32
+
+32
+
+10
+isobtainedfromtheMovingAILab'sMAPF
+benchmark dataset (Stern et al. 2019b). Agent congurations tested include
+scenarios with 8, 16, 32, 64, and 96 agents. Each conguration was tested
+across 10 different problem instances (unique start and goal locations for all
+agents).Thedetailedperformancemetrics,includingsuccessrates,makespan,
+collisions,andcomputationtime,arepresentedinTable6.
+BenchmarkDatasetEvaluation
+
+Table 5: Comparison of replanning settings (Only Static, Only Dynamic, Static & Dynamic Obstacles) for Alert-BFS and
+Alert-A* methods across different grid environments and agent counts. Metrics include Success Rate (SR), Makespan (MS),
+Collisions (CO), and Time (T). Results are averaged over 10 problem instances per conguration. Best performance across
+settings for each method and agent group is bolded.
+Using FFC agent selection policy.
+Shows that, among the replanning
+strategies,Static+Dynamicobstaclereplanningstrategy(selectedforourmainpaper),yieldsbestresultsacrossthedifferent
+mapcongurations.
+(a)11x11mazegrid,
+˘
+45%staticobstacles(5Œ20agents).Timeinseconds(s).
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(s)(
+#
+)
+Methods 5-10 11-15 16-20 5-10 11-15 16-20 5-10 11-15 16-20 5-10 11-15 16-20
+Setting1:OnlyStaticObstacleReplanning(Nointer-agentinformation)
+Alert-BFS 95.00% 92.00% 84.00% 17.5 23.0 25.4 8 51 205 1.4 4.6 14.2
+Alert-A* 95.00% 90.00% 78.00% 15.6 20.3 23.7 8 55 177 3.2 11.6 26.0
+Setting2:OnlyDynamicObstacleReplanning
+Alert-BFS 63.33% 24.00% 8.00% 19.3 21.0 26.8 16 89 171 4.9 17.9 34.7
+Alert-A* 50.00% 12.00% 2.00% 14.0 13.8 15.0 6 25 49 22.9 41.4 52.1
+Setting3:Static&DynamicObstacleReplanning
+Alert-BFS
+100.00% 100.00% 98.00%
+17.8 23.6 27.4 9 53 191
+1.1 4.2 11.8
+Alert-A*
+100.00%
+96.00% 82.00% 16.1 20.7 24.0 10 59 173 3.3 12.0 25.8
+(b)21x21mazegrid,
+˘
+35%staticobstacles(32,64,and96agents).Timeinminutes(min).
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 32 64 96 32 64 96 32 64 96 32 64 96
+Setting1:OnlyStaticObstacleReplanning(Nointer-agentinformation)
+Alert-BFS
+100.00%
+10.00% 0.00% 86.6 140.0 - 528 12476 - 5.8 30.0 30.0
+Alert-A*
+100.00%
+20.00% 0.00%
+41.4 59.0
+-
+457 9310
+- 6.7 30.0 30.0
+Setting2:OnlyDynamicObstacleReplanning
+Alert-BFS 0.00% 0.00% 0.00% - - - - - - 30.0 30.0 30.0
+Alert-A* 0.00% 0.00% 0.00% - - - - - - 30.0 30.0 30.0
+Setting3:Static&DynamicObstacleReplanning
+Alert-BFS
+100.00% 90.00%
+0.00% 86.6 131.4 - 528 18909 -
+2.7
+23.9 30.0
+Alert-A*
+100.00%
+80.00% 0.00%
+41.4
+72.0 -
+457
+11379 - 3.3
+23.5
+30.0
+(c)25x25warehousegrid,
+˘
+24%staticobstacles(32,64,and96agents).Timeinminutes(min).
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 32 64 96 32 64 96 32 64 96 32 64 96
+Setting1:OnlyStaticObstacleReplanning(Nointer-agentinformation)
+Alert-BFS
+100.00% 100.00%
+0.00% 95.8 117.4 - 230 6097 - 10.0 40.0 60.2
+Alert-A*
+100.00% 100.00% 60.00%
+42.2
+41.6
+56.0
+204
+3258 16694 8.9 32.3 53.3
+Setting2:OnlyDynamicObstacleReplanning
+Alert-BFS 0.00% 0.00% 0.00% - - - - - - 61.7 62.4 60.6
+Alert-A* 0.00% 0.00% 0.00% - - - - - - 58.6 61.6 61.8
+Setting3:Static&DynamicObstacleReplanning
+Alert-BFS
+100.00% 100.00%
+10.00% 94.3 125.9 96.0 237 6379 26553 5.2 28.0 59.5
+Alert-A*
+100.00% 100.00% 60.00% 40.5
+43.7
+50.8
+211
+3129 16277 4.7 19.2 51.8
+
+Table6:
+Comparisonofperformancemetricsfordifferentmethodsona
+32
+
+32
+randommap.Resultsareaveragedover10probleminstances
+per conguration and presented in two subtables based on agent counts. Key metrics include Success Rate (SR), Makespan (MS), Collisions
+(CO),andTime(T(min)),withTimeaveragedoveralltrials.Forlearning-basedmethodslikePRIMALandSCRIMP,theaveragestepstaken
+(episode length) are presented in brackets along with average wall-clock time taken. For learning based methods, the environment step limit
+issetto512.Bestperformingvaluesforeachmetricperagentcountarehighlightedinbold.
+(a) 32x32 random map (8, 16, and 32 agents). The time limit per problem instance is 1 hour. For learning based methods, the environment
+steplimitissetto512.
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 8 16 32 8 16 32 8 16 32 8 16 32
+Alert-BFS
+100.00%100.00%100.00%
+62.5 76.2 104.9 2 9 64 0.2 0.6 2.4
+Alert-A*
+100.00%100.00%100.00%
+42.7 45.5 48.1 2 8 68 0.2 0.9 2.5
+CBS
+100.00%100.00%
+90.00% 40.2 43.6 47.0 1 6 35079
+0.01 0.01
+13.0
+ICBS
+100.00%100.00%
+90.00% 40.2 43.6 47.0 1 6 15438
+0.01 0.01
+10.7
+PRIMAL 0.00% 0.00% 0.00% - - - - - - 0.1(512) 0.3(512) 1.0(512)
+SCRIMP
+100.00%100.00%100.00% 39.4 43.3 47.7 0 0 0 0.01
+(39)
+0.01
+(43)
+0.03
+(48)
+(b) 32x32 random map (64 and 96 agents). The time limit per problem instance is 1 hour. For learning based methods, the environment step
+limitissetto512.
+SR(
+"
+) MS(
+#
+) CO(
+#
+) T(min)(
+#
+)
+Methods 64 96 64 96 64 96 64 96
+Alert-BFS
+100.00% 100.00%
+136.5 154.4 1194 7079 12.9 33.8
+Alert-A*
+100.00% 100.00%
+53.2
+52.0
+1158 5912 13.2 30.7
+CBS 0.00% 0.00% - - - - 60.1 60.1
+ICBS 0.00% 0.00% - - - - 60.3 60.2
+PRIMAL 0.00% 0.00% - - - - 3.6(512) 8.4(512)
+SCRIMP
+100.00%
+90.00%
+52.1
+55.8
+2 3 0.2
+(52)
+0.5
+(101)
+
+

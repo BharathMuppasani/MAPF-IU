@@ -1,0 +1,21 @@
+{
+    "env": "CustomGrid-v0",
+    "episodes": 100000,
+    "batch_size": 128,
+    "buffer_size": 200000,
+    "lr": 0.0003,
+    "gamma": 0.9,
+    "target_update": 500,
+    "grid_size": 11,
+    "num_static_obstacles": 15,
+    "num_dynamic_obstacles": 2,
+    "max_steps": 200,
+    "double": true,
+    "priority": false,
+    "custom": true,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.01,
+    "epsilon_decay": 0.999,
+    "save_dir": "train_data/11_maze_dyn/",
+    "load_path": null
+}

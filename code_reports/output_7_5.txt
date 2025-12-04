@@ -1,0 +1,634 @@
+Using device: mps
+→ Running single instance from: test_data/maps/maps_11x11/map_7_5.txt
+Loaded instance from 'test_data/maps/maps_11x11/map_7_5.txt': 7 agents, grid size (11, 11).
+Instance has 7 agents.
+  Computed cell degrees for (11, 11) grid
+  Detected 3 corridor segments
+    Corridor 0: 3 cells, entrances=[(1, 1)], exits=[(3, 3)]
+    Corridor 1: 3 cells, entrances=[(5, 3)], exits=[(7, 1)]
+    Corridor 2: 5 cells, entrances=[(7, 1)], exits=[(9, 5)]
+
+<<<<< Overall Fix Attempt #1 >>>>>
+
+--- Inner Pass 1 of Overall Attempt #1 (Elapsed 0.00s) ---
+Detected 4 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=3,Type=vertex,Cell=(6, 5),Agents=[1, 3],Attempt=1, Stubborn=1
+  Static Replan for Agent 1
+    New plan segment for Agent 1: [1, 2, 2, 2, 1, 1, 2, 2, 1, 1]
+    Agent 1 static: OrigOK=True, NewTotal=4
+  Static Replan for Agent 3
+    New plan segment for Agent 3: [0, 3, 0, 0, 2, 0, 0, 0]
+    Agent 3 static: OrigOK=True, NewTotal=1
+    Committed BEST static fix for Agent 3 (New Colls: 1).
+
+--- Inner Pass 2 of Overall Attempt #1 (Elapsed 8.06s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=9,Type=vertex,Cell=(9, 2),Agents=[1, 7],Attempt=1, Stubborn=1
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Committed YIELD fix for Agent 7.
+
+--- Inner Pass 3 of Overall Attempt #1 (Elapsed 8.99s) ---
+  Contract for Agent 6 expired.
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=19,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=2
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Committed YIELD fix for Agent 1.
+
+--- Inner Pass 4 of Overall Attempt #1 (Elapsed 9.69s) ---
+  Contract for Agent 0 expired.
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=14,Type=vertex,Cell=(5, 1),Agents=[1, 7],Attempt=1, Stubborn=3
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 5 of Overall Attempt #1 (Elapsed 9.69s) ---
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=14,Type=edge,Cell=((6, 1), (5, 1)),Agents=[1, 7],Attempt=1, Stubborn=4
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+    Found 1 cycles: [[0, 6]]
+  General Yield Strategy for Agent 1
+    Committed GENERAL YIELD fix for Agent 1.
+
+--- Inner Pass 6 of Overall Attempt #1 (Elapsed 9.69s) ---
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=20,Type=vertex,Cell=(5, 1),Agents=[1, 7],Attempt=1, Stubborn=5
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+    Found 1 cycles: [[0, 6]]
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 7 of Overall Attempt #1 (Elapsed 9.70s) ---
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=20,Type=edge,Cell=((6, 1), (5, 1)),Agents=[1, 7],Attempt=1, Stubborn=6
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+    Found 1 cycles: [[0, 6]]
+  General Yield Strategy for Agent 1
+    Committed GENERAL YIELD fix for Agent 1.
+
+--- Inner Pass 8 of Overall Attempt #1 (Elapsed 9.70s) ---
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=26,Type=vertex,Cell=(5, 1),Agents=[1, 7],Attempt=1, Stubborn=7
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+    Found 1 cycles: [[0, 6]]
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 9 of Overall Attempt #1 (Elapsed 9.70s) ---
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=26,Type=edge,Cell=((6, 1), (5, 1)),Agents=[1, 7],Attempt=1, Stubborn=8
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+    Found 1 cycles: [[0, 6]]
+  General Yield Strategy for Agent 7
+  General Yield Strategy for Agent 1
+    Committed GENERAL YIELD fix for Agent 1.
+
+--- Inner Pass 10 of Overall Attempt #1 (Elapsed 9.71s) ---
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=32,Type=vertex,Cell=(5, 1),Agents=[1, 7],Attempt=1, Stubborn=9
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+    Found 1 cycles: [[0, 6]]
+  Dynamic Replan for Agent 1 (DynObs: 7)
+    Agent 1 dynamic: OrigOK=True, NewTotal=1
+  Dynamic Replan for Agent 7 (DynObs: 1)
+    Committed BEST dynamic fix for Agent 1 (New Colls: 1).
+
+--- Inner Pass 11 of Overall Attempt #1 (Elapsed 9.99s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=37,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=10
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Committed YIELD fix for Agent 1.
+
+--- Inner Pass 12 of Overall Attempt #1 (Elapsed 10.72s) ---
+  Contract for Agent 0 expired.
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=34,Type=vertex,Cell=(6, 1),Agents=[1, 7],Attempt=1, Stubborn=11
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+    Found 1 cycles: [[0, 6]]
+  Dynamic Replan for Agent 1 (DynObs: 7)
+    Agent 1 dynamic: OrigOK=True, NewTotal=1
+  Dynamic Replan for Agent 7 (DynObs: 1)
+    Agent 7 dynamic: OrigOK=True, NewTotal=1
+    Committed BEST dynamic fix for Agent 1 (New Colls: 1).
+
+--- Inner Pass 13 of Overall Attempt #1 (Elapsed 11.39s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=37,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=2, Stubborn=12
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+    Found 1 cycles: [[0, 6]]
+  Dynamic Replan for Agent 1 (DynObs: 7)
+    Agent 1 dynamic: OrigOK=False, NewTotal=1
+  Dynamic Replan for Agent 7 (DynObs: 1)
+  Smart Coordinated Yield Strategy for Agents [1, 7]
+  Tier 3: Local Joint Planner for Stubborn Agents [1, 7]
+  All strategies failed for (37, 'vertex', (9, 1), frozenset({1, 7})). Deferring agents: [1, 7]
+    Agent 1 DEFERRED at (4, 6).
+    Agent 7 DEFERRED at (9, 7).
+
+--- Inner Pass 14 of Overall Attempt #1 (Elapsed 13.48s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=6,Type=vertex,Cell=(4, 6),Agents=[3],Attempt=1, Stubborn=1
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Static Replan for Agent 3
+    New plan segment for Agent 3: [0, 0, 0, 2, 0]
+    Agent 3 static: OrigOK=True, NewTotal=0
+    Committed PERFECT static fix for Agent 3.
+
+--- Inner Pass 15 of Overall Attempt #1 (Elapsed 18.20s) ---
+No active collisions to process in this inner pass.
+
+--- Handling Deferred Agents Sequentially (2 agents) for Overall Attempt #1 ---
+  Non-deferred agents' effective makespan (wait steps for deferred): 10
+  Planning for deferred Agent 7 from (9, 7) to (9, 2) (after 10 wait steps).
+    Planned for deferred Agent 7. Plan length: 15. Reached goal: True
+  Planning for deferred Agent 1 from (4, 6) to (9, 1) (after 10 wait steps).
+    Agent 1 path blocked by finished Agent 7. Forcing yield.
+    Agent 7 yields to clear path.
+    Planned for deferred Agent 1. Plan length: 20. Reached goal: True
+--- Collisions after Overall Attempt #1 (including deferred): 5 ---
+    Details: [{'time': 19, 'cell': (9, 1), 'agents': [1, 7], 'type': 'vertex'}, {'time': 20, 'cell': (9, 1), 'agents': [1, 7], 'type': 'vertex'}, {'time': 21, 'cell': (9, 1), 'agents': [1, 7], 'type': 'vertex'}] ...
+Collisions persist. Will attempt another overall fix cycle if limits allow.
+
+<<<<< Overall Fix Attempt #2 >>>>>
+
+--- Inner Pass 1 of Overall Attempt #2 (Elapsed 23.50s) ---
+Detected 5 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=19,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=13
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 1
+    Committed GENERAL YIELD fix for Agent 1.
+
+--- Inner Pass 2 of Overall Attempt #2 (Elapsed 23.50s) ---
+Detected 4 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=22,Type=vertex,Cell=(9, 2),Agents=[1, 7],Attempt=1, Stubborn=14
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 3 of Overall Attempt #2 (Elapsed 24.30s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=27,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=15
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 4 of Overall Attempt #2 (Elapsed 24.30s) ---
+  Contract for Agent 6 expired.
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=33,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=16
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 5 of Overall Attempt #2 (Elapsed 24.31s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=39,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=17
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 6 of Overall Attempt #2 (Elapsed 24.31s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=45,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=18
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 7 of Overall Attempt #2 (Elapsed 24.32s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=51,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=19
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 8 of Overall Attempt #2 (Elapsed 24.33s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=57,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=20
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 9 of Overall Attempt #2 (Elapsed 24.33s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=63,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=21
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 10 of Overall Attempt #2 (Elapsed 24.34s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=69,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=22
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Dynamic Replan for Agent 1 (DynObs: 7)
+    Agent 1 dynamic: OrigOK=False, NewTotal=1
+  Dynamic Replan for Agent 7 (DynObs: 1)
+  Smart Coordinated Yield Strategy for Agents [1, 7]
+  Tier 3: Local Joint Planner for Stubborn Agents [1, 7]
+No fixes made for any collision in this inner pass 10. Proceeding to deferred or next overall attempt.
+--- Collisions after Overall Attempt #2 (including deferred): 1 ---
+    Details: [{'time': 69, 'cell': (9, 1), 'agents': [1, 7], 'type': 'vertex'}] ...
+Collisions persist. Will attempt another overall fix cycle if limits allow.
+
+<<<<< Overall Fix Attempt #3 >>>>>
+
+--- Inner Pass 1 of Overall Attempt #3 (Elapsed 26.44s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=69,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=23
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 2 of Overall Attempt #3 (Elapsed 26.45s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=75,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=24
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 3 of Overall Attempt #3 (Elapsed 26.45s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=81,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=25
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 4 of Overall Attempt #3 (Elapsed 26.46s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=87,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=26
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 5 of Overall Attempt #3 (Elapsed 26.53s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=93,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=27
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 6 of Overall Attempt #3 (Elapsed 26.54s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=99,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=28
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 7 of Overall Attempt #3 (Elapsed 26.56s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=105,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=29
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 8 of Overall Attempt #3 (Elapsed 26.57s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=111,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=30
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 9 of Overall Attempt #3 (Elapsed 26.59s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=117,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=31
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 10 of Overall Attempt #3 (Elapsed 26.60s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=123,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=32
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Dynamic Replan for Agent 1 (DynObs: 7)
+    Agent 1 dynamic: OrigOK=False, NewTotal=1
+  Dynamic Replan for Agent 7 (DynObs: 1)
+  Smart Coordinated Yield Strategy for Agents [1, 7]
+  Tier 3: Local Joint Planner for Stubborn Agents [1, 7]
+No fixes made for any collision in this inner pass 10. Proceeding to deferred or next overall attempt.
+--- Collisions after Overall Attempt #3 (including deferred): 1 ---
+    Details: [{'time': 123, 'cell': (9, 1), 'agents': [1, 7], 'type': 'vertex'}] ...
+Collisions persist. Will attempt another overall fix cycle if limits allow.
+
+<<<<< Overall Fix Attempt #4 >>>>>
+
+--- Inner Pass 1 of Overall Attempt #4 (Elapsed 28.65s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=123,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=33
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 2 of Overall Attempt #4 (Elapsed 28.67s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=129,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=34
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 3 of Overall Attempt #4 (Elapsed 28.68s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=135,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=35
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 4 of Overall Attempt #4 (Elapsed 28.70s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=141,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=36
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 5 of Overall Attempt #4 (Elapsed 28.72s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=147,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=37
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 6 of Overall Attempt #4 (Elapsed 28.74s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=153,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=38
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 7 of Overall Attempt #4 (Elapsed 28.76s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=159,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=39
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 8 of Overall Attempt #4 (Elapsed 28.78s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=165,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=40
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 9 of Overall Attempt #4 (Elapsed 28.80s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=171,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=41
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 10 of Overall Attempt #4 (Elapsed 28.83s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=177,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=42
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Dynamic Replan for Agent 1 (DynObs: 7)
+    Agent 1 dynamic: OrigOK=False, NewTotal=1
+  Dynamic Replan for Agent 7 (DynObs: 1)
+  Smart Coordinated Yield Strategy for Agents [1, 7]
+  Tier 3: Local Joint Planner for Stubborn Agents [1, 7]
+No fixes made for any collision in this inner pass 10. Proceeding to deferred or next overall attempt.
+--- Collisions after Overall Attempt #4 (including deferred): 1 ---
+    Details: [{'time': 177, 'cell': (9, 1), 'agents': [1, 7], 'type': 'vertex'}] ...
+Collisions persist. Will attempt another overall fix cycle if limits allow.
+
+<<<<< Overall Fix Attempt #5 >>>>>
+
+--- Inner Pass 1 of Overall Attempt #5 (Elapsed 30.91s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=177,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=43
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 2 of Overall Attempt #5 (Elapsed 30.93s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=183,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=44
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 3 of Overall Attempt #5 (Elapsed 30.95s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=189,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=45
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 4 of Overall Attempt #5 (Elapsed 30.98s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=195,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=46
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 5 of Overall Attempt #5 (Elapsed 31.00s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=201,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=47
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 6 of Overall Attempt #5 (Elapsed 31.02s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=207,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=48
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 7 of Overall Attempt #5 (Elapsed 31.05s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=213,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=49
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 8 of Overall Attempt #5 (Elapsed 31.07s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=219,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=50
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 9 of Overall Attempt #5 (Elapsed 31.10s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=225,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=51
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  General Yield Strategy for Agent 1
+  General Yield Strategy for Agent 7
+    Committed GENERAL YIELD fix for Agent 7.
+
+--- Inner Pass 10 of Overall Attempt #5 (Elapsed 31.12s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=231,Type=vertex,Cell=(9, 1),Agents=[1, 7],Attempt=1, Stubborn=52
+    Corridor 2 owner: Agent 1. Others must yield.
+    Agent 7 is in corridor owned by 1. Forcing exit.
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Dynamic Replan for Agent 1 (DynObs: 7)
+    Agent 1 dynamic: OrigOK=False, NewTotal=1
+  Dynamic Replan for Agent 7 (DynObs: 1)
+  Smart Coordinated Yield Strategy for Agents [1, 7]
+  Tier 3: Local Joint Planner for Stubborn Agents [1, 7]
+No fixes made for any collision in this inner pass 10. Proceeding to deferred or next overall attempt.
+--- Collisions after Overall Attempt #5 (including deferred): 1 ---
+    Details: [{'time': 231, 'cell': (9, 1), 'agents': [1, 7], 'type': 'vertex'}] ...
+Max overall fix attempts reached. Collisions may persist.
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 53
+  - Revised Path Submission IU: 4992
+  - Conflict Alert IU:          69
+    - Static Alerts:      4 IU
+    - Dynamic Alerts:     63 IU
+    - Pivot Alerts:       0 IU
+    - Defer Alerts:       2 IU
+-----------------------------------
+  Total Information Load (IU):  5114
+-----------------------------------
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 53
+  - Revised Path Submission IU: 4992
+  - Conflict Alert IU:          69
+    - Static Alerts:      4 IU
+    - Dynamic Alerts:     63 IU
+    - Pivot Alerts:       0 IU
+    - Defer Alerts:       2 IU
+-----------------------------------
+  Total Information Load (IU):  5114
+-----------------------------------
+
+fix_collisions finished. Total time: 33.22s. Overall Attempts: 5
+Final collisions reported by fix_collisions: 1
+    Details: [{'time': 231, 'cell': (9, 1), 'agents': [1, 7], 'type': 'vertex'}] ...
+Unique collisions ever encountered: 71
+CollisionsTotalDetected (sum over passes): 78
+Static S/A: 2/3. Dynamic S/A: 2/14. Pivot S/A: 0/0. Deferred: 2
+✔ Detailed execution log saved to 'logs/info_test/info_test_map_7_5.json'
+Analysis Complete. Success: 71.43%, Time: 33.26s
+Agent 1 Final Plan: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 2, 2, 2, 4, 4, 4, 4, 3, 2, 2]
+Agent 2 Final Plan: [3, 3, 1, 1, 1, 1, 2]
+Agent 3 Final Plan: [0, 3, 0, 0, 0, 0, 2, 0]
+Agent 4 Final Plan: [0, 0, 3]
+Agent 5 Final Plan: [1, 1, 3, 1, 1, 1, 3, 3, 3, 3]
+Agent 6 Final Plan: [1, 3, 3]
+Agent 7 Final Plan: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 1, 1, 3]

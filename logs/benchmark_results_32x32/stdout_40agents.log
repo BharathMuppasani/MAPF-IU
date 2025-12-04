@@ -1,0 +1,469 @@
+Using device: mps
+→ Running single instance from: test_data/maps/benchmark_converted/scene_even_40agents.txt
+✓ Log directory created (if needed): /Users/bittu/Desktop/GitHub/MAPF-NeurIPS-25/logs/benchmark_results_32x32
+Loaded instance from 'test_data/maps/benchmark_converted/scene_even_40agents.txt': 40 agents, grid size (32, 32).
+Instance has 40 agents.
+
+=== Collision Resolution Started ===
+Grid: (32, 32), Agents: 40
+Strategy: STATIC + DYNAMIC + JOINT A*
+Precomputing heuristic distances...
+Finished agents: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40}
+
+--- Pass 1/10000 (Elapsed: 0.06s) ---
+Detected 21 collisions
+
+  Collision: T=3, Type=edge, Cell=((14, 1), (13, 1)), Agents=[18, 34], Attempt=1
+  → Trying STATIC for Agent 18
+  → Trying STATIC for Agent 34
+  → Trying DYNAMIC for Agent 18 (blocker: 34)
+  → Trying DYNAMIC for Agent 34 (blocker: 18)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=3, t_start=0, t_goal_sub=18, agents=[18, 34]
+    Start positions: ((15, 0), (11, 1))
+    Subgoal positions: ((0, 3), (28, 2))
+    Joint A* success in 18 steps (expanded 19 nodes) window [0,18]
+      Agent 18 joint plan: [0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]...
+      Agent 34 joint plan: [1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]...
+    Splicing agent 18: plan_len=26, t_start=0, t_goal_sub=18, segment_len=18
+    Splicing agent 34: plan_len=37, t_start=0, t_goal_sub=18, segment_len=18
+    ✓ Joint plan accepted!
+      Final plan for Agent 18: [0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 1, 3, 3, 0, 3]
+      Final plan for Agent 34: [1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3]
+  ✓ Joint A* successful
+    Reduced collisions from 21 to 20
+
+--- Pass 2/10000 (Elapsed: 40.30s) ---
+Detected 20 collisions
+
+  Collision: T=4, Type=edge, Cell=((27, 20), (28, 20)), Agents=[22, 28], Attempt=1
+  → Trying STATIC for Agent 22
+  ✓ STATIC successful for Agent 22
+
+--- Pass 3/10000 (Elapsed: 43.15s) ---
+Detected 19 collisions
+
+  Collision: T=5, Type=vertex, Cell=(24, 13), Agents=[17, 35], Attempt=1
+  → Trying STATIC for Agent 17
+  → Trying STATIC for Agent 35
+  → Trying DYNAMIC for Agent 17 (blocker: 35)
+  → Trying DYNAMIC for Agent 35 (blocker: 17)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=5, t_start=0, t_goal_sub=20, agents=[17, 35]
+    Start positions: ((19, 13), (29, 13))
+    Subgoal positions: ((28, 7), (10, 12))
+    Joint A* success in 20 steps (expanded 21 nodes) window [0,20]
+      Agent 17 joint plan: [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2]...
+      Agent 35 joint plan: [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]...
+    Splicing agent 17: plan_len=15, t_start=0, t_goal_sub=20, segment_len=20
+    Splicing agent 35: plan_len=36, t_start=0, t_goal_sub=20, segment_len=20
+    ✓ Joint plan accepted!
+      Final plan for Agent 17: [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4]
+      Final plan for Agent 35: [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0]
+  ✓ Joint A* successful
+    Reduced collisions from 19 to 18
+
+--- Pass 4/10000 (Elapsed: 83.43s) ---
+Detected 18 collisions
+
+  Collision: T=6, Type=vertex, Cell=(23, 17), Agents=[6, 26], Attempt=1
+  → Trying STATIC for Agent 6
+  → Trying STATIC for Agent 26
+  ✓ STATIC successful for Agent 26
+
+--- Pass 5/10000 (Elapsed: 94.82s) ---
+Detected 17 collisions
+
+  Collision: T=8, Type=vertex, Cell=(13, 28), Agents=[33, 38], Attempt=1
+  → Trying STATIC for Agent 33
+  → Trying STATIC for Agent 38
+  → Trying DYNAMIC for Agent 33 (blocker: 38)
+  → Trying DYNAMIC for Agent 38 (blocker: 33)
+  ✓ DYNAMIC successful for Agent 38
+
+--- Pass 6/10000 (Elapsed: 119.46s) ---
+Detected 17 collisions
+
+  Collision: T=10, Type=vertex, Cell=(14, 29), Agents=[1, 15], Attempt=1
+  → Trying STATIC for Agent 1
+  ✓ STATIC successful for Agent 1
+
+--- Pass 7/10000 (Elapsed: 120.17s) ---
+Detected 16 collisions
+
+  Collision: T=10, Type=vertex, Cell=(18, 8), Agents=[12, 30], Attempt=1
+  → Trying STATIC for Agent 12
+  → Trying STATIC for Agent 30
+  → Trying DYNAMIC for Agent 12 (blocker: 30)
+  → Trying DYNAMIC for Agent 30 (blocker: 12)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=10, t_start=3, t_goal_sub=25, agents=[12, 30]
+    Start positions: ((13, 6), (25, 8))
+    Subgoal positions: ((18, 21), (6, 5))
+    Joint A* success in 22 steps (expanded 10468 nodes) window [3,25]
+      Agent 12 joint plan: [1, 1, 1, 1, 3, 1, 3, 3, 3, 0, 3, 3, 3, 3, 3]...
+      Agent 30 joint plan: [0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0]...
+    Splicing agent 12: plan_len=33, t_start=3, t_goal_sub=25, segment_len=22
+    Splicing agent 30: plan_len=30, t_start=3, t_goal_sub=25, segment_len=22
+    ✓ Joint plan accepted!
+      Final plan for Agent 12: [1, 1, 1, 1, 1, 1, 1, 3, 1, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+      Final plan for Agent 30: [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0]
+  ✓ Joint A* successful
+    Reduced collisions from 16 to 14
+
+--- Pass 8/10000 (Elapsed: 161.73s) ---
+Detected 14 collisions
+
+  Collision: T=13, Type=vertex, Cell=(14, 28), Agents=[1, 13], Attempt=1
+  → Trying STATIC for Agent 1
+  → Trying STATIC for Agent 13
+  ✓ STATIC successful for Agent 13
+
+--- Pass 9/10000 (Elapsed: 180.26s) ---
+Detected 15 collisions
+
+  Collision: T=11, Type=vertex, Cell=(16, 28), Agents=[13, 33], Attempt=1
+  → Trying STATIC for Agent 13
+  → Trying STATIC for Agent 33
+  ✓ STATIC successful for Agent 33
+
+--- Pass 10/10000 (Elapsed: 199.43s) ---
+Detected 14 collisions
+
+  Collision: T=12, Type=vertex, Cell=(16, 27), Agents=[13, 38], Attempt=1
+  → Trying STATIC for Agent 13
+  → Trying STATIC for Agent 38
+  ✓ STATIC successful for Agent 38
+
+--- Pass 11/10000 (Elapsed: 209.75s) ---
+Detected 13 collisions
+
+  Collision: T=13, Type=vertex, Cell=(19, 16), Agents=[3, 10], Attempt=1
+  → Trying STATIC for Agent 3
+  → Trying STATIC for Agent 10
+  → Trying DYNAMIC for Agent 3 (blocker: 10)
+  → Trying DYNAMIC for Agent 10 (blocker: 3)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=13, t_start=6, t_goal_sub=28, agents=[3, 10]
+    Start positions: ((12, 16), (21, 17))
+    Subgoal positions: ((18, 4), (19, 16))
+    Joint A* success in 22 steps (expanded 71 nodes) window [6,28]
+      Agent 3 joint plan: [1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2]...
+      Agent 10 joint plan: [0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]...
+    Splicing agent 3: plan_len=33, t_start=6, t_goal_sub=28, segment_len=22
+    Splicing agent 10: plan_len=9, t_start=6, t_goal_sub=28, segment_len=22
+    ✓ Joint plan accepted!
+      Final plan for Agent 3: [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 4, 4, 4, 4, 2, 2, 1, 1, 2]
+      Final plan for Agent 10: [0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 13 to 12
+
+--- Pass 12/10000 (Elapsed: 240.05s) ---
+Detected 12 collisions
+
+  Collision: T=13, Type=vertex, Cell=(11, 29), Agents=[15, 38], Attempt=1
+  → Trying STATIC for Agent 15
+  → Trying STATIC for Agent 38
+  ✓ STATIC successful for Agent 38
+
+--- Pass 13/10000 (Elapsed: 251.16s) ---
+Detected 13 collisions
+
+  Collision: T=12, Type=vertex, Cell=(16, 27), Agents=[13, 38], Attempt=2
+  → Trying DYNAMIC for Agent 13 (blocker: 38)
+  → Trying DYNAMIC for Agent 38 (blocker: 13)
+  ✓ DYNAMIC successful for Agent 38
+
+--- Pass 14/10000 (Elapsed: 262.04s) ---
+Detected 11 collisions
+
+  Collision: T=14, Type=edge, Cell=((17, 18), (17, 19)), Agents=[6, 36], Attempt=1
+  → Trying STATIC for Agent 6
+  → Trying STATIC for Agent 36
+  → Trying DYNAMIC for Agent 6 (blocker: 36)
+  → Trying DYNAMIC for Agent 36 (blocker: 6)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=14, t_start=7, t_goal_sub=29, agents=[6, 36]
+    Start positions: ((22, 17), (21, 21))
+    Subgoal positions: ((4, 21), (16, 4))
+    Joint A* window: coll_time=14, t_start=6, t_goal_sub=30, agents=[6, 36]
+    Start positions: ((23, 17), (22, 21))
+    Subgoal positions: ((3, 21), (16, 3))
+    Joint A* window: coll_time=14, t_start=5, t_goal_sub=31, agents=[6, 36]
+    Start positions: ((24, 17), (23, 21))
+    Subgoal positions: ((2, 21), (16, 3))
+    Joint A* window: coll_time=14, t_start=4, t_goal_sub=32, agents=[6, 36]
+    Start positions: ((25, 17), (23, 22))
+    Subgoal positions: ((2, 22), (16, 3))
+    Joint A* success in 28 steps (expanded 62 nodes) window [4,32]
+      Agent 6 joint plan: [0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0]...
+      Agent 36 joint plan: [2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 1, 2]...
+    Splicing agent 6: plan_len=45, t_start=4, t_goal_sub=32, segment_len=28
+    Splicing agent 36: plan_len=30, t_start=4, t_goal_sub=32, segment_len=28
+    ✓ Joint plan accepted!
+      Final plan for Agent 6: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 3, 3, 3, 3, 1, 3, 3, 0, 0, 0, 3, 3, 3, 3]
+      Final plan for Agent 36: [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+  ✓ Joint A* successful
+    Reduced collisions from 11 to 10
+
+--- Pass 15/10000 (Elapsed: 308.43s) ---
+Detected 10 collisions
+
+  Collision: T=18, Type=vertex, Cell=(16, 21), Agents=[4, 28], Attempt=1
+  → Trying STATIC for Agent 4
+  → Trying STATIC for Agent 28
+  → Trying DYNAMIC for Agent 4 (blocker: 28)
+  → Trying DYNAMIC for Agent 28 (blocker: 4)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=18, t_start=11, t_goal_sub=33, agents=[4, 28]
+    Start positions: ((9, 21), (23, 21))
+    Subgoal positions: ((29, 23), (6, 22))
+    Joint A* window: coll_time=18, t_start=10, t_goal_sub=34, agents=[4, 28]
+    Start positions: ((8, 21), (23, 22))
+    Subgoal positions: ((29, 24), (6, 22))
+    Joint A* success in 24 steps (expanded 134 nodes) window [10,34]
+      Agent 4 joint plan: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]...
+      Agent 28 joint plan: [2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0]...
+    Splicing agent 4: plan_len=39, t_start=10, t_goal_sub=34, segment_len=24
+    Splicing agent 28: plan_len=29, t_start=10, t_goal_sub=34, segment_len=24
+    ✓ Joint plan accepted!
+      Final plan for Agent 4: [3, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3]
+      Final plan for Agent 28: [0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 10 to 7
+
+--- Pass 16/10000 (Elapsed: 350.77s) ---
+Detected 7 collisions
+
+  Collision: T=25, Type=vertex, Cell=(23, 19), Agents=[8, 20], Attempt=1
+  → Trying STATIC for Agent 8
+  → Trying STATIC for Agent 20
+  → Trying DYNAMIC for Agent 8 (blocker: 20)
+  → Trying DYNAMIC for Agent 20 (blocker: 8)
+  ✓ DYNAMIC successful for Agent 20
+
+--- Pass 17/10000 (Elapsed: 370.98s) ---
+Detected 7 collisions
+
+  Collision: T=26, Type=vertex, Cell=(24, 19), Agents=[8, 20], Attempt=1
+  → Trying STATIC for Agent 8
+  → Trying STATIC for Agent 20
+  → Trying DYNAMIC for Agent 8 (blocker: 20)
+  → Trying DYNAMIC for Agent 20 (blocker: 8)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=26, t_start=19, t_goal_sub=41, agents=[8, 20]
+    Start positions: ((20, 22), (24, 19))
+    Subgoal positions: ((26, 8), (24, 19))
+    Joint A* success in 22 steps (expanded 118 nodes) window [19,41]
+      Agent 8 joint plan: [1, 2, 1, 2, 2, 1, 2, 1, 1, 2, 2, 2, 2, 2, 1]...
+      Agent 20 joint plan: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]...
+    Splicing agent 8: plan_len=48, t_start=19, t_goal_sub=41, segment_len=22
+    Extended agent 20 plan: added 18 WAIT actions (1 -> 19)
+    Splicing agent 20: plan_len=19, t_start=19, t_goal_sub=41, segment_len=22
+    ✓ Joint plan accepted!
+      Final plan for Agent 8: [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 4, 4, 2, 2, 1, 2, 2, 2, 2]
+      Final plan for Agent 20: [1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 7 to 6
+
+--- Pass 18/10000 (Elapsed: 381.42s) ---
+Detected 6 collisions
+
+  Collision: T=25, Type=vertex, Cell=(23, 19), Agents=[8, 20], Attempt=2
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=25, t_start=18, t_goal_sub=40, agents=[8, 20]
+    Start positions: ((19, 22), (23, 19))
+    Subgoal positions: ((26, 8), (23, 19))
+    Joint A* success in 22 steps (expanded 147 nodes) window [18,40]
+      Agent 8 joint plan: [1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2]...
+      Agent 20 joint plan: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]...
+    Splicing agent 8: plan_len=48, t_start=18, t_goal_sub=40, segment_len=22
+    Splicing agent 20: plan_len=41, t_start=18, t_goal_sub=40, segment_len=22
+    ✓ Joint plan accepted!
+      Final plan for Agent 8: [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 4, 4, 2, 2, 1, 2, 2, 2, 2]
+      Final plan for Agent 20: [1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 6 to 5
+
+--- Pass 19/10000 (Elapsed: 381.64s) ---
+Detected 5 collisions
+
+  Collision: T=26, Type=vertex, Cell=(3, 27), Agents=[32, 37], Attempt=1
+  → Trying STATIC for Agent 32
+  ✓ STATIC successful for Agent 32
+
+--- Pass 20/10000 (Elapsed: 386.25s) ---
+Detected 4 collisions
+
+  Collision: T=35, Type=vertex, Cell=(2, 25), Agents=[6, 40], Attempt=1
+  → Trying STATIC for Agent 6
+  → Trying STATIC for Agent 40
+  → Trying DYNAMIC for Agent 6 (blocker: 40)
+  → Trying DYNAMIC for Agent 40 (blocker: 6)
+  → Trying Joint A* (both static and dynamic tried)
+    Joint A* window: coll_time=35, t_start=28, t_goal_sub=50, agents=[6, 40]
+    Start positions: ((5, 21), (5, 25))
+    Subgoal positions: ((0, 31), (2, 25))
+    Joint A* success in 22 steps (expanded 1091 nodes) window [28,50]
+      Agent 6 joint plan: [0, 0, 3, 3, 3, 3, 3, 1, 3, 3, 0, 0, 0, 0, 3]...
+      Agent 40 joint plan: [0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]...
+    Splicing agent 6: plan_len=45, t_start=28, t_goal_sub=50, segment_len=22
+    Splicing agent 40: plan_len=31, t_start=28, t_goal_sub=50, segment_len=22
+    ✓ Joint plan accepted!
+      Final plan for Agent 6: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 3, 3, 3, 1, 3, 3, 0, 0, 0, 0, 3, 3, 3, 4, 4, 4, 4, 4]
+      Final plan for Agent 40: [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+  ✓ Joint A* successful
+    Reduced collisions from 4 to 1
+
+--- Pass 21/10000 (Elapsed: 416.69s) ---
+Detected 1 collisions
+
+  Collision: T=38, Type=vertex, Cell=(30, 19), Agents=[21, 22], Attempt=1
+  → Trying STATIC for Agent 21
+  ✓ STATIC successful for Agent 21
+
+--- Pass 22/10000 (Elapsed: 420.13s) ---
+✓ No collisions found! Resolution complete.
+
+=== Global Cleanup ===
+Trimming trailing WAITs across all agents...
+  Global makespan: 48 (max plan was 50)
+  Agent 6: trimmed 2 steps (was 50, now 48)
+  Agent 40: trimmed 2 steps (was 50, now 48)
+  Agent 1: padded with 37 WAIT actions (was 11, now 48)
+  Agent 2: padded with 37 WAIT actions (was 11, now 48)
+  Agent 3: padded with 15 WAIT actions (was 33, now 48)
+  Agent 4: padded with 9 WAIT actions (was 39, now 48)
+  Agent 5: padded with 41 WAIT actions (was 7, now 48)
+  Agent 7: padded with 45 WAIT actions (was 3, now 48)
+  Agent 9: padded with 4 WAIT actions (was 44, now 48)
+  Agent 10: padded with 20 WAIT actions (was 28, now 48)
+  Agent 11: padded with 36 WAIT actions (was 12, now 48)
+  Agent 12: padded with 15 WAIT actions (was 33, now 48)
+  Agent 13: padded with 25 WAIT actions (was 23, now 48)
+  Agent 14: padded with 45 WAIT actions (was 3, now 48)
+  Agent 15: padded with 3 WAIT actions (was 45, now 48)
+  Agent 16: padded with 23 WAIT actions (was 25, now 48)
+  Agent 17: padded with 28 WAIT actions (was 20, now 48)
+  Agent 18: padded with 22 WAIT actions (was 26, now 48)
+  Agent 19: padded with 27 WAIT actions (was 21, now 48)
+  Agent 20: padded with 7 WAIT actions (was 41, now 48)
+  Agent 21: padded with 5 WAIT actions (was 43, now 48)
+  Agent 22: padded with 41 WAIT actions (was 7, now 48)
+  Agent 23: padded with 7 WAIT actions (was 41, now 48)
+  Agent 24: padded with 43 WAIT actions (was 5, now 48)
+  Agent 25: padded with 39 WAIT actions (was 9, now 48)
+  Agent 26: padded with 40 WAIT actions (was 8, now 48)
+  Agent 27: padded with 44 WAIT actions (was 4, now 48)
+  Agent 28: padded with 14 WAIT actions (was 34, now 48)
+  Agent 29: padded with 27 WAIT actions (was 21, now 48)
+  Agent 30: padded with 18 WAIT actions (was 30, now 48)
+  Agent 31: padded with 15 WAIT actions (was 33, now 48)
+  Agent 32: padded with 17 WAIT actions (was 31, now 48)
+  Agent 33: padded with 28 WAIT actions (was 20, now 48)
+  Agent 34: padded with 11 WAIT actions (was 37, now 48)
+  Agent 35: padded with 12 WAIT actions (was 36, now 48)
+  Agent 36: padded with 16 WAIT actions (was 32, now 48)
+  Agent 37: padded with 40 WAIT actions (was 8, now 48)
+  Agent 38: padded with 44 WAIT actions (was 4, now 48)
+  Agent 39: padded with 36 WAIT actions (was 12, now 48)
+  All plans now synchronized to length 48
+  Re-simulating all trajectories to match trimmed plans...
+  [DEBUG] After re-simulation:
+    Plan lengths: [48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48]
+    Traj lengths: [49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49]
+    ✓ All trajectories synchronized to length 49
+Global cleanup complete: trimmed 2 agents, padded 37 agents, re-simulated all trajectories
+
+=== Final Collision Check (after cleanup) ===
+[DEBUG] Trajectory lengths after cleanup: [49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49]
+[DEBUG] Max trajectory length: 49
+[DEBUG] Collision detected at t=8: agents [33, 38] at (13, 28)
+[DEBUG] Collision detected at t=10: agents [1, 38] at (13, 28)
+
+=== Resolution Complete ===
+Time: 420.26s
+Passes: 22
+Final collisions: 2
+Timed out: False
+[DEBUG] analyze_collisions says: 2 collisions
+[DEBUG] debug_scan_collisions says: 2 collisions
+[DEBUG] Sample final collisions: [{'time': 8, 'type': 'vertex', 'cell': (13, 28), 'agents': [33, 38]}, {'time': 10, 'type': 'vertex', 'cell': (13, 28), 'agents': [1, 38]}]
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 925
+  - Revised Path Submission IU: 879
+  - Conflict Alert IU:          722
+    - Static Alerts:      10 IU
+    - Dynamic Alerts:     23 IU
+    - Joint A* Planning:  689 IU
+-----------------------------------
+  Total Information Load (IU):  2526
+-----------------------------------
+
+=== Post-Cleanup Collision Resolution ===
+Found 2 collisions after global cleanup
+Attempting to resolve these remaining collisions...
+
+  Post-Cleanup Pass 1/5
+    Trying to fix: T=8, Type=vertex, Agents=[33, 38]
+    Joint A* window: coll_time=8, t_start=1, t_goal_sub=23, agents=[33, 38]
+    Start positions: ((6, 28), (11, 29))
+    Subgoal positions: ((24, 29), (13, 28))
+    Joint A* success in 22 steps (expanded 199 nodes) window [1,23]
+      Agent 33 joint plan: [1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1]...
+      Agent 38 joint plan: [1, 1, 2, 4, 4, 4, 2, 3, 2, 3, 4, 4, 4, 4, 4]...
+      ✓ Collision resolved!
+
+✓ Post-cleanup resolution fixed 1 collisions
+  Remaining: 0 collisions
+
+=== MAPF Metrics ===
+Makespan (longest trajectory):  49
+Sum of Costs (SOC):             1920
+Average Path Length:            48.00
+Total Agents:                   40
+Agents at Goal:                 40
+Final Collision Count:          0
+✔ Detailed execution log saved to 'logs/benchmark_results_32x32/scene_even_40agents.json'
+Analysis Complete. Success: 100.00%, Time: 420.49s
+Agent 1 Final Plan: [1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 2 Final Plan: [1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 3 Final Plan: [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 4, 4, 4, 4, 2, 2, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 4 Final Plan: [3, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 5 Final Plan: [1, 1, 1, 1, 1, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 6 Final Plan: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 3, 3, 3, 1, 3, 3, 0, 0, 0, 0, 3, 3, 3, 4, 4, 4]
+Agent 7 Final Plan: [3, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 8 Final Plan: [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 4, 4, 2, 2, 1, 2, 2, 2, 2]
+Agent 9 Final Plan: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4]
+Agent 10 Final Plan: [0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 11 Final Plan: [2, 2, 2, 0, 2, 2, 2, 2, 1, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 12 Final Plan: [1, 1, 1, 1, 1, 1, 1, 3, 1, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 13 Final Plan: [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 14 Final Plan: [0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 15 Final Plan: [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 4, 4, 4]
+Agent 16 Final Plan: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 17 Final Plan: [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 18 Final Plan: [0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 1, 3, 3, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 19 Final Plan: [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 20 Final Plan: [1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 21 Final Plan: [1, 3, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 0, 3, 3, 1, 3, 3, 1, 3, 3, 3, 3, 0, 4, 4, 4, 4, 4]
+Agent 22 Final Plan: [1, 2, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 23 Final Plan: [1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 3, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4]
+Agent 24 Final Plan: [1, 1, 1, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 25 Final Plan: [1, 1, 1, 1, 1, 1, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 26 Final Plan: [1, 1, 1, 2, 2, 2, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 27 Final Plan: [1, 1, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 28 Final Plan: [0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 29 Final Plan: [1, 1, 1, 1, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 3, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 30 Final Plan: [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 31 Final Plan: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 32 Final Plan: [3, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 1, 3, 1, 3, 3, 0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 33 Final Plan: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 34 Final Plan: [1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 35 Final Plan: [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 36 Final Plan: [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 37 Final Plan: [0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 38 Final Plan: [1, 1, 1, 2, 4, 4, 4, 2, 3, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 39 Final Plan: [0, 0, 0, 0, 3, 3, 3, 3, 0, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 40 Final Plan: [3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]

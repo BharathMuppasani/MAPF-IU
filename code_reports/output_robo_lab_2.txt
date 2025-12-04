@@ -1,0 +1,185 @@
+Using device: mps
+→ Running single instance from: test_data/maps/robo_lab_2.txt
+Loaded instance from 'test_data/maps/robo_lab_2.txt': 3 agents, grid size (11, 11).
+Instance has 3 agents.
+  Computed cell degrees for (11, 11) grid
+  Detected 2 corridor segments
+    Corridor 0: 2 cells, entrances=[(4, 6)], exits=[(5, 6)]
+    Corridor 1: 2 cells, entrances=[(6, 5)], exits=[(7, 5)]
+
+<<<<< Overall Fix Attempt #1 >>>>>
+
+--- Inner Pass 1 of Overall Attempt #1 (Elapsed 0.00s) ---
+Detected 2 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=2,Type=vertex,Cell=(5, 5),Agents=[1, 2],Attempt=1, Stubborn=1
+  Static Replan for Agent 1
+    New plan segment for Agent 1: None
+  Static Replan for Agent 2
+    New plan segment for Agent 2: None
+  General Yield Strategy for Agent 2
+    Committed GENERAL YIELD fix for Agent 2.
+
+--- Inner Pass 2 of Overall Attempt #1 (Elapsed 2.14s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=3,Type=edge,Cell=((5, 5), (5, 6)),Agents=[1, 3],Attempt=1, Stubborn=1
+  Static Replan for Agent 1
+    New plan segment for Agent 1: None
+  Static Replan for Agent 3
+    New plan segment for Agent 3: None
+  General Yield Strategy for Agent 3
+    Committed GENERAL YIELD fix for Agent 3.
+
+--- Inner Pass 3 of Overall Attempt #1 (Elapsed 3.40s) ---
+  Contract for Agent 0 expired.
+Detected 8 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=3,Type=vertex,Cell=(4, 6),Agents=[2, 3],Attempt=1, Stubborn=1
+  Static Replan for Agent 2
+    New plan segment for Agent 2: [3, 1, 1, 1, 3]
+    Agent 2 static: OrigOK=True, NewTotal=2
+  Static Replan for Agent 3
+    New plan segment for Agent 3: [1, 2, 2, 1, 2, 1]
+    Agent 3 static: OrigOK=True, NewTotal=1
+    Committed BEST static fix for Agent 3 (New Colls: 1).
+
+--- Inner Pass 4 of Overall Attempt #1 (Elapsed 4.31s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=3,Type=edge,Cell=((5, 5), (5, 6)),Agents=[1, 3],Attempt=2, Stubborn=2
+  Static Replan for Agent 1
+    New plan segment for Agent 1: None
+  Static Replan for Agent 3
+    New plan segment for Agent 3: None
+  General Yield Strategy for Agent 3
+    Committed GENERAL YIELD fix for Agent 3.
+
+--- Inner Pass 5 of Overall Attempt #1 (Elapsed 5.26s) ---
+  Contract for Agent 0 expired.
+Detected 8 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=3,Type=vertex,Cell=(4, 6),Agents=[2, 3],Attempt=2, Stubborn=2
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Static Replan for Agent 2
+    New plan segment for Agent 2: [3, 1, 1, 1, 3]
+    Agent 2 static: OrigOK=True, NewTotal=2
+  Static Replan for Agent 3
+    New plan segment for Agent 3: [1, 2, 2, 1, 2, 1]
+    Agent 3 static: OrigOK=True, NewTotal=1
+    Committed BEST static fix for Agent 3 (New Colls: 1).
+
+--- Inner Pass 6 of Overall Attempt #1 (Elapsed 6.26s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=3,Type=edge,Cell=((5, 5), (5, 6)),Agents=[1, 3],Attempt=3, Stubborn=3
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [1, 3]
+    Committed SMART COORDINATED YIELD: Agent 3 yields for 1.
+
+--- Inner Pass 7 of Overall Attempt #1 (Elapsed 6.29s) ---
+Detected 8 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=3,Type=vertex,Cell=(4, 6),Agents=[2, 3],Attempt=3, Stubborn=3
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [2, 3]
+    Committed SMART COORDINATED YIELD: Agent 3 yields for 2.
+
+--- Inner Pass 8 of Overall Attempt #1 (Elapsed 7.70s) ---
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=3,Type=vertex,Cell=(5, 6),Agents=[1, 2],Attempt=1, Stubborn=2
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Static Replan for Agent 1
+    New plan segment for Agent 1: [3, 0, 3]
+    Agent 1 static: OrigOK=False, NewTotal=3
+  Static Replan for Agent 2
+    New plan segment for Agent 2: [3, 1, 1, 1, 3]
+    Agent 2 static: OrigOK=True, NewTotal=3
+    Committed BEST static fix for Agent 2 (New Colls: 3).
+
+--- Inner Pass 9 of Overall Attempt #1 (Elapsed 8.39s) ---
+Detected 3 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=2,Type=vertex,Cell=(5, 5),Agents=[1, 2],Attempt=2, Stubborn=3
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [1, 2]
+    Committed SMART COORDINATED YIELD: Agent 2 yields for 1.
+
+--- Inner Pass 10 of Overall Attempt #1 (Elapsed 8.53s) ---
+Detected 2 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=9,Type=vertex,Cell=(5, 6),Agents=[1, 3],Attempt=1, Stubborn=4
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [1, 3]
+    Committed SMART COORDINATED YIELD: Agent 1 yields for 3.
+
+--- Inner Pass 11 of Overall Attempt #1 (Elapsed 9.05s) ---
+Detected 7 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=4,Type=vertex,Cell=(4, 6),Agents=[1, 2],Attempt=1, Stubborn=4
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [1, 2]
+    Committed SMART COORDINATED YIELD: Agent 2 yields for 1.
+
+--- Inner Pass 12 of Overall Attempt #1 (Elapsed 9.11s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=9,Type=vertex,Cell=(5, 6),Agents=[1, 3],Attempt=2, Stubborn=5
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [1, 3]
+    Committed SMART COORDINATED YIELD: Agent 1 yields for 3.
+
+--- Inner Pass 13 of Overall Attempt #1 (Elapsed 9.65s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=10,Type=vertex,Cell=(4, 6),Agents=[1, 2],Attempt=1, Stubborn=5
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [1, 2]
+    Committed SMART COORDINATED YIELD: Agent 2 yields for 1.
+
+--- Inner Pass 14 of Overall Attempt #1 (Elapsed 9.71s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=10,Type=vertex,Cell=(5, 5),Agents=[2, 3],Attempt=1, Stubborn=4
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [2, 3]
+    Committed SMART COORDINATED YIELD: Agent 3 yields for 2.
+
+--- Inner Pass 15 of Overall Attempt #1 (Elapsed 10.84s) ---
+Detected 1 active collisions to process in this inner pass.
+-- Handling Collision (Inner Pass): T=16,Type=vertex,Cell=(5, 6),Agents=[1, 3],Attempt=1, Stubborn=6
+    Agent 1 hit deep yield cap (2). Skipping deep yield.
+  Checking for Cycles/Deadlocks (Pivot Parking)...
+  Smart Coordinated Yield Strategy for Agents [1, 3]
+    Committed SMART COORDINATED YIELD: Agent 1 yields for 3.
+
+--- Inner Pass 16 of Overall Attempt #1 (Elapsed 11.44s) ---
+No active collisions to process in this inner pass.
+--- Collisions after Overall Attempt #1 (including deferred): 0 ---
+All collisions resolved in this overall attempt.
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 17
+  - Revised Path Submission IU: 310
+  - Conflict Alert IU:          17
+    - Static Alerts:      17 IU
+    - Dynamic Alerts:     0 IU
+    - Pivot Alerts:       0 IU
+    - Defer Alerts:       0 IU
+-----------------------------------
+  Total Information Load (IU):  344
+-----------------------------------
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 17
+  - Revised Path Submission IU: 310
+  - Conflict Alert IU:          17
+    - Static Alerts:      17 IU
+    - Dynamic Alerts:     0 IU
+    - Pivot Alerts:       0 IU
+    - Defer Alerts:       0 IU
+-----------------------------------
+  Total Information Load (IU):  344
+-----------------------------------
+
+fix_collisions finished. Total time: 11.44s. Overall Attempts: 1
+Final collisions reported by fix_collisions: 0
+Unique collisions ever encountered: 22
+CollisionsTotalDetected (sum over passes): 48
+Static S/A: 3/12. Dynamic S/A: 0/0. Pivot S/A: 0/0. Deferred: 0
+✔ Detailed execution log saved to 'logs/info_test/info_test_robo_lab_2.json'
+Analysis Complete. Success: 100.00%, Time: 11.44s
+Agent 1 Final Plan: [3, 0, 3, 4, 0, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 4, 1]
+Agent 2 Final Plan: [3, 3, 4, 2, 4, 4, 4, 4, 4, 1, 1, 1, 3]
+Agent 3 Final Plan: [1, 2, 3, 4, 4, 4, 4, 4, 2, 3, 4, 4, 4, 4, 4, 2, 2, 1, 1, 2]
