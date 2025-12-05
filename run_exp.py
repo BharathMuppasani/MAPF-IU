@@ -12,7 +12,7 @@ from utils.grid_env_wrapper import GridEnvWrapper
 from dqn.dqn import ResNetDQN
 from ppo.ppo import PPOActorCritic
 from utils.env_utils import analyze_collisions, simulate_plan
-from utils.search_utils import plan_with_search, astar
+from utils.search_utils import plan_with_search, astar, astar_cpp
 from fix import fix_collisions
 
 # ==============================================================================
@@ -161,7 +161,7 @@ def make_example_from_txt(instance_path, model, device):
         
         # Create a clean copy for the planner to use
         planning_env = copy.deepcopy(env_inst)
-        plan = astar(planning_env, timeout=60, heuristic_weight=2)
+        plan = astar_cpp(planning_env, timeout=10, heuristic_weight=2)
         
         if plan is None:
             print(f"Warning: No initial plan found for agent start:{start_pos}->goal:{goal_pos}.")
@@ -196,7 +196,7 @@ def make_one_example(num_agents, model, device, map_filepath=None):
         generate_new_agent_and_goal(new_env, used_positions)
         agent_envs.append(new_env)
 
-    agent_plans = [astar(copy.deepcopy(env), timeout=60, heuristic_weight=2) for env in agent_envs]
+    agent_plans = [astar_cpp(copy.deepcopy(env), timeout=60, heuristic_weight=2) for env in agent_envs]
     agent_trajectories = [simulate_plan(env, p) if p else [] for env, p in zip(agent_envs, agent_plans)]
 
     return {"agent_envs": agent_envs, "agent_plans": agent_plans, "agent_trajectories": agent_trajectories}

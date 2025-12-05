@@ -101,55 +101,6 @@ def pos_at(agent_id, t, trajectories, agent_starts):
     return tuple(map(int, agent_starts[idx]))  # No trajectory -> use start
 
 
-def debug_scan_collisions(trajectories, agent_starts):
-    """
-    Brute-force collision scan over trajectories.
-    Vertex collisions at time t: pos_i(t) == pos_j(t)
-    Edge swaps between t and t+1: pos_i(t) == pos_j(t+1) and pos_j(t) == pos_i(t+1)
-    Trajectories are extended by holding the last position after they end.
-
-    Args:
-        trajectories: list of agent trajectories
-        agent_starts: starting positions for agents (used as fallback for agents without trajectories)
-    """
-    collisions = []
-    if not trajectories:
-        return collisions
-
-    T = max(len(traj) for traj in trajectories) if trajectories else 0
-
-    # Vertex collisions
-    for t in range(T):
-        for i in range(len(trajectories)):
-            pi = pos_at(i + 1, t, trajectories, agent_starts)
-            for j in range(i + 1, len(trajectories)):
-                pj = pos_at(j + 1, t, trajectories, agent_starts)
-                if pi == pj:
-                    collisions.append({
-                        'time': t,
-                        'cell': pi,
-                        'agents': [i + 1, j + 1],
-                        'type': 'vertex'
-                    })
-
-    # Edge swaps
-    for t in range(T - 1):
-        for i in range(len(trajectories)):
-            pi_t = pos_at(i + 1, t, trajectories, agent_starts)
-            pi_tp1 = pos_at(i + 1, t + 1, trajectories, agent_starts)
-            for j in range(i + 1, len(trajectories)):
-                pj_t = pos_at(j + 1, t, trajectories, agent_starts)
-                pj_tp1 = pos_at(j + 1, t + 1, trajectories, agent_starts)
-                if pi_t == pj_tp1 and pi_tp1 == pj_t:
-                    collisions.append({
-                        'time': t + 1,
-                        'cell': (pi_t, pi_tp1),
-                        'agents': [i + 1, j + 1],
-                        'type': 'edge'
-                    })
-
-    return collisions
-
 # --- Multi-Agent Planning ---
 
 # Try to import C++ collision module

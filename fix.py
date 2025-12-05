@@ -5,7 +5,7 @@ import heapq
 import itertools
 from collections import defaultdict, deque
 
-from utils.env_utils import analyze_collisions, simulate_plan, debug_scan_collisions
+from utils.env_utils import analyze_collisions, simulate_plan
 from utils.search_utils import plan_with_search, astar
 
 # Try to import the C++ joint A* module
@@ -2824,15 +2824,7 @@ def fix_collisions(
 
         if not collisions:
             if verbose:
-                # Validation: verify no hidden collisions using same check as final check
-                debug_colls = debug_scan_collisions(current_trajectories, agent_starts)
-                if debug_colls:
-                    print(f"⚠ WARNING: Main loop reports 0 collisions but debug scan found {len(debug_colls)}!")
-                    print(f"  This may indicate a collision detection inconsistency.")
-                    print(f"  This collision will likely be caught in final check.")
-                    # Continue anyway - will be caught in final check
-                else:
-                    print(f"✓ No collisions found! Resolution complete (verified with debug scan).")
+                print(f"✓ No collisions found! Resolution complete.")
             break
 
         if verbose:
@@ -4140,7 +4132,6 @@ def fix_collisions(
         print(f"\n=== Final Collision Check (after cleanup) ===")
 
     final_collisions = analyze_collisions(current_trajectories, agent_goals, agent_starts, pristine_static_grid)
-    debug_colls = debug_scan_collisions(current_trajectories, agent_starts)
 
     # DEBUG: Check trajectory lengths and potential late collisions
     if verbose:
@@ -4178,7 +4169,6 @@ def fix_collisions(
         print(f"Final collisions: {len(final_collisions)}")
         print(f"Timed out: {timed_out}")
         print(f"[DEBUG] analyze_collisions says: {len(final_collisions)} collisions")
-        print(f"[DEBUG] debug_scan_collisions says: {len(debug_colls)} collisions")
         if final_collisions:
             print("[DEBUG] Sample final collisions:", [
                 {
