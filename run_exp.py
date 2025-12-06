@@ -206,6 +206,37 @@ def make_one_example(num_agents, model, device, map_filepath=None):
 # SECTION 3: METRICS & ANALYSIS
 # ==============================================================================
 
+def calculate_trimmed_soc(trajectories, goal_positions):
+    """
+    Calculate sum of costs, trimming waits after reaching goal.
+
+    For each agent, count only steps until the goal is first reached.
+    """
+    total = 0
+    for i, traj in enumerate(trajectories):
+        if not traj:
+            continue
+        goal = tuple(map(int, goal_positions[i]))
+        # Find first time reaching goal
+        for t, pos in enumerate(traj):
+            if tuple(map(int, pos)) == goal:
+                total += t + 1  # +1 because t is 0-indexed (position at t=0 is start)
+                break
+        else:
+            # Never reached goal, count entire trajectory
+            total += len(traj)
+    return total
+
+
+def count_agents_at_goal(trajectories, goal_positions):
+    """Count agents whose final position is at their goal."""
+    count = 0
+    for i, traj in enumerate(trajectories):
+        if traj and tuple(map(int, traj[-1])) == tuple(map(int, goal_positions[i])):
+            count += 1
+    return count
+
+
 def compute_metrics(final_trajs, goal_positions, run_counters, start_time):
     """Computes and returns a dictionary of performance metrics."""
     num_agents = len(goal_positions)
@@ -338,6 +369,45 @@ def run_and_analyze_mapf(initial_agent_plans, initial_agent_trajectories, agent_
             "globalMakespan": max((len(t) for t in final_trajs if t), default=0)
         }
 
+        # 4. Add comprehensive metrics section
+        goal_positions = [env.env.goal_pos for env in agent_envs]
+        metrics_raw = log_data.get('metrics_raw', {})
+        strategy_iu_raw = log_data.get('strategy_iu_raw', {})
+
+        log_data["metrics"] = {
+            "makespan": max((len(t) for t in final_trajs if t), default=0),
+            "sumOfCosts": sum(len(t) for t in final_trajs if t),
+            "sumOfCostsTrimmed": calculate_trimmed_soc(final_trajs, goal_positions),
+            "totalTime": log_data.get('time', 0),
+            "agentsAtGoal": count_agents_at_goal(final_trajs, goal_positions),
+            "initialConflicts": metrics_raw.get('initialConflicts', 0),
+            "passes": {
+                "total": log_data.get('passes', 0),
+                "phase1": metrics_raw.get('phase1Passes', 0),
+                "phase2": metrics_raw.get('phase2Passes', 0),
+                "postCleanup": metrics_raw.get('postCleanupPasses', 0),
+            },
+            "strategiesTried": metrics_raw.get('strategies', {}),
+            "deferredAgentsCount": metrics_raw.get('deferredAgentsCount', 0),
+        }
+
+        # 5. Add strategy IU section (only successful attempts)
+        log_data["strategyIU"] = {
+            "yieldIU": strategy_iu_raw.get('yieldIU', 0),
+            "jointAstarIU": strategy_iu_raw.get('jointAstarIU', 0),
+            "jointAstarCellConflicts": strategy_iu_raw.get('jointAstarCellConflicts', 0),
+            "staticIU": strategy_iu_raw.get('staticIU', 0),
+            "staticBlockedCellsIU": strategy_iu_raw.get('staticBlockedCellsIU', 0),
+            "staticCollisionCellsIU": strategy_iu_raw.get('staticCollisionCellsIU', 0),
+            "resubmissionIU": strategy_iu_raw.get('resubmissionIU', 0),
+        }
+
+        # Clean up raw metrics from log_data (they're now in the formatted sections)
+        if 'metrics_raw' in log_data:
+            del log_data['metrics_raw']
+        if 'strategy_iu_raw' in log_data:
+            del log_data['strategy_iu_raw']
+
         try:
             with open(log_filepath, 'w') as f:
                 json.dump(log_data, f, indent=2)
@@ -447,7 +517,7 @@ def main():
     parser.add_argument("--algo", choices=["dqn", "ppo"], default="ppo", help="Model type for RL-guided search.")
     parser.add_argument("--timeout", type=float, default=18000.0, help="Overall time limit (sec) for solving an instance.")
     parser.add_argument("--heuristic_weight", type=float, default=1.5, help="Heuristic weight for A*.")
-    parser.add_argument("--max_expansions", type=int, default=5000, help="Max expansions for search.")
+    parser.add_argument("--max_expansions", type=int, default=10000, help="Max expansions for search.")
     parser.add_argument("--num_agents", type=int, default=None, help="Number of agents to simulate in batch mode.")
     parser.add_argument("--map_file", type=str, default=None, help="Path to a .txt or .map file to run a single instance.")
     parser.add_argument("--log_file", type=str, default=None, help="Path to save the output log JSON file.")

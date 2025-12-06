@@ -12,15 +12,28 @@ from utils.search_utils import plan_with_search, astar
 try:
     import cpp_joint_astar
     HAS_CPP_JOINT_ASTAR = True
+    print("✓ cpp_joint_astar loaded")
 except ImportError:
     HAS_CPP_JOINT_ASTAR = False
+    print("✗ cpp_joint_astar not available")
 
 # Try to import the C++ collision module
 try:
     import cpp_collision
     HAS_CPP_COLLISION = True
+    print("✓ cpp_collision loaded")
 except ImportError:
     HAS_CPP_COLLISION = False
+    print("✗ cpp_collision not available")
+
+# Try to import the C++ cleanup module
+try:
+    import cpp_cleanup
+    HAS_CPP_CLEANUP = True
+    print("✓ cpp_cleanup loaded")
+except ImportError:
+    HAS_CPP_CLEANUP = False
+    print("✗ cpp_cleanup not available")
 
 # Global flag to enable/disable C++ joint A*
 USE_CPP_JOINT_ASTAR = True
@@ -96,6 +109,129 @@ class InfoSharingTracker:
             'jointAStarIU': self.joint_astar_iu,
             'parkingRejectedIU': self.parking_rejected_iu,
             'totalInformationLoadIU': self.total_iu
+        }
+
+
+class MetricsTracker:
+    """Track general metrics about the collision resolution process."""
+    def __init__(self):
+        # Initial conflict count
+        self.initial_conflicts = 0
+
+        # Pass tracking
+        self.phase1_passes = 0
+        self.phase2_passes = 0
+        self.post_cleanup_passes = 0
+
+        # Strategy attempts and successes
+        self.strategies = {
+            'yield_on_start': {'attempts': 0, 'successes': 0},
+            'yield_on_goal': {'attempts': 0, 'successes': 0},
+            'generalized_yield': {'attempts': 0, 'successes': 0},
+            'static': {'attempts': 0, 'successes': 0},
+            'dynamic': {'attempts': 0, 'successes': 0},
+            'joint_astar': {'attempts': 0, 'successes': 0},
+            'defer': {'attempts': 0, 'successes': 0},
+        }
+
+        # Deferred agents count
+        self.deferred_agents_count = 0
+
+    def record_strategy_attempt(self, strategy_name):
+        """Record an attempt for a strategy."""
+        if strategy_name in self.strategies:
+            self.strategies[strategy_name]['attempts'] += 1
+
+    def record_strategy_success(self, strategy_name):
+        """Record a success for a strategy."""
+        if strategy_name in self.strategies:
+            self.strategies[strategy_name]['successes'] += 1
+
+    def to_dict(self):
+        return {
+            'initialConflicts': self.initial_conflicts,
+            'phase1Passes': self.phase1_passes,
+            'phase2Passes': self.phase2_passes,
+            'postCleanupPasses': self.post_cleanup_passes,
+            'strategies': self.strategies,
+            'deferredAgentsCount': self.deferred_agents_count,
+        }
+
+
+class StrategyIUTracker:
+    """Track IU (Information Units) per strategy for successful attempts only."""
+    def __init__(self):
+        # Per-strategy IU (only successful attempts)
+        self.yield_iu = 0           # rejected spots = 1 IU each
+        self.joint_astar_iu = 0     # nodes expanded
+        self.joint_astar_cell_conflicts = 0  # cell conflicts with external agents
+        self.static_iu = 0          # blocked cells + collision cells
+        self.resubmission_iu = 0    # only the resubmitted path length
+
+        # Breakdown for static
+        self.static_blocked_cells_iu = 0
+        self.static_collision_cells_iu = 0  # 1 for vertex, 2 for edge
+
+    def record_yield_iu(self, rejected_count):
+        """Record IU for yield strategy (rejected spots)."""
+        self.yield_iu += rejected_count
+
+    def record_joint_astar_iu(self, nodes_expanded, cell_conflicts=0):
+        """Record IU for joint A* strategy."""
+        self.joint_astar_iu += nodes_expanded
+        self.joint_astar_cell_conflicts += cell_conflicts
+
+    def record_static_iu(self, blocked_cells_count, collision_type):
+        """Record IU for static strategy."""
+        self.static_blocked_cells_iu += blocked_cells_count
+        # 1 IU for vertex collision, 2 IU for edge collision
+        collision_iu = 1 if collision_type == 'vertex' else 2
+        self.static_collision_cells_iu += collision_iu
+        self.static_iu = self.static_blocked_cells_iu + self.static_collision_cells_iu
+
+    def record_resubmission_iu(self, old_traj_segment, new_traj_segment, goal_pos):
+        """
+        Record IU for resubmission.
+        Only counts cells that are DIFFERENT from the original trajectory.
+        Trailing waits after reaching goal are not counted.
+        Each changed cell = 1 IU.
+        """
+        if not new_traj_segment:
+            return
+
+        goal = tuple(map(int, goal_pos))
+
+        # Find first time new trajectory reaches goal (to exclude trailing waits)
+        goal_reached_idx = len(new_traj_segment)
+        for i, pos in enumerate(new_traj_segment):
+            if tuple(map(int, pos)) == goal:
+                goal_reached_idx = i + 1  # Include the goal position itself
+                break
+
+        # Count cells that are different from original trajectory (up to goal)
+        changed_cells = 0
+        for i in range(goal_reached_idx):
+            new_pos = tuple(map(int, new_traj_segment[i]))
+            # Check if this position differs from original
+            if i < len(old_traj_segment):
+                old_pos = tuple(map(int, old_traj_segment[i]))
+                if new_pos != old_pos:
+                    changed_cells += 1
+            else:
+                # New trajectory is longer than old - count as changed
+                changed_cells += 1
+
+        self.resubmission_iu += changed_cells
+
+    def to_dict(self):
+        return {
+            'yieldIU': self.yield_iu,
+            'jointAstarIU': self.joint_astar_iu,
+            'jointAstarCellConflicts': self.joint_astar_cell_conflicts,
+            'staticIU': self.static_iu,
+            'staticBlockedCellsIU': self.static_blocked_cells_iu,
+            'staticCollisionCellsIU': self.static_collision_cells_iu,
+            'resubmissionIU': self.resubmission_iu,
         }
 
 
@@ -2630,7 +2766,7 @@ def fix_collisions(
     algo="ppo",
     timeout=10.0,
     heuristic_weight=1.0,
-    max_expansions=200,
+    max_expansions=20000,
     time_limit=60,
     max_passes=10000,
     joint_rewind=5,
@@ -2699,6 +2835,10 @@ def fix_collisions(
 
     info_tracker = InfoSharingTracker()
     info_tracker.record_initial_submission(initial_agent_trajectories)
+
+    # Initialize metrics and strategy IU trackers
+    metrics_tracker = MetricsTracker()
+    strategy_iu_tracker = StrategyIUTracker()
 
     # History tracking
     static_block_hist = defaultdict(set)
@@ -2822,6 +2962,10 @@ def fix_collisions(
         collisions = analyze_collisions(current_trajectories, agent_goals, agent_starts, pristine_static_grid)
         run_counters['collisions_total'] += len(collisions)
 
+        # Track initial conflicts (only on first pass)
+        if pass_num == 1:
+            metrics_tracker.initial_conflicts = len(collisions)
+
         if not collisions:
             if verbose:
                 print(f"✓ No collisions found! Resolution complete.")
@@ -2904,6 +3048,7 @@ def fix_collisions(
 
                 if agents_at_start:
                     collision_yield_start_attempts[coll_key] += 1
+                    metrics_tracker.record_strategy_attempt('yield_on_start')
 
                     # Try YIELD-ON-START for each agent at start
                     for yielding_agent in agents_at_start:
@@ -2964,6 +3109,11 @@ def fix_collisions(
                                 if verbose:
                                     print(f"  ✓ YIELD-ON-START successful: Agent {yielding_agent} yielded from start")
 
+                                # Track success and IU (only on success)
+                                metrics_tracker.record_strategy_success('yield_on_start')
+                                rejected_count = yield_result.get('rejected_count', 0)
+                                strategy_iu_tracker.record_yield_iu(rejected_count)
+
                                 fixed = True
                                 any_fix_this_pass = True
                                 run_counters['yield_start_fixes'] = run_counters.get('yield_start_fixes', 0) + 1
@@ -2984,6 +3134,7 @@ def fix_collisions(
             if not fixed and collision_yield_goal_applicable.get(coll_key, False):
                 collision_yield_attempts[coll_key] += 1
                 attempt_num_yield = collision_yield_attempts[coll_key]
+                metrics_tracker.record_strategy_attempt('yield_on_goal')
 
                 if verbose:
                     print(f"  → Trying YIELD-ON-GOAL (attempt {attempt_num_yield})")
@@ -3027,6 +3178,10 @@ def fix_collisions(
                         # Track yielded agent
                         yielded_agents.add(yielding_agent)
 
+                        # Track success and IU (only on success)
+                        metrics_tracker.record_strategy_success('yield_on_goal')
+                        strategy_iu_tracker.record_yield_iu(rejected_count)
+
                         if info_tracker:
                             # Yield strategy usually involves a wait or a local move.
                             # We can approximate replan start as collision time or 0.
@@ -3043,7 +3198,7 @@ def fix_collisions(
                             # Let's use max(0, coll['time'] - 1) as a heuristic?
                             # Or just leave it as is for simple yield if not specified?
                             # The user specifically mentioned "Revised Path Submission IU".
-                            # I'll use 0 for simple yield for now to avoid breaking things, 
+                            # I'll use 0 for simple yield for now to avoid breaking things,
                             # but for the main strategies (Static, Dynamic, Joint) I will be precise.
                             info_tracker.record_revised_submission(new_traj, replan_start_time=0)
 
@@ -3067,8 +3222,9 @@ def fix_collisions(
             if not fixed and \
                not collision_yield_start_applicable.get(coll_key, False) and \
                not collision_yield_goal_applicable.get(coll_key, False):
-                
+
                 collision_yield_general_attempts[coll_key] += 1
+                metrics_tracker.record_strategy_attempt('generalized_yield')
 
                 success, yielding_agent, new_plan, new_traj, rejected_count = try_generalized_yield(
                     coll,
@@ -3097,6 +3253,10 @@ def fix_collisions(
                     current_plans[idx] = new_plan
                     current_trajectories[idx] = new_traj
 
+                    # Track success and IU (only on success)
+                    metrics_tracker.record_strategy_success('generalized_yield')
+                    strategy_iu_tracker.record_yield_iu(rejected_count)
+
                     if info_tracker:
                         # Generalized yield
                         info_tracker.record_revised_submission(new_traj, replan_start_time=0)
@@ -3108,7 +3268,7 @@ def fix_collisions(
             if fixed:
                 break  # Exit to re-detect collisions
 
-            # STRATEGY 3: STATIC (refinement #1: try up to 3 times per collision)
+            # STRATEGY 4: STATIC (refinement #1: try up to 3 times per collision)
             # Initialize STATIC strategy variables with safe defaults
             agents_to_try_static = []
             static_can_run = False
@@ -3137,6 +3297,7 @@ def fix_collisions(
                 # Increment attempt counter immediately (revert to old behavior)
                 collision_static_attempts[coll_key] += 1
                 attempt_num_static = collision_static_attempts[coll_key]
+                metrics_tracker.record_strategy_attempt('static')
 
                 # NEW: Iterate by window size first, then by agent
                 window_sizes = [5, 10, 15, 20, 30]
@@ -3257,6 +3418,12 @@ def fix_collisions(
                             # Update blocked cells history
                             static_block_hist[idx].update(new_cells_to_block)
 
+                        # Track success and IU (only on success)
+                        metrics_tracker.record_strategy_success('static')
+                        # Static IU: blocked cells used + collision cells (1 for vertex, 2 for edge)
+                        blocked_cells_count = len(static_block_hist[idx])  # All cells in history used for replanning
+                        strategy_iu_tracker.record_static_iu(blocked_cells_count, coll['type'])
+
                         run_counters['replan_success_static'] += 1
                         any_fix_this_pass = True
                         fixed = True
@@ -3326,6 +3493,11 @@ def fix_collisions(
                                 info_tracker.record_revised_submission(new_traj, replan_start_time=0)
                                 static_block_hist[idx].update(new_cells_to_block)
 
+                            # Track success and IU (only on success)
+                            metrics_tracker.record_strategy_success('static')
+                            blocked_cells_count = len(static_block_hist[idx])
+                            strategy_iu_tracker.record_static_iu(blocked_cells_count, coll['type'])
+
                             run_counters['replan_success_static'] += 1
                             any_fix_this_pass = True
                             fixed = True
@@ -3385,6 +3557,7 @@ def fix_collisions(
                     # Increment attempt counter immediately (revert to old behavior)
                     collision_dynamic_attempts[coll_key] += 1
                     attempt_num_dynamic = collision_dynamic_attempts[coll_key]
+                    metrics_tracker.record_strategy_attempt('dynamic')
 
                     # Determine which agents to try for DYNAMIC
                     if dynamic_forced_assignment:
@@ -3474,11 +3647,20 @@ def fix_collisions(
                                 )
 
                                 if coll_resolved:
+                                    # Save old trajectory segment before replacing (for IU calculation)
+                                    old_traj_segment = current_trajectories[idx][replan_time:] if replan_time < len(current_trajectories[idx]) else []
+                                    new_traj_segment = new_traj[replan_time:] if replan_time < len(new_traj) else []
+
                                     current_plans[idx] = new_full_plan
                                     current_trajectories[idx] = new_traj
 
                                     # BUGFIX: Trim trailing WAITs if agent reached goal
                                     current_plans[idx] = trim_trailing_waits(current_plans[idx], current_trajectories[idx], agent_goals[idx])
+
+                                    # Track success and IU (only on success)
+                                    metrics_tracker.record_strategy_success('dynamic')
+                                    # Resubmission IU: only changed cells, excluding trailing waits after goal
+                                    strategy_iu_tracker.record_resubmission_iu(old_traj_segment, new_traj_segment, agent_goals[idx])
 
                                     if info_tracker:
                                         info_tracker.record_dynamic_alert(obs_path)
@@ -3536,6 +3718,7 @@ def fix_collisions(
                     # Increment attempt counter immediately (revert to old behavior)
                     collision_joint_attempts[coll_key] += 1
                     attempt_num_joint = collision_joint_attempts[coll_key]
+                    metrics_tracker.record_strategy_attempt('joint_astar')
 
                     if verbose:
                         print(f"  → Trying Joint A* (attempt {attempt_num_joint}/{MAX_JOINT_ATTEMPTS})")
@@ -3675,10 +3858,17 @@ def fix_collisions(
                                     # Record expansions (accumulated from the successful call)
                                     info_tracker.record_joint_astar_iu(expansions)
 
+                            # Track success and IU (only on success)
+                            metrics_tracker.record_strategy_success('joint_astar')
+                            # Joint A* IU: nodes expanded + cell conflicts
+                            # Cell conflicts are tracked via print statements in try_joint_astar_planning
+                            # For now, we count expansions. Cell conflicts need to be extracted from the function.
+                            strategy_iu_tracker.record_joint_astar_iu(expansions, cell_conflicts=0)
+
                             # NOTE: DO NOT trim WAITs here! Joint A* has carefully constructed
                             # these plans to resolve collisions. The global cleanup phase will
                             # handle all plan trimming uniformly across all agents.
-           
+
                             run_counters['replan_success_joint'] += 1
                             any_fix_this_pass = True
                             fixed = True
@@ -3735,6 +3925,7 @@ def fix_collisions(
                 if all_main_strategies_done and not defer_exhausted:
                     # Attempt DEFER immediately
                     collision_defer_attempts[coll_key] += 1
+                    metrics_tracker.record_strategy_attempt('defer')
 
                     if verbose:
                         print(f"    Attempting DEFER (attempt {collision_defer_attempts[coll_key]}/{MAX_DEFER_ATTEMPTS})")
@@ -3760,6 +3951,9 @@ def fix_collisions(
 
                         if verbose:
                             print(f"  ✓ DEFER successful: Agent {deferred_agent_id} parked at start")
+
+                        # Track success (no IU for defer - it's just parking at start)
+                        metrics_tracker.record_strategy_success('defer')
 
                         run_counters['defer_fixes'] = run_counters.get('defer_fixes', 0) + 1
                         any_fix_this_pass = True
@@ -3840,6 +4034,9 @@ def fix_collisions(
                     print(f"{'=' * 60}")
                     print(f"✓ No collisions among {num_agents - len(deferred_agents)} non-deferred agents")
                     print(f"→ Planning paths for {len(deferred_agents)} deferred agents...")
+
+                # Record phase 1 passes before transitioning
+                metrics_tracker.phase1_passes = pass_num
 
                 in_phase_2 = True
 
@@ -4126,6 +4323,68 @@ def fix_collisions(
         if verbose:
             print(f"  No plans to trim")
 
+    # SYNCHRONIZED WAIT REMOVAL: Remove timesteps where ALL agents have WAIT action
+    # This compresses the timeline by eliminating "synchronized idle" moments
+    if HAS_CPP_CLEANUP and max_plan_len > 0:
+        if verbose:
+            print(f"\n=== Synchronized WAIT Removal ===")
+
+        # Analyze potential savings before compression
+        analysis = cpp_cleanup.analyze_synchronized_waits(current_plans)
+        sync_wait_count = analysis['synchronized_waits']
+
+        if sync_wait_count > 0:
+            if verbose:
+                print(f"  Found {sync_wait_count} synchronized WAIT timesteps")
+                print(f"  Positions: {list(analysis['sync_wait_positions'])[:20]}{'...' if sync_wait_count > 20 else ''}")
+
+            # Convert starts to CleanupCell objects for C++ module
+            cpp_starts = [cpp_cleanup.CleanupCell(int(s[0]), int(s[1])) for s in agent_starts]
+
+            # Convert grid to list format for C++ module
+            cpp_grid = pristine_static_grid.tolist() if hasattr(pristine_static_grid, 'tolist') else list(pristine_static_grid)
+
+            # Store original plans/trajectories in case compression introduces collisions
+            plans_before_compression = [list(p) for p in current_plans]
+            trajs_before_compression = [list(t) for t in current_trajectories]
+
+            # Perform synchronized WAIT removal
+            cleanup_result = cpp_cleanup.remove_synchronized_waits(current_plans, cpp_starts, cpp_grid)
+
+            # Convert results back to Python lists
+            compressed_plans = [list(p) for p in cleanup_result.plans]
+            compressed_trajectories = [[(c.r, c.c) for c in traj] for traj in cleanup_result.trajectories]
+
+            # SAFETY CHECK: Verify compression doesn't introduce new collisions
+            compressed_collisions = analyze_collisions(
+                compressed_trajectories, agent_goals, agent_starts, pristine_static_grid
+            )
+
+            if len(compressed_collisions) == 0:
+                # Safe to use compressed plans
+                current_plans = compressed_plans
+                current_trajectories = compressed_trajectories
+
+                if verbose:
+                    print(f"  ✓ Compression successful!")
+                    print(f"    Original makespan: {cleanup_result.original_makespan}")
+                    print(f"    Compressed makespan: {cleanup_result.cleaned_makespan}")
+                    print(f"    Timesteps removed: {cleanup_result.timesteps_removed}")
+            else:
+                # Compression introduced collisions - revert
+                current_plans = plans_before_compression
+                current_trajectories = trajs_before_compression
+
+                if verbose:
+                    print(f"  ✗ Compression would introduce {len(compressed_collisions)} collisions - reverted")
+                    print(f"    Sample collision: {compressed_collisions[0] if compressed_collisions else 'N/A'}")
+        else:
+            if verbose:
+                print(f"  No synchronized WAITs to remove")
+    elif not HAS_CPP_CLEANUP:
+        if verbose:
+            print(f"\n=== Synchronized WAIT Removal (skipped - cpp_cleanup not available) ===")
+
     # BUGFIX: Final collision check AFTER global cleanup to catch goal-cell collisions
     # (must happen after trajectories are synchronized to same length)
     if verbose:
@@ -4180,6 +4439,17 @@ def fix_collisions(
                 for c in final_collisions[:5]
             ])
         info_tracker.report()
+
+    # Finalize phase pass counts before post-cleanup
+    if metrics_tracker.phase1_passes == 0:
+        # Never transitioned to phase 2, all passes were phase 1
+        metrics_tracker.phase1_passes = pass_num
+    else:
+        # Transitioned to phase 2, calculate phase 2 passes
+        metrics_tracker.phase2_passes = pass_num - metrics_tracker.phase1_passes
+
+    # Track deferred agents count
+    metrics_tracker.deferred_agents_count = len(deferred_agents)
 
     # POST-CLEANUP COLLISION RESOLUTION
     # If collisions were revealed during cleanup (due to padding), try to fix them
@@ -4283,6 +4553,9 @@ def fix_collisions(
                     print(f"  No progress in this pass, stopping post-cleanup resolution")
                 break
 
+        # Track post-cleanup passes
+        metrics_tracker.post_cleanup_passes = cleanup_pass
+
         if verbose:
             if cleanup_colls_fixed > 0:
                 print(f"\n✓ Post-cleanup resolution fixed {cleanup_colls_fixed} collisions")
@@ -4308,7 +4581,9 @@ def fix_collisions(
         'info_sharing': info_tracker.to_dict(),
         'passes': pass_num,
         'time': time.perf_counter() - overall_start_time,
-        'final_collisions': len(final_collisions)
+        'final_collisions': len(final_collisions),
+        'metrics_raw': metrics_tracker.to_dict(),
+        'strategy_iu_raw': strategy_iu_tracker.to_dict(),
     }
 
     return current_plans, current_trajectories, len(unique_colls), timed_out, log_data
