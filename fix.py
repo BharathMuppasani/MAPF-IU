@@ -4491,7 +4491,6 @@ def fix_collisions(
                     base_rewind=joint_rewind,
                     base_horizon=joint_horizon,
                     max_expansion_steps=4,  # Shorter expansion steps
-                    max_conflict_retries=3,  # Retry with blocking if initial fails
                     use_time_based_blocking=use_time_based_blocking
                 )
 

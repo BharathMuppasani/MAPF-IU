@@ -33,7 +33,7 @@ Detected 3 collisions
       ✓ [C++] Found PARKING-based yield via (14, 2) with 0 wait steps
       Spliced plan: 4 prefix + 2 yield + 49 suffix = 55 total actions
 
---- Pass 2/10000 (Elapsed: 0.02s) ---
+--- Pass 2/10000 (Elapsed: 0.01s) ---
 Detected 2 collisions
 
   Collision: T=14, Type=vertex, Cell=(20, 20), Agents=[2, 4], Attempt=1
@@ -45,7 +45,7 @@ Detected 2 collisions
     ✓ Agent 4 yielded to parking cell (19, 20)
   ✓ YIELD-ON-GOAL successful for Agent 4
 
---- Pass 3/10000 (Elapsed: 0.04s) ---
+--- Pass 3/10000 (Elapsed: 0.02s) ---
 Detected 1 collisions
 
   Collision: T=41, Type=vertex, Cell=(26, 24), Agents=[3, 6], Attempt=1
@@ -57,7 +57,7 @@ Detected 1 collisions
     ✓ Agent 3 yielded to parking cell (27, 24)
   ✓ YIELD-ON-GOAL successful for Agent 3
 
---- Pass 4/10000 (Elapsed: 0.05s) ---
+--- Pass 4/10000 (Elapsed: 0.02s) ---
 ✓ No collisions found! Resolution complete.
 
 === Global Cleanup ===
@@ -82,7 +82,7 @@ Global cleanup complete: trimmed 3 agents, padded 0 agents, re-simulated all tra
 [DEBUG] Max trajectory length: 54
 
 === Resolution Complete ===
-Time: 0.06s
+Time: 0.03s
 Passes: 4
 Final collisions: 0
 Timed out: False
@@ -108,7 +108,7 @@ Total Agents:                   10
 Agents at Goal:                 10
 Final Collision Count:          0
 ✔ Detailed execution log saved to 'logs/icaps_test/random-32-32-20/10_agents/test_10.json'
-Analysis Complete. Success: 100.00%, Time: 0.07s
+Analysis Complete. Success: 100.00%, Time: 0.03s
 Agent 1 Final Plan: [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
 Agent 2 Final Plan: [2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
 Agent 3 Final Plan: [1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]

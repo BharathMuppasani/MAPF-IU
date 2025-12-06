@@ -1,0 +1,240 @@
+✓ cpp_joint_astar loaded
+✓ cpp_collision loaded
+✓ cpp_cleanup loaded
+Using device: mps
+→ Running single instance from: test_data/icaps_test/random-32-32-20/20_agents/test_19.txt
+✓ Log directory created (if needed): /Users/bittu/Desktop/GitHub/MAPF-IU/logs/icaps_test/random-32-32-20/20_agents
+Loaded instance from 'test_data/icaps_test/random-32-32-20/20_agents/test_19.txt': 20 agents, grid size (32, 32).
+Instance has 20 agents.
+
+=== Collision Resolution Started ===
+Grid: (32, 32), Agents: 20
+Strategy: STATIC + DYNAMIC + JOINT A*
+Precomputing heuristic distances...
+Finished agents: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+
+--- Pass 1/10000 (Elapsed: 0.01s) ---
+  Padded Agent 1: 39 → 50
+  Padded Agent 2: 46 → 50
+  Padded Agent 3: 9 → 50
+  Padded Agent 4: 16 → 50
+  Padded Agent 5: 48 → 50
+  Padded Agent 6: 3 → 50
+  Padded Agent 7: 33 → 50
+  Padded Agent 8: 43 → 50
+  Padded Agent 9: 40 → 50
+  Padded Agent 10: 23 → 50
+  Padded Agent 11: 3 → 50
+  Padded Agent 13: 28 → 50
+  Padded Agent 14: 10 → 50
+  Padded Agent 15: 20 → 50
+  Padded Agent 16: 23 → 50
+  Padded Agent 17: 35 → 50
+  Padded Agent 18: 32 → 50
+  Padded Agent 19: 32 → 50
+  Padded Agent 20: 5 → 50
+Detected 33 collisions
+
+  Collision: T=1, Type=edge, Cell=((27, 28), (28, 28)), Agents=[3, 12], Attempt=1
+  ⊘ GENERALIZED YIELD: Not applicable (collision at T=1, need T>1)
+  → Trying BOUNDED WINDOW STATIC with window ±5 (attempt 1/1)
+    → Agent 3 with window ±5
+    → Trying bounded window: ±5 timesteps around T=1
+      ✓ Bounded window (±5) successful for Agent 3
+      Candidate Agent 3: 32 remaining collisions
+    → Agent 12 with window ±5
+    → Trying bounded window: ±5 timesteps around T=1
+      ✓ Bounded window (±5) successful for Agent 12
+      Candidate Agent 12: 32 remaining collisions
+    → Selected best candidate Agent 3 with 32 collisions
+    ✓ BOUNDED WINDOW STATIC successful for Agent 3 with window ±5
+
+--- Pass 2/10000 (Elapsed: 0.05s) ---
+  Padded Agent 3: 9 → 50
+Detected 32 collisions
+
+  Collision: T=1, Type=vertex, Cell=(1, 27), Agents=[9, 13], Attempt=1
+  ⊘ GENERALIZED YIELD: Not applicable (collision at T=1, need T>1)
+  → Trying BOUNDED WINDOW STATIC with window ±5 (attempt 1/1)
+    → Agent 9 with window ±5
+    → Trying bounded window: ±5 timesteps around T=1
+      ✓ Bounded window (±5) successful for Agent 9
+      Candidate Agent 9: 13 remaining collisions
+    → Agent 13 with window ±5
+    → Trying bounded window: ±5 timesteps around T=1
+      ✓ Bounded window (±5) successful for Agent 13
+      Candidate Agent 13: 29 remaining collisions
+    → Selected best candidate Agent 9 with 13 collisions
+    ✓ BOUNDED WINDOW STATIC successful for Agent 9 with window ±5
+
+--- Pass 3/10000 (Elapsed: 0.08s) ---
+  Padded Agent 9: 42 → 50
+Detected 13 collisions
+
+  Collision: T=6, Type=vertex, Cell=(9, 13), Agents=[2, 11], Attempt=1
+  Pre-filter: Yield-on-Start=N/A, Yield-on-Goal=applicable
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 11 at goal (9, 13)
+    ✓ [C++] Found yield-on-goal plan via parking (8, 13)
+      Spliced plan: 5 prefix + 2 yield + 45 suffix = 52 total actions
+    ✓ Agent 11 yielded to parking cell (8, 13)
+  ✓ YIELD-ON-GOAL successful for Agent 11
+
+--- Pass 4/10000 (Elapsed: 0.10s) ---
+Detected 12 collisions
+
+  Collision: T=9, Type=vertex, Cell=(13, 5), Agents=[4, 20], Attempt=1
+  Pre-filter: Yield-on-Start=N/A, Yield-on-Goal=applicable
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 20 at goal (13, 5)
+    ✓ [C++] Found yield-on-goal plan via parking (12, 5)
+      Spliced plan: 8 prefix + 2 yield + 42 suffix = 52 total actions
+    ✓ Agent 20 yielded to parking cell (12, 5)
+  ✓ YIELD-ON-GOAL successful for Agent 20
+
+--- Pass 5/10000 (Elapsed: 0.12s) ---
+Detected 11 collisions
+
+  Collision: T=22, Type=edge, Cell=((15, 21), (14, 21)), Agents=[13, 19], Attempt=1
+  → Trying GENERALIZED YIELD (WAIT + PARKING) for 2 agents at T=22
+    Trying Agent 19 (dist=11.0):
+      [1/2] WAIT-based yielding...
+      [2/2] PARKING-based yielding...
+      ✓ [C++] Found PARKING-based yield via (13, 21) with 0 wait steps
+      Spliced plan: 21 prefix + 2 yield + 29 suffix = 52 total actions
+
+--- Pass 6/10000 (Elapsed: 0.13s) ---
+Detected 9 collisions
+
+  Collision: T=23, Type=vertex, Cell=(20, 16), Agents=[7, 14], Attempt=1
+  Pre-filter: Yield-on-Start=N/A, Yield-on-Goal=applicable
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 14 at goal (20, 16)
+    ✓ [C++] Found yield-on-goal plan via parking (21, 16)
+      Spliced plan: 22 prefix + 2 yield + 28 suffix = 52 total actions
+    ✓ Agent 14 yielded to parking cell (21, 16)
+  ✓ YIELD-ON-GOAL successful for Agent 14
+
+--- Pass 7/10000 (Elapsed: 0.15s) ---
+Detected 8 collisions
+
+  Collision: T=24, Type=edge, Cell=((14, 20), (14, 19)), Agents=[13, 17], Attempt=1
+  → Trying GENERALIZED YIELD (WAIT + PARKING) for 2 agents at T=24
+    Trying Agent 17 (dist=12.0):
+      [1/2] WAIT-based yielding...
+      [2/2] PARKING-based yielding...
+      ✓ [C++] Found PARKING-based yield via (13, 19) with 0 wait steps
+      Spliced plan: 23 prefix + 2 yield + 27 suffix = 52 total actions
+
+--- Pass 8/10000 (Elapsed: 0.16s) ---
+Detected 7 collisions
+
+  Collision: T=27, Type=vertex, Cell=(21, 13), Agents=[7, 8], Attempt=1
+  → Trying GENERALIZED YIELD (WAIT + PARKING) for 2 agents at T=27
+    Trying Agent 8 (dist=13.0):
+      [1/2] WAIT-based yielding...
+      [2/2] PARKING-based yielding...
+      ✓ [C++] Found PARKING-based yield via (22, 14) with 0 wait steps
+      Spliced plan: 26 prefix + 2 yield + 24 suffix = 52 total actions
+
+--- Pass 9/10000 (Elapsed: 0.18s) ---
+Detected 2 collisions
+
+  Collision: T=35, Type=vertex, Cell=(20, 8), Agents=[7, 8], Attempt=1
+  Pre-filter: Yield-on-Start=N/A, Yield-on-Goal=applicable
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 7 at goal (20, 8)
+    ✓ [C++] Found yield-on-goal plan via parking (19, 8)
+      Spliced plan: 34 prefix + 2 yield + 16 suffix = 52 total actions
+    ✓ Agent 7 yielded to parking cell (19, 8)
+  ✓ YIELD-ON-GOAL successful for Agent 7
+
+--- Pass 10/10000 (Elapsed: 0.20s) ---
+Detected 1 collisions
+
+  Collision: T=36, Type=vertex, Cell=(30, 22), Agents=[2, 3], Attempt=1
+  Pre-filter: Yield-on-Start=N/A, Yield-on-Goal=applicable
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 3 at goal (30, 22)
+    ✓ [C++] Found yield-on-goal plan via parking (29, 22)
+      Spliced plan: 35 prefix + 2 yield + 15 suffix = 52 total actions
+    ✓ Agent 3 yielded to parking cell (29, 22)
+  ✓ YIELD-ON-GOAL successful for Agent 3
+
+--- Pass 11/10000 (Elapsed: 0.22s) ---
+✓ No collisions found! Resolution complete.
+
+=== Global Cleanup ===
+Trimming trailing WAITs across all agents...
+  Global makespan: 50 (max plan was 52)
+  Agent 3: trimmed 2 steps (was 52, now 50)
+  Agent 7: trimmed 2 steps (was 52, now 50)
+  Agent 8: trimmed 2 steps (was 52, now 50)
+  Agent 11: trimmed 2 steps (was 52, now 50)
+  Agent 14: trimmed 2 steps (was 52, now 50)
+  Agent 17: trimmed 2 steps (was 52, now 50)
+  Agent 19: trimmed 2 steps (was 52, now 50)
+  Agent 20: trimmed 2 steps (was 52, now 50)
+  All plans now synchronized to length 50
+  Re-simulating all trajectories to match trimmed plans...
+  [DEBUG] After re-simulation:
+    Plan lengths: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+    Traj lengths: [51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51]
+    ✓ All trajectories synchronized to length 51
+Global cleanup complete: trimmed 8 agents, padded 0 agents, re-simulated all trajectories
+
+=== Synchronized WAIT Removal ===
+  No synchronized WAITs to remove
+
+=== Final Collision Check (after cleanup) ===
+[DEBUG] Trajectory lengths after cleanup: [51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51]
+[DEBUG] Max trajectory length: 51
+
+=== Resolution Complete ===
+Time: 0.23s
+Passes: 11
+Final collisions: 0
+Timed out: False
+[DEBUG] analyze_collisions says: 0 collisions
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 558
+  - Revised Path Submission IU: 528
+  - Conflict Alert IU:          3
+    - Static Alerts:      3 IU
+    - Dynamic Alerts:     0 IU
+  - Joint A* IU (Expansions):   0
+  - Parking Rejected IU:        1
+-----------------------------------
+  Total Information Load (IU):  1090
+-----------------------------------
+
+=== MAPF Metrics ===
+Makespan (longest trajectory):  51
+Sum of Costs (SOC):             1000
+Average Path Length:            50.00
+Total Agents:                   20
+Agents at Goal:                 20
+Final Collision Count:          0
+✔ Detailed execution log saved to 'logs/icaps_test/random-32-32-20/20_agents/test_19.json'
+Analysis Complete. Success: 100.00%, Time: 0.28s
+Agent 1 Final Plan: [0, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 2 Final Plan: [1, 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 3, 4, 4, 4, 4]
+Agent 3 Final Plan: [2, 1, 1, 2, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 4 Final Plan: [3, 1, 1, 3, 3, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 5 Final Plan: [0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 0, 2, 2, 1, 4, 4]
+Agent 6 Final Plan: [1, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 7 Final Plan: [1, 1, 2, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 8 Final Plan: [1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 0, 2, 0, 2, 2, 1, 1, 2, 2, 2, 2, 3, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 4, 4, 4, 4, 4]
+Agent 9 Final Plan: [0, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 2, 2, 1, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 10 Final Plan: [2, 1, 2, 1, 2, 1, 2, 2, 0, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 11 Final Plan: [1, 3, 3, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 12 Final Plan: [0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2]
+Agent 13 Final Plan: [1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 14 Final Plan: [0, 0, 0, 0, 3, 3, 0, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 15 Final Plan: [3, 1, 3, 3, 1, 3, 1, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 16 Final Plan: [0, 0, 3, 3, 3, 3, 3, 3, 1, 3, 3, 0, 3, 3, 3, 3, 3, 1, 3, 3, 0, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 17 Final Plan: [0, 0, 0, 0, 0, 0, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 0, 1, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 18 Final Plan: [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 19 Final Plan: [1, 3, 1, 1, 3, 1, 1, 1, 1, 3, 1, 3, 1, 1, 3, 1, 1, 1, 1, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 20 Final Plan: [1, 1, 1, 2, 2, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
