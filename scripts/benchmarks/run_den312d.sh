@@ -15,7 +15,7 @@ STRATEGY="best"
 INFO_SETTING="all"
 SEARCH_TYPE="astar-cpp"
 ALGO="dqn"
-TIMEOUT=1800  # 30 minutes
+TIMEOUT=600  # 10 minutes
 MAX_EXPANSIONS=20000  # 2,445 free cells × ~8
 
 # Directories
