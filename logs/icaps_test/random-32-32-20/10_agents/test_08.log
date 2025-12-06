@@ -1,0 +1,106 @@
+✓ cpp_joint_astar loaded
+✓ cpp_collision loaded
+✓ cpp_cleanup loaded
+Using device: mps
+→ Running single instance from: test_data/icaps_test/random-32-32-20/10_agents/test_08.txt
+✓ Log directory created (if needed): /Users/bittu/Desktop/GitHub/MAPF-IU/logs/icaps_test/random-32-32-20/10_agents
+Loaded instance from 'test_data/icaps_test/random-32-32-20/10_agents/test_08.txt': 10 agents, grid size (32, 32).
+Instance has 10 agents.
+
+=== Collision Resolution Started ===
+Grid: (32, 32), Agents: 10
+Strategy: STATIC + DYNAMIC + JOINT A*
+Precomputing heuristic distances...
+Finished agents: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+--- Pass 1/10000 (Elapsed: 0.01s) ---
+  Padded Agent 1: 14 → 41
+  Padded Agent 2: 25 → 41
+  Padded Agent 3: 33 → 41
+  Padded Agent 4: 23 → 41
+  Padded Agent 5: 4 → 41
+  Padded Agent 6: 13 → 41
+  Padded Agent 7: 12 → 41
+  Padded Agent 8: 22 → 41
+  Padded Agent 10: 18 → 41
+Detected 2 collisions
+
+  Collision: T=10, Type=vertex, Cell=(18, 5), Agents=[4, 7], Attempt=1
+  → Trying GENERALIZED YIELD (WAIT + PARKING) for 2 agents at T=10
+    Trying Agent 4 (dist=14.0):
+      [1/2] WAIT-based yielding...
+      ✓ [C++] Found WAIT-based yield
+
+--- Pass 2/10000 (Elapsed: 0.02s) ---
+Detected 1 collisions
+
+  Collision: T=27, Type=vertex, Cell=(8, 13), Agents=[5, 9], Attempt=1
+  Pre-filter: Yield-on-Start=N/A, Yield-on-Goal=applicable
+  → Trying YIELD-ON-GOAL (attempt 1)
+    → Agent 5 at goal (8, 13)
+    ✓ [C++] Found yield-on-goal plan via parking (7, 13)
+      Spliced plan: 26 prefix + 2 yield + 15 suffix = 43 total actions
+    ✓ Agent 5 yielded to parking cell (7, 13)
+  ✓ YIELD-ON-GOAL successful for Agent 5
+
+--- Pass 3/10000 (Elapsed: 0.03s) ---
+✓ No collisions found! Resolution complete.
+
+=== Global Cleanup ===
+Trimming trailing WAITs across all agents...
+  Global makespan: 41 (max plan was 44)
+  Agent 4: trimmed 3 steps (was 44, now 41)
+  Agent 5: trimmed 2 steps (was 43, now 41)
+  All plans now synchronized to length 41
+  Re-simulating all trajectories to match trimmed plans...
+  [DEBUG] After re-simulation:
+    Plan lengths: [41, 41, 41, 41, 41, 41, 41, 41, 41, 41]
+    Traj lengths: [42, 42, 42, 42, 42, 42, 42, 42, 42, 42]
+    ✓ All trajectories synchronized to length 42
+Global cleanup complete: trimmed 2 agents, padded 0 agents, re-simulated all trajectories
+
+=== Synchronized WAIT Removal ===
+  No synchronized WAITs to remove
+
+=== Final Collision Check (after cleanup) ===
+[DEBUG] Trajectory lengths after cleanup: [42, 42, 42, 42, 42, 42, 42, 42, 42, 42]
+[DEBUG] Max trajectory length: 42
+
+=== Resolution Complete ===
+Time: 0.04s
+Passes: 3
+Final collisions: 0
+Timed out: False
+[DEBUG] analyze_collisions says: 0 collisions
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 215
+  - Revised Path Submission IU: 89
+  - Conflict Alert IU:          0
+    - Static Alerts:      0 IU
+    - Dynamic Alerts:     0 IU
+  - Joint A* IU (Expansions):   0
+  - Parking Rejected IU:        0
+-----------------------------------
+  Total Information Load (IU):  304
+-----------------------------------
+
+=== MAPF Metrics ===
+Makespan (longest trajectory):  42
+Sum of Costs (SOC):             410
+Average Path Length:            41.00
+Total Agents:                   10
+Agents at Goal:                 10
+Final Collision Count:          0
+✔ Detailed execution log saved to 'logs/icaps_test/random-32-32-20/10_agents/test_08.json'
+Analysis Complete. Success: 100.00%, Time: 0.05s
+Agent 1 Final Plan: [1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 2 Final Plan: [1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 3, 3, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 3 Final Plan: [1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 4 Final Plan: [0, 0, 0, 0, 3, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 5 Final Plan: [2, 1, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 6 Final Plan: [1, 3, 3, 1, 1, 1, 1, 1, 3, 1, 1, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 7 Final Plan: [1, 1, 1, 2, 2, 2, 1, 1, 2, 2, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 8 Final Plan: [2, 0, 2, 0, 0, 0, 3, 0, 3, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 9 Final Plan: [2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 2]
+Agent 10 Final Plan: [0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 3, 3, 0, 3, 3, 0, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
