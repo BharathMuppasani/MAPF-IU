@@ -6,7 +6,7 @@ import itertools
 from collections import defaultdict, deque
 
 from utils.env_utils import analyze_collisions, simulate_plan
-from utils.search_utils import plan_with_search, astar
+from utils.search_utils import plan_with_search, astar, astar_cpp
 
 # Try to import the C++ joint A* module
 try:
@@ -1539,7 +1539,7 @@ def plan_astar_path(start, goal, agent_env, verbose=False):
     # Use existing astar planner
     planning_env = copy.deepcopy(agent_env)
     planning_env.env.agent_pos = start
-    astar_plan = astar(planning_env, timeout=10.0, heuristic_weight=2.0)
+    astar_plan = astar_cpp(planning_env, timeout=10.0, heuristic_weight=2.0)
 
     if not astar_plan:
         if verbose:
