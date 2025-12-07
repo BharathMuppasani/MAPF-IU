@@ -15,8 +15,8 @@ STRATEGY="best"
 INFO_SETTING="all"
 SEARCH_TYPE="astar-cpp"
 ALGO="dqn"
-TIMEOUT=1800  # 30 minutes
-MAX_EXPANSIONS=50000  # 9,776 free cells × ~5
+TIMEOUT=600  # 10 minutes
+MAX_EXPANSIONS=20000  # 9,776 free cells × ~5
 
 # Directories
 INPUT_DIR="test_data/icaps_test/$MAP_NAME"
@@ -32,7 +32,7 @@ echo "Strategy: $STRATEGY"
 echo "Info Setting: $INFO_SETTING"
 echo "Search Type: $SEARCH_TYPE"
 echo "Algorithm: $ALGO"
-echo "Timeout: ${TIMEOUT}s (30 min)"
+echo "Timeout: ${TIMEOUT}s (10 min)"
 echo "Max Expansions: $MAX_EXPANSIONS"
 echo "=============================================="
 echo ""

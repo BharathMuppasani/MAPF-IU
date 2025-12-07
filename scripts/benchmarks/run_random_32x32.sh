@@ -15,7 +15,7 @@ STRATEGY="best"
 INFO_SETTING="all"
 SEARCH_TYPE="astar-cpp"
 ALGO="dqn"
-TIMEOUT=300  # 5 minutes
+TIMEOUT=600  # 10 minutes
 MAX_EXPANSIONS=10000  # 819 free cells × ~12
 
 # Directories
@@ -24,7 +24,7 @@ OUTPUT_DIR="logs/icaps_test/$MAP_NAME"
 
 # Agent counts for random maps
 # AGENT_COUNTS="10 20 30 40 50 60 70 80 90 100 128"
-AGENT_COUNTS="90 100 128"
+AGENT_COUNTS="128"
 
 
 echo "=============================================="
