@@ -16,14 +16,14 @@ INFO_SETTING="all"
 SEARCH_TYPE="astar-cpp"
 ALGO="dqn"
 TIMEOUT=600  # 10 minutes
-MAX_EXPANSIONS=5000  # 2,445 free cells × ~8
+MAX_EXPANSIONS=10000  # 2,445 free cells × ~8
 
 # Directories
 INPUT_DIR="test_data/icaps_test/$MAP_NAME"
 OUTPUT_DIR="logs/icaps_test/$MAP_NAME"
 
 # Agent counts for complex maps
-AGENT_COUNTS="128" # 8 16 32 64 128
+AGENT_COUNTS="32" # 8 16 32 64 128
 
 echo "=============================================="
 echo "ICAPS Benchmark: $MAP_NAME"
