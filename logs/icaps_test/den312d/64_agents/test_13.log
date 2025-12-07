@@ -13,7 +13,7 @@ Strategy: STATIC + DYNAMIC + JOINT A*
 Precomputing heuristic distances...
 Finished agents: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64}
 
---- Pass 1/10000 (Elapsed: 0.28s) ---
+--- Pass 1/10000 (Elapsed: 0.26s) ---
   Padded Agent 1: 90 → 124
   Padded Agent 2: 86 → 124
   Padded Agent 3: 28 → 124
@@ -93,7 +93,7 @@ Detected 353 collisions
     → Selected best candidate Agent 29 with 352 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 29 with window ±5
 
---- Pass 2/10000 (Elapsed: 2.31s) ---
+--- Pass 2/10000 (Elapsed: 2.15s) ---
   Padded Agent 29: 71 → 124
 Detected 352 collisions
 
@@ -105,7 +105,7 @@ Detected 352 collisions
       ✓ [C++] Found PARKING-based yield via (12, 48) with 0 wait steps
       Spliced plan: 1 prefix + 2 yield + 123 suffix = 126 total actions
 
---- Pass 3/10000 (Elapsed: 3.00s) ---
+--- Pass 3/10000 (Elapsed: 2.78s) ---
 Detected 363 collisions
 
   Collision: T=3, Type=vertex, Cell=(53, 41), Agents=[8, 50], Attempt=1
@@ -116,7 +116,7 @@ Detected 363 collisions
       ✓ [C++] Found PARKING-based yield via (54, 42) with 1 wait steps
       Spliced plan: 2 prefix + 3 yield + 122 suffix = 127 total actions
 
---- Pass 4/10000 (Elapsed: 3.67s) ---
+--- Pass 4/10000 (Elapsed: 3.48s) ---
 Detected 361 collisions
 
   Collision: T=3, Type=edge, Cell=((56, 4), (57, 4)), Agents=[11, 64], Attempt=1
@@ -127,7 +127,7 @@ Detected 361 collisions
       ✓ [C++] Found PARKING-based yield via (57, 3) with 0 wait steps
       Spliced plan: 2 prefix + 2 yield + 122 suffix = 126 total actions
 
---- Pass 5/10000 (Elapsed: 4.36s) ---
+--- Pass 5/10000 (Elapsed: 4.11s) ---
 Detected 360 collisions
 
   Collision: T=3, Type=edge, Cell=((41, 36), (42, 36)), Agents=[20, 60], Attempt=1
@@ -138,7 +138,7 @@ Detected 360 collisions
       ✓ [C++] Found PARKING-based yield via (43, 35) with 0 wait steps
       Spliced plan: 2 prefix + 4 yield + 122 suffix = 128 total actions
 
---- Pass 6/10000 (Elapsed: 5.00s) ---
+--- Pass 6/10000 (Elapsed: 4.77s) ---
 Detected 360 collisions
 
   Collision: T=6, Type=vertex, Cell=(74, 47), Agents=[16, 19], Attempt=1
@@ -149,7 +149,7 @@ Detected 360 collisions
       ✓ [C++] Found PARKING-based yield via (72, 47) with 0 wait steps
       Spliced plan: 5 prefix + 2 yield + 119 suffix = 126 total actions
 
---- Pass 7/10000 (Elapsed: 5.70s) ---
+--- Pass 7/10000 (Elapsed: 5.44s) ---
 Detected 359 collisions
 
   Collision: T=8, Type=vertex, Cell=(13, 51), Agents=[13, 48], Attempt=1
@@ -160,7 +160,7 @@ Detected 359 collisions
       ✓ [C++] Found PARKING-based yield via (12, 52) with 0 wait steps
       Spliced plan: 7 prefix + 2 yield + 117 suffix = 126 total actions
 
---- Pass 8/10000 (Elapsed: 6.40s) ---
+--- Pass 8/10000 (Elapsed: 6.05s) ---
 Detected 352 collisions
 
   Collision: T=9, Type=vertex, Cell=(29, 52), Agents=[2, 6], Attempt=1
@@ -171,7 +171,7 @@ Detected 352 collisions
       ✓ [C++] Found PARKING-based yield via (27, 52) with 0 wait steps
       Spliced plan: 8 prefix + 2 yield + 116 suffix = 126 total actions
 
---- Pass 9/10000 (Elapsed: 7.07s) ---
+--- Pass 9/10000 (Elapsed: 6.72s) ---
 Detected 279 collisions
 
   Collision: T=9, Type=vertex, Cell=(67, 37), Agents=[40, 43], Attempt=1
@@ -182,7 +182,7 @@ Detected 279 collisions
       ✓ [C++] Found PARKING-based yield via (69, 37) with 0 wait steps
       Spliced plan: 8 prefix + 2 yield + 116 suffix = 126 total actions
 
---- Pass 10/10000 (Elapsed: 7.74s) ---
+--- Pass 10/10000 (Elapsed: 7.35s) ---
 Detected 232 collisions
 
   Collision: T=11, Type=vertex, Cell=(37, 36), Agents=[34, 60], Attempt=1
@@ -197,7 +197,7 @@ Detected 232 collisions
     ✓ Agent 34 yielded to parking cell (37, 37)
   ✓ YIELD-ON-GOAL successful for Agent 34
 
---- Pass 11/10000 (Elapsed: 8.72s) ---
+--- Pass 11/10000 (Elapsed: 8.31s) ---
 Detected 231 collisions
 
   Collision: T=12, Type=vertex, Cell=(67, 27), Agents=[3, 52], Attempt=1
@@ -208,7 +208,7 @@ Detected 231 collisions
       ✓ [C++] Found PARKING-based yield via (66, 26) with 0 wait steps
       Spliced plan: 11 prefix + 2 yield + 113 suffix = 126 total actions
 
---- Pass 12/10000 (Elapsed: 9.40s) ---
+--- Pass 12/10000 (Elapsed: 9.00s) ---
 Detected 230 collisions
 
   Collision: T=12, Type=vertex, Cell=(67, 34), Agents=[5, 40], Attempt=1
@@ -219,7 +219,7 @@ Detected 230 collisions
       ✓ [C++] Found PARKING-based yield via (66, 35) with 1 wait steps
       Spliced plan: 11 prefix + 3 yield + 113 suffix = 127 total actions
 
---- Pass 13/10000 (Elapsed: 10.07s) ---
+--- Pass 13/10000 (Elapsed: 9.64s) ---
 Detected 222 collisions
 
   Collision: T=14, Type=vertex, Cell=(37, 36), Agents=[34, 54], Attempt=1
@@ -234,7 +234,7 @@ Detected 222 collisions
     ✓ Agent 34 yielded to parking cell (38, 36)
   ✓ YIELD-ON-GOAL successful for Agent 34
 
---- Pass 14/10000 (Elapsed: 11.07s) ---
+--- Pass 14/10000 (Elapsed: 10.66s) ---
 Detected 221 collisions
 
   Collision: T=15, Type=edge, Cell=((65, 27), (66, 27)), Agents=[61, 63], Attempt=1
@@ -245,7 +245,7 @@ Detected 221 collisions
       ✓ [C++] Found PARKING-based yield via (65, 26) with 0 wait steps
       Spliced plan: 14 prefix + 2 yield + 110 suffix = 126 total actions
 
---- Pass 15/10000 (Elapsed: 11.78s) ---
+--- Pass 15/10000 (Elapsed: 11.32s) ---
 Detected 220 collisions
 
   Collision: T=16, Type=vertex, Cell=(48, 29), Agents=[20, 36], Attempt=1
@@ -256,7 +256,7 @@ Detected 220 collisions
       ✓ [C++] Found PARKING-based yield via (49, 28) with 2 wait steps
       Spliced plan: 15 prefix + 4 yield + 109 suffix = 128 total actions
 
---- Pass 16/10000 (Elapsed: 12.44s) ---
+--- Pass 16/10000 (Elapsed: 12.00s) ---
 Detected 220 collisions
 
   Collision: T=17, Type=edge, Cell=((67, 29), (67, 30)), Agents=[3, 5], Attempt=1
@@ -267,7 +267,7 @@ Detected 220 collisions
       ✓ [C++] Found PARKING-based yield via (69, 30) with 0 wait steps
       Spliced plan: 16 prefix + 4 yield + 108 suffix = 128 total actions
 
---- Pass 17/10000 (Elapsed: 13.10s) ---
+--- Pass 17/10000 (Elapsed: 12.67s) ---
 Detected 218 collisions
 
   Collision: T=18, Type=vertex, Cell=(67, 31), Agents=[3, 40], Attempt=1
@@ -278,7 +278,7 @@ Detected 218 collisions
       ✓ [C++] Found PARKING-based yield via (68, 32) with 3 wait steps
       Spliced plan: 17 prefix + 5 yield + 110 suffix = 132 total actions
 
---- Pass 18/10000 (Elapsed: 13.76s) ---
+--- Pass 18/10000 (Elapsed: 13.32s) ---
 Detected 218 collisions
 
   Collision: T=18, Type=edge, Cell=((67, 30), (67, 31)), Agents=[3, 43], Attempt=1
@@ -289,7 +289,7 @@ Detected 218 collisions
       ✓ [C++] Found PARKING-based yield via (68, 31) with 0 wait steps
       Spliced plan: 17 prefix + 2 yield + 109 suffix = 128 total actions
 
---- Pass 19/10000 (Elapsed: 14.43s) ---
+--- Pass 19/10000 (Elapsed: 13.97s) ---
 Detected 222 collisions
 
   Collision: T=18, Type=vertex, Cell=(53, 24), Agents=[12, 17], Attempt=1
@@ -300,7 +300,7 @@ Detected 222 collisions
       ✓ [C++] Found PARKING-based yield via (54, 23) with 1 wait steps
       Spliced plan: 17 prefix + 3 yield + 107 suffix = 127 total actions
 
---- Pass 20/10000 (Elapsed: 15.11s) ---
+--- Pass 20/10000 (Elapsed: 14.61s) ---
 Detected 221 collisions
 
   Collision: T=18, Type=edge, Cell=((49, 29), (50, 29)), Agents=[20, 39], Attempt=1
@@ -311,7 +311,7 @@ Detected 221 collisions
       ✓ [C++] Found PARKING-based yield via (50, 28) with 0 wait steps
       Spliced plan: 17 prefix + 2 yield + 107 suffix = 126 total actions
 
---- Pass 21/10000 (Elapsed: 15.84s) ---
+--- Pass 21/10000 (Elapsed: 15.32s) ---
 Detected 220 collisions
 
   Collision: T=18, Type=edge, Cell=((62, 27), (63, 27)), Agents=[35, 63], Attempt=1
@@ -322,7 +322,7 @@ Detected 220 collisions
       ✓ [C++] Found PARKING-based yield via (62, 26) with 0 wait steps
       Spliced plan: 17 prefix + 2 yield + 107 suffix = 126 total actions
 
---- Pass 22/10000 (Elapsed: 16.56s) ---
+--- Pass 22/10000 (Elapsed: 15.98s) ---
 Detected 219 collisions
 
   Collision: T=19, Type=vertex, Cell=(67, 34), Agents=[28, 33], Attempt=1
@@ -333,7 +333,7 @@ Detected 219 collisions
       ✓ [C++] Found PARKING-based yield via (66, 35) with 0 wait steps
       Spliced plan: 18 prefix + 2 yield + 106 suffix = 126 total actions
 
---- Pass 23/10000 (Elapsed: 17.24s) ---
+--- Pass 23/10000 (Elapsed: 16.65s) ---
 Detected 158 collisions
 
   Collision: T=19, Type=vertex, Cell=(37, 36), Agents=[34, 51], Attempt=1
@@ -348,7 +348,7 @@ Detected 158 collisions
     ✓ Agent 34 yielded to parking cell (38, 36)
   ✓ YIELD-ON-GOAL successful for Agent 34
 
---- Pass 24/10000 (Elapsed: 18.24s) ---
+--- Pass 24/10000 (Elapsed: 17.68s) ---
 Detected 157 collisions
 
   Collision: T=19, Type=vertex, Cell=(45, 48), Agents=[56, 62], Attempt=1
@@ -359,7 +359,7 @@ Detected 157 collisions
       ✓ [C++] Found PARKING-based yield via (44, 49) with 1 wait steps
       Spliced plan: 18 prefix + 3 yield + 106 suffix = 127 total actions
 
---- Pass 25/10000 (Elapsed: 18.93s) ---
+--- Pass 25/10000 (Elapsed: 18.38s) ---
 Detected 156 collisions
 
   Collision: T=20, Type=vertex, Cell=(67, 33), Agents=[3, 28], Attempt=1
@@ -370,7 +370,7 @@ Detected 156 collisions
       ✓ [C++] Found PARKING-based yield via (68, 34) with 1 wait steps
       Spliced plan: 19 prefix + 3 yield + 105 suffix = 127 total actions
 
---- Pass 26/10000 (Elapsed: 19.64s) ---
+--- Pass 26/10000 (Elapsed: 19.05s) ---
 Detected 152 collisions
 
   Collision: T=20, Type=edge, Cell=((67, 32), (67, 33)), Agents=[3, 26], Attempt=1
@@ -381,7 +381,7 @@ Detected 152 collisions
       ✓ [C++] Found PARKING-based yield via (68, 33) with 0 wait steps
       Spliced plan: 19 prefix + 2 yield + 105 suffix = 126 total actions
 
---- Pass 27/10000 (Elapsed: 20.38s) ---
+--- Pass 27/10000 (Elapsed: 19.71s) ---
 Detected 180 collisions
 
   Collision: T=20, Type=vertex, Cell=(67, 30), Agents=[5, 43], Attempt=1
@@ -392,7 +392,7 @@ Detected 180 collisions
       ✓ [C++] Found PARKING-based yield via (68, 31) with 0 wait steps
       Spliced plan: 19 prefix + 2 yield + 109 suffix = 130 total actions
 
---- Pass 28/10000 (Elapsed: 21.08s) ---
+--- Pass 28/10000 (Elapsed: 20.41s) ---
 Detected 175 collisions
 
   Collision: T=21, Type=vertex, Cell=(67, 34), Agents=[3, 33], Attempt=1
@@ -403,7 +403,7 @@ Detected 175 collisions
       ✓ [C++] Found PARKING-based yield via (66, 35) with 0 wait steps
       Spliced plan: 20 prefix + 2 yield + 106 suffix = 128 total actions
 
---- Pass 29/10000 (Elapsed: 21.78s) ---
+--- Pass 29/10000 (Elapsed: 21.14s) ---
 Detected 173 collisions
 
   Collision: T=22, Type=edge, Cell=((54, 21), (54, 22)), Agents=[1, 12], Attempt=1
@@ -414,7 +414,7 @@ Detected 173 collisions
       ✓ [C++] Found PARKING-based yield via (55, 21) with 2 wait steps
       Spliced plan: 21 prefix + 4 yield + 103 suffix = 128 total actions
 
---- Pass 30/10000 (Elapsed: 22.57s) ---
+--- Pass 30/10000 (Elapsed: 21.84s) ---
 Detected 172 collisions
 
   Collision: T=22, Type=vertex, Cell=(67, 32), Agents=[26, 40], Attempt=1
@@ -425,7 +425,7 @@ Detected 172 collisions
       ✓ [C++] Found PARKING-based yield via (68, 33) with 2 wait steps
       Spliced plan: 21 prefix + 4 yield + 105 suffix = 130 total actions
 
---- Pass 31/10000 (Elapsed: 23.26s) ---
+--- Pass 31/10000 (Elapsed: 22.51s) ---
 Detected 144 collisions
 
   Collision: T=23, Type=vertex, Cell=(54, 20), Agents=[12, 64], Attempt=1
@@ -436,7 +436,7 @@ Detected 144 collisions
       ✓ [C++] Found PARKING-based yield via (55, 19) with 1 wait steps
       Spliced plan: 22 prefix + 3 yield + 104 suffix = 129 total actions
 
---- Pass 32/10000 (Elapsed: 23.93s) ---
+--- Pass 32/10000 (Elapsed: 23.23s) ---
 Detected 143 collisions
 
   Collision: T=23, Type=edge, Cell=((54, 21), (54, 20)), Agents=[12, 37], Attempt=1
@@ -447,7 +447,7 @@ Detected 143 collisions
       ✓ [C++] Found PARKING-based yield via (55, 20) with 0 wait steps
       Spliced plan: 22 prefix + 2 yield + 102 suffix = 126 total actions
 
---- Pass 33/10000 (Elapsed: 24.64s) ---
+--- Pass 33/10000 (Elapsed: 24.01s) ---
 Detected 159 collisions
 
   Collision: T=25, Type=vertex, Cell=(54, 21), Agents=[1, 37], Attempt=1
@@ -458,7 +458,7 @@ Detected 159 collisions
       ✓ [C++] Found PARKING-based yield via (56, 21) with 0 wait steps
       Spliced plan: 24 prefix + 2 yield + 104 suffix = 130 total actions
 
---- Pass 34/10000 (Elapsed: 25.29s) ---
+--- Pass 34/10000 (Elapsed: 24.70s) ---
 Detected 162 collisions
 
   Collision: T=26, Type=vertex, Cell=(21, 19), Agents=[14, 53], Attempt=1
@@ -470,7 +470,7 @@ Detected 162 collisions
     ✓ Agent 14 yielded to parking cell (20, 19)
   ✓ YIELD-ON-GOAL successful for Agent 14
 
---- Pass 35/10000 (Elapsed: 26.31s) ---
+--- Pass 35/10000 (Elapsed: 25.75s) ---
 Detected 161 collisions
 
   Collision: T=27, Type=vertex, Cell=(54, 21), Agents=[1, 64], Attempt=1
@@ -481,7 +481,7 @@ Detected 161 collisions
       ✓ [C++] Found PARKING-based yield via (56, 21) with 0 wait steps
       Spliced plan: 26 prefix + 2 yield + 104 suffix = 132 total actions
 
---- Pass 36/10000 (Elapsed: 26.99s) ---
+--- Pass 36/10000 (Elapsed: 26.41s) ---
 Detected 142 collisions
 
   Collision: T=28, Type=edge, Cell=((64, 27), (65, 27)), Agents=[21, 43], Attempt=1
@@ -492,7 +492,7 @@ Detected 142 collisions
       ✓ [C++] Found PARKING-based yield via (65, 26) with 1 wait steps
       Spliced plan: 27 prefix + 3 yield + 103 suffix = 133 total actions
 
---- Pass 37/10000 (Elapsed: 27.71s) ---
+--- Pass 37/10000 (Elapsed: 27.08s) ---
 Detected 140 collisions
 
   Collision: T=29, Type=edge, Cell=((65, 27), (66, 27)), Agents=[21, 40], Attempt=1
@@ -503,7 +503,7 @@ Detected 140 collisions
       ✓ [C++] Found PARKING-based yield via (67, 26) with 2 wait steps
       Spliced plan: 28 prefix + 6 yield + 104 suffix = 138 total actions
 
---- Pass 38/10000 (Elapsed: 28.42s) ---
+--- Pass 38/10000 (Elapsed: 27.79s) ---
 Detected 152 collisions
 
   Collision: T=33, Type=vertex, Cell=(30, 29), Agents=[6, 51], Attempt=1
@@ -514,7 +514,7 @@ Detected 152 collisions
       ✓ [C++] Found PARKING-based yield via (29, 28) with 1 wait steps
       Spliced plan: 32 prefix + 3 yield + 92 suffix = 127 total actions
 
---- Pass 39/10000 (Elapsed: 29.14s) ---
+--- Pass 39/10000 (Elapsed: 28.51s) ---
 Detected 174 collisions
 
   Collision: T=34, Type=vertex, Cell=(29, 29), Agents=[2, 51], Attempt=1
@@ -525,7 +525,7 @@ Detected 174 collisions
       ✓ [C++] Found PARKING-based yield via (28, 30) with 1 wait steps
       Spliced plan: 33 prefix + 3 yield + 93 suffix = 129 total actions
 
---- Pass 40/10000 (Elapsed: 29.87s) ---
+--- Pass 40/10000 (Elapsed: 29.28s) ---
 Detected 173 collisions
 
   Collision: T=35, Type=vertex, Cell=(42, 27), Agents=[17, 46], Attempt=1
@@ -536,7 +536,7 @@ Detected 173 collisions
       ✓ [C++] Found PARKING-based yield via (41, 26) with 2 wait steps
       Spliced plan: 34 prefix + 4 yield + 90 suffix = 128 total actions
 
---- Pass 41/10000 (Elapsed: 30.60s) ---
+--- Pass 41/10000 (Elapsed: 30.02s) ---
 Detected 170 collisions
 
   Collision: T=36, Type=edge, Cell=((41, 27), (42, 27)), Agents=[7, 17], Attempt=1
@@ -547,7 +547,7 @@ Detected 170 collisions
       ✓ [C++] Found PARKING-based yield via (41, 28) with 2 wait steps
       Spliced plan: 35 prefix + 4 yield + 89 suffix = 128 total actions
 
---- Pass 42/10000 (Elapsed: 31.31s) ---
+--- Pass 42/10000 (Elapsed: 30.75s) ---
 Detected 168 collisions
 
   Collision: T=37, Type=vertex, Cell=(31, 29), Agents=[6, 36], Attempt=1
@@ -558,7 +558,7 @@ Detected 168 collisions
       ✓ [C++] Found PARKING-based yield via (30, 28) with 2 wait steps
       Spliced plan: 36 prefix + 4 yield + 91 suffix = 131 total actions
 
---- Pass 43/10000 (Elapsed: 32.03s) ---
+--- Pass 43/10000 (Elapsed: 31.48s) ---
 Detected 160 collisions
 
   Collision: T=37, Type=edge, Cell=((41, 27), (40, 27)), Agents=[17, 23], Attempt=1
@@ -569,7 +569,7 @@ Detected 160 collisions
       ✓ [C++] Found PARKING-based yield via (40, 26) with 0 wait steps
       Spliced plan: 36 prefix + 2 yield + 88 suffix = 126 total actions
 
---- Pass 44/10000 (Elapsed: 32.74s) ---
+--- Pass 44/10000 (Elapsed: 32.17s) ---
 Detected 197 collisions
 
   Collision: T=37, Type=vertex, Cell=(37, 36), Agents=[34, 59], Attempt=1
@@ -584,7 +584,7 @@ Detected 197 collisions
     ✓ Agent 34 yielded to parking cell (38, 36)
   ✓ YIELD-ON-GOAL successful for Agent 34
 
---- Pass 45/10000 (Elapsed: 33.78s) ---
+--- Pass 45/10000 (Elapsed: 33.29s) ---
 Detected 196 collisions
 
   Collision: T=38, Type=vertex, Cell=(30, 29), Agents=[2, 36], Attempt=1
@@ -595,7 +595,7 @@ Detected 196 collisions
       ✓ [C++] Found PARKING-based yield via (29, 28) with 2 wait steps
       Spliced plan: 37 prefix + 4 yield + 92 suffix = 133 total actions
 
---- Pass 46/10000 (Elapsed: 34.50s) ---
+--- Pass 46/10000 (Elapsed: 34.01s) ---
 Detected 195 collisions
 
   Collision: T=38, Type=edge, Cell=((47, 27), (48, 27)), Agents=[10, 37], Attempt=1
@@ -606,7 +606,7 @@ Detected 195 collisions
       ✓ [C++] Found PARKING-based yield via (47, 28) with 0 wait steps
       Spliced plan: 37 prefix + 2 yield + 87 suffix = 126 total actions
 
---- Pass 47/10000 (Elapsed: 35.24s) ---
+--- Pass 47/10000 (Elapsed: 34.72s) ---
 Detected 194 collisions
 
   Collision: T=38, Type=vertex, Cell=(31, 29), Agents=[22, 39], Attempt=1
@@ -617,7 +617,7 @@ Detected 194 collisions
       ✓ [C++] Found PARKING-based yield via (29, 30) with 2 wait steps
       Spliced plan: 37 prefix + 6 yield + 87 suffix = 130 total actions
 
---- Pass 48/10000 (Elapsed: 35.96s) ---
+--- Pass 48/10000 (Elapsed: 35.46s) ---
 Detected 193 collisions
 
   Collision: T=39, Type=vertex, Cell=(41, 27), Agents=[7, 23], Attempt=1
@@ -628,7 +628,7 @@ Detected 193 collisions
       ✓ [C++] Found PARKING-based yield via (39, 27) with 0 wait steps
       Spliced plan: 38 prefix + 2 yield + 88 suffix = 128 total actions
 
---- Pass 49/10000 (Elapsed: 36.70s) ---
+--- Pass 49/10000 (Elapsed: 36.21s) ---
 Detected 157 collisions
 
   Collision: T=40, Type=edge, Cell=((47, 27), (48, 27)), Agents=[10, 64], Attempt=1
@@ -639,7 +639,7 @@ Detected 157 collisions
       ✓ [C++] Found PARKING-based yield via (47, 28) with 0 wait steps
       Spliced plan: 39 prefix + 2 yield + 87 suffix = 128 total actions
 
---- Pass 50/10000 (Elapsed: 37.42s) ---
+--- Pass 50/10000 (Elapsed: 36.98s) ---
 Detected 156 collisions
 
   Collision: T=40, Type=edge, Cell=((44, 35), (44, 36)), Agents=[42, 56], Attempt=1
@@ -650,7 +650,7 @@ Detected 156 collisions
       ✓ [C++] Found PARKING-based yield via (43, 35) with 0 wait steps
       Spliced plan: 39 prefix + 2 yield + 85 suffix = 126 total actions
 
---- Pass 51/10000 (Elapsed: 38.19s) ---
+--- Pass 51/10000 (Elapsed: 37.63s) ---
 Detected 155 collisions
 
   Collision: T=42, Type=edge, Cell=((48, 27), (47, 27)), Agents=[1, 10], Attempt=1
@@ -661,7 +661,7 @@ Detected 155 collisions
       ✓ [C++] Found PARKING-based yield via (48, 28) with 0 wait steps
       Spliced plan: 41 prefix + 2 yield + 91 suffix = 134 total actions
 
---- Pass 52/10000 (Elapsed: 38.92s) ---
+--- Pass 52/10000 (Elapsed: 38.37s) ---
 Detected 154 collisions
 
   Collision: T=42, Type=vertex, Cell=(45, 27), Agents=[46, 64], Attempt=1
@@ -672,7 +672,7 @@ Detected 154 collisions
       ✓ [C++] Found PARKING-based yield via (44, 26) with 2 wait steps
       Spliced plan: 41 prefix + 4 yield + 87 suffix = 132 total actions
 
---- Pass 53/10000 (Elapsed: 39.65s) ---
+--- Pass 53/10000 (Elapsed: 39.07s) ---
 Detected 153 collisions
 
   Collision: T=43, Type=edge, Cell=((44, 27), (45, 27)), Agents=[7, 64], Attempt=1
@@ -683,7 +683,7 @@ Detected 153 collisions
       ✓ [C++] Found PARKING-based yield via (44, 28) with 2 wait steps
       Spliced plan: 42 prefix + 4 yield + 86 suffix = 132 total actions
 
---- Pass 54/10000 (Elapsed: 40.39s) ---
+--- Pass 54/10000 (Elapsed: 39.72s) ---
 Detected 153 collisions
 
   Collision: T=44, Type=edge, Cell=((43, 27), (44, 27)), Agents=[23, 64], Attempt=1
@@ -694,7 +694,7 @@ Detected 153 collisions
       ✓ [C++] Found PARKING-based yield via (43, 26) with 0 wait steps
       Spliced plan: 43 prefix + 2 yield + 85 suffix = 130 total actions
 
---- Pass 55/10000 (Elapsed: 41.05s) ---
+--- Pass 55/10000 (Elapsed: 40.41s) ---
 Detected 187 collisions
 
   Collision: T=45, Type=vertex, Cell=(51, 27), Agents=[10, 28], Attempt=1
@@ -705,7 +705,7 @@ Detected 187 collisions
       ✓ [C++] Found PARKING-based yield via (52, 26) with 1 wait steps
       Spliced plan: 44 prefix + 3 yield + 83 suffix = 130 total actions
 
---- Pass 56/10000 (Elapsed: 41.78s) ---
+--- Pass 56/10000 (Elapsed: 41.14s) ---
 Detected 186 collisions
 
   Collision: T=45, Type=edge, Cell=((50, 27), (51, 27)), Agents=[10, 43], Attempt=1
@@ -716,7 +716,7 @@ Detected 186 collisions
       ✓ [C++] Found PARKING-based yield via (50, 26) with 0 wait steps
       Spliced plan: 44 prefix + 2 yield + 84 suffix = 130 total actions
 
---- Pass 57/10000 (Elapsed: 42.46s) ---
+--- Pass 57/10000 (Elapsed: 41.85s) ---
 Detected 186 collisions
 
   Collision: T=45, Type=edge, Cell=((44, 30), (44, 31)), Agents=[37, 56], Attempt=1
@@ -727,7 +727,7 @@ Detected 186 collisions
       ✓ [C++] Found PARKING-based yield via (43, 31) with 0 wait steps
       Spliced plan: 44 prefix + 2 yield + 83 suffix = 129 total actions
 
---- Pass 58/10000 (Elapsed: 43.20s) ---
+--- Pass 58/10000 (Elapsed: 42.57s) ---
 Detected 185 collisions
 
   Collision: T=46, Type=vertex, Cell=(45, 27), Agents=[1, 46], Attempt=1
@@ -738,7 +738,7 @@ Detected 185 collisions
       ✓ [C++] Found PARKING-based yield via (44, 26) with 1 wait steps
       Spliced plan: 45 prefix + 3 yield + 87 suffix = 135 total actions
 
---- Pass 59/10000 (Elapsed: 43.91s) ---
+--- Pass 59/10000 (Elapsed: 43.31s) ---
 Detected 184 collisions
 
   Collision: T=46, Type=vertex, Cell=(44, 27), Agents=[7, 23], Attempt=1
@@ -749,7 +749,7 @@ Detected 184 collisions
       ✓ [C++] Found PARKING-based yield via (42, 27) with 0 wait steps
       Spliced plan: 45 prefix + 2 yield + 85 suffix = 132 total actions
 
---- Pass 60/10000 (Elapsed: 44.67s) ---
+--- Pass 60/10000 (Elapsed: 44.02s) ---
 Detected 205 collisions
 
   Collision: T=47, Type=edge, Cell=((45, 27), (44, 27)), Agents=[1, 7], Attempt=1
@@ -760,7 +760,7 @@ Detected 205 collisions
       ✓ [C++] Found PARKING-based yield via (44, 28) with 1 wait steps
       Spliced plan: 46 prefix + 3 yield + 86 suffix = 135 total actions
 
---- Pass 61/10000 (Elapsed: 45.37s) ---
+--- Pass 61/10000 (Elapsed: 44.77s) ---
 Detected 205 collisions
 
   Collision: T=47, Type=edge, Cell=((34, 29), (35, 29)), Agents=[2, 59], Attempt=1
@@ -771,7 +771,7 @@ Detected 205 collisions
       ✓ [C++] Found PARKING-based yield via (34, 28) with 0 wait steps
       Spliced plan: 46 prefix + 2 yield + 87 suffix = 135 total actions
 
---- Pass 62/10000 (Elapsed: 46.09s) ---
+--- Pass 62/10000 (Elapsed: 45.46s) ---
 Detected 219 collisions
 
   Collision: T=47, Type=vertex, Cell=(51, 27), Agents=[10, 26], Attempt=1
@@ -782,7 +782,7 @@ Detected 219 collisions
       ✓ [C++] Found PARKING-based yield via (52, 28) with 1 wait steps
       Spliced plan: 46 prefix + 3 yield + 84 suffix = 133 total actions
 
---- Pass 63/10000 (Elapsed: 46.87s) ---
+--- Pass 63/10000 (Elapsed: 46.17s) ---
 Detected 218 collisions
 
   Collision: T=47, Type=edge, Cell=((50, 27), (51, 27)), Agents=[10, 33], Attempt=1
@@ -793,7 +793,7 @@ Detected 218 collisions
       ✓ [C++] Found PARKING-based yield via (51, 28) with 3 wait steps
       Spliced plan: 46 prefix + 5 yield + 82 suffix = 133 total actions
 
---- Pass 64/10000 (Elapsed: 47.58s) ---
+--- Pass 64/10000 (Elapsed: 46.82s) ---
   Padded Agent 4: 124 → 126
   Padded Agent 9: 124 → 126
   Padded Agent 11: 124 → 126
@@ -837,7 +837,7 @@ Detected 217 collisions
       ✓ [C++] Found PARKING-based yield via (33, 28) with 1 wait steps
       Spliced plan: 46 prefix + 3 yield + 84 suffix = 133 total actions
 
---- Pass 65/10000 (Elapsed: 48.29s) ---
+--- Pass 65/10000 (Elapsed: 47.52s) ---
 Detected 215 collisions
 
   Collision: T=47, Type=vertex, Cell=(37, 36), Agents=[24, 34], Attempt=1
@@ -852,7 +852,7 @@ Detected 215 collisions
     ✓ Agent 34 yielded to parking cell (37, 33)
   ✓ YIELD-ON-GOAL successful for Agent 34
 
---- Pass 66/10000 (Elapsed: 49.38s) ---
+--- Pass 66/10000 (Elapsed: 48.60s) ---
 Detected 214 collisions
 
   Collision: T=48, Type=edge, Cell=((44, 27), (43, 27)), Agents=[1, 23], Attempt=1
@@ -863,7 +863,7 @@ Detected 214 collisions
       ✓ [C++] Found PARKING-based yield via (43, 26) with 0 wait steps
       Spliced plan: 47 prefix + 2 yield + 85 suffix = 134 total actions
 
---- Pass 67/10000 (Elapsed: 50.07s) ---
+--- Pass 67/10000 (Elapsed: 49.26s) ---
 Detected 161 collisions
 
   Collision: T=48, Type=vertex, Cell=(52, 27), Agents=[10, 40], Attempt=1
@@ -874,7 +874,7 @@ Detected 161 collisions
       ✓ [C++] Found PARKING-based yield via (50, 28) with 1 wait steps
       Spliced plan: 47 prefix + 5 yield + 83 suffix = 135 total actions
 
---- Pass 68/10000 (Elapsed: 50.82s) ---
+--- Pass 68/10000 (Elapsed: 49.95s) ---
 Detected 159 collisions
 
   Collision: T=50, Type=vertex, Cell=(41, 27), Agents=[1, 29], Attempt=1
@@ -885,7 +885,7 @@ Detected 159 collisions
       ✓ [C++] Found PARKING-based yield via (42, 26) with 1 wait steps
       Spliced plan: 49 prefix + 3 yield + 85 suffix = 137 total actions
 
---- Pass 69/10000 (Elapsed: 51.49s) ---
+--- Pass 69/10000 (Elapsed: 50.65s) ---
 Detected 157 collisions
 
   Collision: T=50, Type=vertex, Cell=(45, 27), Agents=[7, 43], Attempt=1
@@ -896,7 +896,7 @@ Detected 157 collisions
       ✓ [C++] Found PARKING-based yield via (44, 26) with 2 wait steps
       Spliced plan: 49 prefix + 4 yield + 86 suffix = 139 total actions
 
---- Pass 70/10000 (Elapsed: 52.24s) ---
+--- Pass 70/10000 (Elapsed: 51.41s) ---
 Detected 156 collisions
 
   Collision: T=50, Type=vertex, Cell=(50, 27), Agents=[40, 44], Attempt=1
@@ -907,7 +907,7 @@ Detected 156 collisions
       ✓ [C++] Found PARKING-based yield via (51, 26) with 0 wait steps
       Spliced plan: 49 prefix + 2 yield + 77 suffix = 128 total actions
 
---- Pass 71/10000 (Elapsed: 52.96s) ---
+--- Pass 71/10000 (Elapsed: 52.14s) ---
 Detected 180 collisions
 
   Collision: T=50, Type=edge, Cell=((46, 27), (45, 27)), Agents=[43, 46], Attempt=1
@@ -918,7 +918,7 @@ Detected 180 collisions
       ✓ [C++] Found PARKING-based yield via (45, 26) with 1 wait steps
       Spliced plan: 49 prefix + 3 yield + 86 suffix = 138 total actions
 
---- Pass 72/10000 (Elapsed: 53.71s) ---
+--- Pass 72/10000 (Elapsed: 52.84s) ---
 Detected 178 collisions
 
   Collision: T=51, Type=edge, Cell=((44, 27), (45, 27)), Agents=[23, 43], Attempt=1
@@ -929,7 +929,7 @@ Detected 178 collisions
       ✓ [C++] Found PARKING-based yield via (44, 28) with 2 wait steps
       Spliced plan: 50 prefix + 4 yield + 84 suffix = 138 total actions
 
---- Pass 73/10000 (Elapsed: 54.45s) ---
+--- Pass 73/10000 (Elapsed: 53.57s) ---
 Detected 177 collisions
 
   Collision: T=52, Type=edge, Cell=((43, 27), (44, 27)), Agents=[25, 43], Attempt=1
@@ -940,7 +940,7 @@ Detected 177 collisions
       ✓ [C++] Found PARKING-based yield via (43, 26) with 0 wait steps
       Spliced plan: 51 prefix + 2 yield + 75 suffix = 128 total actions
 
---- Pass 74/10000 (Elapsed: 55.20s) ---
+--- Pass 74/10000 (Elapsed: 54.31s) ---
 Detected 215 collisions
 
   Collision: T=52, Type=vertex, Cell=(50, 27), Agents=[33, 44], Attempt=1
@@ -955,7 +955,7 @@ Detected 215 collisions
       ✓ [C++] Found PARKING-based yield via (51, 26) with 0 wait steps
       Spliced plan: 51 prefix + 2 yield + 82 suffix = 135 total actions
 
---- Pass 75/10000 (Elapsed: 55.95s) ---
+--- Pass 75/10000 (Elapsed: 54.99s) ---
   Padded Agent 3: 126 → 128
   Padded Agent 4: 126 → 128
   Padded Agent 8: 127 → 128
@@ -1009,7 +1009,7 @@ Detected 181 collisions
       ✓ [C++] Found PARKING-based yield via (40, 26) with 3 wait steps
       Spliced plan: 52 prefix + 5 yield + 76 suffix = 133 total actions
 
---- Pass 76/10000 (Elapsed: 56.66s) ---
+--- Pass 76/10000 (Elapsed: 55.74s) ---
 Detected 163 collisions
 
   Collision: T=53, Type=vertex, Cell=(52, 27), Agents=[10, 45], Attempt=1
@@ -1020,7 +1020,7 @@ Detected 163 collisions
       ✓ [C++] Found PARKING-based yield via (53, 26) with 1 wait steps
       Spliced plan: 52 prefix + 3 yield + 76 suffix = 131 total actions
 
---- Pass 77/10000 (Elapsed: 57.42s) ---
+--- Pass 77/10000 (Elapsed: 56.44s) ---
 Detected 162 collisions
 
   Collision: T=53, Type=vertex, Cell=(46, 27), Agents=[28, 46], Attempt=1
@@ -1031,7 +1031,7 @@ Detected 162 collisions
       ✓ [C++] Found PARKING-based yield via (47, 29) with 2 wait steps
       Spliced plan: 52 prefix + 6 yield + 78 suffix = 136 total actions
 
---- Pass 78/10000 (Elapsed: 58.15s) ---
+--- Pass 78/10000 (Elapsed: 57.18s) ---
   Padded Agent 3: 128 → 129
   Padded Agent 4: 128 → 129
   Padded Agent 5: 128 → 129
@@ -1088,7 +1088,7 @@ Detected 159 collisions
       ✓ [C++] Found PARKING-based yield via (41, 26) with 0 wait steps
       Spliced plan: 53 prefix + 2 yield + 84 suffix = 139 total actions
 
---- Pass 79/10000 (Elapsed: 58.88s) ---
+--- Pass 79/10000 (Elapsed: 57.87s) ---
 Detected 158 collisions
 
   Collision: T=54, Type=vertex, Cell=(44, 27), Agents=[23, 25], Attempt=1
@@ -1099,7 +1099,7 @@ Detected 158 collisions
       ✓ [C++] Found PARKING-based yield via (42, 27) with 0 wait steps
       Spliced plan: 53 prefix + 2 yield + 76 suffix = 131 total actions
 
---- Pass 80/10000 (Elapsed: 59.65s) ---
+--- Pass 80/10000 (Elapsed: 58.64s) ---
 Detected 142 collisions
 
   Collision: T=54, Type=vertex, Cell=(47, 27), Agents=[26, 46], Attempt=1
@@ -1114,7 +1114,7 @@ Detected 142 collisions
       ✓ [C++] Found PARKING-based yield via (48, 29) with 2 wait steps
       Spliced plan: 53 prefix + 6 yield + 80 suffix = 139 total actions
 
---- Pass 81/10000 (Elapsed: 60.40s) ---
+--- Pass 81/10000 (Elapsed: 59.36s) ---
 Detected 144 collisions
 
   Collision: T=54, Type=vertex, Cell=(41, 27), Agents=[31, 43], Attempt=1
@@ -1125,7 +1125,7 @@ Detected 144 collisions
       ✓ [C++] Found PARKING-based yield via (40, 28) with 3 wait steps
       Spliced plan: 53 prefix + 5 yield + 76 suffix = 134 total actions
 
---- Pass 82/10000 (Elapsed: 61.14s) ---
+--- Pass 82/10000 (Elapsed: 60.02s) ---
 Detected 137 collisions
 
   Collision: T=54, Type=edge, Cell=((47, 27), (46, 27)), Agents=[40, 46], Attempt=1
@@ -1151,7 +1151,7 @@ Detected 137 collisions
     → Selected best candidate Agent 40 with 131 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 40 with window ±5
 
---- Pass 83/10000 (Elapsed: 63.40s) ---
+--- Pass 83/10000 (Elapsed: 62.22s) ---
   Padded Agent 40: 69 → 129
 Detected 131 collisions
 
@@ -1163,7 +1163,7 @@ Detected 131 collisions
       ✓ [C++] Found PARKING-based yield via (49, 28) with 1 wait steps
       Spliced plan: 54 prefix + 3 yield + 75 suffix = 132 total actions
 
---- Pass 84/10000 (Elapsed: 64.10s) ---
+--- Pass 84/10000 (Elapsed: 62.94s) ---
 Detected 130 collisions
 
   Collision: T=55, Type=edge, Cell=((48, 27), (47, 27)), Agents=[44, 46], Attempt=1
@@ -1189,7 +1189,7 @@ Detected 130 collisions
     → Selected best candidate Agent 46 with 128 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 46 with window ±5
 
---- Pass 85/10000 (Elapsed: 66.29s) ---
+--- Pass 85/10000 (Elapsed: 64.96s) ---
   Padded Agent 46: 105 → 129
 Detected 128 collisions
 
@@ -1201,7 +1201,7 @@ Detected 128 collisions
       ✓ [C++] Found PARKING-based yield via (46, 29) with 1 wait steps
       Spliced plan: 53 prefix + 3 yield + 76 suffix = 132 total actions
 
---- Pass 86/10000 (Elapsed: 66.97s) ---
+--- Pass 86/10000 (Elapsed: 65.62s) ---
 Detected 127 collisions
 
   Collision: T=56, Type=vertex, Cell=(40, 27), Agents=[1, 38], Attempt=1
@@ -1212,7 +1212,7 @@ Detected 127 collisions
       ✓ [C++] Found PARKING-based yield via (39, 26) with 2 wait steps
       Spliced plan: 55 prefix + 4 yield + 74 suffix = 133 total actions
 
---- Pass 87/10000 (Elapsed: 67.67s) ---
+--- Pass 87/10000 (Elapsed: 66.33s) ---
 Detected 110 collisions
 
   Collision: T=56, Type=edge, Cell=((46, 27), (47, 27)), Agents=[7, 44], Attempt=1
@@ -1238,7 +1238,7 @@ Detected 110 collisions
     → Selected best candidate Agent 44 with 128 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 44 with window ±5
 
---- Pass 88/10000 (Elapsed: 69.84s) ---
+--- Pass 88/10000 (Elapsed: 68.34s) ---
   Padded Agent 44: 126 → 129
 Detected 128 collisions
 
@@ -1250,7 +1250,7 @@ Detected 128 collisions
       ✓ [C++] Found PARKING-based yield via (56, 26) with 1 wait steps
       Spliced plan: 55 prefix + 3 yield + 74 suffix = 132 total actions
 
---- Pass 89/10000 (Elapsed: 70.58s) ---
+--- Pass 89/10000 (Elapsed: 69.06s) ---
 Detected 127 collisions
 
   Collision: T=57, Type=edge, Cell=((47, 27), (48, 27)), Agents=[7, 33], Attempt=1
@@ -1276,7 +1276,7 @@ Detected 127 collisions
     → Selected best candidate Agent 33 with 118 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 33 with window ±5
 
---- Pass 90/10000 (Elapsed: 72.87s) ---
+--- Pass 90/10000 (Elapsed: 71.20s) ---
   Padded Agent 3: 129 → 130
   Padded Agent 4: 129 → 130
   Padded Agent 5: 129 → 130
@@ -1331,7 +1331,7 @@ Detected 118 collisions
       ✓ [C++] Found PARKING-based yield via (50, 30) with 1 wait steps
       Spliced plan: 55 prefix + 9 yield + 75 suffix = 139 total actions
 
---- Pass 91/10000 (Elapsed: 73.63s) ---
+--- Pass 91/10000 (Elapsed: 71.91s) ---
   Padded Agent 2: 135 → 139
   Padded Agent 3: 130 → 139
   Padded Agent 4: 130 → 139
@@ -1406,7 +1406,7 @@ Detected 92 collisions
       ✓ [C++] Found PARKING-based yield via (46, 27) with 0 wait steps
       Spliced plan: 56 prefix + 2 yield + 83 suffix = 141 total actions
 
---- Pass 92/10000 (Elapsed: 74.36s) ---
+--- Pass 92/10000 (Elapsed: 72.56s) ---
 Detected 94 collisions
 
   Collision: T=57, Type=vertex, Cell=(38, 27), Agents=[43, 48], Attempt=1
@@ -1417,7 +1417,7 @@ Detected 94 collisions
       ✓ [C++] Found PARKING-based yield via (37, 26) with 3 wait steps
       Spliced plan: 56 prefix + 5 yield + 83 suffix = 144 total actions
 
---- Pass 93/10000 (Elapsed: 75.08s) ---
+--- Pass 93/10000 (Elapsed: 73.22s) ---
 Detected 93 collisions
 
   Collision: T=58, Type=edge, Cell=((48, 27), (49, 27)), Agents=[7, 32], Attempt=1
@@ -1428,7 +1428,7 @@ Detected 93 collisions
       ✓ [C++] Found PARKING-based yield via (49, 28) with 1 wait steps
       Spliced plan: 57 prefix + 3 yield + 82 suffix = 142 total actions
 
---- Pass 94/10000 (Elapsed: 75.82s) ---
+--- Pass 94/10000 (Elapsed: 73.93s) ---
 Detected 91 collisions
 
   Collision: T=59, Type=edge, Cell=((49, 27), (50, 27)), Agents=[7, 45], Attempt=1
@@ -1439,7 +1439,7 @@ Detected 91 collisions
       ✓ [C++] Found PARKING-based yield via (50, 26) with 1 wait steps
       Spliced plan: 58 prefix + 3 yield + 81 suffix = 142 total actions
 
---- Pass 95/10000 (Elapsed: 76.58s) ---
+--- Pass 95/10000 (Elapsed: 74.69s) ---
 Detected 89 collisions
 
   Collision: T=59, Type=vertex, Cell=(36, 27), Agents=[13, 43], Attempt=1
@@ -1450,7 +1450,7 @@ Detected 89 collisions
       ✓ [C++] Found PARKING-based yield via (35, 26) with 2 wait steps
       Spliced plan: 58 prefix + 4 yield + 81 suffix = 143 total actions
 
---- Pass 96/10000 (Elapsed: 77.31s) ---
+--- Pass 96/10000 (Elapsed: 75.45s) ---
 Detected 87 collisions
 
   Collision: T=59, Type=edge, Cell=((46, 27), (47, 27)), Agents=[25, 28], Attempt=1
@@ -1465,7 +1465,7 @@ Detected 87 collisions
       ✓ [C++] Found PARKING-based yield via (46, 28) with 0 wait steps
       Spliced plan: 58 prefix + 2 yield + 81 suffix = 141 total actions
 
---- Pass 97/10000 (Elapsed: 78.04s) ---
+--- Pass 97/10000 (Elapsed: 76.13s) ---
 Detected 63 collisions
 
   Collision: T=59, Type=vertex, Cell=(46, 27), Agents=[28, 53], Attempt=1
@@ -1480,7 +1480,7 @@ Detected 63 collisions
       ✓ [C++] Found PARKING-based yield via (45, 26) with 1 wait steps
       Spliced plan: 58 prefix + 3 yield + 81 suffix = 142 total actions
 
---- Pass 98/10000 (Elapsed: 78.77s) ---
+--- Pass 98/10000 (Elapsed: 76.87s) ---
 Detected 57 collisions
 
   Collision: T=61, Type=edge, Cell=((46, 27), (47, 27)), Agents=[25, 26], Attempt=1
@@ -1506,7 +1506,7 @@ Detected 57 collisions
     → Selected best candidate Agent 25 with 54 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 25 with window ±5
 
---- Pass 99/10000 (Elapsed: 80.96s) ---
+--- Pass 99/10000 (Elapsed: 78.95s) ---
   Padded Agent 25: 123 → 139
 Detected 54 collisions
 
@@ -1518,7 +1518,7 @@ Detected 54 collisions
       ✓ [C++] Found PARKING-based yield via (46, 29) with 1 wait steps
       Spliced plan: 57 prefix + 3 yield + 82 suffix = 142 total actions
 
---- Pass 100/10000 (Elapsed: 81.74s) ---
+--- Pass 100/10000 (Elapsed: 79.60s) ---
 Detected 52 collisions
 
   Collision: T=61, Type=vertex, Cell=(44, 27), Agents=[28, 47], Attempt=1
@@ -1533,7 +1533,7 @@ Detected 52 collisions
       ✓ [C++] Found PARKING-based yield via (43, 26) with 2 wait steps
       Spliced plan: 60 prefix + 4 yield + 79 suffix = 143 total actions
 
---- Pass 101/10000 (Elapsed: 82.50s) ---
+--- Pass 101/10000 (Elapsed: 80.38s) ---
 Detected 50 collisions
 
   Collision: T=61, Type=vertex, Cell=(41, 27), Agents=[38, 40], Attempt=1
@@ -1544,7 +1544,7 @@ Detected 50 collisions
       ✓ [C++] Found PARKING-based yield via (39, 27) with 1 wait steps
       Spliced plan: 60 prefix + 3 yield + 79 suffix = 142 total actions
 
---- Pass 102/10000 (Elapsed: 83.29s) ---
+--- Pass 102/10000 (Elapsed: 81.15s) ---
 Detected 49 collisions
 
   Collision: T=62, Type=edge, Cell=((52, 27), (53, 27)), Agents=[7, 41], Attempt=1
@@ -1555,7 +1555,7 @@ Detected 49 collisions
       ✓ [C++] Found PARKING-based yield via (52, 26) with 0 wait steps
       Spliced plan: 61 prefix + 2 yield + 78 suffix = 141 total actions
 
---- Pass 103/10000 (Elapsed: 84.05s) ---
+--- Pass 103/10000 (Elapsed: 81.92s) ---
 Detected 48 collisions
 
   Collision: T=62, Type=vertex, Cell=(52, 27), Agents=[23, 41], Attempt=1
@@ -1566,7 +1566,7 @@ Detected 48 collisions
       ✓ [C++] Found PARKING-based yield via (51, 26) with 1 wait steps
       Spliced plan: 61 prefix + 3 yield + 78 suffix = 142 total actions
 
---- Pass 104/10000 (Elapsed: 84.78s) ---
+--- Pass 104/10000 (Elapsed: 82.63s) ---
 Detected 92 collisions
 
   Collision: T=62, Type=edge, Cell=((46, 27), (45, 27)), Agents=[26, 53], Attempt=1
@@ -1577,7 +1577,7 @@ Detected 92 collisions
       ✓ [C++] Found PARKING-based yield via (46, 28) with 3 wait steps
       Spliced plan: 61 prefix + 5 yield + 78 suffix = 144 total actions
 
---- Pass 105/10000 (Elapsed: 85.55s) ---
+--- Pass 105/10000 (Elapsed: 83.29s) ---
 Detected 92 collisions
 
   Collision: T=62, Type=edge, Cell=((44, 27), (43, 27)), Agents=[28, 31], Attempt=1
@@ -1588,7 +1588,7 @@ Detected 92 collisions
       ✓ [C++] Found PARKING-based yield via (44, 26) with 0 wait steps
       Spliced plan: 61 prefix + 2 yield + 78 suffix = 141 total actions
 
---- Pass 106/10000 (Elapsed: 86.31s) ---
+--- Pass 106/10000 (Elapsed: 83.96s) ---
 Detected 130 collisions
 
   Collision: T=63, Type=edge, Cell=((47, 27), (46, 27)), Agents=[32, 53], Attempt=1
@@ -1599,7 +1599,7 @@ Detected 130 collisions
       ✓ [C++] Found PARKING-based yield via (47, 28) with 2 wait steps
       Spliced plan: 62 prefix + 4 yield + 80 suffix = 146 total actions
 
---- Pass 107/10000 (Elapsed: 87.04s) ---
+--- Pass 107/10000 (Elapsed: 84.64s) ---
 Detected 128 collisions
 
   Collision: T=64, Type=vertex, Cell=(43, 27), Agents=[28, 47], Attempt=1
@@ -1610,7 +1610,7 @@ Detected 128 collisions
       ✓ [C++] Found PARKING-based yield via (44, 26) with 1 wait steps
       Spliced plan: 63 prefix + 3 yield + 78 suffix = 144 total actions
 
---- Pass 108/10000 (Elapsed: 87.81s) ---
+--- Pass 108/10000 (Elapsed: 85.38s) ---
 Detected 89 collisions
 
   Collision: T=64, Type=edge, Cell=((48, 27), (47, 27)), Agents=[45, 53], Attempt=1
@@ -1621,7 +1621,7 @@ Detected 89 collisions
       ✓ [C++] Found PARKING-based yield via (48, 28) with 0 wait steps
       Spliced plan: 63 prefix + 2 yield + 79 suffix = 144 total actions
 
---- Pass 109/10000 (Elapsed: 88.56s) ---
+--- Pass 109/10000 (Elapsed: 86.17s) ---
 Detected 116 collisions
 
   Collision: T=65, Type=vertex, Cell=(49, 27), Agents=[41, 53], Attempt=1
@@ -1632,7 +1632,7 @@ Detected 116 collisions
       ✓ [C++] Found PARKING-based yield via (50, 26) with 1 wait steps
       Spliced plan: 64 prefix + 3 yield + 75 suffix = 142 total actions
 
---- Pass 110/10000 (Elapsed: 89.34s) ---
+--- Pass 110/10000 (Elapsed: 86.91s) ---
 Detected 115 collisions
 
   Collision: T=66, Type=vertex, Cell=(53, 27), Agents=[23, 46], Attempt=1
@@ -1643,7 +1643,7 @@ Detected 115 collisions
       ✓ [C++] Found PARKING-based yield via (51, 27) with 0 wait steps
       Spliced plan: 65 prefix + 2 yield + 77 suffix = 144 total actions
 
---- Pass 111/10000 (Elapsed: 90.10s) ---
+--- Pass 111/10000 (Elapsed: 87.70s) ---
 Detected 71 collisions
 
   Collision: T=66, Type=edge, Cell=((47, 27), (48, 27)), Agents=[31, 45], Attempt=1
@@ -1654,7 +1654,7 @@ Detected 71 collisions
       ✓ [C++] Found PARKING-based yield via (49, 28) with 1 wait steps
       Spliced plan: 65 prefix + 5 yield + 79 suffix = 149 total actions
 
---- Pass 112/10000 (Elapsed: 90.81s) ---
+--- Pass 112/10000 (Elapsed: 88.42s) ---
 Detected 41 collisions
 
   Collision: T=67, Type=vertex, Cell=(40, 27), Agents=[13, 44], Attempt=1
@@ -1665,7 +1665,7 @@ Detected 41 collisions
       ✓ [C++] Found PARKING-based yield via (41, 26) with 2 wait steps
       Spliced plan: 66 prefix + 4 yield + 76 suffix = 146 total actions
 
---- Pass 113/10000 (Elapsed: 91.59s) ---
+--- Pass 113/10000 (Elapsed: 89.12s) ---
 Detected 40 collisions
 
   Collision: T=67, Type=edge, Cell=((46, 27), (45, 27)), Agents=[26, 47], Attempt=1
@@ -1676,7 +1676,7 @@ Detected 40 collisions
       ✓ [C++] Found PARKING-based yield via (45, 26) with 2 wait steps
       Spliced plan: 66 prefix + 4 yield + 77 suffix = 147 total actions
 
---- Pass 114/10000 (Elapsed: 92.36s) ---
+--- Pass 114/10000 (Elapsed: 89.89s) ---
 Detected 39 collisions
 
   Collision: T=67, Type=vertex, Cell=(43, 27), Agents=[28, 48], Attempt=1
@@ -1687,7 +1687,7 @@ Detected 39 collisions
       ✓ [C++] Found PARKING-based yield via (44, 26) with 2 wait steps
       Spliced plan: 66 prefix + 4 yield + 78 suffix = 148 total actions
 
---- Pass 115/10000 (Elapsed: 93.13s) ---
+--- Pass 115/10000 (Elapsed: 90.66s) ---
 Detected 37 collisions
 
   Collision: T=68, Type=edge, Cell=((49, 27), (50, 27)), Agents=[31, 41], Attempt=1
@@ -1698,7 +1698,7 @@ Detected 37 collisions
       ✓ [C++] Found PARKING-based yield via (47, 28) with 2 wait steps
       Spliced plan: 67 prefix + 8 yield + 72 suffix = 147 total actions
 
---- Pass 116/10000 (Elapsed: 93.88s) ---
+--- Pass 116/10000 (Elapsed: 91.38s) ---
 Detected 28 collisions
 
   Collision: T=68, Type=vertex, Cell=(45, 27), Agents=[32, 38], Attempt=1
@@ -1709,7 +1709,7 @@ Detected 28 collisions
       ✓ [C++] Found PARKING-based yield via (47, 29) with 1 wait steps
       Spliced plan: 67 prefix + 7 yield + 79 suffix = 153 total actions
 
---- Pass 117/10000 (Elapsed: 94.68s) ---
+--- Pass 117/10000 (Elapsed: 92.20s) ---
 Detected 25 collisions
 
   Collision: T=70, Type=vertex, Cell=(47, 27), Agents=[38, 41], Attempt=1
@@ -1724,7 +1724,7 @@ Detected 25 collisions
       ✓ [C++] Found PARKING-based yield via (50, 28) with 2 wait steps
       Spliced plan: 69 prefix + 8 yield + 73 suffix = 150 total actions
 
---- Pass 118/10000 (Elapsed: 95.48s) ---
+--- Pass 118/10000 (Elapsed: 92.99s) ---
 Detected 21 collisions
 
   Collision: T=70, Type=vertex, Cell=(52, 52), Agents=[42, 62], Attempt=1
@@ -1736,7 +1736,7 @@ Detected 21 collisions
     ✓ Agent 62 yielded to parking cell (52, 51)
   ✓ YIELD-ON-GOAL successful for Agent 62
 
---- Pass 119/10000 (Elapsed: 96.65s) ---
+--- Pass 119/10000 (Elapsed: 94.12s) ---
 Detected 20 collisions
 
   Collision: T=71, Type=edge, Cell=((43, 27), (44, 27)), Agents=[13, 28], Attempt=1
@@ -1745,7 +1745,7 @@ Detected 20 collisions
       [1/2] WAIT-based yielding...
       ✓ [C++] Found WAIT-based yield
 
---- Pass 120/10000 (Elapsed: 97.40s) ---
+--- Pass 120/10000 (Elapsed: 94.90s) ---
   Padded Agent 1: 139 → 140
   Padded Agent 2: 139 → 140
   Padded Agent 3: 139 → 140
@@ -1804,7 +1804,7 @@ Detected 19 collisions
       ✓ [C++] Found PARKING-based yield via (48, 29) with 2 wait steps
       Spliced plan: 70 prefix + 6 yield + 79 suffix = 155 total actions
 
---- Pass 121/10000 (Elapsed: 98.19s) ---
+--- Pass 121/10000 (Elapsed: 95.72s) ---
 Detected 15 collisions
 
   Collision: T=76, Type=vertex, Cell=(18, 18), Agents=[59, 60], Attempt=1
@@ -1816,7 +1816,7 @@ Detected 15 collisions
     ✓ Agent 60 yielded to parking cell (20, 18)
   ✓ YIELD-ON-GOAL successful for Agent 60
 
---- Pass 122/10000 (Elapsed: 99.42s) ---
+--- Pass 122/10000 (Elapsed: 96.91s) ---
 Detected 14 collisions
 
   Collision: T=89, Type=vertex, Cell=(18, 18), Agents=[1, 60], Attempt=1
@@ -1828,7 +1828,7 @@ Detected 14 collisions
     ✓ Agent 60 yielded to parking cell (20, 18)
   ✓ YIELD-ON-GOAL successful for Agent 60
 
---- Pass 123/10000 (Elapsed: 100.62s) ---
+--- Pass 123/10000 (Elapsed: 98.16s) ---
 Detected 13 collisions
 
   Collision: T=90, Type=vertex, Cell=(42, 47), Agents=[26, 29], Attempt=1
@@ -1840,7 +1840,7 @@ Detected 13 collisions
     ✓ Agent 29 yielded to parking cell (41, 47)
   ✓ YIELD-ON-GOAL successful for Agent 29
 
---- Pass 124/10000 (Elapsed: 101.81s) ---
+--- Pass 124/10000 (Elapsed: 99.42s) ---
 Detected 12 collisions
 
   Collision: T=93, Type=vertex, Cell=(45, 47), Agents=[26, 37], Attempt=1
@@ -1860,7 +1860,7 @@ Detected 12 collisions
     → Selected best candidate Agent 26 with 11 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 26 with window ±5
 
---- Pass 125/10000 (Elapsed: 103.45s) ---
+--- Pass 125/10000 (Elapsed: 101.13s) ---
   Padded Agent 26: 101 → 140
 Detected 11 collisions
 
@@ -1873,7 +1873,7 @@ Detected 11 collisions
     ✓ Agent 61 yielded to parking cell (72, 41)
   ✓ YIELD-ON-GOAL successful for Agent 61
 
---- Pass 126/10000 (Elapsed: 104.67s) ---
+--- Pass 126/10000 (Elapsed: 102.30s) ---
 Detected 10 collisions
 
   Collision: T=102, Type=vertex, Cell=(73, 41), Agents=[23, 61], Attempt=1
@@ -1885,7 +1885,7 @@ Detected 10 collisions
     ✓ Agent 61 yielded to parking cell (72, 41)
   ✓ YIELD-ON-GOAL successful for Agent 61
 
---- Pass 127/10000 (Elapsed: 105.88s) ---
+--- Pass 127/10000 (Elapsed: 103.54s) ---
 Detected 9 collisions
 
   Collision: T=105, Type=vertex, Cell=(73, 41), Agents=[22, 61], Attempt=1
@@ -1897,7 +1897,7 @@ Detected 9 collisions
     ✓ Agent 61 yielded to parking cell (72, 41)
   ✓ YIELD-ON-GOAL successful for Agent 61
 
---- Pass 128/10000 (Elapsed: 107.10s) ---
+--- Pass 128/10000 (Elapsed: 104.72s) ---
 Detected 8 collisions
 
   Collision: T=108, Type=vertex, Cell=(75, 21), Agents=[13, 35], Attempt=1
@@ -1909,7 +1909,7 @@ Detected 8 collisions
     ✓ Agent 35 yielded to parking cell (75, 20)
   ✓ YIELD-ON-GOAL successful for Agent 35
 
---- Pass 129/10000 (Elapsed: 108.35s) ---
+--- Pass 129/10000 (Elapsed: 105.94s) ---
 Detected 7 collisions
 
   Collision: T=110, Type=vertex, Cell=(18, 18), Agents=[33, 60], Attempt=1
@@ -1921,7 +1921,7 @@ Detected 7 collisions
     ✓ Agent 60 yielded to parking cell (20, 18)
   ✓ YIELD-ON-GOAL successful for Agent 60
 
---- Pass 130/10000 (Elapsed: 109.60s) ---
+--- Pass 130/10000 (Elapsed: 107.11s) ---
 Detected 6 collisions
 
   Collision: T=110, Type=vertex, Cell=(78, 36), Agents=[38, 49], Attempt=1
@@ -1941,7 +1941,7 @@ Detected 6 collisions
     → Selected best candidate Agent 38 with 5 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 38 with window ±5
 
---- Pass 131/10000 (Elapsed: 111.28s) ---
+--- Pass 131/10000 (Elapsed: 108.76s) ---
   Padded Agent 38: 112 → 140
 Detected 5 collisions
 
@@ -1954,7 +1954,7 @@ Detected 5 collisions
     ✓ Agent 46 yielded to parking cell (72, 51)
   ✓ YIELD-ON-GOAL successful for Agent 46
 
---- Pass 132/10000 (Elapsed: 112.55s) ---
+--- Pass 132/10000 (Elapsed: 109.91s) ---
 Detected 4 collisions
 
   Collision: T=115, Type=vertex, Cell=(76, 52), Agents=[16, 25], Attempt=1
@@ -1966,7 +1966,7 @@ Detected 4 collisions
     ✓ Agent 16 yielded to parking cell (75, 52)
   ✓ YIELD-ON-GOAL successful for Agent 16
 
---- Pass 133/10000 (Elapsed: 113.81s) ---
+--- Pass 133/10000 (Elapsed: 111.14s) ---
 Detected 3 collisions
 
   Collision: T=115, Type=vertex, Cell=(73, 51), Agents=[22, 46], Attempt=1
@@ -1978,7 +1978,7 @@ Detected 3 collisions
     ✓ Agent 46 yielded to parking cell (72, 51)
   ✓ YIELD-ON-GOAL successful for Agent 46
 
---- Pass 134/10000 (Elapsed: 115.04s) ---
+--- Pass 134/10000 (Elapsed: 112.32s) ---
 Detected 2 collisions
 
   Collision: T=118, Type=vertex, Cell=(70, 50), Agents=[7, 47], Attempt=1
@@ -1990,7 +1990,7 @@ Detected 2 collisions
     ✓ Agent 7 yielded to parking cell (69, 50)
   ✓ YIELD-ON-GOAL successful for Agent 7
 
---- Pass 135/10000 (Elapsed: 116.30s) ---
+--- Pass 135/10000 (Elapsed: 113.46s) ---
 Detected 1 collisions
 
   Collision: T=132, Type=vertex, Cell=(11, 59), Agents=[39, 44], Attempt=1
@@ -2002,7 +2002,7 @@ Detected 1 collisions
     ✓ Agent 39 yielded to parking cell (10, 59)
   ✓ YIELD-ON-GOAL successful for Agent 39
 
---- Pass 136/10000 (Elapsed: 117.48s) ---
+--- Pass 136/10000 (Elapsed: 114.70s) ---
 ✓ No collisions found! Resolution complete.
 
 === Global Cleanup ===
@@ -2044,7 +2044,7 @@ Global cleanup complete: trimmed 20 agents, padded 0 agents, re-simulated all tr
 [DEBUG] Max trajectory length: 141
 
 === Resolution Complete ===
-Time: 118.29s
+Time: 115.50s
 Passes: 136
 Final collisions: 0
 Timed out: False
@@ -2070,7 +2070,7 @@ Total Agents:                   64
 Agents at Goal:                 64
 Final Collision Count:          0
 ✔ Detailed execution log saved to 'logs/icaps_test/den312d/64_agents/test_13.json'
-Analysis Complete. Success: 100.00%, Time: 118.79s
+Analysis Complete. Success: 100.00%, Time: 116.00s
 Agent 1 Final Plan: [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 4, 4, 1, 0, 1, 0, 0, 3, 0, 3, 3, 0, 0, 3, 3, 0, 3, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0, 2, 4, 3, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
 Agent 2 Final Plan: [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 4, 1, 2, 2, 4, 4, 3, 1, 1, 1, 1, 1, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
 Agent 3 Final Plan: [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]

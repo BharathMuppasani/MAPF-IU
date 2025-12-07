@@ -3,7 +3,7 @@
 ✓ cpp_cleanup loaded
 Using device: mps
 → Running single instance from: test_data/icaps_test/random-32-32-20/80_agents/test_16.txt
-✓ Log directory created (if needed): /Users/bittu/Desktop/GitHub/MAPF-IU/logs/icaps_test/random-32-32-20/80_agents
+✓ Log directory created (if needed): /Users/lab/Desktop/github/MAPF-IU/logs/icaps_test/random-32-32-20/80_agents
 Loaded instance from 'test_data/icaps_test/random-32-32-20/80_agents/test_16.txt': 80 agents, grid size (32, 32).
 Instance has 80 agents.
 
@@ -13,7 +13,7 @@ Strategy: STATIC + DYNAMIC + JOINT A*
 Precomputing heuristic distances...
 Finished agents: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80}
 
---- Pass 1/10000 (Elapsed: 0.09s) ---
+--- Pass 1/10000 (Elapsed: 0.12s) ---
   Padded Agent 1: 46 → 59
   Padded Agent 2: 28 → 59
   Padded Agent 3: 2 → 59
@@ -109,7 +109,7 @@ Detected 250 collisions
     → Selected best candidate Agent 14 with 249 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 14 with window ±5
 
---- Pass 2/10000 (Elapsed: 0.71s) ---
+--- Pass 2/10000 (Elapsed: 1.54s) ---
   Padded Agent 14: 49 → 59
 Detected 249 collisions
 
@@ -127,7 +127,7 @@ Detected 249 collisions
     → Selected best candidate Agent 27 with 246 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 27 with window ±5
 
---- Pass 3/10000 (Elapsed: 1.36s) ---
+--- Pass 3/10000 (Elapsed: 3.00s) ---
   Padded Agent 27: 41 → 59
 Detected 246 collisions
 
@@ -145,7 +145,7 @@ Detected 246 collisions
     → Selected best candidate Agent 61 with 245 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 61 with window ±5
 
---- Pass 4/10000 (Elapsed: 1.98s) ---
+--- Pass 4/10000 (Elapsed: 4.41s) ---
   Padded Agent 61: 3 → 59
 Detected 245 collisions
 
@@ -157,7 +157,7 @@ Detected 245 collisions
       ✓ [C++] Found PARKING-based yield via (22, 17) with 0 wait steps
       Spliced plan: 1 prefix + 2 yield + 58 suffix = 61 total actions
 
---- Pass 5/10000 (Elapsed: 2.19s) ---
+--- Pass 5/10000 (Elapsed: 4.91s) ---
 Detected 244 collisions
 
   Collision: T=2, Type=edge, Cell=((5, 4), (4, 4)), Agents=[12, 64], Attempt=1
@@ -168,7 +168,7 @@ Detected 244 collisions
       ✓ [C++] Found PARKING-based yield via (5, 3) with 0 wait steps
       Spliced plan: 1 prefix + 2 yield + 58 suffix = 61 total actions
 
---- Pass 6/10000 (Elapsed: 2.40s) ---
+--- Pass 6/10000 (Elapsed: 5.37s) ---
 Detected 243 collisions
 
   Collision: T=2, Type=vertex, Cell=(26, 26), Agents=[33, 79], Attempt=1
@@ -179,7 +179,7 @@ Detected 243 collisions
       ✓ [C++] Found PARKING-based yield via (28, 26) with 0 wait steps
       Spliced plan: 1 prefix + 2 yield + 58 suffix = 61 total actions
 
---- Pass 7/10000 (Elapsed: 2.62s) ---
+--- Pass 7/10000 (Elapsed: 5.87s) ---
 Detected 241 collisions
 
   Collision: T=3, Type=vertex, Cell=(14, 7), Agents=[9, 44], Attempt=1
@@ -190,7 +190,7 @@ Detected 241 collisions
       ✓ [C++] Found PARKING-based yield via (12, 7) with 0 wait steps
       Spliced plan: 2 prefix + 2 yield + 57 suffix = 61 total actions
 
---- Pass 8/10000 (Elapsed: 2.84s) ---
+--- Pass 8/10000 (Elapsed: 6.34s) ---
 Detected 243 collisions
 
   Collision: T=3, Type=vertex, Cell=(4, 10), Agents=[19, 65], Attempt=1
@@ -201,7 +201,7 @@ Detected 243 collisions
       ✓ [C++] Found PARKING-based yield via (2, 10) with 0 wait steps
       Spliced plan: 2 prefix + 2 yield + 57 suffix = 61 total actions
 
---- Pass 9/10000 (Elapsed: 3.06s) ---
+--- Pass 9/10000 (Elapsed: 6.88s) ---
 Detected 231 collisions
 
   Collision: T=3, Type=vertex, Cell=(8, 23), Agents=[73, 77], Attempt=1
@@ -212,7 +212,7 @@ Detected 231 collisions
       ✓ [C++] Found PARKING-based yield via (7, 24) with 1 wait steps
       Spliced plan: 2 prefix + 3 yield + 57 suffix = 62 total actions
 
---- Pass 10/10000 (Elapsed: 3.27s) ---
+--- Pass 10/10000 (Elapsed: 7.37s) ---
 Detected 231 collisions
 
   Collision: T=4, Type=vertex, Cell=(26, 16), Agents=[2, 20], Attempt=1
@@ -223,7 +223,7 @@ Detected 231 collisions
       ✓ [C++] Found PARKING-based yield via (28, 16) with 0 wait steps
       Spliced plan: 3 prefix + 2 yield + 56 suffix = 61 total actions
 
---- Pass 11/10000 (Elapsed: 3.50s) ---
+--- Pass 11/10000 (Elapsed: 7.87s) ---
 Detected 231 collisions
 
   Collision: T=4, Type=vertex, Cell=(26, 26), Agents=[14, 33], Attempt=1
@@ -234,7 +234,7 @@ Detected 231 collisions
       ✓ [C++] Found PARKING-based yield via (25, 27) with 0 wait steps
       Spliced plan: 3 prefix + 2 yield + 56 suffix = 61 total actions
 
---- Pass 12/10000 (Elapsed: 3.72s) ---
+--- Pass 12/10000 (Elapsed: 8.40s) ---
 Detected 190 collisions
 
   Collision: T=4, Type=vertex, Cell=(19, 11), Agents=[23, 69], Attempt=1
@@ -245,7 +245,7 @@ Detected 190 collisions
       ✓ [C++] Found PARKING-based yield via (20, 10) with 1 wait steps
       Spliced plan: 3 prefix + 3 yield + 56 suffix = 62 total actions
 
---- Pass 13/10000 (Elapsed: 3.94s) ---
+--- Pass 13/10000 (Elapsed: 8.90s) ---
 Detected 191 collisions
 
   Collision: T=5, Type=edge, Cell=((21, 8), (20, 8)), Agents=[10, 43], Attempt=1
@@ -260,7 +260,7 @@ Detected 191 collisions
       ✓ [C++] Found PARKING-based yield via (19, 8) with 0 wait steps
       Spliced plan: 4 prefix + 2 yield + 55 suffix = 61 total actions
 
---- Pass 14/10000 (Elapsed: 4.16s) ---
+--- Pass 14/10000 (Elapsed: 9.42s) ---
 Detected 193 collisions
 
   Collision: T=6, Type=vertex, Cell=(26, 18), Agents=[20, 26], Attempt=1
@@ -271,7 +271,7 @@ Detected 193 collisions
       ✓ [C++] Found PARKING-based yield via (27, 19) with 1 wait steps
       Spliced plan: 5 prefix + 3 yield + 54 suffix = 62 total actions
 
---- Pass 15/10000 (Elapsed: 4.38s) ---
+--- Pass 15/10000 (Elapsed: 9.98s) ---
 Detected 194 collisions
 
   Collision: T=6, Type=edge, Cell=((26, 17), (26, 18)), Agents=[20, 70], Attempt=1
@@ -282,7 +282,7 @@ Detected 194 collisions
       ✓ [C++] Found PARKING-based yield via (25, 18) with 0 wait steps
       Spliced plan: 5 prefix + 2 yield + 54 suffix = 61 total actions
 
---- Pass 16/10000 (Elapsed: 4.60s) ---
+--- Pass 16/10000 (Elapsed: 10.48s) ---
 Detected 194 collisions
 
   Collision: T=6, Type=vertex, Cell=(20, 2), Agents=[22, 29], Attempt=1
@@ -302,7 +302,7 @@ Detected 194 collisions
     → Selected best candidate Agent 22 with 193 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 22 with window ±5
 
---- Pass 17/10000 (Elapsed: 5.04s) ---
+--- Pass 17/10000 (Elapsed: 11.46s) ---
   Padded Agent 22: 9 → 59
 Detected 193 collisions
 
@@ -314,7 +314,7 @@ Detected 193 collisions
       ✓ [C++] Found PARKING-based yield via (20, 7) with 0 wait steps
       Spliced plan: 6 prefix + 2 yield + 55 suffix = 63 total actions
 
---- Pass 18/10000 (Elapsed: 5.26s) ---
+--- Pass 18/10000 (Elapsed: 11.96s) ---
 Detected 191 collisions
 
   Collision: T=7, Type=vertex, Cell=(24, 14), Agents=[40, 56], Attempt=1
@@ -325,7 +325,7 @@ Detected 191 collisions
       ✓ [C++] Found PARKING-based yield via (25, 13) with 0 wait steps
       Spliced plan: 6 prefix + 2 yield + 53 suffix = 61 total actions
 
---- Pass 19/10000 (Elapsed: 5.49s) ---
+--- Pass 19/10000 (Elapsed: 12.43s) ---
 Detected 177 collisions
 
   Collision: T=7, Type=vertex, Cell=(25, 22), Agents=[62, 79], Attempt=1
@@ -336,7 +336,7 @@ Detected 177 collisions
       ✓ [C++] Found PARKING-based yield via (27, 22) with 0 wait steps
       Spliced plan: 6 prefix + 2 yield + 53 suffix = 61 total actions
 
---- Pass 20/10000 (Elapsed: 5.71s) ---
+--- Pass 20/10000 (Elapsed: 12.94s) ---
 Detected 176 collisions
 
   Collision: T=8, Type=vertex, Cell=(20, 15), Agents=[5, 80], Attempt=1
@@ -348,7 +348,7 @@ Detected 176 collisions
     ✓ Agent 5 yielded to parking cell (19, 15)
   ✓ YIELD-ON-GOAL successful for Agent 5
 
---- Pass 21/10000 (Elapsed: 6.04s) ---
+--- Pass 21/10000 (Elapsed: 13.72s) ---
 Detected 175 collisions
 
   Collision: T=8, Type=vertex, Cell=(17, 7), Agents=[9, 13], Attempt=1
@@ -359,7 +359,7 @@ Detected 175 collisions
       ✓ [C++] Found PARKING-based yield via (15, 9) with 1 wait steps
       Spliced plan: 7 prefix + 7 yield + 54 suffix = 68 total actions
 
---- Pass 22/10000 (Elapsed: 6.26s) ---
+--- Pass 22/10000 (Elapsed: 14.25s) ---
 Detected 175 collisions
 
   Collision: T=8, Type=edge, Cell=((17, 6), (17, 7)), Agents=[13, 32], Attempt=1
@@ -370,7 +370,7 @@ Detected 175 collisions
       ✓ [C++] Found PARKING-based yield via (18, 6) with 0 wait steps
       Spliced plan: 7 prefix + 2 yield + 52 suffix = 61 total actions
 
---- Pass 23/10000 (Elapsed: 6.51s) ---
+--- Pass 23/10000 (Elapsed: 14.80s) ---
 Detected 177 collisions
 
   Collision: T=8, Type=edge, Cell=((22, 11), (23, 11)), Agents=[23, 27], Attempt=1
@@ -381,7 +381,7 @@ Detected 177 collisions
       ✓ [C++] Found PARKING-based yield via (23, 10) with 0 wait steps
       Spliced plan: 7 prefix + 2 yield + 52 suffix = 61 total actions
 
---- Pass 24/10000 (Elapsed: 6.76s) ---
+--- Pass 24/10000 (Elapsed: 15.39s) ---
 Detected 173 collisions
 
   Collision: T=8, Type=vertex, Cell=(18, 11), Agents=[25, 69], Attempt=1
@@ -392,7 +392,7 @@ Detected 173 collisions
       ✓ [C++] Found PARKING-based yield via (19, 12) with 1 wait steps
       Spliced plan: 7 prefix + 3 yield + 55 suffix = 65 total actions
 
---- Pass 25/10000 (Elapsed: 7.00s) ---
+--- Pass 25/10000 (Elapsed: 15.94s) ---
 Detected 170 collisions
 
   Collision: T=8, Type=vertex, Cell=(14, 7), Agents=[66, 74], Attempt=1
@@ -403,7 +403,7 @@ Detected 170 collisions
       ✓ [C++] Found PARKING-based yield via (13, 6) with 1 wait steps
       Spliced plan: 7 prefix + 3 yield + 52 suffix = 62 total actions
 
---- Pass 26/10000 (Elapsed: 7.24s) ---
+--- Pass 26/10000 (Elapsed: 16.46s) ---
 Detected 167 collisions
 
   Collision: T=9, Type=vertex, Cell=(11, 23), Agents=[3, 73], Attempt=1
@@ -415,7 +415,7 @@ Detected 167 collisions
     ✓ Agent 3 yielded to parking cell (11, 24)
   ✓ YIELD-ON-GOAL successful for Agent 3
 
---- Pass 27/10000 (Elapsed: 7.61s) ---
+--- Pass 27/10000 (Elapsed: 17.25s) ---
 Detected 166 collisions
 
   Collision: T=9, Type=vertex, Cell=(25, 20), Agents=[7, 20], Attempt=1
@@ -426,7 +426,7 @@ Detected 166 collisions
       ✓ [C++] Found PARKING-based yield via (24, 19) with 1 wait steps
       Spliced plan: 8 prefix + 3 yield + 51 suffix = 62 total actions
 
---- Pass 28/10000 (Elapsed: 7.86s) ---
+--- Pass 28/10000 (Elapsed: 17.76s) ---
 Detected 166 collisions
 
   Collision: T=9, Type=vertex, Cell=(25, 20), Agents=[20, 79], Attempt=1
@@ -441,7 +441,7 @@ Detected 166 collisions
       ✓ [C++] Found PARKING-based yield via (26, 19) with 0 wait steps
       Spliced plan: 8 prefix + 2 yield + 51 suffix = 61 total actions
 
---- Pass 29/10000 (Elapsed: 8.11s) ---
+--- Pass 29/10000 (Elapsed: 18.28s) ---
 Detected 165 collisions
 
   Collision: T=9, Type=edge, Cell=((21, 8), (20, 8)), Agents=[30, 43], Attempt=1
@@ -452,7 +452,7 @@ Detected 165 collisions
       ✓ [C++] Found PARKING-based yield via (20, 7) with 0 wait steps
       Spliced plan: 8 prefix + 2 yield + 55 suffix = 65 total actions
 
---- Pass 30/10000 (Elapsed: 8.36s) ---
+--- Pass 30/10000 (Elapsed: 18.81s) ---
 Detected 163 collisions
 
   Collision: T=9, Type=vertex, Cell=(25, 22), Agents=[33, 62], Attempt=1
@@ -463,7 +463,7 @@ Detected 163 collisions
       ✓ [C++] Found PARKING-based yield via (26, 23) with 1 wait steps
       Spliced plan: 8 prefix + 3 yield + 53 suffix = 64 total actions
 
---- Pass 31/10000 (Elapsed: 8.61s) ---
+--- Pass 31/10000 (Elapsed: 19.32s) ---
 Detected 142 collisions
 
   Collision: T=10, Type=edge, Cell=((11, 14), (12, 14)), Agents=[1, 63], Attempt=1
@@ -474,7 +474,7 @@ Detected 142 collisions
       ✓ [C++] Found PARKING-based yield via (11, 13) with 0 wait steps
       Spliced plan: 9 prefix + 2 yield + 50 suffix = 61 total actions
 
---- Pass 32/10000 (Elapsed: 8.86s) ---
+--- Pass 32/10000 (Elapsed: 19.90s) ---
 Detected 139 collisions
 
   Collision: T=10, Type=vertex, Cell=(17, 7), Agents=[13, 15], Attempt=1
@@ -485,7 +485,7 @@ Detected 139 collisions
       ✓ [C++] Found PARKING-based yield via (15, 6) with 2 wait steps
       Spliced plan: 9 prefix + 6 yield + 50 suffix = 65 total actions
 
---- Pass 33/10000 (Elapsed: 9.11s) ---
+--- Pass 33/10000 (Elapsed: 20.45s) ---
 Detected 138 collisions
 
   Collision: T=11, Type=vertex, Cell=(25, 20), Agents=[20, 62], Attempt=1
@@ -500,7 +500,7 @@ Detected 138 collisions
       ✓ [C++] Found PARKING-based yield via (24, 19) with 0 wait steps
       Spliced plan: 10 prefix + 2 yield + 51 suffix = 63 total actions
 
---- Pass 34/10000 (Elapsed: 9.36s) ---
+--- Pass 34/10000 (Elapsed: 21.01s) ---
 Detected 139 collisions
 
   Collision: T=11, Type=vertex, Cell=(20, 14), Agents=[40, 80], Attempt=1
@@ -512,7 +512,7 @@ Detected 139 collisions
     ✓ Agent 80 yielded to parking cell (20, 13)
   ✓ YIELD-ON-GOAL successful for Agent 80
 
---- Pass 35/10000 (Elapsed: 9.72s) ---
+--- Pass 35/10000 (Elapsed: 21.84s) ---
 Detected 138 collisions
 
   Collision: T=12, Type=edge, Cell=((24, 20), (25, 20)), Agents=[7, 62], Attempt=1
@@ -527,7 +527,7 @@ Detected 138 collisions
       ✓ [C++] Found PARKING-based yield via (24, 19) with 0 wait steps
       Spliced plan: 11 prefix + 2 yield + 51 suffix = 64 total actions
 
---- Pass 36/10000 (Elapsed: 9.96s) ---
+--- Pass 36/10000 (Elapsed: 22.40s) ---
 Detected 138 collisions
 
   Collision: T=12, Type=vertex, Cell=(16, 7), Agents=[8, 41], Attempt=1
@@ -542,7 +542,7 @@ Detected 138 collisions
       ✓ [C++] Found PARKING-based yield via (16, 5) with 1 wait steps
       Spliced plan: 11 prefix + 7 yield + 48 suffix = 66 total actions
 
---- Pass 37/10000 (Elapsed: 10.20s) ---
+--- Pass 37/10000 (Elapsed: 22.96s) ---
 Detected 137 collisions
 
   Collision: T=12, Type=vertex, Cell=(14, 11), Agents=[18, 74], Attempt=1
@@ -553,7 +553,7 @@ Detected 137 collisions
       ✓ [C++] Found PARKING-based yield via (12, 11) with 1 wait steps
       Spliced plan: 11 prefix + 3 yield + 48 suffix = 62 total actions
 
---- Pass 38/10000 (Elapsed: 10.44s) ---
+--- Pass 38/10000 (Elapsed: 23.53s) ---
 Detected 135 collisions
 
   Collision: T=12, Type=vertex, Cell=(19, 14), Agents=[25, 36], Attempt=1
@@ -573,7 +573,7 @@ Detected 135 collisions
     → Selected best candidate Agent 25 with 133 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 25 with window ±5
 
---- Pass 39/10000 (Elapsed: 10.92s) ---
+--- Pass 39/10000 (Elapsed: 24.68s) ---
   Padded Agent 25: 13 → 59
 Detected 133 collisions
 
@@ -585,7 +585,7 @@ Detected 133 collisions
       ✓ [C++] Found PARKING-based yield via (23, 10) with 0 wait steps
       Spliced plan: 11 prefix + 2 yield + 50 suffix = 63 total actions
 
---- Pass 40/10000 (Elapsed: 11.16s) ---
+--- Pass 40/10000 (Elapsed: 25.27s) ---
 Detected 141 collisions
 
   Collision: T=12, Type=vertex, Cell=(19, 14), Agents=[36, 40], Attempt=1
@@ -597,7 +597,7 @@ Detected 141 collisions
     ✓ Agent 36 yielded to parking cell (19, 15)
   ✓ YIELD-ON-GOAL successful for Agent 36
 
---- Pass 41/10000 (Elapsed: 11.52s) ---
+--- Pass 41/10000 (Elapsed: 26.03s) ---
 Detected 140 collisions
 
   Collision: T=12, Type=vertex, Cell=(22, 8), Agents=[43, 75], Attempt=1
@@ -612,7 +612,7 @@ Detected 140 collisions
       ✓ [C++] Found PARKING-based yield via (23, 9) with 1 wait steps
       Spliced plan: 11 prefix + 3 yield + 48 suffix = 62 total actions
 
---- Pass 42/10000 (Elapsed: 11.76s) ---
+--- Pass 42/10000 (Elapsed: 26.58s) ---
 Detected 137 collisions
 
   Collision: T=13, Type=vertex, Cell=(20, 15), Agents=[2, 5], Attempt=1
@@ -624,7 +624,7 @@ Detected 137 collisions
     ✓ Agent 5 yielded to parking cell (20, 16)
   ✓ YIELD-ON-GOAL successful for Agent 5
 
---- Pass 43/10000 (Elapsed: 12.12s) ---
+--- Pass 43/10000 (Elapsed: 27.44s) ---
 Detected 136 collisions
 
   Collision: T=13, Type=edge, Cell=((16, 9), (16, 8)), Agents=[9, 13], Attempt=1
@@ -635,7 +635,7 @@ Detected 136 collisions
       ✓ [C++] Found PARKING-based yield via (15, 9) with 0 wait steps
       Spliced plan: 12 prefix + 2 yield + 56 suffix = 70 total actions
 
---- Pass 44/10000 (Elapsed: 12.36s) ---
+--- Pass 44/10000 (Elapsed: 28.01s) ---
 Detected 133 collisions
 
   Collision: T=13, Type=vertex, Cell=(25, 20), Agents=[14, 20], Attempt=1
@@ -650,7 +650,7 @@ Detected 133 collisions
       ✓ [C++] Found PARKING-based yield via (24, 19) with 0 wait steps
       Spliced plan: 12 prefix + 2 yield + 51 suffix = 65 total actions
 
---- Pass 45/10000 (Elapsed: 12.61s) ---
+--- Pass 45/10000 (Elapsed: 28.56s) ---
 Detected 132 collisions
 
   Collision: T=13, Type=vertex, Cell=(17, 7), Agents=[30, 41], Attempt=1
@@ -661,7 +661,7 @@ Detected 132 collisions
       ✓ [C++] Found PARKING-based yield via (16, 8) with 0 wait steps
       Spliced plan: 12 prefix + 2 yield + 47 suffix = 61 total actions
 
---- Pass 46/10000 (Elapsed: 12.86s) ---
+--- Pass 46/10000 (Elapsed: 29.11s) ---
 Detected 147 collisions
 
   Collision: T=13, Type=vertex, Cell=(17, 3), Agents=[32, 78], Attempt=1
@@ -673,7 +673,7 @@ Detected 147 collisions
     ✓ Agent 32 yielded to parking cell (18, 3)
   ✓ YIELD-ON-GOAL successful for Agent 32
 
---- Pass 47/10000 (Elapsed: 13.23s) ---
+--- Pass 47/10000 (Elapsed: 29.93s) ---
 Detected 146 collisions
 
   Collision: T=13, Type=vertex, Cell=(20, 14), Agents=[56, 80], Attempt=1
@@ -685,7 +685,7 @@ Detected 146 collisions
     ✓ Agent 80 yielded to parking cell (20, 13)
   ✓ YIELD-ON-GOAL successful for Agent 80
 
---- Pass 48/10000 (Elapsed: 13.61s) ---
+--- Pass 48/10000 (Elapsed: 30.82s) ---
 Detected 145 collisions
 
   Collision: T=13, Type=vertex, Cell=(9, 15), Agents=[63, 65], Attempt=1
@@ -696,7 +696,7 @@ Detected 145 collisions
       ✓ [C++] Found PARKING-based yield via (9, 18) with 1 wait steps
       Spliced plan: 12 prefix + 9 yield + 47 suffix = 68 total actions
 
---- Pass 49/10000 (Elapsed: 13.86s) ---
+--- Pass 49/10000 (Elapsed: 31.40s) ---
 Detected 144 collisions
 
   Collision: T=14, Type=vertex, Cell=(19, 15), Agents=[2, 25], Attempt=1
@@ -716,7 +716,7 @@ Detected 144 collisions
     → Selected best candidate Agent 2 with 145 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 2 with window ±5
 
---- Pass 50/10000 (Elapsed: 14.36s) ---
+--- Pass 50/10000 (Elapsed: 32.54s) ---
   Padded Agent 2: 32 → 59
 Detected 145 collisions
 
@@ -728,7 +728,7 @@ Detected 145 collisions
       ✓ [C++] Found PARKING-based yield via (2, 10) with 0 wait steps
       Spliced plan: 13 prefix + 2 yield + 48 suffix = 63 total actions
 
---- Pass 51/10000 (Elapsed: 14.61s) ---
+--- Pass 51/10000 (Elapsed: 33.12s) ---
 Detected 144 collisions
 
   Collision: T=14, Type=vertex, Cell=(25, 20), Agents=[7, 33], Attempt=1
@@ -739,7 +739,7 @@ Detected 144 collisions
       ✓ [C++] Found PARKING-based yield via (25, 22) with 0 wait steps
       Spliced plan: 13 prefix + 2 yield + 51 suffix = 66 total actions
 
---- Pass 52/10000 (Elapsed: 14.86s) ---
+--- Pass 52/10000 (Elapsed: 33.66s) ---
 Detected 144 collisions
 
   Collision: T=14, Type=edge, Cell=((24, 20), (25, 20)), Agents=[7, 14], Attempt=1
@@ -754,7 +754,7 @@ Detected 144 collisions
       ✓ [C++] Found PARKING-based yield via (24, 19) with 0 wait steps
       Spliced plan: 13 prefix + 2 yield + 51 suffix = 66 total actions
 
---- Pass 53/10000 (Elapsed: 15.11s) ---
+--- Pass 53/10000 (Elapsed: 34.26s) ---
 Detected 145 collisions
 
   Collision: T=14, Type=vertex, Cell=(19, 14), Agents=[36, 56], Attempt=1
@@ -766,7 +766,7 @@ Detected 145 collisions
     ✓ Agent 36 yielded to parking cell (18, 13)
   ✓ YIELD-ON-GOAL successful for Agent 36
 
---- Pass 54/10000 (Elapsed: 15.48s) ---
+--- Pass 54/10000 (Elapsed: 35.08s) ---
 Detected 144 collisions
 
   Collision: T=14, Type=vertex, Cell=(13, 12), Agents=[42, 74], Attempt=1
@@ -777,7 +777,7 @@ Detected 144 collisions
       ✓ [C++] Found PARKING-based yield via (15, 12) with 0 wait steps
       Spliced plan: 13 prefix + 2 yield + 46 suffix = 61 total actions
 
---- Pass 55/10000 (Elapsed: 15.72s) ---
+--- Pass 55/10000 (Elapsed: 35.62s) ---
 Detected 144 collisions
 
   Collision: T=15, Type=edge, Cell=((14, 11), (13, 11)), Agents=[10, 18], Attempt=1
@@ -788,7 +788,7 @@ Detected 144 collisions
       ✓ [C++] Found PARKING-based yield via (14, 10) with 0 wait steps
       Spliced plan: 14 prefix + 2 yield + 45 suffix = 61 total actions
 
---- Pass 56/10000 (Elapsed: 15.97s) ---
+--- Pass 56/10000 (Elapsed: 36.13s) ---
 Detected 143 collisions
 
   Collision: T=15, Type=vertex, Cell=(16, 11), Agents=[13, 17], Attempt=1
@@ -799,7 +799,7 @@ Detected 143 collisions
       ✓ [C++] Found PARKING-based yield via (15, 10) with 0 wait steps
       Spliced plan: 14 prefix + 2 yield + 47 suffix = 63 total actions
 
---- Pass 57/10000 (Elapsed: 16.22s) ---
+--- Pass 57/10000 (Elapsed: 36.71s) ---
 Detected 142 collisions
 
   Collision: T=15, Type=vertex, Cell=(14, 11), Agents=[18, 69], Attempt=1
@@ -810,7 +810,7 @@ Detected 142 collisions
       ✓ [C++] Found PARKING-based yield via (13, 10) with 3 wait steps
       Spliced plan: 14 prefix + 5 yield + 48 suffix = 67 total actions
 
---- Pass 58/10000 (Elapsed: 16.48s) ---
+--- Pass 58/10000 (Elapsed: 37.30s) ---
 Detected 137 collisions
 
   Collision: T=16, Type=edge, Cell=((15, 14), (16, 14)), Agents=[1, 40], Attempt=1
@@ -825,7 +825,7 @@ Detected 137 collisions
       ✓ [C++] Found PARKING-based yield via (16, 13) with 1 wait steps
       Spliced plan: 15 prefix + 3 yield + 44 suffix = 62 total actions
 
---- Pass 59/10000 (Elapsed: 16.73s) ---
+--- Pass 59/10000 (Elapsed: 37.86s) ---
 Detected 139 collisions
 
   Collision: T=16, Type=vertex, Cell=(20, 15), Agents=[5, 70], Attempt=1
@@ -837,7 +837,7 @@ Detected 139 collisions
     ✓ Agent 5 yielded to parking cell (20, 16)
   ✓ YIELD-ON-GOAL successful for Agent 5
 
---- Pass 60/10000 (Elapsed: 17.11s) ---
+--- Pass 60/10000 (Elapsed: 38.72s) ---
 Detected 138 collisions
 
   Collision: T=16, Type=vertex, Cell=(25, 20), Agents=[7, 33], Attempt=1
@@ -852,7 +852,7 @@ Detected 138 collisions
       ✓ [C++] Found PARKING-based yield via (24, 19) with 2 wait steps
       Spliced plan: 15 prefix + 4 yield + 51 suffix = 70 total actions
 
---- Pass 61/10000 (Elapsed: 17.36s) ---
+--- Pass 61/10000 (Elapsed: 39.27s) ---
 Detected 136 collisions
 
   Collision: T=16, Type=vertex, Cell=(25, 21), Agents=[11, 20], Attempt=1
@@ -863,7 +863,7 @@ Detected 136 collisions
       ✓ [C++] Found PARKING-based yield via (24, 22) with 1 wait steps
       Spliced plan: 15 prefix + 3 yield + 44 suffix = 62 total actions
 
---- Pass 62/10000 (Elapsed: 17.60s) ---
+--- Pass 62/10000 (Elapsed: 39.86s) ---
 Detected 136 collisions
 
   Collision: T=16, Type=edge, Cell=((25, 20), (25, 21)), Agents=[20, 33], Attempt=1
@@ -874,7 +874,7 @@ Detected 136 collisions
       ✓ [C++] Found PARKING-based yield via (25, 23) with 1 wait steps
       Spliced plan: 15 prefix + 5 yield + 51 suffix = 71 total actions
 
---- Pass 63/10000 (Elapsed: 17.86s) ---
+--- Pass 63/10000 (Elapsed: 40.45s) ---
   Padded Agent 2: 59 → 60
   Padded Agent 4: 59 → 60
   Padded Agent 6: 59 → 60
@@ -932,7 +932,7 @@ Detected 135 collisions
     ✓ Agent 32 yielded to parking cell (18, 3)
   ✓ YIELD-ON-GOAL successful for Agent 32
 
---- Pass 64/10000 (Elapsed: 18.24s) ---
+--- Pass 64/10000 (Elapsed: 41.31s) ---
 Detected 133 collisions
 
   Collision: T=16, Type=vertex, Cell=(14, 18), Agents=[44, 48], Attempt=1
@@ -943,7 +943,7 @@ Detected 133 collisions
       ✓ [C++] Found PARKING-based yield via (15, 18) with 0 wait steps
       Spliced plan: 15 prefix + 4 yield + 45 suffix = 64 total actions
 
---- Pass 65/10000 (Elapsed: 18.49s) ---
+--- Pass 65/10000 (Elapsed: 41.90s) ---
 Detected 129 collisions
 
   Collision: T=17, Type=edge, Cell=((16, 14), (17, 14)), Agents=[1, 56], Attempt=1
@@ -969,7 +969,7 @@ Detected 129 collisions
     → Selected best candidate Agent 56 with 129 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 56 with window ±5
 
---- Pass 66/10000 (Elapsed: 19.25s) ---
+--- Pass 66/10000 (Elapsed: 43.68s) ---
   Padded Agent 56: 51 → 60
 Detected 129 collisions
 
@@ -981,7 +981,7 @@ Detected 129 collisions
       ✓ [C++] Found PARKING-based yield via (18, 18) with 0 wait steps
       Spliced plan: 16 prefix + 2 yield + 44 suffix = 62 total actions
 
---- Pass 67/10000 (Elapsed: 19.51s) ---
+--- Pass 67/10000 (Elapsed: 44.26s) ---
 Detected 130 collisions
 
   Collision: T=17, Type=vertex, Cell=(19, 15), Agents=[25, 70], Attempt=1
@@ -1001,7 +1001,7 @@ Detected 130 collisions
     → Selected best candidate Agent 70 with 132 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 70 with window ±5
 
---- Pass 68/10000 (Elapsed: 20.01s) ---
+--- Pass 68/10000 (Elapsed: 45.47s) ---
   Padded Agent 70: 46 → 60
 Detected 132 collisions
 
@@ -1014,7 +1014,7 @@ Detected 132 collisions
     ✓ Agent 80 yielded to parking cell (21, 14)
   ✓ YIELD-ON-GOAL successful for Agent 80
 
---- Pass 69/10000 (Elapsed: 20.39s) ---
+--- Pass 69/10000 (Elapsed: 46.29s) ---
 Detected 131 collisions
 
   Collision: T=18, Type=vertex, Cell=(22, 9), Agents=[4, 75], Attempt=1
@@ -1026,7 +1026,7 @@ Detected 131 collisions
     ✓ Agent 75 yielded to parking cell (22, 8)
   ✓ YIELD-ON-GOAL successful for Agent 75
 
---- Pass 70/10000 (Elapsed: 20.79s) ---
+--- Pass 70/10000 (Elapsed: 47.19s) ---
 Detected 130 collisions
 
   Collision: T=18, Type=vertex, Cell=(20, 15), Agents=[5, 26], Attempt=1
@@ -1038,7 +1038,7 @@ Detected 130 collisions
     ✓ Agent 5 yielded to parking cell (20, 16)
   ✓ YIELD-ON-GOAL successful for Agent 5
 
---- Pass 71/10000 (Elapsed: 21.18s) ---
+--- Pass 71/10000 (Elapsed: 48.08s) ---
 Detected 129 collisions
 
   Collision: T=18, Type=vertex, Cell=(13, 14), Agents=[19, 74], Attempt=1
@@ -1049,7 +1049,7 @@ Detected 129 collisions
       ✓ [C++] Found PARKING-based yield via (11, 14) with 0 wait steps
       Spliced plan: 17 prefix + 2 yield + 44 suffix = 63 total actions
 
---- Pass 72/10000 (Elapsed: 21.44s) ---
+--- Pass 72/10000 (Elapsed: 48.66s) ---
 Detected 115 collisions
 
   Collision: T=18, Type=vertex, Cell=(19, 14), Agents=[36, 70], Attempt=1
@@ -1065,7 +1065,7 @@ Detected 115 collisions
     → Selected best candidate Agent 70 with 114 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 70 with window ±5
 
---- Pass 73/10000 (Elapsed: 21.95s) ---
+--- Pass 73/10000 (Elapsed: 49.78s) ---
   Padded Agent 70: 46 → 60
 Detected 114 collisions
 
@@ -1119,7 +1119,7 @@ Detected 114 collisions
   ✓ Joint A* successful
     Reduced collisions from 114 to 109
 
---- Pass 74/10000 (Elapsed: 22.66s) ---
+--- Pass 74/10000 (Elapsed: 51.31s) ---
 Detected 109 collisions
 
   Collision: T=19, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=1
@@ -1135,7 +1135,7 @@ Detected 109 collisions
     → Selected best candidate Agent 1 with 116 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±5
 
---- Pass 75/10000 (Elapsed: 23.15s) ---
+--- Pass 75/10000 (Elapsed: 52.44s) ---
   Padded Agent 1: 50 → 60
 Detected 116 collisions
 
@@ -1151,7 +1151,7 @@ Detected 116 collisions
       ✓ [C++] Found PARKING-based yield via (18, 18) with 3 wait steps
       Spliced plan: 18 prefix + 9 yield + 42 suffix = 69 total actions
 
---- Pass 76/10000 (Elapsed: 23.40s) ---
+--- Pass 76/10000 (Elapsed: 53.07s) ---
 Detected 116 collisions
 
   Collision: T=19, Type=vertex, Cell=(21, 8), Agents=[47, 66], Attempt=1
@@ -1171,7 +1171,7 @@ Detected 116 collisions
     → Selected best candidate Agent 66 with 116 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 66 with window ±5
 
---- Pass 77/10000 (Elapsed: 23.90s) ---
+--- Pass 77/10000 (Elapsed: 54.33s) ---
   Padded Agent 66: 47 → 60
 Detected 116 collisions
 
@@ -1198,7 +1198,7 @@ Detected 116 collisions
     → Selected best candidate Agent 54 with 118 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 54 with window ±5
 
---- Pass 78/10000 (Elapsed: 24.65s) ---
+--- Pass 78/10000 (Elapsed: 56.01s) ---
   Padded Agent 54: 33 → 60
 Detected 118 collisions
 
@@ -1225,7 +1225,7 @@ Detected 118 collisions
     → Selected best candidate Agent 54 with 115 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 54 with window ±5
 
---- Pass 79/10000 (Elapsed: 25.39s) ---
+--- Pass 79/10000 (Elapsed: 57.81s) ---
   Padded Agent 54: 33 → 60
 Detected 115 collisions
 
@@ -1237,7 +1237,7 @@ Detected 115 collisions
       ✓ [C++] Found PARKING-based yield via (18, 18) with 0 wait steps
       Spliced plan: 16 prefix + 2 yield + 44 suffix = 62 total actions
 
---- Pass 80/10000 (Elapsed: 25.64s) ---
+--- Pass 80/10000 (Elapsed: 58.38s) ---
 Detected 116 collisions
 
   Collision: T=19, Type=edge, Cell=((18, 17), (19, 17)), Agents=[54, 79], Attempt=2
@@ -1255,7 +1255,7 @@ Detected 116 collisions
   → Trying DYNAMIC for Agent 54 (blocker: 79) (attempt 1/1)
   ✓ DYNAMIC successful for Agent 54
 
---- Pass 81/10000 (Elapsed: 26.02s) ---
+--- Pass 81/10000 (Elapsed: 59.33s) ---
   Padded Agent 54: 33 → 60
 Detected 119 collisions
 
@@ -1271,7 +1271,7 @@ Detected 119 collisions
       ✓ [C++] Found PARKING-based yield via (18, 18) with 0 wait steps
       Spliced plan: 16 prefix + 2 yield + 44 suffix = 62 total actions
 
---- Pass 82/10000 (Elapsed: 26.26s) ---
+--- Pass 82/10000 (Elapsed: 59.96s) ---
 Detected 118 collisions
 
   Collision: T=19, Type=vertex, Cell=(18, 16), Agents=[54, 70], Attempt=1
@@ -1297,7 +1297,7 @@ Detected 118 collisions
     → Selected best candidate Agent 54 with 115 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 54 with window ±5
 
---- Pass 83/10000 (Elapsed: 27.01s) ---
+--- Pass 83/10000 (Elapsed: 61.68s) ---
   Padded Agent 54: 33 → 60
 Detected 115 collisions
 
@@ -1309,7 +1309,7 @@ Detected 115 collisions
       ✓ [C++] Found PARKING-based yield via (18, 18) with 0 wait steps
       Spliced plan: 16 prefix + 2 yield + 44 suffix = 62 total actions
 
---- Pass 84/10000 (Elapsed: 27.26s) ---
+--- Pass 84/10000 (Elapsed: 62.23s) ---
 Detected 116 collisions
 
   Collision: T=19, Type=edge, Cell=((18, 17), (19, 17)), Agents=[54, 79], Attempt=3
@@ -1384,7 +1384,7 @@ Detected 116 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 85/10000 (Elapsed: 27.89s) ---
+--- Pass 85/10000 (Elapsed: 63.73s) ---
   Padded Agent 54: 1 → 60
 Detected 114 collisions
 
@@ -1399,7 +1399,7 @@ Detected 114 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 86/10000 (Elapsed: 28.40s) ---
+--- Pass 86/10000 (Elapsed: 64.89s) ---
 Detected 113 collisions
 
   Collision: T=19, Type=vertex, Cell=(14, 6), Agents=[59, 78], Attempt=1
@@ -1412,7 +1412,7 @@ Detected 113 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 87/10000 (Elapsed: 28.78s) ---
+--- Pass 87/10000 (Elapsed: 65.72s) ---
 Detected 105 collisions
 
   Collision: T=20, Type=edge, Cell=((18, 15), (19, 15)), Agents=[1, 26], Attempt=1
@@ -1440,7 +1440,7 @@ Detected 105 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 88/10000 (Elapsed: 29.66s) ---
+--- Pass 88/10000 (Elapsed: 67.71s) ---
   Padded Agent 1: 50 → 60
 Detected 105 collisions
 
@@ -1509,7 +1509,7 @@ Detected 105 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 89/10000 (Elapsed: 30.49s) ---
+--- Pass 89/10000 (Elapsed: 69.56s) ---
   Padded Agent 1: 1 → 60
 Detected 102 collisions
 
@@ -1524,7 +1524,7 @@ Detected 102 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 90/10000 (Elapsed: 30.98s) ---
+--- Pass 90/10000 (Elapsed: 70.72s) ---
 Detected 101 collisions
 
   Collision: T=3, Type=vertex, Cell=(4, 12), Agents=[1, 51], Attempt=1
@@ -1538,7 +1538,7 @@ Detected 101 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 91/10000 (Elapsed: 31.48s) ---
+--- Pass 91/10000 (Elapsed: 71.80s) ---
 Detected 100 collisions
 
   Collision: T=5, Type=vertex, Cell=(4, 12), Agents=[1, 65], Attempt=1
@@ -1552,7 +1552,7 @@ Detected 100 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 92/10000 (Elapsed: 31.99s) ---
+--- Pass 92/10000 (Elapsed: 72.86s) ---
 Detected 99 collisions
 
   Collision: T=7, Type=vertex, Cell=(4, 12), Agents=[1, 19], Attempt=1
@@ -1566,7 +1566,7 @@ Detected 99 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 93/10000 (Elapsed: 32.49s) ---
+--- Pass 93/10000 (Elapsed: 74.08s) ---
 Detected 98 collisions
 
   Collision: T=20, Type=vertex, Cell=(25, 20), Agents=[7, 11], Attempt=1
@@ -1583,7 +1583,7 @@ Detected 98 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 94/10000 (Elapsed: 32.87s) ---
+--- Pass 94/10000 (Elapsed: 74.98s) ---
 Detected 95 collisions
 
   Collision: T=20, Type=vertex, Cell=(18, 11), Agents=[27, 50], Attempt=1
@@ -1596,7 +1596,7 @@ Detected 95 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 95/10000 (Elapsed: 33.26s) ---
+--- Pass 95/10000 (Elapsed: 75.86s) ---
 Detected 96 collisions
 
   Collision: T=20, Type=vertex, Cell=(21, 8), Agents=[41, 47], Attempt=1
@@ -1618,7 +1618,7 @@ Detected 96 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 96/10000 (Elapsed: 33.91s) ---
+--- Pass 96/10000 (Elapsed: 77.29s) ---
   Padded Agent 41: 40 → 60
 Detected 94 collisions
 
@@ -1633,7 +1633,7 @@ Detected 94 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 97/10000 (Elapsed: 34.43s) ---
+--- Pass 97/10000 (Elapsed: 78.46s) ---
 Detected 93 collisions
 
   Collision: T=21, Type=vertex, Cell=(20, 10), Agents=[4, 41], Attempt=1
@@ -1646,7 +1646,7 @@ Detected 93 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 98/10000 (Elapsed: 34.82s) ---
+--- Pass 98/10000 (Elapsed: 79.34s) ---
 Detected 90 collisions
 
   Collision: T=21, Type=vertex, Cell=(21, 8), Agents=[15, 47], Attempt=1
@@ -1668,7 +1668,7 @@ Detected 90 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 99/10000 (Elapsed: 35.46s) ---
+--- Pass 99/10000 (Elapsed: 80.84s) ---
   Padded Agent 15: 52 → 60
 Detected 90 collisions
 
@@ -1682,7 +1682,7 @@ Detected 90 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 100/10000 (Elapsed: 35.85s) ---
+--- Pass 100/10000 (Elapsed: 81.73s) ---
 Detected 81 collisions
 
   Collision: T=21, Type=edge, Cell=((18, 15), (18, 14)), Agents=[26, 58], Attempt=1
@@ -1695,7 +1695,7 @@ Detected 81 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 101/10000 (Elapsed: 36.25s) ---
+--- Pass 101/10000 (Elapsed: 82.62s) ---
 Detected 81 collisions
 
   Collision: T=21, Type=edge, Cell=((16, 17), (17, 17)), Agents=[31, 79], Attempt=1
@@ -1708,7 +1708,7 @@ Detected 81 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 102/10000 (Elapsed: 36.64s) ---
+--- Pass 102/10000 (Elapsed: 83.48s) ---
 Detected 83 collisions
 
   Collision: T=21, Type=edge, Cell=((19, 11), (18, 11)), Agents=[46, 50], Attempt=1
@@ -1725,7 +1725,7 @@ Detected 83 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 103/10000 (Elapsed: 37.03s) ---
+--- Pass 103/10000 (Elapsed: 84.34s) ---
 Detected 94 collisions
 
   Collision: T=21, Type=vertex, Cell=(14, 16), Agents=[56, 74], Attempt=1
@@ -1742,7 +1742,7 @@ Detected 94 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 104/10000 (Elapsed: 37.42s) ---
+--- Pass 104/10000 (Elapsed: 85.17s) ---
 Detected 93 collisions
 
   Collision: T=22, Type=vertex, Cell=(14, 16), Agents=[2, 48], Attempt=1
@@ -1755,7 +1755,7 @@ Detected 93 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 105/10000 (Elapsed: 37.81s) ---
+--- Pass 105/10000 (Elapsed: 86.05s) ---
 Detected 94 collisions
 
   Collision: T=22, Type=vertex, Cell=(21, 8), Agents=[9, 47], Attempt=1
@@ -1777,7 +1777,7 @@ Detected 94 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 106/10000 (Elapsed: 38.47s) ---
+--- Pass 106/10000 (Elapsed: 87.51s) ---
   Padded Agent 9: 50 → 60
 Detected 94 collisions
 
@@ -1792,7 +1792,7 @@ Detected 94 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 107/10000 (Elapsed: 38.99s) ---
+--- Pass 107/10000 (Elapsed: 88.73s) ---
 Detected 93 collisions
 
   Collision: T=23, Type=vertex, Cell=(21, 10), Agents=[4, 15], Attempt=1
@@ -1805,7 +1805,7 @@ Detected 93 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 108/10000 (Elapsed: 39.45s) ---
+--- Pass 108/10000 (Elapsed: 89.63s) ---
 Detected 88 collisions
 
   Collision: T=23, Type=vertex, Cell=(1, 3), Agents=[6, 39], Attempt=1
@@ -1819,7 +1819,7 @@ Detected 88 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 109/10000 (Elapsed: 39.99s) ---
+--- Pass 109/10000 (Elapsed: 90.78s) ---
 Detected 87 collisions
 
   Collision: T=23, Type=vertex, Cell=(22, 20), Agents=[11, 73], Attempt=1
@@ -1832,7 +1832,7 @@ Detected 87 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 110/10000 (Elapsed: 40.40s) ---
+--- Pass 110/10000 (Elapsed: 91.68s) ---
 Detected 85 collisions
 
   Collision: T=23, Type=vertex, Cell=(18, 27), Agents=[16, 72], Attempt=1
@@ -1846,7 +1846,7 @@ Detected 85 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 111/10000 (Elapsed: 40.95s) ---
+--- Pass 111/10000 (Elapsed: 92.86s) ---
 Detected 84 collisions
 
   Collision: T=23, Type=edge, Cell=((16, 11), (17, 11)), Agents=[18, 46], Attempt=1
@@ -1859,7 +1859,7 @@ Detected 84 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 112/10000 (Elapsed: 41.35s) ---
+--- Pass 112/10000 (Elapsed: 93.72s) ---
   Padded Agent 2: 60 → 62
   Padded Agent 3: 61 → 62
   Padded Agent 6: 60 → 62
@@ -1918,7 +1918,7 @@ Detected 81 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 113/10000 (Elapsed: 41.75s) ---
+--- Pass 113/10000 (Elapsed: 94.56s) ---
 Detected 80 collisions
 
   Collision: T=23, Type=edge, Cell=((19, 11), (18, 11)), Agents=[27, 50], Attempt=1
@@ -1931,7 +1931,7 @@ Detected 80 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 114/10000 (Elapsed: 42.15s) ---
+--- Pass 114/10000 (Elapsed: 95.42s) ---
 Detected 76 collisions
 
   Collision: T=23, Type=vertex, Cell=(12, 20), Agents=[42, 51], Attempt=1
@@ -1945,7 +1945,7 @@ Detected 76 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 115/10000 (Elapsed: 42.68s) ---
+--- Pass 115/10000 (Elapsed: 96.56s) ---
 Detected 75 collisions
 
   Collision: T=24, Type=vertex, Cell=(12, 6), Agents=[8, 34], Attempt=1
@@ -1958,7 +1958,7 @@ Detected 75 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 116/10000 (Elapsed: 43.08s) ---
+--- Pass 116/10000 (Elapsed: 97.43s) ---
 Detected 77 collisions
 
   Collision: T=24, Type=vertex, Cell=(14, 16), Agents=[13, 48], Attempt=1
@@ -1971,7 +1971,7 @@ Detected 77 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 117/10000 (Elapsed: 43.48s) ---
+--- Pass 117/10000 (Elapsed: 98.33s) ---
 Detected 75 collisions
 
   Collision: T=24, Type=edge, Cell=((23, 20), (22, 20)), Agents=[33, 73], Attempt=1
@@ -1984,7 +1984,7 @@ Detected 75 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 118/10000 (Elapsed: 43.88s) ---
+--- Pass 118/10000 (Elapsed: 99.24s) ---
   Padded Agent 2: 62 → 63
   Padded Agent 3: 62 → 63
   Padded Agent 6: 62 → 63
@@ -2047,7 +2047,7 @@ Detected 75 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 119/10000 (Elapsed: 44.28s) ---
+--- Pass 119/10000 (Elapsed: 100.21s) ---
 Detected 79 collisions
 
   Collision: T=24, Type=vertex, Cell=(16, 16), Agents=[58, 62], Attempt=1
@@ -2060,7 +2060,7 @@ Detected 79 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 120/10000 (Elapsed: 44.69s) ---
+--- Pass 120/10000 (Elapsed: 101.10s) ---
 Detected 77 collisions
 
   Collision: T=25, Type=edge, Cell=((17, 17), (16, 17)), Agents=[14, 31], Attempt=1
@@ -2073,7 +2073,7 @@ Detected 77 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 121/10000 (Elapsed: 45.08s) ---
+--- Pass 121/10000 (Elapsed: 102.01s) ---
 Detected 76 collisions
 
   Collision: T=25, Type=edge, Cell=((18, 11), (19, 11)), Agents=[18, 27], Attempt=1
@@ -2086,7 +2086,7 @@ Detected 76 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 122/10000 (Elapsed: 45.49s) ---
+--- Pass 122/10000 (Elapsed: 102.98s) ---
 Detected 75 collisions
 
   Collision: T=25, Type=vertex, Cell=(16, 14), Agents=[19, 26], Attempt=1
@@ -2099,7 +2099,7 @@ Detected 75 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 123/10000 (Elapsed: 45.88s) ---
+--- Pass 123/10000 (Elapsed: 103.85s) ---
 Detected 73 collisions
 
   Collision: T=26, Type=vertex, Cell=(14, 16), Agents=[48, 62], Attempt=1
@@ -2112,7 +2112,7 @@ Detected 73 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 124/10000 (Elapsed: 46.27s) ---
+--- Pass 124/10000 (Elapsed: 104.77s) ---
 Detected 69 collisions
 
   Collision: T=27, Type=vertex, Cell=(4, 12), Agents=[1, 10], Attempt=1
@@ -2126,7 +2126,7 @@ Detected 69 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 125/10000 (Elapsed: 46.79s) ---
+--- Pass 125/10000 (Elapsed: 105.93s) ---
 Detected 68 collisions
 
   Collision: T=28, Type=edge, Cell=((14, 16), (14, 17)), Agents=[13, 48], Attempt=1
@@ -2139,7 +2139,7 @@ Detected 68 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 126/10000 (Elapsed: 47.18s) ---
+--- Pass 126/10000 (Elapsed: 106.88s) ---
 Detected 67 collisions
 
   Collision: T=28, Type=vertex, Cell=(21, 8), Agents=[47, 59], Attempt=1
@@ -2153,7 +2153,7 @@ Detected 67 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 127/10000 (Elapsed: 47.70s) ---
+--- Pass 127/10000 (Elapsed: 108.06s) ---
 Detected 66 collisions
 
   Collision: T=29, Type=edge, Cell=((25, 10), (25, 9)), Agents=[9, 15], Attempt=1
@@ -2166,7 +2166,7 @@ Detected 66 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 128/10000 (Elapsed: 48.09s) ---
+--- Pass 128/10000 (Elapsed: 108.94s) ---
 Detected 65 collisions
 
   Collision: T=29, Type=vertex, Cell=(22, 22), Agents=[38, 45], Attempt=1
@@ -2180,7 +2180,7 @@ Detected 65 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 129/10000 (Elapsed: 48.61s) ---
+--- Pass 129/10000 (Elapsed: 110.10s) ---
 Detected 63 collisions
 
   Collision: T=29, Type=vertex, Cell=(14, 22), Agents=[44, 74], Attempt=1
@@ -2194,7 +2194,7 @@ Detected 63 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 130/10000 (Elapsed: 49.14s) ---
+--- Pass 130/10000 (Elapsed: 111.29s) ---
 Detected 62 collisions
 
   Collision: T=29, Type=vertex, Cell=(5, 18), Agents=[55, 63], Attempt=1
@@ -2208,7 +2208,7 @@ Detected 62 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 131/10000 (Elapsed: 49.66s) ---
+--- Pass 131/10000 (Elapsed: 112.56s) ---
 Detected 61 collisions
 
   Collision: T=30, Type=edge, Cell=((20, 19), (20, 18)), Agents=[11, 31], Attempt=1
@@ -2221,7 +2221,7 @@ Detected 61 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 132/10000 (Elapsed: 50.05s) ---
+--- Pass 132/10000 (Elapsed: 113.51s) ---
 Detected 58 collisions
 
   Collision: T=30, Type=vertex, Cell=(28, 16), Agents=[23, 60], Attempt=1
@@ -2235,7 +2235,7 @@ Detected 58 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 133/10000 (Elapsed: 50.61s) ---
+--- Pass 133/10000 (Elapsed: 114.72s) ---
 Detected 57 collisions
 
   Collision: T=30, Type=vertex, Cell=(20, 19), Agents=[31, 33], Attempt=1
@@ -2248,7 +2248,7 @@ Detected 57 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 134/10000 (Elapsed: 51.09s) ---
+--- Pass 134/10000 (Elapsed: 115.67s) ---
   Padded Agent 2: 63 → 65
   Padded Agent 3: 63 → 65
   Padded Agent 6: 63 → 65
@@ -2313,7 +2313,7 @@ Detected 57 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 135/10000 (Elapsed: 51.52s) ---
+--- Pass 135/10000 (Elapsed: 116.59s) ---
 Detected 63 collisions
 
   Collision: T=31, Type=vertex, Cell=(25, 11), Agents=[9, 18], Attempt=1
@@ -2326,7 +2326,7 @@ Detected 63 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 136/10000 (Elapsed: 51.95s) ---
+--- Pass 136/10000 (Elapsed: 117.53s) ---
 Detected 62 collisions
 
   Collision: T=31, Type=edge, Cell=((9, 7), (8, 7)), Agents=[34, 68], Attempt=1
@@ -2343,7 +2343,7 @@ Detected 62 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 137/10000 (Elapsed: 52.36s) ---
+--- Pass 137/10000 (Elapsed: 118.48s) ---
 Detected 62 collisions
 
   Collision: T=31, Type=vertex, Cell=(27, 11), Agents=[41, 50], Attempt=1
@@ -2356,7 +2356,7 @@ Detected 62 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 138/10000 (Elapsed: 52.77s) ---
+--- Pass 138/10000 (Elapsed: 119.37s) ---
 Detected 53 collisions
 
   Collision: T=32, Type=vertex, Cell=(10, 25), Agents=[24, 65], Attempt=1
@@ -2370,7 +2370,7 @@ Detected 53 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 139/10000 (Elapsed: 53.32s) ---
+--- Pass 139/10000 (Elapsed: 120.61s) ---
 Detected 52 collisions
 
   Collision: T=32, Type=vertex, Cell=(10, 13), Agents=[26, 79], Attempt=1
@@ -2384,7 +2384,7 @@ Detected 52 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 140/10000 (Elapsed: 53.87s) ---
+--- Pass 140/10000 (Elapsed: 121.84s) ---
 Detected 51 collisions
 
   Collision: T=32, Type=vertex, Cell=(13, 11), Agents=[27, 62], Attempt=1
@@ -2397,7 +2397,7 @@ Detected 51 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 141/10000 (Elapsed: 54.28s) ---
+--- Pass 141/10000 (Elapsed: 122.79s) ---
 Detected 42 collisions
 
   Collision: T=32, Type=vertex, Cell=(21, 20), Agents=[31, 45], Attempt=1
@@ -2410,7 +2410,7 @@ Detected 42 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 142/10000 (Elapsed: 54.69s) ---
+--- Pass 142/10000 (Elapsed: 123.70s) ---
 Detected 41 collisions
 
   Collision: T=32, Type=edge, Cell=((28, 17), (28, 18)), Agents=[60, 73], Attempt=1
@@ -2423,7 +2423,7 @@ Detected 41 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 143/10000 (Elapsed: 55.09s) ---
+--- Pass 143/10000 (Elapsed: 124.60s) ---
 Detected 40 collisions
 
   Collision: T=33, Type=vertex, Cell=(6, 16), Agents=[2, 56], Attempt=1
@@ -2437,7 +2437,7 @@ Detected 40 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 144/10000 (Elapsed: 55.63s) ---
+--- Pass 144/10000 (Elapsed: 125.83s) ---
 Detected 39 collisions
 
   Collision: T=33, Type=vertex, Cell=(28, 16), Agents=[23, 73], Attempt=1
@@ -2451,7 +2451,7 @@ Detected 39 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 145/10000 (Elapsed: 56.17s) ---
+--- Pass 145/10000 (Elapsed: 127.08s) ---
 Detected 38 collisions
 
   Collision: T=33, Type=edge, Cell=((8, 7), (9, 7)), Agents=[68, 78], Attempt=1
@@ -2462,7 +2462,7 @@ Detected 38 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 146/10000 (Elapsed: 56.58s) ---
+--- Pass 146/10000 (Elapsed: 128.05s) ---
 Detected 37 collisions
 
   Collision: T=34, Type=vertex, Cell=(19, 14), Agents=[19, 36], Attempt=1
@@ -2480,7 +2480,7 @@ Detected 37 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 147/10000 (Elapsed: 57.26s) ---
+--- Pass 147/10000 (Elapsed: 129.58s) ---
 Detected 37 collisions
 
   Collision: T=34, Type=vertex, Cell=(11, 26), Agents=[24, 35], Attempt=1
@@ -2494,7 +2494,7 @@ Detected 37 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 148/10000 (Elapsed: 57.81s) ---
+--- Pass 148/10000 (Elapsed: 130.79s) ---
 Detected 36 collisions
 
   Collision: T=34, Type=vertex, Cell=(14, 12), Agents=[48, 70], Attempt=1
@@ -2507,7 +2507,7 @@ Detected 36 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 149/10000 (Elapsed: 58.22s) ---
+--- Pass 149/10000 (Elapsed: 131.72s) ---
 Detected 34 collisions
 
   Collision: T=34, Type=vertex, Cell=(14, 25), Agents=[49, 74], Attempt=1
@@ -2521,7 +2521,7 @@ Detected 34 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 150/10000 (Elapsed: 58.78s) ---
+--- Pass 150/10000 (Elapsed: 133.04s) ---
 Detected 33 collisions
 
   Collision: T=35, Type=vertex, Cell=(19, 15), Agents=[19, 25], Attempt=1
@@ -2543,7 +2543,7 @@ Detected 33 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 151/10000 (Elapsed: 59.48s) ---
+--- Pass 151/10000 (Elapsed: 134.56s) ---
 Detected 33 collisions
 
   Collision: T=34, Type=vertex, Cell=(19, 14), Agents=[19, 36], Attempt=2
@@ -2585,7 +2585,7 @@ Detected 33 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 152/10000 (Elapsed: 60.30s) ---
+--- Pass 152/10000 (Elapsed: 136.43s) ---
 Detected 31 collisions
 
   Collision: T=36, Type=vertex, Cell=(5, 18), Agents=[55, 56], Attempt=1
@@ -2599,7 +2599,7 @@ Detected 31 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 153/10000 (Elapsed: 60.85s) ---
+--- Pass 153/10000 (Elapsed: 137.68s) ---
 Detected 30 collisions
 
   Collision: T=37, Type=vertex, Cell=(25, 20), Agents=[16, 66], Attempt=1
@@ -2612,7 +2612,7 @@ Detected 30 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 154/10000 (Elapsed: 61.26s) ---
+--- Pass 154/10000 (Elapsed: 138.57s) ---
 Detected 29 collisions
 
   Collision: T=37, Type=vertex, Cell=(8, 14), Agents=[17, 46], Attempt=1
@@ -2626,7 +2626,7 @@ Detected 29 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 155/10000 (Elapsed: 61.81s) ---
+--- Pass 155/10000 (Elapsed: 139.87s) ---
 Detected 28 collisions
 
   Collision: T=37, Type=vertex, Cell=(11, 11), Agents=[27, 62], Attempt=1
@@ -2640,7 +2640,7 @@ Detected 28 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 156/10000 (Elapsed: 62.35s) ---
+--- Pass 156/10000 (Elapsed: 141.08s) ---
 Detected 27 collisions
 
   Collision: T=37, Type=edge, Cell=((25, 20), (25, 19)), Agents=[31, 66], Attempt=1
@@ -2657,7 +2657,7 @@ Detected 27 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 157/10000 (Elapsed: 62.76s) ---
+--- Pass 157/10000 (Elapsed: 141.98s) ---
 Detected 26 collisions
 
   Collision: T=38, Type=vertex, Cell=(28, 20), Agents=[43, 60], Attempt=1
@@ -2671,7 +2671,7 @@ Detected 26 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 158/10000 (Elapsed: 63.31s) ---
+--- Pass 158/10000 (Elapsed: 143.20s) ---
 Detected 25 collisions
 
   Collision: T=40, Type=vertex, Cell=(6, 14), Agents=[14, 34], Attempt=1
@@ -2684,7 +2684,7 @@ Detected 25 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 159/10000 (Elapsed: 63.72s) ---
+--- Pass 159/10000 (Elapsed: 144.10s) ---
 Detected 24 collisions
 
   Collision: T=40, Type=vertex, Cell=(25, 19), Agents=[16, 31], Attempt=1
@@ -2698,7 +2698,7 @@ Detected 24 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 160/10000 (Elapsed: 64.28s) ---
+--- Pass 160/10000 (Elapsed: 145.38s) ---
 Detected 23 collisions
 
   Collision: T=40, Type=vertex, Cell=(30, 20), Agents=[21, 60], Attempt=1
@@ -2712,7 +2712,7 @@ Detected 23 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 161/10000 (Elapsed: 64.82s) ---
+--- Pass 161/10000 (Elapsed: 146.63s) ---
 Detected 22 collisions
 
   Collision: T=40, Type=vertex, Cell=(11, 11), Agents=[62, 70], Attempt=1
@@ -2726,7 +2726,7 @@ Detected 22 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 162/10000 (Elapsed: 65.38s) ---
+--- Pass 162/10000 (Elapsed: 147.93s) ---
 Detected 21 collisions
 
   Collision: T=41, Type=vertex, Cell=(25, 18), Agents=[15, 16], Attempt=1
@@ -2754,7 +2754,7 @@ Detected 21 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 163/10000 (Elapsed: 66.33s) ---
+--- Pass 163/10000 (Elapsed: 150.09s) ---
   Padded Agent 15: 54 → 65
 Detected 20 collisions
 
@@ -2769,7 +2769,7 @@ Detected 20 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 164/10000 (Elapsed: 66.88s) ---
+--- Pass 164/10000 (Elapsed: 151.36s) ---
 Detected 19 collisions
 
   Collision: T=42, Type=edge, Cell=((25, 17), (25, 18)), Agents=[9, 16], Attempt=1
@@ -2782,7 +2782,7 @@ Detected 19 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 165/10000 (Elapsed: 67.30s) ---
+--- Pass 165/10000 (Elapsed: 152.25s) ---
 Detected 18 collisions
 
   Collision: T=42, Type=vertex, Cell=(25, 19), Agents=[15, 31], Attempt=1
@@ -2796,7 +2796,7 @@ Detected 18 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 166/10000 (Elapsed: 67.84s) ---
+--- Pass 166/10000 (Elapsed: 153.46s) ---
 Detected 16 collisions
 
   Collision: T=43, Type=vertex, Cell=(1, 23), Agents=[10, 12], Attempt=1
@@ -2818,7 +2818,7 @@ Detected 16 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 167/10000 (Elapsed: 68.52s) ---
+--- Pass 167/10000 (Elapsed: 155.03s) ---
   Padded Agent 10: 53 → 65
 Detected 19 collisions
 
@@ -2832,7 +2832,7 @@ Detected 19 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 168/10000 (Elapsed: 68.92s) ---
+--- Pass 168/10000 (Elapsed: 155.93s) ---
 Detected 16 collisions
 
   Collision: T=43, Type=vertex, Cell=(27, 20), Agents=[41, 50], Attempt=1
@@ -2854,7 +2854,7 @@ Detected 16 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 169/10000 (Elapsed: 69.61s) ---
+--- Pass 169/10000 (Elapsed: 157.49s) ---
   Padded Agent 50: 52 → 65
 Detected 17 collisions
 
@@ -2869,7 +2869,7 @@ Detected 17 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 170/10000 (Elapsed: 70.15s) ---
+--- Pass 170/10000 (Elapsed: 158.80s) ---
 Detected 16 collisions
 
   Collision: T=45, Type=vertex, Cell=(4, 12), Agents=[1, 27], Attempt=1
@@ -2883,7 +2883,7 @@ Detected 16 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 171/10000 (Elapsed: 70.69s) ---
+--- Pass 171/10000 (Elapsed: 160.05s) ---
 Detected 15 collisions
 
   Collision: T=45, Type=vertex, Cell=(5, 18), Agents=[34, 55], Attempt=1
@@ -2897,7 +2897,7 @@ Detected 15 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 172/10000 (Elapsed: 71.25s) ---
+--- Pass 172/10000 (Elapsed: 161.30s) ---
 Detected 14 collisions
 
   Collision: T=45, Type=vertex, Cell=(8, 9), Agents=[70, 71], Attempt=1
@@ -2911,7 +2911,7 @@ Detected 14 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 173/10000 (Elapsed: 71.79s) ---
+--- Pass 173/10000 (Elapsed: 162.51s) ---
 Detected 13 collisions
 
   Collision: T=47, Type=vertex, Cell=(4, 12), Agents=[1, 14], Attempt=1
@@ -2925,7 +2925,7 @@ Detected 13 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 174/10000 (Elapsed: 72.33s) ---
+--- Pass 174/10000 (Elapsed: 163.69s) ---
 Detected 12 collisions
 
   Collision: T=48, Type=vertex, Cell=(26, 22), Agents=[20, 50], Attempt=1
@@ -2939,7 +2939,7 @@ Detected 12 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 175/10000 (Elapsed: 72.87s) ---
+--- Pass 175/10000 (Elapsed: 164.99s) ---
 Detected 11 collisions
 
   Collision: T=50, Type=vertex, Cell=(1, 26), Agents=[10, 77], Attempt=1
@@ -2953,7 +2953,7 @@ Detected 11 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 176/10000 (Elapsed: 73.40s) ---
+--- Pass 176/10000 (Elapsed: 166.24s) ---
 Detected 10 collisions
 
   Collision: T=50, Type=vertex, Cell=(27, 20), Agents=[19, 41], Attempt=1
@@ -2967,7 +2967,7 @@ Detected 10 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 177/10000 (Elapsed: 73.95s) ---
+--- Pass 177/10000 (Elapsed: 167.47s) ---
 Detected 9 collisions
 
   Collision: T=51, Type=vertex, Cell=(28, 20), Agents=[19, 43], Attempt=1
@@ -2981,7 +2981,7 @@ Detected 9 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 178/10000 (Elapsed: 74.50s) ---
+--- Pass 178/10000 (Elapsed: 168.76s) ---
 Detected 8 collisions
 
   Collision: T=52, Type=vertex, Cell=(6, 13), Agents=[11, 33], Attempt=1
@@ -2995,7 +2995,7 @@ Detected 8 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 179/10000 (Elapsed: 75.04s) ---
+--- Pass 179/10000 (Elapsed: 170.03s) ---
 Detected 7 collisions
 
   Collision: T=52, Type=vertex, Cell=(10, 25), Agents=[46, 65], Attempt=1
@@ -3009,7 +3009,7 @@ Detected 7 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 180/10000 (Elapsed: 75.58s) ---
+--- Pass 180/10000 (Elapsed: 171.33s) ---
 Detected 5 collisions
 
   Collision: T=53, Type=vertex, Cell=(30, 20), Agents=[19, 21], Attempt=1
@@ -3023,7 +3023,7 @@ Detected 5 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 181/10000 (Elapsed: 76.13s) ---
+--- Pass 181/10000 (Elapsed: 172.55s) ---
 Detected 4 collisions
 
   Collision: T=54, Type=vertex, Cell=(11, 26), Agents=[35, 46], Attempt=1
@@ -3037,7 +3037,7 @@ Detected 4 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 182/10000 (Elapsed: 76.68s) ---
+--- Pass 182/10000 (Elapsed: 173.76s) ---
 Detected 2 collisions
 
   Collision: T=55, Type=vertex, Cell=(4, 12), Agents=[1, 33], Attempt=1
@@ -3051,7 +3051,7 @@ Detected 2 collisions
 
 → Non-deferred collisions remain; continuing to next pass
 
---- Pass 183/10000 (Elapsed: 77.23s) ---
+--- Pass 183/10000 (Elapsed: 175.08s) ---
 Detected 1 collisions
 
   Collision: T=55, Type=vertex, Cell=(30, 22), Agents=[19, 67], Attempt=1
@@ -3096,7 +3096,7 @@ Running final collision resolution (DEFER disabled)...
   Found 73 collisions after Phase 2 planning
   Attempting to resolve with STATIC, DYNAMIC, YIELD-on-goal, YIELD-on-start, Joint A*...
 
---- Pass 184/10000 (Elapsed: 77.98s) ---
+--- Pass 184/10000 (Elapsed: 176.71s) ---
   Padded Agent 2: 32 → 111
   Padded Agent 3: 2 → 111
   Padded Agent 4: 58 → 111
@@ -3187,7 +3187,7 @@ Detected 73 collisions
       Spliced plan: 0 prefix + 2 yield + 111 suffix = 113 total actions
   ✓ YIELD-ON-START successful: Agent 1 yielded from start
 
---- Pass 185/10000 (Elapsed: 78.59s) ---
+--- Pass 185/10000 (Elapsed: 178.09s) ---
   Padded Agent 2: 111 → 113
   Padded Agent 3: 111 → 113
   Padded Agent 4: 111 → 113
@@ -3278,7 +3278,7 @@ Detected 72 collisions
       Spliced plan: 2 prefix + 2 yield + 111 suffix = 115 total actions
   ✓ YIELD-ON-START successful: Agent 1 yielded from start
 
---- Pass 186/10000 (Elapsed: 79.20s) ---
+--- Pass 186/10000 (Elapsed: 179.48s) ---
   Padded Agent 2: 113 → 115
   Padded Agent 3: 113 → 115
   Padded Agent 4: 113 → 115
@@ -3369,7 +3369,7 @@ Detected 71 collisions
       Spliced plan: 4 prefix + 2 yield + 111 suffix = 117 total actions
   ✓ YIELD-ON-START successful: Agent 1 yielded from start
 
---- Pass 187/10000 (Elapsed: 79.84s) ---
+--- Pass 187/10000 (Elapsed: 180.89s) ---
   Padded Agent 2: 115 → 117
   Padded Agent 3: 115 → 117
   Padded Agent 4: 115 → 117
@@ -3460,7 +3460,7 @@ Detected 70 collisions
       Spliced plan: 4 prefix + 2 yield + 113 suffix = 119 total actions
   ✓ YIELD-ON-START successful: Agent 54 yielded from start
 
---- Pass 188/10000 (Elapsed: 80.46s) ---
+--- Pass 188/10000 (Elapsed: 182.34s) ---
 Detected 69 collisions
 
   Collision: T=7, Type=vertex, Cell=(4, 12), Agents=[1, 19], Attempt=2
@@ -3472,7 +3472,7 @@ Detected 69 collisions
       Spliced plan: 6 prefix + 2 yield + 111 suffix = 119 total actions
   ✓ YIELD-ON-START successful: Agent 1 yielded from start
 
---- Pass 189/10000 (Elapsed: 81.09s) ---
+--- Pass 189/10000 (Elapsed: 183.72s) ---
   Padded Agent 2: 117 → 119
   Padded Agent 3: 117 → 119
   Padded Agent 4: 117 → 119
@@ -3562,7 +3562,7 @@ Detected 68 collisions
     ✓ Agent 5 yielded to parking cell (19, 15)
   ✓ YIELD-ON-GOAL successful for Agent 5
 
---- Pass 190/10000 (Elapsed: 81.74s) ---
+--- Pass 190/10000 (Elapsed: 185.19s) ---
 Detected 67 collisions
 
   Collision: T=9, Type=vertex, Cell=(11, 23), Agents=[3, 73], Attempt=2
@@ -3574,7 +3574,7 @@ Detected 67 collisions
     ✓ Agent 3 yielded to parking cell (11, 24)
   ✓ YIELD-ON-GOAL successful for Agent 3
 
---- Pass 191/10000 (Elapsed: 82.39s) ---
+--- Pass 191/10000 (Elapsed: 186.55s) ---
 Detected 66 collisions
 
   Collision: T=11, Type=vertex, Cell=(20, 14), Agents=[40, 80], Attempt=2
@@ -3586,7 +3586,7 @@ Detected 66 collisions
     ✓ Agent 80 yielded to parking cell (20, 13)
   ✓ YIELD-ON-GOAL successful for Agent 80
 
---- Pass 192/10000 (Elapsed: 83.04s) ---
+--- Pass 192/10000 (Elapsed: 188.03s) ---
 Detected 65 collisions
 
   Collision: T=12, Type=vertex, Cell=(19, 14), Agents=[36, 40], Attempt=2
@@ -3598,7 +3598,7 @@ Detected 65 collisions
     ✓ Agent 36 yielded to parking cell (19, 15)
   ✓ YIELD-ON-GOAL successful for Agent 36
 
---- Pass 193/10000 (Elapsed: 83.69s) ---
+--- Pass 193/10000 (Elapsed: 189.54s) ---
 Detected 64 collisions
 
   Collision: T=13, Type=vertex, Cell=(17, 3), Agents=[32, 78], Attempt=2
@@ -3610,7 +3610,7 @@ Detected 64 collisions
     ✓ Agent 32 yielded to parking cell (18, 3)
   ✓ YIELD-ON-GOAL successful for Agent 32
 
---- Pass 194/10000 (Elapsed: 84.33s) ---
+--- Pass 194/10000 (Elapsed: 190.98s) ---
 Detected 63 collisions
 
   Collision: T=13, Type=vertex, Cell=(20, 14), Agents=[56, 80], Attempt=2
@@ -3622,7 +3622,7 @@ Detected 63 collisions
     ✓ Agent 80 yielded to parking cell (20, 13)
   ✓ YIELD-ON-GOAL successful for Agent 80
 
---- Pass 195/10000 (Elapsed: 84.98s) ---
+--- Pass 195/10000 (Elapsed: 192.54s) ---
 Detected 62 collisions
 
   Collision: T=14, Type=vertex, Cell=(19, 14), Agents=[36, 56], Attempt=2
@@ -3634,7 +3634,7 @@ Detected 62 collisions
     ✓ Agent 36 yielded to parking cell (17, 14)
   ✓ YIELD-ON-GOAL successful for Agent 36
 
---- Pass 196/10000 (Elapsed: 85.64s) ---
+--- Pass 196/10000 (Elapsed: 194.00s) ---
 Detected 61 collisions
 
   Collision: T=16, Type=vertex, Cell=(20, 15), Agents=[5, 70], Attempt=2
@@ -3646,7 +3646,7 @@ Detected 61 collisions
     ✓ Agent 5 yielded to parking cell (20, 16)
   ✓ YIELD-ON-GOAL successful for Agent 5
 
---- Pass 197/10000 (Elapsed: 86.30s) ---
+--- Pass 197/10000 (Elapsed: 195.51s) ---
 Detected 60 collisions
 
   Collision: T=16, Type=vertex, Cell=(17, 3), Agents=[32, 34], Attempt=2
@@ -3658,7 +3658,7 @@ Detected 60 collisions
     ✓ Agent 32 yielded to parking cell (18, 3)
   ✓ YIELD-ON-GOAL successful for Agent 32
 
---- Pass 198/10000 (Elapsed: 86.96s) ---
+--- Pass 198/10000 (Elapsed: 197.00s) ---
 Detected 58 collisions
 
   Collision: T=17, Type=vertex, Cell=(19, 15), Agents=[25, 70], Attempt=3
@@ -3678,7 +3678,7 @@ Detected 58 collisions
     → Selected best candidate Agent 70 with 57 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 70 with window ±5
 
---- Pass 199/10000 (Elapsed: 87.84s) ---
+--- Pass 199/10000 (Elapsed: 199.04s) ---
   Padded Agent 70: 56 → 119
 Detected 57 collisions
 
@@ -3691,7 +3691,7 @@ Detected 57 collisions
     ✓ Agent 75 yielded to parking cell (22, 8)
   ✓ YIELD-ON-GOAL successful for Agent 75
 
---- Pass 200/10000 (Elapsed: 88.50s) ---
+--- Pass 200/10000 (Elapsed: 200.72s) ---
 Detected 56 collisions
 
   Collision: T=18, Type=vertex, Cell=(20, 15), Agents=[5, 26], Attempt=2
@@ -3703,7 +3703,7 @@ Detected 56 collisions
     ✓ Agent 5 yielded to parking cell (20, 16)
   ✓ YIELD-ON-GOAL successful for Agent 5
 
---- Pass 201/10000 (Elapsed: 89.17s) ---
+--- Pass 201/10000 (Elapsed: 202.20s) ---
 Detected 55 collisions
 
   Collision: T=19, Type=vertex, Cell=(19, 15), Agents=[25, 26], Attempt=1
@@ -3723,7 +3723,7 @@ Detected 55 collisions
     → Selected best candidate Agent 26 with 54 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 26 with window ±5
 
---- Pass 202/10000 (Elapsed: 90.05s) ---
+--- Pass 202/10000 (Elapsed: 204.26s) ---
   Padded Agent 26: 49 → 119
 Detected 54 collisions
 
@@ -3736,7 +3736,7 @@ Detected 54 collisions
     ✓ Agent 80 yielded to parking cell (21, 14)
   ✓ YIELD-ON-GOAL successful for Agent 80
 
---- Pass 203/10000 (Elapsed: 90.73s) ---
+--- Pass 203/10000 (Elapsed: 205.79s) ---
 Detected 53 collisions
 
   Collision: T=20, Type=vertex, Cell=(19, 14), Agents=[26, 36], Attempt=1
@@ -3752,7 +3752,7 @@ Detected 53 collisions
     → Selected best candidate Agent 26 with 54 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 26 with window ±5
 
---- Pass 204/10000 (Elapsed: 91.63s) ---
+--- Pass 204/10000 (Elapsed: 207.78s) ---
   Padded Agent 26: 49 → 119
 Detected 54 collisions
 
@@ -3790,7 +3790,7 @@ Detected 54 collisions
     → Selected best candidate Agent 26 with 59 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 26 with window ±15
 
---- Pass 205/10000 (Elapsed: 92.98s) ---
+--- Pass 205/10000 (Elapsed: 210.91s) ---
   Padded Agent 26: 46 → 119
 Detected 59 collisions
 
@@ -3802,7 +3802,7 @@ Detected 59 collisions
       ✓ [C++] Found PARKING-based yield via (27, 19) with 1 wait steps
       Spliced plan: 5 prefix + 3 yield + 114 suffix = 122 total actions
 
---- Pass 206/10000 (Elapsed: 93.43s) ---
+--- Pass 206/10000 (Elapsed: 211.95s) ---
 Detected 54 collisions
 
   Collision: T=19, Type=edge, Cell=((21, 14), (20, 14)), Agents=[26, 80], Attempt=1
@@ -3813,7 +3813,7 @@ Detected 54 collisions
       ✓ [C++] Found PARKING-based yield via (22, 14) with 0 wait steps
       Spliced plan: 18 prefix + 2 yield + 104 suffix = 124 total actions
 
---- Pass 207/10000 (Elapsed: 93.88s) ---
+--- Pass 207/10000 (Elapsed: 212.99s) ---
 Detected 55 collisions
 
   Collision: T=20, Type=vertex, Cell=(18, 27), Agents=[45, 72], Attempt=2
@@ -3825,7 +3825,7 @@ Detected 55 collisions
     ✓ Agent 72 yielded to parking cell (19, 27)
   ✓ YIELD-ON-GOAL successful for Agent 72
 
---- Pass 208/10000 (Elapsed: 94.55s) ---
+--- Pass 208/10000 (Elapsed: 214.49s) ---
 Detected 54 collisions
 
   Collision: T=21, Type=vertex, Cell=(20, 14), Agents=[26, 80], Attempt=1
@@ -3837,7 +3837,7 @@ Detected 54 collisions
     ✓ Agent 80 yielded to parking cell (20, 13)
   ✓ YIELD-ON-GOAL successful for Agent 80
 
---- Pass 209/10000 (Elapsed: 95.23s) ---
+--- Pass 209/10000 (Elapsed: 215.95s) ---
 Detected 53 collisions
 
   Collision: T=22, Type=vertex, Cell=(19, 14), Agents=[26, 36], Attempt=1
@@ -3849,7 +3849,7 @@ Detected 53 collisions
     ✓ Agent 36 yielded to parking cell (18, 13)
   ✓ YIELD-ON-GOAL successful for Agent 36
 
---- Pass 210/10000 (Elapsed: 95.93s) ---
+--- Pass 210/10000 (Elapsed: 217.47s) ---
 Detected 52 collisions
 
   Collision: T=22, Type=vertex, Cell=(14, 25), Agents=[35, 49], Attempt=2
@@ -3861,7 +3861,7 @@ Detected 52 collisions
     ✓ Agent 49 yielded to parking cell (15, 25)
   ✓ YIELD-ON-GOAL successful for Agent 49
 
---- Pass 211/10000 (Elapsed: 96.63s) ---
+--- Pass 211/10000 (Elapsed: 219.10s) ---
 Detected 51 collisions
 
   Collision: T=23, Type=vertex, Cell=(1, 3), Agents=[6, 39], Attempt=2
@@ -3873,7 +3873,7 @@ Detected 51 collisions
     ✓ Agent 39 yielded to parking cell (2, 3)
   ✓ YIELD-ON-GOAL successful for Agent 39
 
---- Pass 212/10000 (Elapsed: 97.32s) ---
+--- Pass 212/10000 (Elapsed: 220.75s) ---
 Detected 50 collisions
 
   Collision: T=23, Type=vertex, Cell=(18, 27), Agents=[16, 72], Attempt=2
@@ -3885,7 +3885,7 @@ Detected 50 collisions
     ✓ Agent 72 yielded to parking cell (19, 27)
   ✓ YIELD-ON-GOAL successful for Agent 72
 
---- Pass 213/10000 (Elapsed: 98.01s) ---
+--- Pass 213/10000 (Elapsed: 222.39s) ---
 Detected 49 collisions
 
   Collision: T=23, Type=vertex, Cell=(12, 20), Agents=[42, 51], Attempt=2
@@ -3897,7 +3897,7 @@ Detected 49 collisions
     ✓ Agent 51 yielded to parking cell (11, 21)
   ✓ YIELD-ON-GOAL successful for Agent 51
 
---- Pass 214/10000 (Elapsed: 98.71s) ---
+--- Pass 214/10000 (Elapsed: 224.06s) ---
 Detected 48 collisions
 
   Collision: T=27, Type=vertex, Cell=(4, 12), Agents=[1, 10], Attempt=2
@@ -3909,7 +3909,7 @@ Detected 48 collisions
       Spliced plan: 26 prefix + 2 yield + 93 suffix = 121 total actions
   ✓ YIELD-ON-START successful: Agent 1 yielded from start
 
---- Pass 215/10000 (Elapsed: 99.40s) ---
+--- Pass 215/10000 (Elapsed: 225.65s) ---
   Padded Agent 2: 119 → 121
   Padded Agent 4: 119 → 121
   Padded Agent 6: 119 → 121
@@ -3989,7 +3989,7 @@ Detected 47 collisions
     ✓ Agent 47 yielded to parking cell (24, 7)
   ✓ YIELD-ON-GOAL successful for Agent 47
 
---- Pass 216/10000 (Elapsed: 100.09s) ---
+--- Pass 216/10000 (Elapsed: 227.27s) ---
 Detected 46 collisions
 
   Collision: T=29, Type=vertex, Cell=(22, 22), Agents=[38, 45], Attempt=2
@@ -4001,7 +4001,7 @@ Detected 46 collisions
     ✓ Agent 38 yielded to parking cell (23, 19)
   ✓ YIELD-ON-GOAL successful for Agent 38
 
---- Pass 217/10000 (Elapsed: 100.78s) ---
+--- Pass 217/10000 (Elapsed: 228.94s) ---
 Detected 44 collisions
 
   Collision: T=29, Type=vertex, Cell=(14, 22), Agents=[44, 74], Attempt=2
@@ -4013,7 +4013,7 @@ Detected 44 collisions
     ✓ Agent 44 yielded to parking cell (15, 22)
   ✓ YIELD-ON-GOAL successful for Agent 44
 
---- Pass 218/10000 (Elapsed: 101.49s) ---
+--- Pass 218/10000 (Elapsed: 230.62s) ---
 Detected 43 collisions
 
   Collision: T=29, Type=vertex, Cell=(5, 18), Agents=[55, 63], Attempt=2
@@ -4025,7 +4025,7 @@ Detected 43 collisions
     ✓ Agent 55 yielded to parking cell (6, 18)
   ✓ YIELD-ON-GOAL successful for Agent 55
 
---- Pass 219/10000 (Elapsed: 102.19s) ---
+--- Pass 219/10000 (Elapsed: 232.26s) ---
 Detected 42 collisions
 
   Collision: T=30, Type=vertex, Cell=(28, 16), Agents=[23, 60], Attempt=2
@@ -4037,7 +4037,7 @@ Detected 42 collisions
     ✓ Agent 23 yielded to parking cell (27, 16)
   ✓ YIELD-ON-GOAL successful for Agent 23
 
---- Pass 220/10000 (Elapsed: 102.90s) ---
+--- Pass 220/10000 (Elapsed: 234.22s) ---
 Detected 41 collisions
 
   Collision: T=32, Type=vertex, Cell=(10, 25), Agents=[24, 65], Attempt=2
@@ -4049,7 +4049,7 @@ Detected 41 collisions
     ✓ Agent 65 yielded to parking cell (10, 24)
   ✓ YIELD-ON-GOAL successful for Agent 65
 
---- Pass 221/10000 (Elapsed: 103.60s) ---
+--- Pass 221/10000 (Elapsed: 235.79s) ---
 Detected 40 collisions
 
   Collision: T=32, Type=vertex, Cell=(10, 13), Agents=[26, 79], Attempt=2
@@ -4061,7 +4061,7 @@ Detected 40 collisions
     ✓ Agent 79 yielded to parking cell (9, 12)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 222/10000 (Elapsed: 104.31s) ---
+--- Pass 222/10000 (Elapsed: 237.41s) ---
 Detected 39 collisions
 
   Collision: T=33, Type=vertex, Cell=(6, 16), Agents=[2, 56], Attempt=2
@@ -4073,7 +4073,7 @@ Detected 39 collisions
     ✓ Agent 2 yielded to parking cell (7, 16)
   ✓ YIELD-ON-GOAL successful for Agent 2
 
---- Pass 223/10000 (Elapsed: 105.02s) ---
+--- Pass 223/10000 (Elapsed: 239.06s) ---
 Detected 38 collisions
 
   Collision: T=33, Type=vertex, Cell=(28, 16), Agents=[23, 73], Attempt=2
@@ -4085,7 +4085,7 @@ Detected 38 collisions
     ✓ Agent 23 yielded to parking cell (27, 16)
   ✓ YIELD-ON-GOAL successful for Agent 23
 
---- Pass 224/10000 (Elapsed: 105.73s) ---
+--- Pass 224/10000 (Elapsed: 240.64s) ---
 Detected 37 collisions
 
   Collision: T=34, Type=vertex, Cell=(11, 26), Agents=[24, 35], Attempt=2
@@ -4097,7 +4097,7 @@ Detected 37 collisions
     ✓ Agent 35 yielded to parking cell (12, 27)
   ✓ YIELD-ON-GOAL successful for Agent 35
 
---- Pass 225/10000 (Elapsed: 106.43s) ---
+--- Pass 225/10000 (Elapsed: 242.33s) ---
 Detected 36 collisions
 
   Collision: T=34, Type=vertex, Cell=(14, 25), Agents=[49, 74], Attempt=2
@@ -4109,7 +4109,7 @@ Detected 36 collisions
     ✓ Agent 49 yielded to parking cell (13, 25)
   ✓ YIELD-ON-GOAL successful for Agent 49
 
---- Pass 226/10000 (Elapsed: 107.12s) ---
+--- Pass 226/10000 (Elapsed: 243.94s) ---
 Detected 35 collisions
 
   Collision: T=36, Type=vertex, Cell=(5, 18), Agents=[55, 56], Attempt=2
@@ -4121,7 +4121,7 @@ Detected 35 collisions
     ✓ Agent 55 yielded to parking cell (6, 18)
   ✓ YIELD-ON-GOAL successful for Agent 55
 
---- Pass 227/10000 (Elapsed: 107.82s) ---
+--- Pass 227/10000 (Elapsed: 245.60s) ---
 Detected 34 collisions
 
   Collision: T=37, Type=vertex, Cell=(8, 14), Agents=[17, 46], Attempt=2
@@ -4133,7 +4133,7 @@ Detected 34 collisions
     ✓ Agent 17 yielded to parking cell (7, 14)
   ✓ YIELD-ON-GOAL successful for Agent 17
 
---- Pass 228/10000 (Elapsed: 108.51s) ---
+--- Pass 228/10000 (Elapsed: 247.22s) ---
 Detected 33 collisions
 
   Collision: T=37, Type=vertex, Cell=(11, 11), Agents=[27, 62], Attempt=2
@@ -4145,7 +4145,7 @@ Detected 33 collisions
     ✓ Agent 62 yielded to parking cell (11, 10)
   ✓ YIELD-ON-GOAL successful for Agent 62
 
---- Pass 229/10000 (Elapsed: 109.22s) ---
+--- Pass 229/10000 (Elapsed: 248.77s) ---
 Detected 32 collisions
 
   Collision: T=38, Type=vertex, Cell=(28, 20), Agents=[43, 60], Attempt=2
@@ -4157,7 +4157,7 @@ Detected 32 collisions
     ✓ Agent 43 yielded to parking cell (28, 21)
   ✓ YIELD-ON-GOAL successful for Agent 43
 
---- Pass 230/10000 (Elapsed: 109.92s) ---
+--- Pass 230/10000 (Elapsed: 250.40s) ---
 Detected 31 collisions
 
   Collision: T=39, Type=vertex, Cell=(11, 11), Agents=[62, 70], Attempt=1
@@ -4169,7 +4169,7 @@ Detected 31 collisions
     ✓ Agent 62 yielded to parking cell (11, 10)
   ✓ YIELD-ON-GOAL successful for Agent 62
 
---- Pass 231/10000 (Elapsed: 110.62s) ---
+--- Pass 231/10000 (Elapsed: 252.06s) ---
 Detected 30 collisions
 
   Collision: T=40, Type=vertex, Cell=(25, 19), Agents=[16, 31], Attempt=2
@@ -4181,7 +4181,7 @@ Detected 30 collisions
     ✓ Agent 31 yielded to parking cell (24, 19)
   ✓ YIELD-ON-GOAL successful for Agent 31
 
---- Pass 232/10000 (Elapsed: 111.32s) ---
+--- Pass 232/10000 (Elapsed: 253.74s) ---
 Detected 29 collisions
 
   Collision: T=40, Type=vertex, Cell=(30, 20), Agents=[21, 60], Attempt=2
@@ -4193,7 +4193,7 @@ Detected 29 collisions
     ✓ Agent 21 yielded to parking cell (30, 19)
   ✓ YIELD-ON-GOAL successful for Agent 21
 
---- Pass 233/10000 (Elapsed: 112.02s) ---
+--- Pass 233/10000 (Elapsed: 255.32s) ---
 Detected 28 collisions
 
   Collision: T=42, Type=vertex, Cell=(6, 16), Agents=[2, 34], Attempt=2
@@ -4205,7 +4205,7 @@ Detected 28 collisions
     ✓ Agent 2 yielded to parking cell (7, 16)
   ✓ YIELD-ON-GOAL successful for Agent 2
 
---- Pass 234/10000 (Elapsed: 112.72s) ---
+--- Pass 234/10000 (Elapsed: 256.94s) ---
 Detected 27 collisions
 
   Collision: T=42, Type=vertex, Cell=(25, 19), Agents=[15, 31], Attempt=2
@@ -4217,7 +4217,7 @@ Detected 27 collisions
     ✓ Agent 31 yielded to parking cell (24, 19)
   ✓ YIELD-ON-GOAL successful for Agent 31
 
---- Pass 235/10000 (Elapsed: 113.43s) ---
+--- Pass 235/10000 (Elapsed: 258.56s) ---
 Detected 24 collisions
 
   Collision: T=44, Type=vertex, Cell=(8, 9), Agents=[70, 71], Attempt=1
@@ -4229,7 +4229,7 @@ Detected 24 collisions
     ✓ Agent 71 yielded to parking cell (7, 9)
   ✓ YIELD-ON-GOAL successful for Agent 71
 
---- Pass 236/10000 (Elapsed: 114.15s) ---
+--- Pass 236/10000 (Elapsed: 260.07s) ---
 Detected 23 collisions
 
   Collision: T=45, Type=vertex, Cell=(4, 12), Agents=[1, 27], Attempt=2
@@ -4241,7 +4241,7 @@ Detected 23 collisions
       Spliced plan: 44 prefix + 2 yield + 77 suffix = 123 total actions
   ✓ YIELD-ON-START successful: Agent 1 yielded from start
 
---- Pass 237/10000 (Elapsed: 114.91s) ---
+--- Pass 237/10000 (Elapsed: 261.68s) ---
   Padded Agent 3: 121 → 123
   Padded Agent 4: 121 → 123
   Padded Agent 6: 121 → 123
@@ -4309,7 +4309,7 @@ Detected 22 collisions
     ✓ Agent 55 yielded to parking cell (4, 18)
   ✓ YIELD-ON-GOAL successful for Agent 55
 
---- Pass 238/10000 (Elapsed: 115.75s) ---
+--- Pass 238/10000 (Elapsed: 263.29s) ---
 Detected 21 collisions
 
   Collision: T=47, Type=vertex, Cell=(4, 12), Agents=[1, 14], Attempt=2
@@ -4321,7 +4321,7 @@ Detected 21 collisions
       Spliced plan: 46 prefix + 2 yield + 77 suffix = 125 total actions
   ✓ YIELD-ON-START successful: Agent 1 yielded from start
 
---- Pass 239/10000 (Elapsed: 116.48s) ---
+--- Pass 239/10000 (Elapsed: 264.89s) ---
   Padded Agent 3: 123 → 125
   Padded Agent 4: 123 → 125
   Padded Agent 6: 123 → 125
@@ -4400,7 +4400,7 @@ Detected 20 collisions
     ✓ Agent 20 yielded to parking cell (26, 23)
   ✓ YIELD-ON-GOAL successful for Agent 20
 
---- Pass 240/10000 (Elapsed: 117.19s) ---
+--- Pass 240/10000 (Elapsed: 266.52s) ---
 Detected 19 collisions
 
   Collision: T=50, Type=vertex, Cell=(1, 26), Agents=[10, 77], Attempt=2
@@ -4412,7 +4412,7 @@ Detected 19 collisions
     ✓ Agent 77 yielded to parking cell (1, 27)
   ✓ YIELD-ON-GOAL successful for Agent 77
 
---- Pass 241/10000 (Elapsed: 117.88s) ---
+--- Pass 241/10000 (Elapsed: 268.14s) ---
 Detected 18 collisions
 
   Collision: T=50, Type=vertex, Cell=(27, 20), Agents=[19, 41], Attempt=2
@@ -4424,7 +4424,7 @@ Detected 18 collisions
     ✓ Agent 41 yielded to parking cell (27, 21)
   ✓ YIELD-ON-GOAL successful for Agent 41
 
---- Pass 242/10000 (Elapsed: 118.57s) ---
+--- Pass 242/10000 (Elapsed: 269.78s) ---
 Detected 17 collisions
 
   Collision: T=51, Type=vertex, Cell=(28, 20), Agents=[19, 43], Attempt=2
@@ -4436,7 +4436,7 @@ Detected 17 collisions
     ✓ Agent 43 yielded to parking cell (28, 21)
   ✓ YIELD-ON-GOAL successful for Agent 43
 
---- Pass 243/10000 (Elapsed: 119.26s) ---
+--- Pass 243/10000 (Elapsed: 271.36s) ---
 Detected 16 collisions
 
   Collision: T=52, Type=vertex, Cell=(6, 13), Agents=[11, 33], Attempt=2
@@ -4448,7 +4448,7 @@ Detected 16 collisions
     ✓ Agent 11 yielded to parking cell (7, 13)
   ✓ YIELD-ON-GOAL successful for Agent 11
 
---- Pass 244/10000 (Elapsed: 119.95s) ---
+--- Pass 244/10000 (Elapsed: 273.05s) ---
 Detected 15 collisions
 
   Collision: T=52, Type=vertex, Cell=(10, 25), Agents=[46, 65], Attempt=2
@@ -4460,7 +4460,7 @@ Detected 15 collisions
     ✓ Agent 65 yielded to parking cell (12, 25)
   ✓ YIELD-ON-GOAL successful for Agent 65
 
---- Pass 245/10000 (Elapsed: 120.65s) ---
+--- Pass 245/10000 (Elapsed: 274.65s) ---
 Detected 13 collisions
 
   Collision: T=53, Type=vertex, Cell=(30, 20), Agents=[19, 21], Attempt=2
@@ -4472,7 +4472,7 @@ Detected 13 collisions
     ✓ Agent 21 yielded to parking cell (31, 20)
   ✓ YIELD-ON-GOAL successful for Agent 21
 
---- Pass 246/10000 (Elapsed: 121.33s) ---
+--- Pass 246/10000 (Elapsed: 276.26s) ---
 Detected 12 collisions
 
   Collision: T=54, Type=vertex, Cell=(11, 26), Agents=[35, 46], Attempt=2
@@ -4484,7 +4484,7 @@ Detected 12 collisions
     ✓ Agent 35 yielded to parking cell (12, 27)
   ✓ YIELD-ON-GOAL successful for Agent 35
 
---- Pass 247/10000 (Elapsed: 122.03s) ---
+--- Pass 247/10000 (Elapsed: 277.85s) ---
 Detected 10 collisions
 
   Collision: T=55, Type=vertex, Cell=(4, 12), Agents=[1, 33], Attempt=2
@@ -4496,7 +4496,7 @@ Detected 10 collisions
       Spliced plan: 54 prefix + 2 yield + 71 suffix = 127 total actions
   ✓ YIELD-ON-START successful: Agent 1 yielded from start
 
---- Pass 248/10000 (Elapsed: 122.73s) ---
+--- Pass 248/10000 (Elapsed: 279.49s) ---
   Padded Agent 2: 125 → 127
   Padded Agent 3: 125 → 127
   Padded Agent 4: 125 → 127
@@ -4573,7 +4573,7 @@ Detected 9 collisions
     ✓ Agent 67 yielded to parking cell (29, 22)
   ✓ YIELD-ON-GOAL successful for Agent 67
 
---- Pass 249/10000 (Elapsed: 123.44s) ---
+--- Pass 249/10000 (Elapsed: 281.21s) ---
 Detected 8 collisions
 
   Collision: T=88, Type=vertex, Cell=(10, 13), Agents=[1, 79], Attempt=1
@@ -4585,7 +4585,7 @@ Detected 8 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 250/10000 (Elapsed: 124.14s) ---
+--- Pass 250/10000 (Elapsed: 282.86s) ---
 Detected 7 collisions
 
   Collision: T=93, Type=vertex, Cell=(21, 10), Agents=[45, 54], Attempt=1
@@ -4597,7 +4597,7 @@ Detected 7 collisions
     ✓ Agent 45 yielded to parking cell (22, 10)
   ✓ YIELD-ON-GOAL successful for Agent 45
 
---- Pass 251/10000 (Elapsed: 124.84s) ---
+--- Pass 251/10000 (Elapsed: 284.46s) ---
 Detected 6 collisions
 
   Collision: T=98, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=1
@@ -4628,7 +4628,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 7 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 252/10000 (Elapsed: 126.51s) ---
+--- Pass 252/10000 (Elapsed: 288.32s) ---
 Detected 7 collisions
 
   Collision: T=85, Type=vertex, Cell=(10, 13), Agents=[1, 79], Attempt=1
@@ -4640,7 +4640,7 @@ Detected 7 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 253/10000 (Elapsed: 127.22s) ---
+--- Pass 253/10000 (Elapsed: 290.02s) ---
 Detected 6 collisions
 
   Collision: T=95, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=1
@@ -4671,7 +4671,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 7 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 254/10000 (Elapsed: 128.94s) ---
+--- Pass 254/10000 (Elapsed: 294.06s) ---
 Detected 7 collisions
 
   Collision: T=82, Type=vertex, Cell=(10, 13), Agents=[1, 79], Attempt=1
@@ -4683,7 +4683,7 @@ Detected 7 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 255/10000 (Elapsed: 129.69s) ---
+--- Pass 255/10000 (Elapsed: 295.80s) ---
 Detected 6 collisions
 
   Collision: T=92, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=1
@@ -4714,7 +4714,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 7 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 256/10000 (Elapsed: 131.47s) ---
+--- Pass 256/10000 (Elapsed: 299.96s) ---
 Detected 7 collisions
 
   Collision: T=79, Type=vertex, Cell=(10, 13), Agents=[1, 79], Attempt=1
@@ -4726,7 +4726,7 @@ Detected 7 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 257/10000 (Elapsed: 132.24s) ---
+--- Pass 257/10000 (Elapsed: 301.73s) ---
 Detected 6 collisions
 
   Collision: T=89, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=1
@@ -4757,7 +4757,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 7 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 258/10000 (Elapsed: 134.09s) ---
+--- Pass 258/10000 (Elapsed: 306.08s) ---
 Detected 7 collisions
 
   Collision: T=76, Type=vertex, Cell=(10, 13), Agents=[1, 79], Attempt=1
@@ -4769,7 +4769,7 @@ Detected 7 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 259/10000 (Elapsed: 134.88s) ---
+--- Pass 259/10000 (Elapsed: 308.07s) ---
   Padded Agent 1: 115 → 117
 Detected 6 collisions
 
@@ -4801,7 +4801,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 7 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 260/10000 (Elapsed: 136.83s) ---
+--- Pass 260/10000 (Elapsed: 312.49s) ---
   Padded Agent 1: 112 → 117
 Detected 7 collisions
 
@@ -4814,7 +4814,7 @@ Detected 7 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 261/10000 (Elapsed: 137.68s) ---
+--- Pass 261/10000 (Elapsed: 314.36s) ---
   Padded Agent 1: 117 → 123
 Detected 6 collisions
 
@@ -4846,7 +4846,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 7 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 262/10000 (Elapsed: 139.73s) ---
+--- Pass 262/10000 (Elapsed: 318.99s) ---
   Padded Agent 1: 109 → 123
 Detected 7 collisions
 
@@ -4859,7 +4859,7 @@ Detected 7 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 263/10000 (Elapsed: 140.61s) ---
+--- Pass 263/10000 (Elapsed: 320.99s) ---
   Padded Agent 1: 123 → 129
   Padded Agent 2: 127 → 129
   Padded Agent 3: 127 → 129
@@ -4962,7 +4962,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 7 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 264/10000 (Elapsed: 142.71s) ---
+--- Pass 264/10000 (Elapsed: 325.87s) ---
   Padded Agent 1: 106 → 129
 Detected 7 collisions
 
@@ -4975,7 +4975,7 @@ Detected 7 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 265/10000 (Elapsed: 143.60s) ---
+--- Pass 265/10000 (Elapsed: 327.98s) ---
   Padded Agent 1: 129 → 135
   Padded Agent 2: 129 → 135
   Padded Agent 3: 129 → 135
@@ -5085,7 +5085,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 7 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 266/10000 (Elapsed: 145.75s) ---
+--- Pass 266/10000 (Elapsed: 332.91s) ---
   Padded Agent 1: 103 → 135
 Detected 7 collisions
 
@@ -5098,7 +5098,7 @@ Detected 7 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 267/10000 (Elapsed: 146.68s) ---
+--- Pass 267/10000 (Elapsed: 334.93s) ---
   Padded Agent 1: 135 → 141
   Padded Agent 2: 135 → 141
   Padded Agent 3: 135 → 141
@@ -5208,7 +5208,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 8 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 268/10000 (Elapsed: 148.93s) ---
+--- Pass 268/10000 (Elapsed: 340.16s) ---
   Padded Agent 1: 100 → 141
 Detected 8 collisions
 
@@ -5220,7 +5220,7 @@ Detected 8 collisions
       ✓ [C++] Found PARKING-based yield via (3, 12) with 0 wait steps
       Spliced plan: 54 prefix + 2 yield + 87 suffix = 143 total actions
 
---- Pass 269/10000 (Elapsed: 149.59s) ---
+--- Pass 269/10000 (Elapsed: 341.65s) ---
 Detected 9 collisions
 
   Collision: T=63, Type=vertex, Cell=(10, 13), Agents=[1, 79], Attempt=1
@@ -5232,7 +5232,7 @@ Detected 9 collisions
     ✓ Agent 79 yielded to parking cell (11, 15)
   ✓ YIELD-ON-GOAL successful for Agent 79
 
---- Pass 270/10000 (Elapsed: 150.55s) ---
+--- Pass 270/10000 (Elapsed: 343.93s) ---
   Padded Agent 1: 143 → 147
   Padded Agent 2: 141 → 147
   Padded Agent 3: 141 → 147
@@ -5342,7 +5342,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 8 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 271/10000 (Elapsed: 152.86s) ---
+--- Pass 271/10000 (Elapsed: 349.33s) ---
   Padded Agent 1: 99 → 147
 Detected 8 collisions
 
@@ -5354,7 +5354,7 @@ Detected 8 collisions
       ✓ [C++] Found PARKING-based yield via (3, 12) with 1 wait steps
       Spliced plan: 53 prefix + 3 yield + 94 suffix = 150 total actions
 
---- Pass 272/10000 (Elapsed: 153.51s) ---
+--- Pass 272/10000 (Elapsed: 350.78s) ---
 Detected 6 collisions
 
   Collision: T=73, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=2
@@ -5384,7 +5384,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 8 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 273/10000 (Elapsed: 155.82s) ---
+--- Pass 273/10000 (Elapsed: 356.11s) ---
   Padded Agent 1: 99 → 147
 Detected 8 collisions
 
@@ -5396,7 +5396,7 @@ Detected 8 collisions
       ✓ [C++] Found PARKING-based yield via (3, 12) with 1 wait steps
       Spliced plan: 53 prefix + 3 yield + 94 suffix = 150 total actions
 
---- Pass 274/10000 (Elapsed: 156.48s) ---
+--- Pass 274/10000 (Elapsed: 357.68s) ---
 Detected 6 collisions
 
   Collision: T=73, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=3
@@ -5426,7 +5426,7 @@ Detected 6 collisions
     → Selected best candidate Agent 1 with 8 collisions
     ✓ BOUNDED WINDOW STATIC successful for Agent 1 with window ±20
 
---- Pass 275/10000 (Elapsed: 158.79s) ---
+--- Pass 275/10000 (Elapsed: 363.12s) ---
   Padded Agent 1: 99 → 147
 Detected 8 collisions
 
@@ -5438,7 +5438,7 @@ Detected 8 collisions
       ✓ [C++] Found PARKING-based yield via (3, 12) with 1 wait steps
       Spliced plan: 53 prefix + 3 yield + 94 suffix = 150 total actions
 
---- Pass 276/10000 (Elapsed: 159.44s) ---
+--- Pass 276/10000 (Elapsed: 364.68s) ---
 Detected 6 collisions
 
   Collision: T=73, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=4
@@ -5508,7 +5508,7 @@ Detected 6 collisions
     ✓ Agent 80 yielded to parking cell (20, 13)
   ✓ YIELD-ON-GOAL successful for Agent 80
 
---- Pass 277/10000 (Elapsed: 161.41s) ---
+--- Pass 277/10000 (Elapsed: 369.28s) ---
 Detected 5 collisions
 
   Collision: T=73, Type=vertex, Cell=(19, 14), Agents=[1, 36], Attempt=5
@@ -5530,7 +5530,7 @@ Detected 5 collisions
   ✓ Joint A* successful
     Reduced collisions from 5 to 4
 
---- Pass 278/10000 (Elapsed: 162.72s) ---
+--- Pass 278/10000 (Elapsed: 372.30s) ---
 Detected 4 collisions
 
   Collision: T=87, Type=vertex, Cell=(27, 20), Agents=[1, 41], Attempt=1
@@ -5542,7 +5542,7 @@ Detected 4 collisions
     ✓ Agent 41 yielded to parking cell (27, 21)
   ✓ YIELD-ON-GOAL successful for Agent 41
 
---- Pass 279/10000 (Elapsed: 163.70s) ---
+--- Pass 279/10000 (Elapsed: 374.56s) ---
 Detected 3 collisions
 
   Collision: T=88, Type=vertex, Cell=(28, 20), Agents=[1, 43], Attempt=1
@@ -5554,7 +5554,7 @@ Detected 3 collisions
     ✓ Agent 43 yielded to parking cell (28, 21)
   ✓ YIELD-ON-GOAL successful for Agent 43
 
---- Pass 280/10000 (Elapsed: 164.68s) ---
+--- Pass 280/10000 (Elapsed: 376.80s) ---
 Detected 2 collisions
 
   Collision: T=90, Type=vertex, Cell=(30, 20), Agents=[1, 21], Attempt=1
@@ -5566,7 +5566,7 @@ Detected 2 collisions
     ✓ Agent 21 yielded to parking cell (31, 20)
   ✓ YIELD-ON-GOAL successful for Agent 21
 
---- Pass 281/10000 (Elapsed: 165.65s) ---
+--- Pass 281/10000 (Elapsed: 379.07s) ---
 Detected 1 collisions
 
   Collision: T=92, Type=vertex, Cell=(30, 22), Agents=[1, 67], Attempt=1
@@ -5578,7 +5578,7 @@ Detected 1 collisions
     ✓ Agent 67 yielded to parking cell (29, 22)
   ✓ YIELD-ON-GOAL successful for Agent 67
 
---- Pass 282/10000 (Elapsed: 166.63s) ---
+--- Pass 282/10000 (Elapsed: 381.38s) ---
 ✓ No collisions found! Resolution complete.
 
 === Global Cleanup ===
@@ -5612,7 +5612,7 @@ Global cleanup complete: trimmed 7 agents, padded 0 agents, re-simulated all tra
 [DEBUG] Max trajectory length: 133
 
 === Resolution Complete ===
-Time: 167.43s
+Time: 383.26s
 Passes: 282
 Final collisions: 0
 Timed out: False
@@ -5638,7 +5638,7 @@ Total Agents:                   80
 Agents at Goal:                 80
 Final Collision Count:          0
 ✔ Detailed execution log saved to 'logs/icaps_test/random-32-32-20/80_agents/test_16.json'
-Analysis Complete. Success: 100.00%, Time: 167.73s
+Analysis Complete. Success: 100.00%, Time: 383.91s
 Agent 1 Final Plan: [0, 1, 0, 1, 0, 1, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 3, 0, 1, 4, 4, 4, 4, 4, 0, 4, 1, 1, 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
 Agent 2 Final Plan: [0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 1, 0, 4, 4, 4, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
 Agent 3 Final Plan: [2, 2, 4, 4, 4, 4, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
