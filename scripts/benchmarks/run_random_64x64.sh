@@ -15,7 +15,7 @@ STRATEGY="best"
 INFO_SETTING="all"
 SEARCH_TYPE="astar-cpp"
 ALGO="dqn"
-TIMEOUT=300  # 5 minutes
+TIMEOUT=600  # 10 minutes
 MAX_EXPANSIONS=10000  # 3,270 free cells × ~6
 
 # Directories
@@ -23,7 +23,8 @@ INPUT_DIR="test_data/icaps_test/$MAP_NAME"
 OUTPUT_DIR="logs/icaps_test/$MAP_NAME"
 
 # Agent counts for random maps
-AGENT_COUNTS="10 20 30 40 50 60 70 80 90 100 128"
+# AGENT_COUNTS="10 20 30 40 50 60 70 80 90 100 128"
+AGENT_COUNTS="100 128"
 
 echo "=============================================="
 echo "ICAPS Benchmark: $MAP_NAME"
@@ -32,7 +33,7 @@ echo "Strategy: $STRATEGY"
 echo "Info Setting: $INFO_SETTING"
 echo "Search Type: $SEARCH_TYPE"
 echo "Algorithm: $ALGO"
-echo "Timeout: ${TIMEOUT}s (30 min)"
+echo "Timeout: ${TIMEOUT}s (10 min)"
 echo "Max Expansions: $MAX_EXPANSIONS"
 echo "=============================================="
 echo ""
