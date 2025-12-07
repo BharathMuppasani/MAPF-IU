@@ -4,6 +4,7 @@
   \setlength{\tabcolsep}{3pt}
   \renewcommand{\arraystretch}{1.1}
 
+  % 3 non-numeric cols + 15 numeric (5 solvers x 3 metrics)
   \begin{tabular}{c c c | *{15}{r}}
     \toprule
     & & & \multicolumn{6}{c}{Search-based Solvers} & \multicolumn{9}{c}{Learning-based Solvers} \\
@@ -22,54 +23,86 @@
     EL & SR & IU \\
     \midrule
 
-    % ----------------- random-32-32-20 (compact) -----------------
-    \multirow{5}{*}{\includegraphics[height=1.5cm]{content/images/random-32-32-20}} &
-    \multirow{5}{*}{\rotatebox{90}{\shortstack{\texttt{random}\\\texttt{32$\times$32-20}}}} &
-    10-30 & --- & --- & --- & 54.0 & 100 & 28.5 \textsubscript{(0\%)} & --- & --- & --- & 50.3 & 100 & 570.8 \textsubscript{(+1902\%)} & 57.4 & 98 & 266.9 \textsubscript{(+836\%)} \\
+    % ----------------- random-32-32-20 -----------------
+    \multirow{11}{*}{\includegraphics[height=1.5cm]{content/images/random-32-32-20}} &
+    \multirow{11}{*}{\rotatebox{90}{\shortstack{\texttt{random}\\\texttt{32$\times$32-20}}}} &
+    10 & --- & --- & --- & 50.5 & 100 & 3.6 \textsubscript{(0\%)} & --- & --- & --- & 48.0 & 100 & 262.2 \textsubscript{(+7084\%)} & 47.6 & 100 & 19.7 \textsubscript{(+440\%)} \\
      & &
-    40-60 & --- & --- & --- & 99.9 & 100 & 146.4 \textsubscript{(0\%)} & --- & --- & --- & 62.1 & 95 & 1948.5 \textsubscript{(+1231\%)} & 77.4 & 97 & 3580.5 \textsubscript{(+2345\%)} \\
+    20 & --- & --- & --- & 56.0 & 100 & 18.8 \textsubscript{(0\%)} & --- & --- & --- & 50.5 & 100 & 565.2 \textsubscript{(+2915\%)} & 62.5 & 95 & 204.2 \textsubscript{(+989\%)} \\
      & &
-    70-90 & --- & --- & --- & 71.4 & 98 & 1652.0 \textsubscript{(0\%)} & --- & --- & --- & 77.2 & 85 & 3909.8 \textsubscript{(+137\%)} & 114.5 & 53 & 22702.2 \textsubscript{(+1274\%)} \\
+    30 & --- & --- & --- & 55.5 & 100 & 66.3 \textsubscript{(0\%)} & --- & --- & --- & 52.4 & 100 & 884.8 \textsubscript{(+1235\%)} & 62.0 & 100 & 576.8 \textsubscript{(+770\%)} \\
+     & &
+    40 & --- & --- & --- & 107.0 & 100 & 48.8 \textsubscript{(0\%)} & --- & --- & --- & 58.0 & 95 & 1377.7 \textsubscript{(+2723\%)} & 64.5 & 100 & 1403.0 \textsubscript{(+2775\%)} \\
+     & &
+    50 & --- & --- & --- & 61.4 & 100 & 221.4 \textsubscript{(0\%)} & --- & --- & --- & 56.8 & 100 & 1645.2 \textsubscript{(+643\%)} & 79.0 & 95 & 3183.2 \textsubscript{(+1337\%)} \\
+     & &
+    60 & --- & --- & --- & 128.2 & 100 & 214.2 \textsubscript{(0\%)} & --- & --- & --- & 71.4 & 90 & 2822.8 \textsubscript{(+1218\%)} & 88.7 & 95 & 6155.1 \textsubscript{(+2774\%)} \\
+     & &
+    70 & --- & --- & --- & 65.5 & 100 & 2158.2 \textsubscript{(0\%)} & --- & --- & --- & 70.5 & 90 & 3158.8 \textsubscript{(+46\%)} & 110.7 & 65 & 11735.3 \textsubscript{(+444\%)} \\
+     & &
+    80 & --- & --- & --- & 71.8 & 100 & 1405.5 \textsubscript{(0\%)} & --- & --- & --- & 83.8 & 80 & 4660.8 \textsubscript{(+232\%)} & 108.9 & 70 & 20330.8 \textsubscript{(+1347\%)} \\
+     & &
+    90 & --- & --- & --- & 80.0 & 94 & 1837.5 \textsubscript{(0\%)} & --- & --- & --- & 96.9 & 60 & 6292.6 \textsubscript{(+242\%)} & 123.8 & 25 & 36040.6 \textsubscript{(+1861\%)} \\
      & &
     100 & --- & --- & --- & 76.5 & 85 & 3553.8 \textsubscript{(0\%)} & --- & --- & --- & 97.2 & 60 & 6982.9 \textsubscript{(+96\%)} & 121.0 & 50 & 41383.7 \textsubscript{(+1065\%)} \\
      & &
     128 & --- & --- & --- & --- & 0 & 5629.7 \textsubscript{(0\%)} & --- & --- & --- & 96.6 & 70 & 8615.5 \textsubscript{(+53\%)} & 127.5 & 5 & 129548.7 \textsubscript{(+2201\%)} \\
     \midrule
 
-    % ----------------- random-64-64-20 (compact) -----------------
-    \multirow{5}{*}{\includegraphics[height=1.5cm]{content/images/random-64-64-20}} &
-    \multirow{5}{*}{\rotatebox{90}{\shortstack{\texttt{random}\\\texttt{64$\times$64-20}}}} &
-    10-30 & --- & --- & --- & 113.9 & 100 & 10.2 \textsubscript{(0\%)} & --- & --- & --- & 121.9 & 23 & 1394.8 \textsubscript{(+13620\%)} & 104.1 & 98 & 65.8 \textsubscript{(+547\%)} \\
+    % ----------------- random-64-64-20 -----------------
+    \multirow{11}{*}{\includegraphics[height=1.5cm]{content/images/random-64-64-20}} &
+    \multirow{11}{*}{\rotatebox{90}{\shortstack{\texttt{random}\\\texttt{64$\times$64-20}}}} &
+    10 & --- & --- & --- & 108.0 & 100 & 0.9 \textsubscript{(0\%)} & --- & --- & --- & 112.5 & 50 & 612.1 \textsubscript{(+67917\%)} & 97.3 & 95 & 7.8 \textsubscript{(+761\%)} \\
      & &
-    40-60 & --- & --- & --- & 125.6 & 100 & 88.5 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 3678.6 \textsubscript{(+4054\%)} & 114.0 & 98 & 643.8 \textsubscript{(+627\%)} \\
+    20 & --- & --- & --- & 115.6 & 100 & 6.2 \textsubscript{(0\%)} & --- & --- & --- & 126.5 & 10 & 1382.0 \textsubscript{(+22190\%)} & 105.7 & 100 & 47.8 \textsubscript{(+670\%)} \\
      & &
-    70-90 & --- & --- & --- & 129.1 & 98 & 213.5 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 5275.4 \textsubscript{(+2372\%)} & 121.1 & 85 & 2449.4 \textsubscript{(+1048\%)} \\
+    30 & --- & --- & --- & 118.2 & 100 & 23.4 \textsubscript{(0\%)} & --- & --- & --- & 126.7 & 10 & 2190.3 \textsubscript{(+9260\%)} & 109.5 & 100 & 141.8 \textsubscript{(+506\%)} \\
+     & &
+    40 & --- & --- & --- & 122.6 & 100 & 45.0 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 2912.6 \textsubscript{(+6365\%)} & 112.3 & 100 & 328.9 \textsubscript{(+630\%)} \\
+     & &
+    50 & --- & --- & --- & 124.0 & 100 & 109.8 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 3668.7 \textsubscript{(+3240\%)} & 113.8 & 100 & 638.0 \textsubscript{(+481\%)} \\
+     & &
+    60 & --- & --- & --- & 130.2 & 100 & 110.8 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 4454.6 \textsubscript{(+3922\%)} & 116.1 & 95 & 964.6 \textsubscript{(+771\%)} \\
+     & &
+    70 & --- & --- & --- & 128.2 & 100 & 183.0 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 5275.4 \textsubscript{(+2783\%)} & 120.8 & 85 & 1640.2 \textsubscript{(+796\%)} \\
+     & &
+    80 & --- & --- & --- & 128.7 & 100 & 211.9 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 5860.5 \textsubscript{(+2665\%)} & 120.2 & 90 & 2520.7 \textsubscript{(+1089\%)} \\
+     & &
+    90 & --- & --- & --- & 130.4 & 95 & 245.4 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 6649.9 \textsubscript{(+2610\%)} & 122.2 & 80 & 3187.4 \textsubscript{(+1199\%)} \\
      & &
     100 & --- & --- & --- & 130.1 & 90 & 462.1 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 7296.5 \textsubscript{(+1479\%)} & 125.3 & 45 & 5290.0 \textsubscript{(+1045\%)} \\
      & &
     128 & --- & --- & --- & 132.0 & 5 & 607.6 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 9213.7 \textsubscript{(+1416\%)} & 127.7 & 15 & 12250.5 \textsubscript{(+1916\%)} \\
     \midrule
 
-    % ----------------- den312d (compact) -----------------
-    \multirow{3}{*}{\includegraphics[height=1.5cm]{content/images/den312d}} &
-    \multirow{3}{*}{\rotatebox{90}{\shortstack{\texttt{den312d}\\\texttt{65$\times$81}}}} &
-    8-16 & --- & --- & --- & 119.2 & 100 & 12.3 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 117.1 & 100 & 70.7 \textsubscript{(+475\%)} \\
+    % ----------------- den312d -----------------
+    \multirow{5}{*}{\includegraphics[height=1.5cm]{content/images/den312d}} &
+    \multirow{5}{*}{\rotatebox{90}{\shortstack{\texttt{den312d}\\\texttt{65$\times$81}}}} &
+    8 & --- & --- & --- & 115.3 & 100 & 3.6 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 111.9 & 100 & 13.0 \textsubscript{(+256\%)} \\
      & &
-    32-64 & --- & --- & --- & 154.8 & 100 & 789.8 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 136.6 & 100 & 3674.9 \textsubscript{(+365\%)} \\
+    16 & --- & --- & --- & 124.0 & 100 & 21.8 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 122.2 & 100 & 128.4 \textsubscript{(+490\%)} \\
      & &
-    128 & --- & --- & --- & --- & 0 & 1285.0 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 207.7 & 90 & 77108.9 \textsubscript{(+5901\%)} \\
+    32 & --- & --- & --- & --- & --- & --- & --- & --- & --- & --- & --- & --- & 127.0 & 100 & 627.5 \\
+     & &
+    64 & --- & --- & --- & 153.1 & 100 & 759.9 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 146.1 & 100 & 6722.3 \textsubscript{(+785\%)} \\
+     & &
+    128 & --- & --- & --- & --- & 0 & 1156.0 \textsubscript{(0\%)} & --- & --- & --- & 256.0 & 0 & 14090.8 \textsubscript{(+1119\%)} & 207.7 & 90 & 77108.9 \textsubscript{(+6570\%)} \\
     \midrule
 
-    % ----------------- warehouse (compact) -----------------
-    \multirow{3}{*}{\includegraphics[height=1.5cm]{content/images/warehouse}} &
-    \multirow{3}{*}{\rotatebox{90}{\shortstack{\texttt{warehouse}\\\texttt{161$\times$63}}}} &
-    8-16 & --- & --- & --- & 203.9 & 100 & 0.9 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 202.2 & 100 & 6.4 \textsubscript{(+629\%)} \\
+    % ----------------- warehouse -----------------
+    \multirow{5}{*}{\includegraphics[height=1.5cm]{content/images/warehouse}} &
+    \multirow{5}{*}{\rotatebox{90}{\shortstack{\texttt{warehouse}\\\texttt{161$\times$63}}}} &
+    8 & --- & --- & --- & 192.8 & 100 & 0.8 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 191.6 & 100 & 1.7 \textsubscript{(+127\%)} \\
      & &
-    32-64 & --- & --- & --- & 223.9 & 100 & 17.2 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 222.9 & 100 & 161.4 \textsubscript{(+840\%)} \\
+    16 & --- & --- & --- & 215.1 & 100 & 1.0 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 212.9 & 100 & 11.1 \textsubscript{(+1005\%)} \\
      & &
-    128 & --- & --- & --- & 234.7 & 100 & 139.1 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 239.1 & 90 & 1502.4 \textsubscript{(+980\%)} \\
+    32 & --- & --- & --- & 220.3 & 100 & 10.7 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 218.1 & 100 & 57.7 \textsubscript{(+439\%)} \\
+     & &
+    64 & --- & --- & --- & 227.6 & 100 & 23.6 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 227.8 & 100 & 265.1 \textsubscript{(+1021\%)} \\
+     & &
+    128 & --- & --- & --- & 234.7 & 100 & 139.1 \textsubscript{(0\%)} & --- & --- & --- & 256.0 & 0 & 9408.9 \textsubscript{(+6664\%)} & 239.1 & 90 & 1502.4 \textsubscript{(+980\%)} \\
     \bottomrule
   \end{tabular}
-  \caption{Performance of search-based (EECBS, IO-MAPF) and learning-based (DCC, SCRIMP, EPH) MAPF solvers (compact view). EL represents makespan (maximum timesteps). Values are averaged within agent count groups. IU shows information units with percentage increase relative to IO-MAPF baseline in subscript (IO-MAPF = 0\%). Lower EL$\downarrow$ and IU$\downarrow$ are better, higher SR$\uparrow$ is better.}
-  \label{tab:search-vs-learning-compact}
+  \caption{Performance of search-based (EECBS, IO-MAPF) and learning-based (DCC, SCRIMP, EPH) MAPF solvers. EL represents makespan (maximum timesteps). IU shows information units with percentage increase relative to IO-MAPF baseline in subscript (IO-MAPF = 0\%). Lower EL$\downarrow$ and IU$\downarrow$ are better, higher SR$\uparrow$ is better.}
+  \label{tab:search-vs-learning}
 \end{table*}
