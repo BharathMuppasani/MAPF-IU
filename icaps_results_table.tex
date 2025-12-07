@@ -1,0 +1,75 @@
+\begin{table*}[t]
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \renewcommand{\arraystretch}{1.1}
+
+  \begin{tabular}{c c c | *{15}{r}}
+    \toprule
+    & & & \multicolumn{6}{c}{Search-based Solvers} & \multicolumn{9}{c}{Learning-based Solvers} \\
+    \cmidrule(lr){4-9} \cmidrule(lr){10-18}
+    Map & & $m$ &
+    \multicolumn{3}{c}{EECBS} &
+    \multicolumn{3}{c}{IO-MAPF} &
+    \multicolumn{3}{c}{DCC} &
+    \multicolumn{3}{c}{SCRIMP} &
+    \multicolumn{3}{c}{EPH} \\
+    & & &
+    EL & SR & IU &
+    EL & SR & IU &
+    EL & SR & IU &
+    EL & SR & IU &
+    EL & SR & IU \\
+    \midrule
+
+    % ----------------- random-32-32-20 (compact) -----------------
+    \multirow{5}{*}{\includegraphics[height=1.5cm]{content/images/random-32-32-20}} &
+    \multirow{5}{*}{\rotatebox{90}{\shortstack{\texttt{random}\\\texttt{32$\times$32-20}}}} &
+    10-30 & --- & --- & --- & 54.0 & 100 & 28.5 \textsubscript{(0\%)} & --- & --- & --- & 50.3 & 100 & 570.8 \textsubscript{(+1902\%)} & 57.4 & 98 & 266.9 \textsubscript{(+836\%)} \\
+     & &
+    40-60 & --- & --- & --- & 99.9 & 100 & 146.4 \textsubscript{(0\%)} & --- & --- & --- & 62.1 & 95 & 1948.5 \textsubscript{(+1231\%)} & 77.4 & 97 & 3580.5 \textsubscript{(+2345\%)} \\
+     & &
+    70-90 & --- & --- & --- & 71.4 & 98 & 1652.0 \textsubscript{(0\%)} & --- & --- & --- & 77.2 & 85 & 3909.8 \textsubscript{(+137\%)} & 114.5 & 53 & 22702.2 \textsubscript{(+1274\%)} \\
+     & &
+    100 & --- & --- & --- & 76.5 & 85 & 3553.8 \textsubscript{(0\%)} & --- & --- & --- & 97.2 & 60 & 6982.9 \textsubscript{(+96\%)} & 121.0 & 50 & 41383.7 \textsubscript{(+1065\%)} \\
+     & &
+    128 & --- & --- & --- & --- & 0 & 5629.7 \textsubscript{(0\%)} & --- & --- & --- & 96.6 & 70 & 8615.5 \textsubscript{(+53\%)} & 127.5 & 5 & 129548.7 \textsubscript{(+2201\%)} \\
+    \midrule
+
+    % ----------------- random-64-64-20 (compact) -----------------
+    \multirow{5}{*}{\includegraphics[height=1.5cm]{content/images/random-64-64-20}} &
+    \multirow{5}{*}{\rotatebox{90}{\shortstack{\texttt{random}\\\texttt{64$\times$64-20}}}} &
+    10-30 & --- & --- & --- & 113.9 & 100 & 10.2 \textsubscript{(0\%)} & --- & --- & --- & 121.9 & 23 & 1394.8 \textsubscript{(+13620\%)} & 104.1 & 98 & 65.8 \textsubscript{(+547\%)} \\
+     & &
+    40-60 & --- & --- & --- & 125.6 & 100 & 88.5 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 3678.6 \textsubscript{(+4054\%)} & 114.0 & 98 & 643.8 \textsubscript{(+627\%)} \\
+     & &
+    70-90 & --- & --- & --- & 129.1 & 98 & 213.5 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 5275.4 \textsubscript{(+2372\%)} & 121.1 & 85 & 2449.4 \textsubscript{(+1048\%)} \\
+     & &
+    100 & --- & --- & --- & 130.1 & 90 & 462.1 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 7296.5 \textsubscript{(+1479\%)} & 125.3 & 45 & 5290.0 \textsubscript{(+1045\%)} \\
+     & &
+    128 & --- & --- & --- & 132.0 & 5 & 607.6 \textsubscript{(0\%)} & --- & --- & --- & 128.0 & 0 & 9213.7 \textsubscript{(+1416\%)} & 127.7 & 15 & 12250.5 \textsubscript{(+1916\%)} \\
+    \midrule
+
+    % ----------------- den312d (compact) -----------------
+    \multirow{3}{*}{\includegraphics[height=1.5cm]{content/images/den312d}} &
+    \multirow{3}{*}{\rotatebox{90}{\shortstack{\texttt{den312d}\\\texttt{65$\times$81}}}} &
+    8-16 & --- & --- & --- & 119.2 & 100 & 12.3 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 117.1 & 100 & 70.7 \textsubscript{(+475\%)} \\
+     & &
+    32-64 & --- & --- & --- & 154.8 & 100 & 789.8 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 136.6 & 100 & 3674.9 \textsubscript{(+365\%)} \\
+     & &
+    128 & --- & --- & --- & --- & 0 & 1285.0 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 207.7 & 90 & 77108.9 \textsubscript{(+5901\%)} \\
+    \midrule
+
+    % ----------------- warehouse (compact) -----------------
+    \multirow{3}{*}{\includegraphics[height=1.5cm]{content/images/warehouse}} &
+    \multirow{3}{*}{\rotatebox{90}{\shortstack{\texttt{warehouse}\\\texttt{161$\times$63}}}} &
+    8-16 & --- & --- & --- & 203.9 & 100 & 0.9 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 202.2 & 100 & 6.4 \textsubscript{(+629\%)} \\
+     & &
+    32-64 & --- & --- & --- & 223.9 & 100 & 17.2 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 222.9 & 100 & 161.4 \textsubscript{(+840\%)} \\
+     & &
+    128 & --- & --- & --- & 234.7 & 100 & 139.1 \textsubscript{(0\%)} & --- & --- & --- & --- & --- & --- & 239.1 & 90 & 1502.4 \textsubscript{(+980\%)} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Performance of search-based (EECBS, IO-MAPF) and learning-based (DCC, SCRIMP, EPH) MAPF solvers (compact view). EL represents makespan (maximum timesteps). Values are averaged within agent count groups. IU shows information units with percentage increase relative to IO-MAPF baseline in subscript (IO-MAPF = 0\%). Lower EL$\downarrow$ and IU$\downarrow$ are better, higher SR$\uparrow$ is better.}
+  \label{tab:search-vs-learning-compact}
+\end{table*}
