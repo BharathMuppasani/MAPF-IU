@@ -1,0 +1,123 @@
+✓ cpp_joint_astar loaded
+✓ cpp_collision loaded
+✓ cpp_cleanup loaded
+Using device: mps
+→ Running single instance from: test_data/icaps_test/random-64-64-20/10_agents/test_05.txt
+✓ Log directory created (if needed): /Users/lab/Desktop/github/MAPF-IU/logs/icaps_test/random-64-64-20/10_agents
+Loaded instance from 'test_data/icaps_test/random-64-64-20/10_agents/test_05.txt': 10 agents, grid size (64, 64).
+Instance has 10 agents.
+
+=== Collision Resolution Started ===
+Grid: (64, 64), Agents: 10
+Strategy: STATIC + DYNAMIC + JOINT A*
+Precomputing heuristic distances...
+Finished agents: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+--- Pass 1/10000 (Elapsed: 0.06s) ---
+  Padded Agent 1: 85 → 123
+  Padded Agent 2: 68 → 123
+  Padded Agent 3: 94 → 123
+  Padded Agent 4: 68 → 123
+  Padded Agent 6: 63 → 123
+  Padded Agent 7: 100 → 123
+  Padded Agent 8: 82 → 123
+  Padded Agent 9: 44 → 123
+  Padded Agent 10: 14 → 123
+Detected 4 collisions
+
+  Collision: T=10, Type=vertex, Cell=(56, 9), Agents=[5, 10], Attempt=1
+  → Trying GENERALIZED YIELD (WAIT + PARKING) for 2 agents at T=10
+    Trying Agent 5 (dist=104.0):
+      [1/2] WAIT-based yielding...
+      [2/2] PARKING-based yielding...
+      ✓ [C++] Found PARKING-based yield via (58, 9) with 0 wait steps
+      Spliced plan: 9 prefix + 2 yield + 114 suffix = 125 total actions
+
+--- Pass 2/10000 (Elapsed: 0.08s) ---
+  Padded Agent 1: 123 → 125
+  Padded Agent 2: 123 → 125
+  Padded Agent 3: 123 → 125
+  Padded Agent 4: 123 → 125
+  Padded Agent 6: 123 → 125
+  Padded Agent 7: 123 → 125
+  Padded Agent 8: 123 → 125
+  Padded Agent 9: 123 → 125
+  Padded Agent 10: 123 → 125
+Detected 2 collisions
+
+  Collision: T=40, Type=vertex, Cell=(34, 15), Agents=[2, 5], Attempt=1
+  → Trying GENERALIZED YIELD (WAIT + PARKING) for 2 agents at T=40
+    Trying Agent 5 (dist=76.0):
+      [1/2] WAIT-based yielding...
+      [2/2] PARKING-based yielding...
+      ✓ [C++] Found PARKING-based yield via (35, 16) with 1 wait steps
+      Spliced plan: 39 prefix + 3 yield + 86 suffix = 128 total actions
+
+--- Pass 3/10000 (Elapsed: 0.10s) ---
+  Padded Agent 1: 125 → 128
+  Padded Agent 2: 125 → 128
+  Padded Agent 3: 125 → 128
+  Padded Agent 4: 125 → 128
+  Padded Agent 6: 125 → 128
+  Padded Agent 7: 125 → 128
+  Padded Agent 8: 125 → 128
+  Padded Agent 9: 125 → 128
+  Padded Agent 10: 125 → 128
+✓ No collisions found! Resolution complete.
+
+=== Global Cleanup ===
+Trimming trailing WAITs across all agents...
+  Global makespan: 128 (max plan was 128)
+  All plans now synchronized to length 128
+  Re-simulating all trajectories to match trimmed plans...
+  [DEBUG] After re-simulation:
+    Plan lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128]
+    Traj lengths: [129, 129, 129, 129, 129, 129, 129, 129, 129, 129]
+    ✓ All trajectories synchronized to length 129
+Global cleanup complete: trimmed 0 agents, padded 0 agents, re-simulated all trajectories
+
+=== Synchronized WAIT Removal ===
+  No synchronized WAITs to remove
+
+=== Final Collision Check (after cleanup) ===
+[DEBUG] Trajectory lengths after cleanup: [129, 129, 129, 129, 129, 129, 129, 129, 129, 129]
+[DEBUG] Max trajectory length: 129
+
+=== Resolution Complete ===
+Time: 0.13s
+Passes: 3
+Final collisions: 0
+Timed out: False
+[DEBUG] analyze_collisions says: 0 collisions
+
+--- Information Sharing Metrics ---
+  - Initial Path Submission IU: 751
+  - Revised Path Submission IU: 255
+  - Conflict Alert IU:          0
+    - Static Alerts:      0 IU
+    - Dynamic Alerts:     0 IU
+  - Joint A* IU (Expansions):   0
+  - Parking Rejected IU:        3
+-----------------------------------
+  Total Information Load (IU):  1009
+-----------------------------------
+
+=== MAPF Metrics ===
+Makespan (longest trajectory):  129
+Sum of Costs (SOC):             1280
+Average Path Length:            128.00
+Total Agents:                   10
+Agents at Goal:                 10
+Final Collision Count:          0
+✔ Detailed execution log saved to 'logs/icaps_test/random-64-64-20/10_agents/test_05.json'
+Analysis Complete. Success: 100.00%, Time: 0.16s
+Agent 1 Final Plan: [1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 3, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 3, 1, 3, 3, 1, 3, 3, 3, 3, 3, 1, 3, 1, 3, 3, 0, 3, 3, 0, 3, 3, 1, 3, 3, 3, 3, 3, 1, 3, 1, 3, 3, 0, 3, 0, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 2 Final Plan: [1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 3 Final Plan: [2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 0, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 4 Final Plan: [0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 5 Final Plan: [0, 3, 0, 0, 3, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 3, 0, 3, 0, 0, 0, 3, 3, 0, 3, 4, 2, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 3, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 3, 3, 3, 3, 1, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 1, 3, 3, 3, 3, 1, 1, 3, 3, 0, 3, 0, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 3, 3, 3, 3, 3]
+Agent 6 Final Plan: [2, 1, 2, 1, 1, 1, 3, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 0, 2, 2, 0, 0, 0, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 7 Final Plan: [0, 0, 0, 0, 3, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 2, 2, 1, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 2, 1, 2, 1, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 1, 1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 8 Final Plan: [2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 0, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 1, 3, 1, 3, 3, 3, 1, 3, 3, 0, 3, 0, 3, 3, 3, 3, 3, 0, 3, 3, 1, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 9 Final Plan: [0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Agent 10 Final Plan: [1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]

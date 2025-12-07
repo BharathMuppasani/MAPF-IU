@@ -15,8 +15,8 @@ STRATEGY="best"
 INFO_SETTING="all"
 SEARCH_TYPE="astar-cpp"
 ALGO="dqn"
-TIMEOUT=1800  # 30 minutes
-MAX_EXPANSIONS=20000  # 3,270 free cells × ~6
+TIMEOUT=300  # 5 minutes
+MAX_EXPANSIONS=10000  # 3,270 free cells × ~6
 
 # Directories
 INPUT_DIR="test_data/icaps_test/$MAP_NAME"
